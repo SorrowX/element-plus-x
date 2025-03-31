@@ -66,6 +66,13 @@ const alias: AliasOptions = [
           find: /^element-plus-x\/(es|lib)\/(.*)$/,
           replacement: `${path.resolve(projRoot, 'packages')}/$2`,
         },
+        {
+          find: /^@formily\/vue$/,
+          replacement: path.resolve(
+            projRoot,
+            'node_modules/@formily/vue/esm/index.js'
+          ),
+        },
       ]),
 ]
 
