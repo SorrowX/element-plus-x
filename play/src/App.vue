@@ -25,7 +25,7 @@ import { merge } from 'lodash-unified'
 import { ElCase } from 'element-plus-x'
 
 // import Test from '../../docs/examples/f-form-item/basic.vue'
-import Test from '../../docs/examples/table-dialog/slots.vue'
+import Test from '../../docs/examples/f-input/markup-schema.vue'
 // import Test from '../../docs/examples/emoji/parser.vue'
 
 import { computed, ref } from 'vue'
@@ -48,12 +48,14 @@ const toggle = () => {
 html,
 body {
   width: 100vw;
+  height: 100vh;
   margin: 0;
+  // padding: 50px;
+  overflow: hidden;
 
   #play {
     height: 100%;
     width: 100%;
-    padding: 50px;
 
     .play-container {
       height: 100%;

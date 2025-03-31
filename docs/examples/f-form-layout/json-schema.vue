@@ -6,7 +6,7 @@
 
 <script>
 import { createForm } from '@formily/core'
-import { createSchemaField, FormProvider } from '@formily/vue'
+import { FormProvider, createSchemaField } from '@formily/vue'
 import { Formily } from 'element-plus-x'
 const { FormItem, FormLayout, Input, Select, Submit } = Formily
 
