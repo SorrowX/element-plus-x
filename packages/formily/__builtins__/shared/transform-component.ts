@@ -1,9 +1,9 @@
-import { defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 import { each, merge } from '@formily/shared'
-import { h } from '@formily/vue'
 import type { Component } from 'vue'
 
 type ListenersTransformRules = Record<string, string>
+const noop = () => {}
 
 export const transformComponent = <T extends Record<string, any>>(
   tag: any,
@@ -20,7 +20,7 @@ export const transformComponent = <T extends Record<string, any>>(
           const listeners = transformRules
           each(listeners, (event, extract) => {
             data[`on${event[0].toUpperCase()}${event.slice(1)}`] =
-              attrs[`on${extract[0].toUpperCase()}${extract.slice(1)}`]
+              attrs[`on${extract[0].toUpperCase()}${extract.slice(1)}`] || noop
           })
         }
         if (defaultProps) {

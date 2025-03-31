@@ -1,27 +1,23 @@
-// @ts-nocheck
-
-import { defineComponent, computed, toRef, Ref, h } from 'vue'
-import {
-  createContext,
-  resolveComponent,
-  useContext,
-  composeExport,
-} from '../__builtins__/shared'
+import { Ref, computed, defineComponent, h, toRef } from 'vue'
 import { Field } from '@formily/core'
 import { observer } from '@formily/reactive-vue'
 import { useField } from '@formily/vue'
 import { isArr, isValid } from '@formily/shared'
+import { ElSpace, ElTag } from 'element-plus'
+import {
+  composeExport,
+  createContext,
+  resolveComponent,
+  useContext,
+} from '../__builtins__/shared'
 import { stylePrefix } from '../__builtins__/configs'
 import type { SelectProps } from '../select'
 import type { CascaderProps } from '../cascader'
 import type { DatePickerProps } from '../date-picker'
 import type { TimePickerProps } from '../time-picker'
-import { Space } from '../space'
-import { ElTag } from 'element-plus'
 
 const prefixCls = `${stylePrefix}-preview-text`
-// const PlaceholderContext = createContext('N/A')
-const PlaceholderContext = createContext('--')
+const PlaceholderContext = createContext('N/A')
 const defaultSeparator = '; '
 
 export const usePlaceholder = (value?: Ref<any>) => {
@@ -34,35 +30,43 @@ export const usePlaceholder = (value?: Ref<any>) => {
   return placeholder
 }
 
-const Input = defineComponent({
-  name: 'FPreviewTextInput',
-  props: ['value'],
-  setup(props, { attrs, slots }) {
-    const value = toRef(props, 'value')
-    const placeholder = usePlaceholder(value)
-    return () => {
-      return h(
-        Space,
-        {
-          class: [prefixCls],
-          style: attrs.style,
-        },
-        {
-          default: () =>
-            [
-              slots?.prepend?.(),
-              slots?.prefix?.(),
-              placeholder.value,
-              slots?.suffix?.(),
-              slots?.append?.(),
-            ].filter((child) => !!child),
-        }
-      )
-    }
-  },
-})
+const Input = observer(
+  // eslint-disable-next-line vue/one-component-per-file
+  defineComponent({
+    name: 'FPreviewTextInput',
+    props: {
+      value: {
+        type: null,
+      },
+    },
+    setup(props, { attrs, slots }) {
+      const value = toRef(props, 'value')
+      const placeholder = usePlaceholder(value)
+      return () => {
+        return h(
+          ElSpace,
+          {
+            class: [prefixCls],
+            style: { ...(attrs.style ?? {}) },
+          },
+          {
+            default: () =>
+              [
+                slots?.prepend?.(),
+                slots?.prefix?.(),
+                placeholder.value,
+                slots?.suffix?.(),
+                slots?.append?.(),
+              ].filter((child) => !!child),
+          }
+        )
+      }
+    },
+  })
+)
 
 const Select = observer(
+  // eslint-disable-next-line vue/one-component-per-file
   defineComponent<SelectProps>({
     name: 'FPreviewTextSelect',
     setup(_props, { attrs }) {
@@ -116,10 +120,10 @@ const Select = observer(
 
       return () => {
         return h(
-          Space,
+          ElSpace,
           {
             class: [prefixCls],
-            style: attrs.style,
+            style: { ...(attrs.style ?? {}) },
           },
           {
             default: () => getLabels(),
@@ -131,6 +135,7 @@ const Select = observer(
 )
 
 const Cascader = observer(
+  // eslint-disable-next-line vue/one-component-per-file
   defineComponent<CascaderProps>({
     name: 'FPreviewTextCascader',
     setup(_props, { attrs }) {
@@ -193,10 +198,10 @@ const Cascader = observer(
 
       return () => {
         return h(
-          Space,
+          ElSpace,
           {
             class: [prefixCls],
-            style: attrs.style,
+            style: { ...(attrs.style ?? {}) },
           },
           {
             default: () => getLabels(),
@@ -207,6 +212,7 @@ const Cascader = observer(
   })
 )
 
+// eslint-disable-next-line vue/one-component-per-file
 const DatePicker = defineComponent<DatePickerProps>({
   name: 'FPreviewTextDatePicker',
   setup(_props, { attrs }) {
@@ -239,6 +245,7 @@ const DatePicker = defineComponent<DatePickerProps>({
   },
 })
 
+// eslint-disable-next-line vue/one-component-per-file
 const TimePicker = defineComponent<TimePickerProps>({
   name: 'FPreviewTextTimePicker',
   setup(_props, { attrs }) {
@@ -272,6 +279,7 @@ const TimePicker = defineComponent<TimePickerProps>({
   },
 })
 
+// eslint-disable-next-line vue/one-component-per-file
 const Text = defineComponent<any>({
   name: 'FPreviewText',
   setup(_props, { attrs }) {
@@ -293,6 +301,7 @@ const Text = defineComponent<any>({
 })
 
 const TextArray = observer(
+  // eslint-disable-next-line vue/one-component-per-file
   defineComponent({
     name: 'FPreviewTextArray',
     setup(_props, { attrs }) {
@@ -301,7 +310,7 @@ const TextArray = observer(
       const props = attrs as unknown as SelectProps
       const placeholder = usePlaceholder()
 
-      const getItem = (value) => {
+      const getItem = (value: any) => {
         const dataSource: any[] = field?.dataSource?.length
           ? field.dataSource
           : props?.options?.length
@@ -335,10 +344,10 @@ const TextArray = observer(
 
       return () => {
         return h(
-          Space,
+          ElSpace,
           {
             class: [prefixCls],
-            style: attrs.style,
+            style: { ...(attrs.style ?? {}) },
           },
           {
             default: () => getLabels(),
@@ -349,9 +358,14 @@ const TextArray = observer(
   })
 )
 
+// eslint-disable-next-line vue/one-component-per-file
 const TextSwitch = defineComponent({
   name: 'FPreviewTextSwitch',
-  props: ['value'],
+  props: {
+    value: {
+      type: null,
+    },
+  },
   setup(props, { attrs }) {
     const value = toRef(props, 'value')
     const activeText = attrs.activeText ?? attrs['active-text']
@@ -371,10 +385,10 @@ const TextSwitch = defineComponent({
           : placeholder.value
 
       return h(
-        Space,
+        ElSpace,
         {
           class: [prefixCls],
-          style: attrs.style,
+          style: { ...(attrs.style ?? {}) },
         },
         {
           default: () => text,
@@ -385,6 +399,7 @@ const TextSwitch = defineComponent({
 })
 
 const TextTree = observer(
+  // eslint-disable-next-line vue/one-component-per-file
   defineComponent({
     name: 'FPreviewTextTree',
     setup(_props, { attrs }) {
@@ -395,7 +410,7 @@ const TextTree = observer(
       const placeholder = usePlaceholder()
       const valueKey = props.props?.value || 'value'
       const labelKey = props.props?.label || 'label'
-      const getSelected = (dataSource) => {
+      const getSelected = (dataSource: any) => {
         const values = isArr(props.value)
           ? props.value
           : props.value
@@ -404,7 +419,7 @@ const TextTree = observer(
         return values.map((value) => {
           return {
             label: findLabel(value, dataSource) ?? value,
-            value: value,
+            value,
           }
         })
       }
@@ -441,10 +456,10 @@ const TextTree = observer(
 
       return () => {
         return h(
-          Space,
+          ElSpace,
           {
             class: [prefixCls],
-            style: attrs.style,
+            style: { ...(attrs.style ?? {}) },
           },
           {
             default: () => getLabels(),
