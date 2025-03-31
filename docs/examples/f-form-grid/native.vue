@@ -141,14 +141,12 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script>
 import { h } from 'vue'
-import { FormilyPlus } from 'element-plus-x'
-const { FormGrid } = FormilyPlus
-const FormGridColumn = FormGrid.GridColumn
+import { Formily } from 'element-plus-x'
+const { FormGrid } = Formily
 
 const Cell = {
-  functional: true,
   setup(props, { slots }) {
     return () =>
       h(
@@ -166,5 +164,9 @@ const Cell = {
         slots
       )
   },
+}
+
+export default {
+  components: { FormGrid, FormGridColumn: FormGrid.GridColumn, Cell },
 }
 </script>

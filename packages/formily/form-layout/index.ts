@@ -73,85 +73,29 @@ export const useFormLayout = (): Ref<FormLayoutProps> => {
 export const FormLayout = defineComponent<FormLayoutProps>({
   name: 'FFormLayout',
   props: {
-    className: {
-      type: String,
-    },
-    colon: {
-      type: Boolean,
-      default: true,
-    },
-    labelAlign: {
-      type: [String, Array],
-    },
-    wrapperAlign: {
-      type: [String, Array],
-    },
-    labelWrap: {
-      type: Boolean,
-      default: false,
-    },
-    labelWidth: {
-      type: Number,
-    },
-    wrapperWidth: {
-      type: Number,
-    },
-    wrapperWrap: {
-      type: Boolean,
-      default: false,
-    },
-    labelCol: {
-      type: [Number, Array],
-    },
-    wrapperCol: {
-      type: [Number, Array],
-    },
-    fullness: {
-      type: Boolean,
-      default: false,
-    },
-    size: {
-      type: String,
-      default: 'default',
-    },
-    layout: {
-      type: [String, Array],
-      default: 'horizontal',
-    },
-    direction: {
-      type: String,
-      default: 'ltr',
-    },
-    shallow: {
-      type: Boolean,
-      default: true,
-    },
-    feedbackLayout: {
-      type: String,
-    },
-    tooltipLayout: {
-      type: String,
-    },
-    bordered: {
-      type: Boolean,
-      default: true,
-    },
-    inset: {
-      type: Boolean,
-      default: false,
-    },
-    breakpoints: {
-      type: Array,
-    },
-    spaceGap: {
-      type: Number,
-    },
-    gridColumnGap: {
-      type: Number,
-    },
-    gridRowGap: {
-      type: Number,
-    },
+    className: {},
+    colon: { default: true },
+    labelAlign: {},
+    wrapperAlign: {},
+    labelWrap: { default: false },
+    labelWidth: {},
+    wrapperWidth: {},
+    wrapperWrap: { default: false },
+    labelCol: {},
+    wrapperCol: {},
+    fullness: { default: false },
+    size: { default: 'default' },
+    layout: { default: 'horizontal' },
+    direction: { default: 'ltr' },
+    shallow: { default: true },
+    feedbackLayout: {},
+    tooltipLayout: {},
+    bordered: { default: true },
+    inset: { default: false },
+    breakpoints: {},
+    spaceGap: {},
+    gridColumnGap: {},
+    gridRowGap: {},
   },
   setup(customProps, { slots }: SetupContext) {
     const root = ref()

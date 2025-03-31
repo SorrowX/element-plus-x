@@ -16,10 +16,6 @@ interface IProps {
   [props: string]: any
 }
 
-interface ICalcBreakpointIndex {
-  (originalBreakpoints: number[], width: number): number
-}
-
 interface ICalculateProps {
   (target: Element, props: IProps): IProps
 }
@@ -30,22 +26,12 @@ interface IUseResponsiveFormLayout {
   }
 }
 
-// const calcBreakpointIndex: ICalcBreakpointIndex = (breakpoints, width) => {
-//   for (const [i, breakpoint] of breakpoints.entries()) {
-//     if (width <= breakpoint) {
-//       return i
-//     }
-//   }
-// }
-const calcBreakpointIndex: ICalcBreakpointIndex = (breakpoints, width) => {
-  let index = -1
+const calcBreakpointIndex = (breakpoints: number[], width: number) => {
   for (const [i, breakpoint] of breakpoints.entries()) {
     if (width <= breakpoint) {
-      index = i
-      break
+      return i
     }
   }
-  return index
 }
 
 const calcFactor = <T>(value: T | T[], breakpointIndex: number): T => {
@@ -57,8 +43,8 @@ const calcFactor = <T>(value: T | T[], breakpointIndex: number): T => {
   }
 }
 
-const factor = <T>(value: T | T[], breakpointIndex: number): T =>
-  isValid(value) ? calcFactor(value as any, breakpointIndex) : (value as T)
+const factor = <T>(value: T | T[], breakpointIndex: number | undefined): T =>
+  isValid(value) ? calcFactor(value, breakpointIndex as number) : (value as T)
 
 const calculateProps: ICalculateProps = (target, props) => {
   const { clientWidth } = target

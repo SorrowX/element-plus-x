@@ -1,6 +1,7 @@
-import { DefineComponent, h, toRaw } from 'vue'
-import { isVnode } from './utils'
+import { h, isVNode, toRaw } from 'vue'
+// import { isVnode } from './utils'
 import { SlotTypes } from '.'
+import type { Component } from 'vue'
 
 export const resolveComponent = (
   child?: SlotTypes,
@@ -11,10 +12,10 @@ export const resolveComponent = (
       return child
     } else if (typeof child === 'function') {
       return (child as any)(props)
-    } else if (isVnode(child)) {
+    } else if (isVNode(child)) {
       return child
     } else {
-      return h(toRaw(child as DefineComponent), props)
+      return h(toRaw(child as Component), props)
     }
   }
 

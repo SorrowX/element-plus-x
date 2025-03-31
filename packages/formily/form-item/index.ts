@@ -1,9 +1,7 @@
 import { defineComponent, h, onBeforeUnmount, provide, ref, watch } from 'vue'
 import { isVoidField } from '@formily/core'
 import { connect, mapProps } from '@formily/vue'
-
-import { ElIcon, ElTooltip } from 'element-plus'
-// import ResizeObserver from 'resize-observer-polyfill'
+import { ElIcon, ElPopover, ElTooltip } from 'element-plus'
 import {
   CircleCheck,
   CircleClose,
@@ -11,13 +9,7 @@ import {
   Warning,
 } from '@element-plus/icons-vue'
 import { FormLayoutShallowContext, useFormLayout } from '../form-layout'
-import {
-  composeExport,
-  getStyleNumber,
-  resolveComponent,
-  stylePrefix,
-} from '../__builtins__'
-import { useGridColumn } from '../form-grid'
+import { composeExport, resolveComponent, stylePrefix } from '../__builtins__'
 import type { Component, Ref } from 'vue'
 
 export type FormItemProps = {
@@ -57,7 +49,7 @@ export type FormItemProps = {
 
 const useOverflow = (containerRef: Ref<HTMLElement>) => {
   const overflow = ref(false)
-  let resizeObserver: ResizeObserver | undefined | null
+  let resizeObserver: ResizeObserver | null = null
 
   const cleanup = () => {
     if (resizeObserver) {
@@ -103,112 +95,47 @@ const useOverflow = (containerRef: Ref<HTMLElement>) => {
 }
 
 const ICON_MAP = {
-  info: () => h(ElIcon, {}, { default: () => h(InfoFilled, {}, {}) }),
-  error: () => h(ElIcon, {}, { default: () => h(CircleClose, {}, {}) }),
-  success: () => h(ElIcon, {}, { default: () => h(CircleCheck, {}, {}) }),
-  warning: () => h(ElIcon, {}, { default: () => h(Warning, {}, {}) }),
+  info: () => h(ElIcon, {}, { default: () => h(InfoFilled) }),
+  error: () => h(ElIcon, {}, { default: () => h(CircleClose) }),
+  success: () => h(ElIcon, {}, { default: () => h(CircleCheck) }),
+  warning: () => h(ElIcon, {}, { default: () => h(Warning) }),
 }
 
-export const FormBaseItem = defineComponent({
+export const FormBaseItem = defineComponent<FormItemProps>({
   name: 'FormItem',
   props: {
-    className: {
-      type: String,
-    },
-    required: {
-      type: Boolean,
-    },
-    label: {
-      type: [String, Object],
-    },
-    colon: {
-      type: Boolean,
-    },
-    layout: {
-      type: String,
-    },
-    tooltip: {
-      type: [String, Object],
-    },
-    labelStyle: {
-      type: Object,
-    },
-    labelAlign: {
-      type: String,
-    },
-    labelWrap: {
-      type: Boolean,
-    },
-    labelWidth: {
-      type: Number,
-    },
-    wrapperWidth: {
-      type: Number,
-    },
-    labelCol: {
-      type: Number,
-    },
-    wrapperCol: {
-      type: Number,
-    },
-    wrapperAlign: {
-      type: String,
-    },
-    wrapperWrap: {
-      type: Boolean,
-    },
-    wrapperStyle: {
-      type: Object,
-    },
-    fullness: {
-      type: Boolean,
-    },
-    addonBefore: {
-      type: [String, Object],
-    },
-    addonAfter: {
-      type: [String, Object],
-    },
-    prefix: {
-      type: [String, Object],
-    },
-    suffix: {
-      type: [String, Object],
-    },
-    size: {
-      type: String,
-    },
-    extra: {
-      type: String,
-    },
-    feedbackText: {
-      type: [String, Object],
-    },
-    feedbackLayout: {
-      type: String,
-    },
-    tooltipLayout: {
-      type: String,
-    },
-    feedbackStatus: {
-      type: String,
-    },
-    feedbackIcon: {
-      type: [String, Object],
-    },
-    asterisk: {
-      type: Boolean,
-    },
-    gridSpan: {
-      type: [String, Number],
-    },
-    bordered: {
-      type: Boolean,
-    },
-    inset: {
-      type: Boolean,
-      default: false,
-    },
+    className: {},
+    required: {},
+    label: {},
+    colon: {},
+    layout: {},
+    tooltip: {},
+    labelStyle: {},
+    labelAlign: {},
+    labelWrap: {},
+    labelWidth: {},
+    wrapperWidth: {},
+    labelCol: {},
+    wrapperCol: {},
+    wrapperAlign: {},
+    wrapperWrap: {},
+    wrapperStyle: {},
+    fullness: {},
+    addonBefore: {},
+    addonAfter: {},
+    size: {},
+    extra: {},
+    feedbackText: {},
+    feedbackLayout: {},
+    tooltipLayout: {},
+    feedbackStatus: {},
+    feedbackIcon: {},
+    asterisk: {},
+    gridSpan: {},
+    bordered: { default: true },
+    inset: { default: false },
+    prefix: {},
+    suffix: {},
   },
   setup(props, { slots }) {
     const active = ref(false)
@@ -218,21 +145,17 @@ export const FormBaseItem = defineComponent({
     const containerRef: Ref<any> = ref<HTMLElement>()
     const overflow = useOverflow(containerRef)
 
+    // provide(FormLayoutShallowContext, ref(null))
     provide(FormLayoutShallowContext, ref({}))
 
     return () => {
-      const gridColumn = useGridColumn(props.gridSpan as number)
       const gridStyles: Record<string, any> = {}
 
-      if (gridColumn) {
-        gridStyles.gridColumn = gridColumn
-      }
       const deepLayout = deepLayoutRef.value
       const {
         label,
         colon = deepLayout.colon ?? true,
         layout = deepLayout.layout ?? 'horizontal',
-        // TODO 拿不到 x-decorator-props 属性
         tooltip,
         labelStyle = {},
         labelWrap = deepLayout.labelWrap ?? false,
@@ -246,8 +169,8 @@ export const FormBaseItem = defineComponent({
         fullness = deepLayout.fullness,
         addonBefore,
         addonAfter,
-        prefix,
-        suffix,
+        prefix, //  add
+        suffix, //  add
         size = deepLayout.size,
         extra,
         feedbackText,
@@ -259,6 +182,7 @@ export const FormBaseItem = defineComponent({
         bordered = deepLayout.bordered,
         inset = deepLayout.inset,
       } = props as any
+
       const labelAlign =
         deepLayout.layout === 'vertical'
           ? props.labelAlign ?? deepLayout.labelAlign ?? 'left'
@@ -268,16 +192,12 @@ export const FormBaseItem = defineComponent({
       let enableCol = false
       if (labelWidth || wrapperWidth) {
         if (labelWidth) {
-          labelStyle.width =
-            labelWidth === 'auto' ? undefined : getStyleNumber(labelWidth)
-          labelStyle.maxWidth =
-            labelWidth === 'auto' ? undefined : getStyleNumber(labelWidth)
+          labelStyle.width = `${labelWidth}px`
+          labelStyle.maxWidth = `${labelWidth}px`
         }
         if (wrapperWidth) {
-          wrapperStyle.width =
-            wrapperWidth === 'auto' ? undefined : getStyleNumber(wrapperWidth)
-          wrapperStyle.maxWidth =
-            wrapperWidth === 'auto' ? undefined : getStyleNumber(wrapperWidth)
+          wrapperStyle.width = `${wrapperWidth}px`
+          wrapperStyle.maxWidth = `${wrapperWidth}px`
         }
         // 栅格模式
       } else if (labelCol || wrapperCol) {
@@ -287,12 +207,11 @@ export const FormBaseItem = defineComponent({
       const formatChildren =
         feedbackLayout === 'popover'
           ? h(
-              'el-popover',
+              ElPopover,
               {
-                props: {
-                  disabled: !feedbackText,
-                  placement: 'top',
-                },
+                disabled: !feedbackText,
+                placement: 'top',
+                width: 'auto',
               },
               {
                 reference: () =>
@@ -310,9 +229,7 @@ export const FormBaseItem = defineComponent({
                     {
                       default: () => [
                         feedbackStatus &&
-                        ['error', 'success', 'warning'].includes(
-                          feedbackStatus as string
-                        )
+                        ['error', 'success', 'warning'].includes(feedbackStatus)
                           ? ICON_MAP[
                               feedbackStatus as 'error' | 'success' | 'warning'
                             ]()
@@ -383,9 +300,7 @@ export const FormBaseItem = defineComponent({
                 h(
                   ElTooltip,
                   {
-                    props: {
-                      placement: 'top',
-                    },
+                    placement: 'top',
                   },
                   {
                     default: ICON_MAP.info,
@@ -473,7 +388,11 @@ export const FormBaseItem = defineComponent({
 
       const renderExtra =
         extra &&
-        h('div', { class: `${prefixCls}-extra` }, { default: () => [extra] })
+        h(
+          'div',
+          { class: `${prefixCls}-extra` },
+          { default: () => [resolveComponent(extra)] }
+        )
       const renderContent = h(
         'div',
         {
@@ -544,6 +463,7 @@ export const FormBaseItem = defineComponent({
       return h(
         'div',
         {
+          'data-grid-span': props.gridSpan,
           style: {
             ...gridStyles,
           },
@@ -567,17 +487,15 @@ export const FormBaseItem = defineComponent({
               bordered === false || !!inset || !!feedbackIcon,
             [`${props.className}`]: !!props.className,
           },
-          on: {
-            '!focus': () => {
-              if (feedbackIcon || inset) {
-                active.value = true
-              }
-            },
-            '!blur': () => {
-              if (feedbackIcon || inset) {
-                active.value = false
-              }
-            },
+          onFocus: () => {
+            if (feedbackIcon || inset) {
+              active.value = true
+            }
+          },
+          onBlur: () => {
+            if (feedbackIcon || inset) {
+              active.value = false
+            }
           },
         },
         {
@@ -596,19 +514,11 @@ const Item = connect(
       if (isVoidField(field)) return props
       if (!field) return props
       const takeMessage = () => {
-        const split = (messages: any[]) => {
-          return messages.reduce((buf, text, index) => {
-            if (!text) return buf
-            return index < messages.length - 1
-              ? buf.concat([text, ', '])
-              : buf.concat([text])
-          }, [])
-        }
         if (field.validating) return
         if (props.feedbackText) return props.feedbackText
-        if (field.selfErrors.length) return split(field.selfErrors)
-        if (field.selfWarnings.length) return split(field.selfWarnings)
-        if (field.selfSuccesses.length) return split(field.selfSuccesses)
+        if (field.selfErrors.length) return field.selfErrors
+        if (field.selfWarnings.length) return field.selfWarnings
+        if (field.selfSuccesses.length) return field.selfSuccesses
       }
       const errorMessages = takeMessage()
       return {

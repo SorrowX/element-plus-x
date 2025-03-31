@@ -153,6 +153,7 @@
   }
 }
 
+// small 尺寸
 .#{$form-item-prefix}-size-small {
   font-size: $font-size-extra-small;
 
@@ -185,10 +186,21 @@
   }
 
   .#{$namespace}-input {
+    height: $form-item-small-line-height !important;
     input {
-      height: $form-item-small-line-height;
+      height: $form-item-small-line-height !important;
       line-height: $form-item-small-line-height;
     }
+  }
+
+  .#{$namespace}-select__wrapper {
+    min-height: $form-item-small-line-height;
+    line-height: $form-item-small-line-height;
+  }
+
+  .#{$namespace}-tag {
+    height: $form-item-small-line-height - 6px;
+    line-height: $form-item-small-line-height - 6px;
   }
 
   .#{$namespace}-input-number {
@@ -205,6 +217,7 @@
   }
 }
 
+// large尺寸
 .#{$form-item-prefix}-size-large {
   font-size: $font-size-medium;
 
@@ -233,20 +246,19 @@
   }
 
   .#{$namespace}-input {
-    input {
-      height: $form-item-large-line-height;
-      line-height: $form-item-large-line-height;
-    }
-  }
-
-  .#{$namespace}-select {
+    height: $form-item-large-line-height !important;
     input {
       height: $form-item-large-line-height !important;
       line-height: $form-item-large-line-height;
     }
   }
 
-  .#{$namespace}-select__tags .el-tag {
+  .#{$namespace}-select__wrapper {
+    height: $form-item-large-line-height !important;
+    line-height: $form-item-large-line-height;
+  }
+
+  .#{$namespace}-tag {
     height: $form-item-large-line-height - 12px;
     line-height: $form-item-large-line-height - 12px;
   }
@@ -256,7 +268,7 @@
     &.is-controls-right {
       .#{$namespace}-input-number__increase,
       .#{$namespace}-input-number__decrease {
-        line-height: calc($form-item-large-line-height / 2) - 1;
+        height: calc($form-item-large-line-height / 2) - 1;
         font-size: $font-size-medium;
       }
     }
@@ -392,6 +404,11 @@
 }
 
 .#{$form-item-prefix}-error {
+  & .#{$namespace}-input__wrapper {
+    box-shadow: 0 0 0 1px $color-danger inset !important;
+  }
+
+  // old
   & .#{$namespace}-input__inner,
   & .#{$namespace}-textarea__inner {
     &,
@@ -439,6 +456,11 @@
 }
 
 .#{$form-item-prefix}-warning {
+  & .#{$namespace}-input__wrapper {
+    box-shadow: 0 0 0 1px $color-warning inset !important;
+  }
+
+  // old
   & .#{$namespace}-input__inner,
   & .#{$namespace}-textarea__inner {
     &,
@@ -466,6 +488,11 @@
 }
 
 .#{$form-item-prefix}-success {
+  & .#{$namespace}-input__wrapper {
+    box-shadow: 0 0 0 1px $color-success inset !important;
+  }
+
+  // old
   & .#{$namespace}-input__inner,
   & .#{$namespace}-textarea__inner {
     &,
@@ -492,15 +519,18 @@
   }
 }
 
+// 去除ep组件的边框
 .#{$form-item-prefix}-bordered-none {
-  .#{$namespace}-input__inner {
-    border: none !important;
+  .#{$namespace}-input__wrapper {
+    box-shadow: none !important;
   }
-
+  .#{$namespace}-select__wrapper {
+    box-shadow: none !important;
+  }
   .#{$namespace}-input-number__decrease,
   .#{$namespace}-input-number__increase {
+    background-color: transparent !important;
     border: none !important;
-    background: transparent !important;
   }
 }
 
