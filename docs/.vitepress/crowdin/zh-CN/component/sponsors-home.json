@@ -1,0 +1,22 @@
+[
+    {
+        "name": "JNPF",
+        "img": "/images/jnpf_index.png",
+        "url": "https://www.jnpfsoft.com/index.html?from=elementUI",
+        "slogan": "JNPF 低代码开发平台，让开发变得简单！",
+        "className": "jnpf"
+    },
+    {
+        "name": "bit",
+        "img": "/images/bit.svg",
+        "url": "https://bit.dev/?from=element-ui",
+        "slogan": "Share Code"
+    },
+    {
+        "name": "人人开源",
+        "img": "/images/renren.png",
+        "url": "https://www.renren.io/?from=element-ui",
+        "slogan": "企业级的快速开发平台",
+        "className": "renren"
+    }
+]

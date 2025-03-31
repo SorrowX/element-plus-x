@@ -1,0 +1,11 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(draggable-table) {
+
+  .#{$namespace}-table__body tr.hover-row>td.#{$namespace}-table__cell,
+  .#{$namespace}-table__body tr:hover>td.#{$namespace}-table__cell {
+    background-color: transparent !important;
+  }
+}

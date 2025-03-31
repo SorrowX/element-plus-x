@@ -1,0 +1,19 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(affix-bottom) {
+  @include set-component-css-var('affix-bottom', $affix-bottom);
+}
+
+@include b(affix-bottom) {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  right: 0px;
+  padding: 16px;
+  background-color: getCssVar('affix-bottom-bg-color');
+  box-shadow: 0px -3px 8px 0px rgba(202, 202, 202, 0.16);
+}

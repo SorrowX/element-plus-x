@@ -1,0 +1,19 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(full-screen) {
+  @include set-component-css-var('full-screen', $common);
+
+  background-color: getCssVar('full-screen-bg-color');
+  &--full {
+    position: fixed !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

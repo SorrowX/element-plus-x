@@ -1,0 +1,111 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(split) {
+  @include set-component-css-var('split', $split);
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  $split: #{&};
+  $pane: #{&}__panel;
+  $trigger: #{&}__trigger;
+  $handler: #{&}__handler;
+  $pointer: #{&}__pointer;
+  $moving: #{&}--moving;
+  $pointer-bg-color: getCssVar('color', 'primary', 'light-3');
+
+  &__trigger {
+    position: absolute;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+  }
+
+  &__panel {
+    position: absolute;
+  }
+
+  &__handler {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: getCssVar('split-handler-bg-color');
+  }
+
+  &--horizontal {
+    #{$pane} {
+      top: 0;
+      bottom: 0;
+    }
+    #{$pane}--left {
+      left: 0;
+      padding-right: calc(getCssVar('split-handler-size') * 0.5);
+    }
+    #{$pane}--right {
+      right: 0;
+      padding-left: calc(getCssVar('split-handler-size') * 0.5);
+    }
+    #{$trigger} {
+      width: 0;
+      height: 100%;
+      top: 50%;
+    }
+    #{$handler} {
+      flex-direction: column;
+      width: getCssVar('split-handler-size');
+      height: 100%;
+      cursor: col-resize;
+    }
+    #{$pointer} {
+      width: 2px;
+      height: 100%;
+      &:hover {
+        background-color: $pointer-bg-color;
+      }
+    }
+  }
+
+  &--vertical {
+    #{$pane} {
+      left: 0;
+      right: 0;
+    }
+    #{$pane}--top {
+      top: 0;
+      padding-bottom: calc(getCssVar('split-handler-size') * 0.5);
+    }
+    #{$pane}--bottom {
+      bottom: 0;
+      padding-top: calc(getCssVar('split-handler-size') * 0.5);
+    }
+    #{$trigger} {
+      width: 100%;
+      height: 0;
+      left: 50%;
+    }
+    #{$handler} {
+      flex-direction: row;
+      width: 100%;
+      height: getCssVar('split-handler-size');
+      cursor: row-resize;
+    }
+    #{$pointer} {
+      width: 100%;
+      height: 2px;
+      &:hover {
+        background-color: $pointer-bg-color;
+      }
+    }
+  }
+
+  &--horizontal#{$moving} > #{$trigger},
+  &--vertical#{$moving} > #{$trigger} {
+    #{$pointer} {
+      background-color: $pointer-bg-color;
+    }
+  }
+}

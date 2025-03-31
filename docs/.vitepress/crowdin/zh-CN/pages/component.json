@@ -1,0 +1,185 @@
+{
+  "overview": {
+    "text": "Overview 组件总览",
+    "children": [
+      {
+        "link": "/version",
+        "text": "Version 版本日志"
+      },
+      {
+        "link": "/overview",
+        "text": "Overview 组件总览"
+      }
+    ]
+  },
+  "basic": {
+    "text": "Basic 基础组件",
+    "children": [
+      {
+        "link": "/icons-vue",
+        "text": "IconsVue 图标",
+        "promotion": "1.0.2"
+      },
+      {
+        "link": "/flex",
+        "text": "Flex 弹性布局"
+      },
+      {
+        "link": "/split",
+        "text": "Split 分割面板",
+        "promotion": "1.1.0"
+      },
+      {
+        "link": "/bubble",
+        "text": "Bubble 对话气泡"
+      }
+    ]
+  },
+  "form": {
+    "text": "Form 表单组件",
+    "children": [
+      {
+        "link": "/editor",
+        "text": "Editor 编辑器"
+      },
+      {
+        "link": "/editable",
+        "text": "Editable 可编辑"
+      },
+      {
+        "link": "/array-items",
+        "text": "ArrayItems 自增列表"
+      },
+      {
+        "link": "/array-table",
+        "text": "ArrayTable 自增表格"
+      },
+      {
+        "link": "/table-dialog",
+        "text": "TableDialog 表格弹窗",
+        "promotion": "updated"
+      },
+      {
+        "link": "/submit",
+        "text": "Submit 表单提交"
+      },
+      {
+        "link": "/reset",
+        "text": "Reset 表单重置"
+      }
+    ]
+  },
+  "data": {
+    "text": "Data 数据展示",
+    "children": [
+      {
+        "link": "/list",
+        "text": "List 列表",
+        "promotion": "1.0.8"
+      },
+      {
+        "link": "/virtual-list",
+        "text": "VirtualList 虚拟列表"
+      },
+      {
+        "link": "/sortable-list",
+        "text": "SortableList 可排序列表",
+        "promotion": "1.0.5"
+      },
+      {
+        "link": "/collapse-content",
+        "text": "CollapseContent 折叠内容"
+      },
+      {
+        "link": "/table-page",
+        "text": "TablePage 表格页"
+      },
+      {
+        "link": "/draggable-table",
+        "text": "DraggableTable 可拖拽表格"
+      }
+    ]
+  },
+  "feedback": {
+    "text": "Feedback 反馈组件",
+    "children": [
+      {
+        "link": "/ellipsis",
+        "text": "Ellipsis 省略"
+      },
+      {
+        "link": "/text-ellipsis",
+        "text": "TextEllipsis 文本省略"
+      },
+      {
+        "link": "/contextmenu",
+        "text": "Contextmenu 右键菜单",
+        "promotion": "1.0.0"
+      }
+    ]
+  },
+  "other": {
+    "text": "Other 其他",
+    "children": [
+      {
+        "link": "/dot",
+        "text": "Dot 点"
+      },
+      {
+        "link": "/load-more",
+        "text": "LoadMore 加载更多",
+        "promotion": "1.0.5"
+      },
+      {
+        "link": "/dropdown-v2",
+        "text": "DropdownV2 下拉菜单",
+        "promotion": "1.0.4"
+      },
+      {
+        "link": "/renderer",
+        "text": "Renderer 渲染器",
+        "promotion": "1.0.2"
+      },
+      {
+        "link": "/full-screen",
+        "text": "FullScreen 全屏",
+        "promotion": "1.0.9"
+      }
+    ]
+  },
+  "business": {
+    "text": "Business 业务组件",
+    "children": [
+      {
+        "link": "/emoji",
+        "text": "Emoji 表情包"
+      },
+      {
+        "link": "/dialog-v2",
+        "text": "DialogV2 对话框"
+      },
+      {
+        "link": "/drawer-v2",
+        "text": "DrawerV2 抽屉"
+      },
+      {
+        "link": "/text-highlight",
+        "text": "TextHighlight 文本凸显"
+      },
+      {
+        "link": "/select-v3",
+        "text": "SelectV3 选择器",
+        "promotion": "1.0.3"
+      },
+      {
+        "link": "/preview-file",
+        "text": "PreviewFile 文件预览",
+        "promotion": "1.0.3"
+      },
+      {
+        "link": "/affix-bottom",
+        "text": "AffixBottom 固定底部"
+      }
+    ]
+  }
+}

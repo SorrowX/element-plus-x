@@ -1,0 +1,5 @@
+export const DIV_TAG = 'div'
+export const SPAN_TAG = 'span'
+export const P_TAG = 'p'
+export const UL_TAG = 'ul'
+export const LI_TAG = 'li'

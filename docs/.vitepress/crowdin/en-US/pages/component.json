@@ -1,0 +1,185 @@
+{
+  "overview": {
+    "text": "Overview",
+    "children": [
+      {
+        "link": "/version",
+        "text": "Version"
+      },
+      {
+        "link": "/overview",
+        "text": "Overview"
+      }
+    ]
+  },
+  "basic": {
+    "text": "Basic",
+    "children": [
+      {
+        "link": "/icons-vue",
+        "text": "IconsVue",
+        "promotion": "1.0.2"
+      },
+      {
+        "link": "/flex",
+        "text": "Flex"
+      },
+      {
+        "link": "/split",
+        "text": "Split",
+        "promotion": "1.1.0"
+      },
+      {
+        "link": "/bubble",
+        "text": "Bubble"
+      }
+    ]
+  },
+  "form": {
+    "text": "Form",
+    "children": [
+      {
+        "link": "/editor",
+        "text": "Editor"
+      },
+      {
+        "link": "/editable",
+        "text": "Editable"
+      },
+      {
+        "link": "/array-items",
+        "text": "ArrayItems"
+      },
+      {
+        "link": "/array-table",
+        "text": "ArrayTable"
+      },
+      {
+        "link": "/table-dialog",
+        "text": "TableDialog",
+        "promotion": "updated"
+      },
+      {
+        "link": "/submit",
+        "text": "Submit"
+      },
+      {
+        "link": "/reset",
+        "text": "Reset"
+      }
+    ]
+  },
+  "data": {
+    "text": "Data",
+    "children": [
+      {
+        "link": "/list",
+        "text": "List",
+        "promotion": "1.0.8"
+      },
+      {
+        "link": "/virtual-list",
+        "text": "VirtualList"
+      },
+      {
+        "link": "/sortable-list",
+        "text": "SortableList",
+        "promotion": "1.0.5"
+      },
+      {
+        "link": "/collapse-content",
+        "text": "CollapseContent"
+      },
+      {
+        "link": "/table-page",
+        "text": "TablePage"
+      },
+      {
+        "link": "/draggable-table",
+        "text": "DraggableTable"
+      }
+    ]
+  },
+  "feedback": {
+    "text": "Feedback",
+    "children": [
+      {
+        "link": "/ellipsis",
+        "text": "Ellipsis"
+      },
+      {
+        "link": "/text-ellipsis",
+        "text": "TextEllipsis"
+      },
+      {
+        "link": "/contextmenu",
+        "text": "Contextmenu",
+        "promotion": "1.0.0"
+      }
+    ]
+  },
+  "other": {
+    "text": "Other",
+    "children": [
+      {
+        "link": "/dot",
+        "text": "Dot"
+      },
+      {
+        "link": "/load-more",
+        "text": "LoadMore",
+        "promotion": "1.0.5"
+      },
+      {
+        "link": "/dropdown-v2",
+        "text": "DropdownV2",
+        "promotion": "1.0.4"
+      },
+      {
+        "link": "/renderer",
+        "text": "Renderer",
+        "promotion": "1.0.2"
+      },
+      {
+        "link": "/full-screen",
+        "text": "FullScreen",
+        "promotion": "1.0.9"
+      }
+    ]
+  },
+  "business": {
+    "text": "Business 业务组件",
+    "children": [
+      {
+        "link": "/emoji",
+        "text": "Emoji"
+      },
+      {
+        "link": "/dialog-v2",
+        "text": "DialogV2"
+      },
+      {
+        "link": "/drawer-v2",
+        "text": "DrawerV2"
+      },
+      {
+        "link": "/text-highlight",
+        "text": "TextHighlight"
+      },
+      {
+        "link": "/select-v3",
+        "text": "SelectV3",
+        "promotion": "1.0.3"
+      },
+      {
+        "link": "/preview-file",
+        "text": "PreviewFile",
+        "promotion": "1.0.3"
+      },
+      {
+        "link": "/affix-bottom",
+        "text": "AffixBottom"
+      }
+    ]
+  }
+}

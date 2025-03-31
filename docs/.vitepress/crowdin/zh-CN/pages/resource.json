@@ -1,0 +1,18 @@
+{
+  "title": "资源",
+  "lineOne": "更多设计资源正在处于开发状态。 ",
+  "lineTwo": "如果您有兴趣参与 Element Plus 的设计，请通过 <span><a href=\"mailto:element-plus@outlook.com\" target=\"_blank\">element-plus@outlook.com</a></span> 联系我们。",
+  "download": "下载",
+  "axure": "Axure Components",
+  "axureIntro": "通过在 Axure 中导入 Element Plus 组件库，可以在交互设计阶段方便地调用常用的组件",
+  "sketch": "Sketch Template",
+  "sketchIntro": "2022年全新设计的 Sketch 组件库，提供完整的组件支持。在提升设计效率的同时，保证统一的视觉风格。",
+  "figma": "Figma Template",
+  "figmaIntro": "2022年全新设计的 Figma 组件库，应用了自动布局与可变组件等新特性。",
+  "figmaVariables": "Figma 变量版",
+  "figmaVariablesIntro": "所有组件支持使用变量可以在普通模式和黑暗模式之间快速切换。",
+  "figma2023": "2023 Figma UI Kit",
+  "figma2023Intro": "使用 Figma 的最新变量能力的组件设计集合，提供了Light/Dark/Dark Alpha主题切换，帮助您快速搭建原型设计。",
+  "masterGo2024": "2024 MasterGo UI Kit",
+  "masterGo2024Intro": "在 MasterGo 中使用经过治理的 Element 组件库搭建设计系统，优化了自适应布局，组件状态更齐全，变体切换更符合开发习惯。"
+}

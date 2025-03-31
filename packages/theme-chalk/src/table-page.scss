@@ -1,0 +1,53 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(table-page) {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+  &__wrapper {
+    height: 100%;
+    overflow: auto;
+  }
+
+  .#{$namespace}-table__inner-wrapper::before {
+    background-color: transparent !important;
+  }
+  .#{$namespace}-table--border .#{$namespace}-table__inner-wrapper::before {
+    background-color: var(--el-table-border-color) !important;
+  }
+}
+
+@include b(table-wrapper) {
+  margin-bottom: 8px;
+  flex: 1;
+  box-sizing: border-box;
+  &--fixed {
+    height: 100%;
+    overflow: auto;
+  }
+}
+
+@include b(pagination-wrapper) {
+  display: flex;
+  justify-content: space-between;
+  flex: none;
+  &__right,
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+  &__total {
+    font-size: 14px;
+    color: #333333;
+    display: inline-block;
+    margin-right: 16px;
+  }
+  &__record {
+    font-size: 14px;
+    color: #999999;
+  }
+}

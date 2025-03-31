@@ -1,0 +1,66 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(flex) {
+  display: flex;
+  &-vertical {
+    flex-direction: column;
+  }
+
+  // justify
+  &-justify-flex-start {
+    justify-content: flex-start;
+  }
+  &-justify-center {
+    justify-content: center;
+  }
+  &-justify-flex-end {
+    justify-content: flex-end;
+  }
+  &-justify-space-between {
+    justify-content: space-between;
+  }
+  &-justify-space-around {
+    justify-content: space-around;
+  }
+  &-justify-space-evenly {
+    justify-content: space-evenly;
+  }
+
+  // align
+  &-align-flex-start {
+    align-items: flex-start;
+  }
+  &-align-center {
+    align-items: center;
+  }
+  &-align-flex-end {
+    align-items: flex-end;
+  }
+  &-align-stretch {
+    align-items: stretch;
+  }
+
+  // gap
+  &-gap-small {
+    gap: 8px;
+  }
+  &-gap-default {
+    gap: 16px;
+  }
+  &-gap-large {
+    gap: 24px;
+  }
+
+  // wrap
+  &-wrap-wrap {
+    flex-wrap: wrap;
+  }
+  &-wrap-nowrap {
+    flex-wrap: nowrap;
+  }
+  &-wrap-wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+}

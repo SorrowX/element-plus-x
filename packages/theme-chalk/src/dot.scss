@@ -1,0 +1,38 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(dot) {
+  display: inline-flex;
+  align-items: center;
+
+  &__spot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: getCssVar('dot-bg-color');
+    display: inline-flex;
+    margin-right: 4px;
+  }
+
+  &--large {
+    .#{$namespace}-dot__spot {
+      width: 8px;
+      height: 8px;
+    }
+  }
+
+  &--small {
+    .#{$namespace}-dot__spot {
+      width: 4px;
+      height: 4px;
+    }
+  }
+
+  @each $type in $types {
+    .#{bem('dot', '', $type)} &__spot {
+      @include css-var-from-global(('dot', 'bg-color'), ('color', $type));
+    }
+  }
+
+}

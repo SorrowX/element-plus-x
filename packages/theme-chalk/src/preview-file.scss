@@ -1,0 +1,35 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(preview-file) {
+  &__item {
+    width: 235px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.06);
+    margin-bottom: 16px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  &__icon {
+    padding-top: 6px;
+    flex: none;
+  }
+  &__content {
+    flex: 1;
+    overflow: hidden;
+    &-name,
+    &-desc {
+      width: 100%;
+      overflow: hidden;
+      line-height: 22px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}

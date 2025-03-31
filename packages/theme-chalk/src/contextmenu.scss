@@ -1,0 +1,21 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(contextmenu) {
+  &__trigger {
+    display: contents;
+  }
+}
+
+.#{$namespace}-contextmenu__menu {
+  min-width: 80px;
+  min-height: 40px;
+}
+.contextmenu__popper-kls {
+  padding: 0px !important;
+
+  .#{$namespace}-dropdown-v2-panel-content {
+    border: 0px;
+  }
+}

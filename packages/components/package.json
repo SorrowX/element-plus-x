@@ -1,0 +1,17 @@
+{
+  "name": "@element-plus/components",
+  "version": "0.0.5",
+  "description": "all components are settled here",
+  "main": "index.ts",
+  "module": "index.ts",
+  "unpkg": "index.js",
+  "jsdelivr": "index.js",
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "types": "index.d.ts",
+  "sideEffects": [
+    "*/style/*"
+  ],
+  "gitHead": "c69724230befa8fede0e6b9c37fb0b7e39fd7cdd"
+}

@@ -1,0 +1,55 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(dialog-v2) {
+  @include set-component-css-var('dialog-v2', $dialogv2);
+}
+
+@include b(dialog-v2) {
+  .#{$namespace}-dialog {
+    padding: 0px;
+    background-color: getCssVar('dialog-v2-bg-color');
+  }
+  .#{$namespace}-dialog__header {
+    padding-bottom: 0px;
+  }
+  .#{$namespace}-dialog__footer {
+    padding-top: 0px;
+  }
+
+  &-trigger {
+    display: inline-block;
+  }
+
+  &-header {
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    border-bottom: 1px solid getCssVar('dialog-v2-border-color');
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+    i {
+      cursor: pointer;
+      flex: none;
+    }
+  }
+
+  &-footer {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 24px;
+    border-top: 1px solid getCssVar('dialog-v2-border-color');
+  }
+}

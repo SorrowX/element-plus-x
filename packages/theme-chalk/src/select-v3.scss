@@ -1,0 +1,22 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(select-v3) {
+  &__item {
+    height: 34px;
+    display: flex;
+    align-items: center;
+  }
+  &__item-text {
+    height: 24px;
+    line-height: 24px;
+    margin-left: 4px;
+  }
+}
+
+@include b(select-v3__popper) {
+  .#{$namespace}-select-dropdown__item {
+    padding: 0px 12px !important;
+  }
+}

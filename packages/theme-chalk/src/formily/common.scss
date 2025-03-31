@@ -1,0 +1,46 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+$formily-prefix: 'fep' !default;
+
+@mixin active {
+  border-color: getCssVar('color-primary'); // #409eff
+  outline: 0;
+  border-right-width: getCssVar('border-width') !important; // 1px
+}
+
+@mixin hover {
+  border-color: getCssVar('border-color-hover'); // #c0c4cc
+  outline: 0;
+  border-right-width: getCssVar('border-width') !important; // 1px
+}
+
+// form-item  var
+$form-item-prefix: '#{$formily-prefix}-form-item' !default;
+
+$font-size-extra-small: getCssVar('font-size-extra-small') !default; // 12px
+$font-size-extra-large: getCssVar('font-size-extra-large') !default; // 20px
+$font-size-large: getCssVar('font-size-large') !default; // 18px
+$font-size-medium: getCssVar('font-size-medium') !default; // 16px
+$font-size-small: getCssVar('font-size-small') !default; // 13px
+
+$form-font-size: getCssVar('font-size-base') !default; // 14px
+$form-label-font-size: $form-font-size !default;
+$form-item-large-line-height: 40px !default;
+$form-item-medium-line-height: 32px !default;
+$form-item-small-line-height: 24px !default;
+$form-item-label-top-line-height: 40px !default;
+$form-error-line-height: 22px !default;
+$form-item-margin-bottom: $form-error-line-height !default;
+$color-text-secondary: getCssVar('text-color', 'secondary');
+$color-danger: getCssVar('color-danger');
+$color-transition-base: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) !default;
+$border-radius-base: getCssVar('border-radius-base');
+$border-base: getCssVar('border'); // 1px solid #c0c4cc
+$all-transition: getCssVar(
+  'transition',
+  'all'
+); // all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !default;
+$color-warning: getCssVar('color-warning'); // #e6a23c
+$color-success: getCssVar('color-success'); // #67c23a

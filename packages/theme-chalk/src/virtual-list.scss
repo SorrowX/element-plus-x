@@ -1,0 +1,35 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(virtual-list) {
+  &--scrollbar {
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(144, 147, 153, 0.3);
+      background-clip: padding-box;
+      min-height: 20px;
+      border-radius: 5px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(144, 147, 153, 0.5);
+      cursor: pointer;
+    }
+  }
+
+  &-load-status {
+    height: 36px;
+    color: rgb(144, 147, 153);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+  }
+  &-text {
+    display: inline-block;
+    margin-left: 4px;
+  }
+}

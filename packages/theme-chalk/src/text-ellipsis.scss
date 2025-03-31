@@ -1,0 +1,18 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(text-ellipsis) {
+  line-height: 24px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+
+  &__action {
+    cursor: pointer;
+    color: #{$color-primary};
+
+    &:active {
+      opacity: 0.6;
+    }
+  }
+}

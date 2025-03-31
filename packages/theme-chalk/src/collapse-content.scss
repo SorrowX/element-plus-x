@@ -1,0 +1,34 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(collapse-content) {
+  &--transition {
+    .#{$namespace}-collapse-content-wrapper {
+      transition: height 0.3s;
+    }
+  }
+  &-wrapper {
+    &.collapse {
+      overflow: hidden;
+    }
+    &.expanded {
+      overflow: hidden;
+    }
+  }
+  &-trigger {
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #ebedf0;
+    color: #323233;
+    font-size: 14px;
+    span {
+      display: inline-block;
+      margin-right: 6px;
+    }
+  }
+}

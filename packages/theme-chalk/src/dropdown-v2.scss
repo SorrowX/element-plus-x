@@ -1,0 +1,48 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+@use './common/var.scss' as *;
+
+@include b(dropdown-v2) {
+}
+
+@include b(dropdown-v2-panel) {
+  display: inline-flex;
+  &-content {
+    border: 1px solid #e4e7ed;
+  }
+}
+
+@include b(dropdown-v2-list) {
+  @include set-component-css-var('dropdown-v2', $dropdownv2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 160px;
+  border-radius: 4px;
+  padding: 4px 0;
+  box-sizing: border-box;
+  background-color: getCssVar('dropdown-v2-bg-color');
+}
+
+@include b(dropdown-v2-item) {
+  @include set-component-css-var('dropdown-v2', $dropdownv2);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  font-size: 13px;
+  line-height: 24px;
+  color: getCssVar('text-color', 'regular');
+  cursor: pointer;
+  &:hover {
+    background-color: getCssVar('dropdown-v2-item-hover-fill');
+  }
+  &--active {
+    background-color: getCssVar('dropdown-v2-item-hover-fill');
+  }
+  &--divided {
+    border-bottom: 1px solid getCssVar('border-color-lighter');
+  }
+}

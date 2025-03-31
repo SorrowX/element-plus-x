@@ -1,0 +1,80 @@
+/* Element Chalk Variables */
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:color';
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+$common: () !default;
+$common: map.merge(
+  (
+    'bg-color': #fff,
+    'border-color': #dcdfe6,
+  ),
+  $common
+);
+
+// AffixBottom
+// css3 var in packages/theme-chalk/src/affix-bottom.scss
+$affix-bottom: () !default;
+$affix-bottom: map.merge(
+  (
+    'bg-color': #fff,
+  ),
+  $affix-bottom
+);
+
+// Bubble
+// css3 var in packages/theme-chalk/src/bubble.scss
+$bubble: () !default;
+$bubble: map.merge(
+  (
+    'content-filled-background-color': rgba(0, 0, 0, 0.06),
+    'content-outlined-border': 1px solid #f0f0f0,
+    'content-text-color': rgba(0, 0, 0, 0.06),
+  ),
+  $bubble
+);
+
+// DialogV2
+// css3 var in packages/theme-chalk/src/dialog-v2.scss
+$dialogv2: () !default;
+$dialogv2: map.merge(
+  (
+    'bg-color': #fff,
+    'border-color': rgba(0, 0, 0, 0.06),
+  ),
+  $dialogv2
+);
+
+// DrawerV2
+// css3 var in packages/theme-chalk/src/drawer-v2.scss
+$drawerv2: () !default;
+$drawerv2: map.merge(
+  (
+    'bg-color': #fff,
+    'border-color': rgba(0, 0, 0, 0.06),
+  ),
+  $drawerv2
+);
+
+// DropdownV2
+// css3 var in packages/theme-chalk/src/dropdown-v2.scss
+$dropdownv2: () !default;
+$dropdownv2: map.merge(
+  (
+    'item-hover-fill': getCssVar('color-primary-light-9'),
+    'bg-color': '#ffffff',
+  ),
+  $dropdownv2
+);
+
+// split
+// css3 var in packages/theme-chalk/src/split.scss
+$split: () !default;
+$split: map.merge(
+  (
+    'handler-size': 6px,
+    'handler-bg-color': #f3f4f6,
+  ),
+  $split
+);

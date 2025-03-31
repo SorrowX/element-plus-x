@@ -1,0 +1,7 @@
+.vitepress/i18n/*
+!.vitepress/crowdin/en-US
+
+temp
+fr-FR
+es-ES
+ja-JP

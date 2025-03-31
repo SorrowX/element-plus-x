@@ -1,0 +1,6 @@
+@use './common.scss' as *;
+
+.#{$formily-prefix}-form-inline {
+  display: flex;
+  flex-wrap: wrap;
+}

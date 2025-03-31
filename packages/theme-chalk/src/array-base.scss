@@ -1,0 +1,10 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(array-base) {
+  &-addition {
+    width: 100%;
+    border-bottom-style: dashed;
+  }
+}

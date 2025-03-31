@@ -1,0 +1,40 @@
+// CSS3 var
+@use './var' as *;
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+html.dark {
+  color-scheme: dark;
+}
+
+@include dark(bubble) {
+  @include set-component-css-var('bubble', $bubble);
+}
+
+@include dark(dialog-v2) {
+  @include set-component-css-var('dialog-v2', $dialogv2);
+}
+
+@include dark(drawer-v2) {
+  @include set-component-css-var('drawer-v2', $drawerv2);
+}
+
+@include dark(affix-bottom) {
+  @include set-component-css-var('affix-bottom', $affix-bottom);
+}
+
+@include dark(dropdown-v2-list) {
+  @include set-component-css-var('dropdown-v2', $dropdownv2);
+}
+@include dark(dropdown-v2-item) {
+  @include set-component-css-var('dropdown-v2', $dropdownv2);
+}
+
+@include dark(full-screen) {
+  @include set-component-css-var('full-screen', $common);
+}
+
+@include dark(split) {
+  @include set-component-css-var('split', $split);
+}

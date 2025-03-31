@@ -1,0 +1,28 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(load-more) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  color: rgb(144, 147, 153);
+  font-size: 14px;
+  &__loading-icon {
+    display: inline-block;
+    margin-right: 4px;
+  }
+  &__text {
+    display: inline-block;
+  }
+  &--circle-loading {
+    animation: rotating 0.8s linear infinite;
+  }
+  &--snow-loading {
+    animation: rotating 2s linear infinite;
+  }
+  &--error {
+    cursor: pointer;
+  }
+}
