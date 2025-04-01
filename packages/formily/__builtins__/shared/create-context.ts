@@ -20,7 +20,6 @@ export const createContext = <T>(defaultValue?: T): CreateContext<T> => {
   const injectKey: InjectionKey<Ref<T>> = Symbol()
 
   return {
-    // eslint-disable-next-line vue/one-component-per-file
     Provider: defineComponent({
       name: 'ContextProvider',
       props: {
@@ -39,7 +38,6 @@ export const createContext = <T>(defaultValue?: T): CreateContext<T> => {
       },
     }),
 
-    // eslint-disable-next-line vue/one-component-per-file
     Consumer: defineComponent({
       name: 'ContextConsumer',
       setup(_props, { slots }) {

@@ -31,7 +31,6 @@ export const usePlaceholder = (value?: Ref<any>) => {
 }
 
 const Input = observer(
-  // eslint-disable-next-line vue/one-component-per-file
   defineComponent({
     name: 'FPreviewTextInput',
     props: {
@@ -66,7 +65,6 @@ const Input = observer(
 )
 
 const Select = observer(
-  // eslint-disable-next-line vue/one-component-per-file
   defineComponent<SelectProps>({
     name: 'FPreviewTextSelect',
     setup(_props, { attrs }) {
@@ -135,7 +133,6 @@ const Select = observer(
 )
 
 const Cascader = observer(
-  // eslint-disable-next-line vue/one-component-per-file
   defineComponent<CascaderProps>({
     name: 'FPreviewTextCascader',
     setup(_props, { attrs }) {
@@ -212,7 +209,6 @@ const Cascader = observer(
   })
 )
 
-// eslint-disable-next-line vue/one-component-per-file
 const DatePicker = defineComponent<DatePickerProps>({
   name: 'FPreviewTextDatePicker',
   setup(_props, { attrs }) {
@@ -245,7 +241,6 @@ const DatePicker = defineComponent<DatePickerProps>({
   },
 })
 
-// eslint-disable-next-line vue/one-component-per-file
 const TimePicker = defineComponent<TimePickerProps>({
   name: 'FPreviewTextTimePicker',
   setup(_props, { attrs }) {
@@ -279,7 +274,6 @@ const TimePicker = defineComponent<TimePickerProps>({
   },
 })
 
-// eslint-disable-next-line vue/one-component-per-file
 const Text = defineComponent<any>({
   name: 'FPreviewText',
   setup(_props, { attrs }) {
@@ -301,7 +295,6 @@ const Text = defineComponent<any>({
 })
 
 const TextArray = observer(
-  // eslint-disable-next-line vue/one-component-per-file
   defineComponent({
     name: 'FPreviewTextArray',
     setup(_props, { attrs }) {
@@ -358,7 +351,6 @@ const TextArray = observer(
   })
 )
 
-// eslint-disable-next-line vue/one-component-per-file
 const TextSwitch = defineComponent({
   name: 'FPreviewTextSwitch',
   props: {
@@ -399,7 +391,6 @@ const TextSwitch = defineComponent({
 })
 
 const TextTree = observer(
-  // eslint-disable-next-line vue/one-component-per-file
   defineComponent({
     name: 'FPreviewTextTree',
     setup(_props, { attrs }) {
