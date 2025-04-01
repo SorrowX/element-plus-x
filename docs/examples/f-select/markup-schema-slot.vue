@@ -58,7 +58,7 @@ const content = {
     },
   },
   header: {
-    render(thisProxy, proxyToUse) {
+    render() {
       return h('div', {}, `header`)
     },
   },
