@@ -458,39 +458,43 @@
 }
 
 .#{$form-item-prefix}-warning {
-  & .#{$namespace}-input__wrapper {
+  & .#{$namespace}-input__wrapper,
+  & .#{$namespace}-textarea__inner,
+  & .#{$namespace}-select__wrapper {
     box-shadow: 0 0 0 1px $color-warning inset !important;
   }
 
   // old
-  & .#{$namespace}-input__inner,
-  & .#{$namespace}-textarea__inner {
-    &,
-    &.hover {
-      border-color: $color-warning;
-    }
-  }
+  // & .#{$namespace}-input__inner,
+  // & .#{$namespace}-textarea__inner {
+  //   &,
+  //   &.hover {
+  //     border-color: $color-warning;
+  //   }
+  // }
 
-  & .#{$namespace}-input__inner,
-  & .#{$namespace}-textarea__inner {
-    &:focus {
-      border-color: $color-warning;
-    }
-  }
+  // & .#{$namespace}-input__inner,
+  // & .#{$namespace}-textarea__inner {
+  //   &:focus {
+  //     border-color: $color-warning;
+  //   }
+  // }
 
-  & .#{$namespace}-input-group__append,
-  & .#{$namespace}-input-group__prepend {
-    & .#{$namespace}-input__inner {
-      border-color: transparent;
-    }
-  }
-  .#{$namespace}-input__validateIcon {
-    color: $color-warning !important;
-  }
+  // & .#{$namespace}-input-group__append,
+  // & .#{$namespace}-input-group__prepend {
+  //   & .#{$namespace}-input__inner {
+  //     border-color: transparent;
+  //   }
+  // }
+  // .#{$namespace}-input__validateIcon {
+  //   color: $color-warning !important;
+  // }
 }
 
 .#{$form-item-prefix}-success {
-  & .#{$namespace}-input__wrapper {
+  & .#{$namespace}-input__wrapper,
+  & .#{$namespace}-textarea__inner,
+  & .#{$namespace}-select__wrapper {
     box-shadow: 0 0 0 1px $color-success inset !important;
   }
 
