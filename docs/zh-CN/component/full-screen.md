@@ -36,10 +36,10 @@ full-screen/browser
 
 ### Exposes
 
-| 名称         | 详情     | 类型                                               |
-| ------------ | -------- | -------------------------------------------------- |
-| enter        | 打开弹窗 | ^[Function]`(type: 'window' \| 'browser') => void` |
-| exit         | 关闭弹窗 | ^[Function]`(type: 'window' \| 'browser') => void` |
-| toggle       | 关闭弹窗 | ^[Function]`(type: 'window' \| 'browser') => void` |
-| isFullscreen | 关闭弹窗 | ^[Boolean]`Ref<boolean>`                           |
-| appendTo     | 关闭弹窗 | ^[Object]`Ref<HTMLDivElement>`                     |
+| 名称         | 详情                       | 类型                                               |
+| ------------ | -------------------------- | -------------------------------------------------- |
+| enter        | 打开弹窗                   | ^[Function]`(type: 'window' \| 'browser') => void` |
+| exit         | 关闭弹窗                   | ^[Function]`(type: 'window' \| 'browser') => void` |
+| toggle       | 切换弹窗                   | ^[Function]`(type: 'window' \| 'browser') => void` |
+| isFullscreen | 是否全屏                   | ^[Boolean]`Ref<boolean>`                           |
+| appendTo     | 用于 el 弹窗追加或者挂载点 | ^[Object]`Ref<HTMLDivElement>`                     |
