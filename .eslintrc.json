@@ -2,6 +2,7 @@
   "root": true,
   "extends": ["@element-plus/eslint-config"],
   "rules": {
-    "vue/one-component-per-file": "off"
+    "vue/one-component-per-file": "off",
+    "vue/require-prop-types": "off"
   }
 }
