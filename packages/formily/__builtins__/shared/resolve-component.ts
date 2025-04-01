@@ -1,5 +1,4 @@
 import { h, isVNode, toRaw } from 'vue'
-// import { isVnode } from './utils'
 import { SlotTypes } from '.'
 import type { Component } from 'vue'
 

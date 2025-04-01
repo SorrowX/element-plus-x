@@ -1,78 +1,74 @@
-import { connect, mapProps, mapReadPretty } from '@formily/vue'
 import { defineComponent, h } from 'vue'
+import { connect, mapProps, mapReadPretty } from '@formily/vue'
+import { ElOption, ElSelect } from 'element-plus'
 import { PreviewText } from '../preview-text'
+import { resolveComponent, transformComponent } from '../__builtins__'
 
-import { ElSelect, ElOption } from 'element-plus'
-import { transformComponent } from '../__builtins__'
+type IOption = Pick<typeof ElOption, 'value' | 'label' | 'disabled'> | string
+type IOptions = IOption[]
 
 export type SelectProps = typeof ElSelect & {
-  options?: Array<typeof ElOption>
+  options?: IOptions
 }
-
-const TransformElSelect = transformComponent<SelectProps>(ElSelect, {
-  change: 'update:modelValue',
-})
-
-const InnerSelect = connect(
-  TransformElSelect,
-  mapProps({ value: 'modelValue', readOnly: 'readonly' }),
-  mapReadPretty(PreviewText.Select)
-)
 
 const SelectOption = defineComponent({
   name: 'FSelect',
-  props: ['options'],
-  setup(customProps, { attrs, slots }) {
+  props: {
+    options: {
+      type: Array as () => IOptions,
+      default: () => [],
+    },
+  },
+  setup(props, { attrs, slots }) {
     return () => {
-      const options = customProps.options || []
-      const children =
-        options.length !== 0
-          ? {
-              default: () =>
-                options.map((option: any) => {
-                  if (typeof option === 'string') {
-                    return h(
-                      ElOption,
-                      { key: option, value: option, label: option },
-                      {
-                        default: () =>
-                          slots?.option?.({
-                            option: { label: option, value: option },
-                          }) ?? option,
-                      }
-                    )
-                  } else {
-                    return h(
-                      ElOption,
-                      {
-                        key: option.value,
-                        ...option,
-                      },
-                      {
-                        default: () =>
-                          slots?.option?.({ option }) ??
-                          option.label ??
-                          option.value,
-                      }
-                    )
-                  }
-                }),
-            }
-          : slots
+      const options = props.options || []
       return h(
-        InnerSelect,
+        ElSelect,
         {
           ...attrs,
         },
-        children
+        {
+          default: () =>
+            options.map((option: IOption) => {
+              if (typeof option === 'string') {
+                return h(
+                  ElOption,
+                  { key: option, value: option, label: option },
+                  {
+                    default: () => [
+                      resolveComponent(slots?.option, { option }),
+                    ],
+                  }
+                )
+              } else {
+                return h(
+                  ElOption,
+                  {
+                    key: option.value,
+                    ...option,
+                  },
+                  {
+                    default: () => [
+                      resolveComponent(slots?.option, {
+                        option,
+                      }),
+                    ],
+                  }
+                )
+              }
+            }),
+          ...slots,
+        }
       )
     }
   },
 })
 
 export const Select = connect(
-  SelectOption,
-  mapProps({ dataSource: 'options', loading: true }),
+  transformComponent<SelectProps>(SelectOption, {
+    change: 'update:modelValue',
+  }),
+  mapProps({ dataSource: 'options', value: 'modelValue', loading: true }),
   mapReadPretty(PreviewText.TextArray)
 )
 

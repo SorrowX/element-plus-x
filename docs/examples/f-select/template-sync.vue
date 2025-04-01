@@ -1,16 +1,28 @@
 <template>
   <FormProvider :form="form">
     <Field
-      name="input"
-      title="输入框"
+      name="select"
+      title="选择框"
       :decorator="[FormItem]"
-      :component="[Input, { clearable: true }]"
-    />
-    <Field
-      name="textarea"
-      title="文本框"
-      :decorator="[FormItem]"
-      :component="[Input.TextArea]"
+      :component="[
+        Select,
+        {
+          style: {
+            width: '240px',
+          },
+          clearable: true,
+        },
+      ]"
+      :data-source="[
+        {
+          label: '选项1',
+          value: 1,
+        },
+        {
+          label: '选项2',
+          value: 2,
+        },
+      ]"
     />
     <Submit @submit="log">提交</Submit>
   </FormProvider>
@@ -20,7 +32,7 @@
 import { createForm } from '@formily/core'
 import { Field, FormProvider } from '@formily/vue'
 import { Formily } from 'element-plus-x'
-const { FormItem, Input, Submit } = Formily
+const { FormItem, Select, Submit } = Formily
 
 const form = createForm()
 
@@ -29,7 +41,7 @@ export default {
   data() {
     return {
       FormItem,
-      Input,
+      Select,
       form,
     }
   },
