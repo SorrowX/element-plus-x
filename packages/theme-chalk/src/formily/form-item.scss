@@ -404,35 +404,36 @@
 }
 
 .#{$form-item-prefix}-error {
-  & .#{$namespace}-input__wrapper {
+  & .#{$namespace}-input__wrapper,
+  & .#{$namespace}-textarea__inner {
     box-shadow: 0 0 0 1px $color-danger inset !important;
   }
 
   // old
-  & .#{$namespace}-input__inner,
-  & .#{$namespace}-textarea__inner {
-    &,
-    &.hover {
-      border-color: $color-danger;
-    }
-  }
+  // & .#{$namespace}-input__inner,
+  // & .#{$namespace}-textarea__inner {
+  //   &,
+  //   &.hover {
+  //     border-color: $color-danger;
+  //   }
+  // }
 
-  & .#{$namespace}-input__inner,
-  & .#{$namespace}-textarea__inner {
-    &:focus {
-      border-color: $color-danger;
-    }
-  }
+  // & .#{$namespace}-input__inner,
+  // & .#{$namespace}-textarea__inner {
+  //   &:focus {
+  //     border-color: $color-danger;
+  //   }
+  // }
 
-  & .#{$namespace}-input-group__append,
-  & .#{$namespace}-input-group__prepend {
-    & .#{$namespace}-input__inner {
-      border-color: transparent;
-    }
-  }
-  .#{$namespace}-input__validateIcon {
-    color: $color-danger !important;
-  }
+  // & .#{$namespace}-input-group__append,
+  // & .#{$namespace}-input-group__prepend {
+  //   & .#{$namespace}-input__inner {
+  //     border-color: transparent;
+  //   }
+  // }
+  // .#{$namespace}-input__validateIcon {
+  //   color: $color-danger !important;
+  // }
 }
 
 .#{$form-item-prefix}-error-help,
@@ -493,30 +494,30 @@
   }
 
   // old
-  & .#{$namespace}-input__inner,
-  & .#{$namespace}-textarea__inner {
-    &,
-    &.hover {
-      border-color: $color-success;
-    }
-  }
+  // & .#{$namespace}-input__inner,
+  // & .#{$namespace}-textarea__inner {
+  //   &,
+  //   &.hover {
+  //     border-color: $color-success;
+  //   }
+  // }
 
-  & .#{$namespace}-input__inner,
-  & .#{$namespace}-textarea__inner {
-    &:focus {
-      border-color: $color-success;
-    }
-  }
+  // & .#{$namespace}-input__inner,
+  // & .#{$namespace}-textarea__inner {
+  //   &:focus {
+  //     border-color: $color-success;
+  //   }
+  // }
 
-  & .#{$namespace}-input-group__append,
-  & .#{$namespace}-input-group__prepend {
-    & .#{$namespace}-input__inner {
-      border-color: transparent;
-    }
-  }
-  .#{$namespace}-input__validateIcon {
-    color: $color-success !important;
-  }
+  // & .#{$namespace}-input-group__append,
+  // & .#{$namespace}-input-group__prepend {
+  //   & .#{$namespace}-input__inner {
+  //     border-color: transparent;
+  //   }
+  // }
+  // .#{$namespace}-input__validateIcon {
+  //   color: $color-success !important;
+  // }
 }
 
 // 去除ep组件的边框
