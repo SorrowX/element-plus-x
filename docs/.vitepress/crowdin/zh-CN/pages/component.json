@@ -89,6 +89,10 @@
         "text": "FormItem 表单项"
       },
       {
+        "link": "/f-form",
+        "text": "Form 表单"
+      },
+      {
         "link": "/f-form-layout",
         "text": "FormLayout 表单布局"
       }

@@ -89,6 +89,10 @@
         "text": "FormItem"
       },
       {
+        "link": "/f-form",
+        "text": "Form"
+      },
+      {
         "link": "/f-form-layout",
         "text": "FormLayout"
       }

@@ -40,6 +40,7 @@
     </SchemaField>
     <FormButtonGroup align-form-item>
       <Submit>提交</Submit>
+      <Reset>重置</Reset>
     </FormButtonGroup>
   </Form>
 </template>
@@ -48,13 +49,14 @@
 import { createForm } from '@formily/core'
 import { createSchemaField } from '@formily/vue'
 import { Formily } from 'element-plus-x'
-const { Form, FormButtonGroup, FormItem, Input, Select, Submit } = Formily
+const { Form, FormButtonGroup, FormItem, Input, Select, Submit, Reset } =
+  Formily
 
 const form = createForm()
 const fields = createSchemaField({ components: { Input, Select, FormItem } })
 
 export default {
-  components: { FormButtonGroup, Submit, Form, ...fields },
+  components: { FormButtonGroup, Submit, Form, Reset, ...fields },
   data() {
     return {
       form,

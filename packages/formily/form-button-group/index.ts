@@ -1,10 +1,11 @@
 import { defineComponent } from 'vue'
 import { h } from '@formily/vue'
-import { Space, SpaceProps } from '../space'
+import { ElSpace } from 'element-plus'
+// import { Space, SpaceProps } from '../space'
 import { FormBaseItem } from '../form-item'
 import { stylePrefix } from '../__builtins__'
 
-export type FormButtonGroupProps = Omit<SpaceProps, 'align' | 'size'> & {
+export type FormButtonGroupProps = Omit<typeof ElSpace, 'align' | 'size'> & {
   align?: 'left' | 'right' | 'center'
   gutter?: number
   className?: string
@@ -44,12 +45,12 @@ export const FormButtonGroup = defineComponent({
             },
           },
           {
-            default: () => h(Space, { size: props.gutter }, slots),
+            default: () => h(ElSpace, { size: props.gutter }, slots),
           }
         )
       } else {
         return h(
-          Space,
+          ElSpace,
           {
             ...attrs,
             class: [prefixCls],
