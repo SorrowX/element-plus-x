@@ -73,6 +73,14 @@
     "text": "Formily 表单组件",
     "children": [
       {
+        "link": "/f-input",
+        "text": "Input 输入框"
+      },
+      {
+        "link": "/f-select",
+        "text": "Select 选择器"
+      },
+      {
         "link": "/f-form-grid",
         "text": "FormGrid 表单网格"
       },
@@ -83,10 +91,6 @@
       {
         "link": "/f-form-layout",
         "text": "FormLayout 表单布局"
-      },
-      {
-        "link": "/f-input",
-        "text": "Input 输入框"
       }
     ]
   },

@@ -73,6 +73,14 @@
     "text": "Formily",
     "children": [
       {
+        "link": "/f-input",
+        "text": "Input"
+      },
+      {
+        "link": "/f-select",
+        "text": "Select"
+      },
+      {
         "link": "/f-form-grid",
         "text": "FormGrid"
       },
@@ -83,10 +91,6 @@
       {
         "link": "/f-form-layout",
         "text": "FormLayout"
-      },
-      {
-        "link": "/f-input",
-        "text": "Input"
       }
     ]
   },

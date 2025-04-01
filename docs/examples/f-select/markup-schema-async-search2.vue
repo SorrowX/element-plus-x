@@ -89,6 +89,7 @@ const remoteMethod = (query: string) => {
   const field = form.query('*').take() as Field
   if (query) {
     clearTimeout(tick)
+    field.loading = true
     tick = setTimeout(() => {
       if (field) {
         field.setDataSource(
@@ -96,6 +97,7 @@ const remoteMethod = (query: string) => {
             return item.label.toLowerCase().includes(query.toLowerCase())
           })
         )
+        field.loading = false
       }
     }, 200)
   } else {
