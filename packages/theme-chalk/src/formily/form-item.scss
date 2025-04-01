@@ -405,7 +405,8 @@
 
 .#{$form-item-prefix}-error {
   & .#{$namespace}-input__wrapper,
-  & .#{$namespace}-textarea__inner {
+  & .#{$namespace}-textarea__inner,
+  & .#{$namespace}-select__wrapper {
     box-shadow: 0 0 0 1px $color-danger inset !important;
   }
 

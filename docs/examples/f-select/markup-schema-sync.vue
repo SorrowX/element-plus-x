@@ -2,6 +2,7 @@
   <FormProvider :form="form">
     <SchemaField>
       <SchemaStringField
+        required
         name="select"
         title="选择框"
         x-decorator="FormItem"
@@ -10,6 +11,7 @@
           style: {
             width: '240px',
           },
+          clearable: true,
         }"
         :enum="[
           {
