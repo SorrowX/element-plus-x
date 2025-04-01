@@ -83,6 +83,10 @@
       {
         "link": "/f-form-layout",
         "text": "FormLayout"
+      },
+      {
+        "link": "/f-input",
+        "text": "Input"
       }
     ]
   },
