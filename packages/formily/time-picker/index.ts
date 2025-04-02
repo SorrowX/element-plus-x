@@ -1,9 +1,10 @@
-import { transformComponent } from '../__builtins__/shared'
 import { connect, mapProps, mapReadPretty } from '@formily/vue'
-import { PreviewText } from '../preview-text'
 import { ElTimePicker } from 'element-plus'
+import { PreviewText } from '../preview-text'
+import { transformComponent } from '../__builtins__/shared'
+import type { TimePickerDefaultProps } from 'element-plus'
 
-export type TimePickerProps = typeof ElTimePicker
+export type TimePickerProps = TimePickerDefaultProps
 
 const TransformElTimePicker = transformComponent<TimePickerProps>(
   ElTimePicker,
