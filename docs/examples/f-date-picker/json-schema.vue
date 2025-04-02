@@ -1,5 +1,5 @@
 <template>
-  <Form :form="form" label-width="120">
+  <Form :form="form" label-width="120" wrapper-width="360">
     <SchemaField :schema="schema" />
     <Submit @submit="onSubmit">提交</Submit>
   </Form>
@@ -73,6 +73,7 @@ const schema = {
       'x-component-props': {
         type: 'daterange',
         style: {
+          width: '100%',
           boxSizing: 'border-box',
         },
       },
@@ -98,6 +99,7 @@ const schema = {
       'x-component-props': {
         type: 'datetimerange',
         style: {
+          width: '100%',
           boxSizing: 'border-box',
         },
       },

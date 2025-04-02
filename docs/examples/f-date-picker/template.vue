@@ -1,5 +1,5 @@
 <template>
-  <Form :form="form" label-width="120">
+  <Form :form="form" label-width="120" wrapper-width="360">
     <Field
       name="date"
       title="普通日期"
@@ -70,6 +70,7 @@
         {
           type: 'daterange',
           style: {
+            width: '100%',
             boxSizing: 'border-box',
           },
         },
@@ -99,6 +100,7 @@
         {
           type: 'datetimerange',
           style: {
+            width: '100%',
             boxSizing: 'border-box',
           },
         },

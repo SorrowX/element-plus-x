@@ -81,6 +81,14 @@
         "text": "Select 选择器"
       },
       {
+        "link": "/f-date-picker",
+        "text": "DatePicker 日期时间选择器"
+      },
+      {
+        "link": "/f-time-picker",
+        "text": "TimePicker 时间选择器"
+      },
+      {
         "link": "/f-form-grid",
         "text": "FormGrid 表单网格"
       },

@@ -81,6 +81,14 @@
         "text": "Select"
       },
       {
+        "link": "/f-date-picker",
+        "text": "DatePicker"
+      },
+      {
+        "link": "/f-time-picker",
+        "text": "TimePicker"
+      },
+      {
         "link": "/f-form-grid",
         "text": "FormGrid"
       },
