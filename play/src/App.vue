@@ -25,7 +25,7 @@ import { merge } from 'lodash-unified'
 import { ElCase } from 'element-plus-x'
 
 // import Test from '../../docs/examples/f-form-item/basic.vue'
-import Test from '../../docs/examples/f-cascader/template.vue'
+import Test from '../../docs/examples/f-input-number/template.vue'
 // import Test from '../../docs/examples/emoji/parser.vue'
 
 import { computed, ref } from 'vue'
