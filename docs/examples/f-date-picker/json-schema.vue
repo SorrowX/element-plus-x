@@ -1,5 +1,5 @@
 <template>
-  <Form :form="form">
+  <Form :form="form" label-width="120">
     <SchemaField :schema="schema" />
     <Submit @submit="onSubmit">提交</Submit>
   </Form>
@@ -8,7 +8,8 @@
 <script>
 import { createForm } from '@formily/core'
 import { createSchemaField } from '@formily/vue'
-import { DatePicker, Form, FormItem, Submit } from '@formily/element'
+import { Formily } from 'element-plus-x'
+const { DatePicker, Form, FormItem, Submit } = Formily
 
 const schema = {
   type: 'object',
@@ -71,6 +72,9 @@ const schema = {
       'x-component': 'DatePicker',
       'x-component-props': {
         type: 'daterange',
+        style: {
+          boxSizing: 'border-box',
+        },
       },
     },
     monthRange: {
@@ -80,6 +84,10 @@ const schema = {
       'x-component': 'DatePicker',
       'x-component-props': {
         type: 'monthrange',
+        style: {
+          width: '100%',
+          boxSizing: 'border-box',
+        },
       },
     },
     dateTimeRange: {
@@ -89,6 +97,9 @@ const schema = {
       'x-component': 'DatePicker',
       'x-component-props': {
         type: 'datetimerange',
+        style: {
+          boxSizing: 'border-box',
+        },
       },
     },
   },

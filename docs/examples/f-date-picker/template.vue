@@ -1,5 +1,5 @@
 <template>
-  <Form :form="form">
+  <Form :form="form" label-width="120">
     <Field
       name="date"
       title="普通日期"
@@ -69,6 +69,9 @@
         DatePicker,
         {
           type: 'daterange',
+          style: {
+            boxSizing: 'border-box',
+          },
         },
       ]"
     />
@@ -80,6 +83,10 @@
         DatePicker,
         {
           type: 'monthrange',
+          style: {
+            width: '100%',
+            boxSizing: 'border-box',
+          },
         },
       ]"
     />
@@ -91,6 +98,9 @@
         DatePicker,
         {
           type: 'datetimerange',
+          style: {
+            boxSizing: 'border-box',
+          },
         },
       ]"
     />
@@ -101,7 +111,8 @@
 <script>
 import { createForm } from '@formily/core'
 import { ArrayField, Field } from '@formily/vue'
-import { DatePicker, Form, FormItem, Submit } from '@formily/element'
+import { Formily } from 'element-plus-x'
+const { DatePicker, Form, FormItem, Submit } = Formily
 
 const form = createForm()
 
