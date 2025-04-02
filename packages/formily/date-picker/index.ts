@@ -2,9 +2,8 @@ import { connect, mapProps, mapReadPretty } from '@formily/vue'
 import { ElDatePicker } from 'element-plus'
 import { PreviewText } from '../preview-text'
 import { transformComponent } from '../__builtins__/shared'
-import type { DatePickerProps as ElDatePickerProps } from 'element-plus'
-
-export type DatePickerProps = ElDatePickerProps
+import { getDefaultFormat } from './util'
+import type { DatePickerProps } from './util'
 
 const TransformElDatePicker = transformComponent<DatePickerProps>(
   ElDatePicker,
@@ -12,22 +11,6 @@ const TransformElDatePicker = transformComponent<DatePickerProps>(
     change: 'update:modelValue',
   }
 )
-
-const getDefaultFormat = (props: DatePickerProps, formatType = 'format') => {
-  const type = props.type
-
-  if (type === 'week' && formatType === 'format') {
-    return '[Week] ww'
-  } else if (type === 'month') {
-    return 'YYYY-MM'
-  } else if (type === 'year') {
-    return 'YYYY'
-  } else if (type === 'datetime' || type === 'datetimerange') {
-    return 'YYYY-MM-DD HH:mm:ss'
-  }
-
-  return 'YYYY-MM-DD'
-}
 
 export const DatePicker = connect(
   TransformElDatePicker,

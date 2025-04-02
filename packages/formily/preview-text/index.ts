@@ -3,7 +3,8 @@ import { Field } from '@formily/core'
 import { observer } from '@formily/reactive-vue'
 import { useField } from '@formily/vue'
 import { isArr, isValid } from '@formily/shared'
-import { ElSpace, ElTag } from 'element-plus'
+import { ElSpace, ElTag, formatter, useLocale } from 'element-plus'
+import { getDefaultFormat } from '../date-picker/util'
 import {
   composeExport,
   createContext,
@@ -11,9 +12,10 @@ import {
   useContext,
 } from '../__builtins__/shared'
 import { stylePrefix } from '../__builtins__/configs'
+
 import type { SelectProps } from '../select'
 import type { CascaderProps } from '../cascader'
-import type { DatePickerProps } from '../date-picker'
+import type { DatePickerProps } from '../date-picker/util'
 import type { TimePickerProps } from '../time-picker'
 
 const prefixCls = `${stylePrefix}-preview-text`
@@ -209,20 +211,30 @@ const Cascader = observer(
   })
 )
 
-const DatePicker = defineComponent<DatePickerProps>({
+const DatePicker = defineComponent<
+  DatePickerProps & { value: DatePickerProps['modelValue'] }
+>({
   name: 'FPreviewTextDatePicker',
   setup(_props, { attrs }) {
-    const props = attrs as unknown as DatePickerProps
+    const { lang } = useLocale()
     const placeholder = usePlaceholder()
-    const getLabels = () => {
-      if (isArr(props.modelValue)) {
-        const labels = (props.modelValue as any[]).map(
-          (value: string | Date) => value || placeholder.value
-        )
+    const format = getDefaultFormat(attrs as DatePickerProps)
 
+    const getLabels = () => {
+      if (isArr(attrs.value)) {
+        const labels = attrs.value.map(
+          (value: string | Date) =>
+            formatter(value, format as string, lang.value) || placeholder.value
+        )
         return labels.join('~')
       } else {
-        return props.modelValue || placeholder.value
+        return (
+          formatter(
+            attrs.value as string | Date,
+            format as string,
+            lang.value
+          ) || placeholder.value
+        )
       }
     }
 
@@ -230,7 +242,7 @@ const DatePicker = defineComponent<DatePickerProps>({
       return h(
         'div',
         {
-          class: [prefixCls],
+          class: [prefixCls, `${prefixCls}__date-picker`],
           style: attrs.style,
         },
         {
@@ -241,21 +253,30 @@ const DatePicker = defineComponent<DatePickerProps>({
   },
 })
 
-const TimePicker = defineComponent<TimePickerProps>({
+const TimePicker = defineComponent<
+  TimePickerProps & { value: TimePickerProps['modelValue'] }
+>({
   name: 'FPreviewTextTimePicker',
   setup(_props, { attrs }) {
-    const props = attrs as unknown as TimePickerProps
-    // const format = props.pickerOptions?.format || 'HH:mm:ss'
+    const { lang } = useLocale()
     const placeholder = usePlaceholder()
-    const getLabels = () => {
-      if (isArr(props.modelValue)) {
-        const labels = props.modelValue.map(
-          (value) => value || placeholder.value
-        )
+    const format = attrs.format || 'HH:mm:ss'
 
+    const getLabels = () => {
+      if (isArr(attrs.value)) {
+        const labels = attrs.value.map(
+          (value: string | Date) =>
+            formatter(value, format as string, lang.value) || placeholder.value
+        )
         return labels.join('~')
       } else {
-        return props.modelValue || placeholder.value
+        return (
+          formatter(
+            attrs.value as string | Date,
+            format as string,
+            lang.value
+          ) || placeholder.value
+        )
       }
     }
 
@@ -263,7 +284,7 @@ const TimePicker = defineComponent<TimePickerProps>({
       return h(
         'div',
         {
-          class: [prefixCls],
+          class: [prefixCls, `${prefixCls}__time-picker`],
           style: attrs.style,
         },
         {
