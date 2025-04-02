@@ -1,9 +1,10 @@
-import { transformComponent } from '../__builtins__'
 import { connect, mapProps, mapReadPretty } from '@formily/vue'
-import { PreviewText } from '../preview-text'
 import { ElSwitch } from 'element-plus'
+import { transformComponent } from '../__builtins__'
+import { PreviewText } from '../preview-text'
+import type { SwitchProps as ElSwitchProps } from 'element-plus'
 
-export type SwitchProps = typeof ElSwitch
+export type SwitchProps = ElSwitchProps
 
 const TransformElSwitch = transformComponent<SwitchProps>(ElSwitch, {
   change: 'update:modelValue',
