@@ -1,10 +1,8 @@
-import { transformComponent } from '../__builtins__/shared'
 import { connect, mapProps, mapReadPretty } from '@formily/vue'
 import { ElDatePicker } from 'element-plus'
-
 import { PreviewText } from '../preview-text'
-
-export type DatePickerProps = typeof ElDatePicker
+import { transformComponent } from '../__builtins__/shared'
+import type { DatePickerProps } from 'element-plus'
 
 const TransformElDatePicker = transformComponent<DatePickerProps>(
   ElDatePicker,
@@ -36,7 +34,7 @@ export const DatePicker = connect(
       value: 'modelValue',
       readOnly: 'readonly',
     },
-    (props: any) => {
+    (props) => {
       return {
         ...props,
         format: props.format || getDefaultFormat(props),

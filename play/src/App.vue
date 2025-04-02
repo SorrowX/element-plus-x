@@ -25,7 +25,7 @@ import { merge } from 'lodash-unified'
 import { ElCase } from 'element-plus-x'
 
 // import Test from '../../docs/examples/f-form-item/basic.vue'
-import Test from '../../docs/examples/f-form/form.vue'
+import Test from '../../docs/examples/f-date-picker/markup-schema.vue'
 // import Test from '../../docs/examples/emoji/parser.vue'
 
 import { computed, ref } from 'vue'
@@ -56,12 +56,12 @@ body {
   #play {
     height: 100%;
     width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 
     .play-container {
       height: 100%;
       width: 100%;
-      // padding: 20px;
-      box-sizing: border-box;
     }
   }
 }
