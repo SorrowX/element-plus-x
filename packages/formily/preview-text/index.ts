@@ -215,14 +215,14 @@ const DatePicker = defineComponent<DatePickerProps>({
     const props = attrs as unknown as DatePickerProps
     const placeholder = usePlaceholder()
     const getLabels = () => {
-      if (isArr(props.value)) {
-        const labels = (props.value as any[]).map(
+      if (isArr(props.modelValue)) {
+        const labels = (props.modelValue as any[]).map(
           (value: string | Date) => value || placeholder.value
         )
 
         return labels.join('~')
       } else {
-        return props.value || placeholder.value
+        return props.modelValue || placeholder.value
       }
     }
 
@@ -248,14 +248,14 @@ const TimePicker = defineComponent<TimePickerProps>({
     // const format = props.pickerOptions?.format || 'HH:mm:ss'
     const placeholder = usePlaceholder()
     const getLabels = () => {
-      if (isArr(props.value)) {
-        const labels = props.value.map(
-          (value: string | Date) => value || placeholder.value
+      if (isArr(props.modelValue)) {
+        const labels = props.modelValue.map(
+          (value) => value || placeholder.value
         )
 
         return labels.join('~')
       } else {
-        return props.value || placeholder.value
+        return props.modelValue || placeholder.value
       }
     }
 

@@ -2,7 +2,9 @@ import { connect, mapProps, mapReadPretty } from '@formily/vue'
 import { ElDatePicker } from 'element-plus'
 import { PreviewText } from '../preview-text'
 import { transformComponent } from '../__builtins__/shared'
-import type { DatePickerProps } from 'element-plus'
+import type { DatePickerProps as ElDatePickerProps } from 'element-plus'
+
+export type DatePickerProps = ElDatePickerProps
 
 const TransformElDatePicker = transformComponent<DatePickerProps>(
   ElDatePicker,
