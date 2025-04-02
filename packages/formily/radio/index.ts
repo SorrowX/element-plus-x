@@ -55,6 +55,7 @@ const RadioGroupOption = defineComponent<RadioGroupProps>({
           ...attrs,
         },
         {
+          ...slots,
           default: () =>
             options.map((option: IOption) => {
               if (typeof option === 'string') {
@@ -84,7 +85,6 @@ const RadioGroupOption = defineComponent<RadioGroupProps>({
                 )
               }
             }),
-          ...slots,
         }
       )
     }
