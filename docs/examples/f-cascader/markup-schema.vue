@@ -53,7 +53,7 @@ const transformAddress = (data = {}) => {
 const useAddress = (pattern) => {
   onFieldReact(pattern, (field) => {
     field.loading = true
-    axios('//unpkg.com/china-location/dist/location.json')
+    axios('https://unpkg.com/china-location@2.1.0/dist/location.json')
       .then((res) => res.data)
       .then(
         action.bound((data) => {
