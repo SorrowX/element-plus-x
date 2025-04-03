@@ -77,6 +77,10 @@
         "text": "Input"
       },
       {
+        "link": "/f-input-number",
+        "text": "InputNumber"
+      },
+      {
         "link": "/f-select",
         "text": "Select"
       },
@@ -89,16 +93,36 @@
         "text": "TimePicker"
       },
       {
-        "link": "/f-form-grid",
-        "text": "FormGrid"
+        "link": "/f-cascader",
+        "text": "Cascader"
+      },
+      {
+        "link": "/f-radio",
+        "text": "Radio"
+      },
+      {
+        "link": "/f-checkbox",
+        "text": "Checkbox"
+      },
+      {
+        "link": "/f-switch",
+        "text": "Switch"
+      },
+      {
+        "link": "/f-preview-text",
+        "text": "PreviewText"
+      },
+      {
+        "link": "/f-form",
+        "text": "Form"
       },
       {
         "link": "/f-form-item",
         "text": "FormItem"
       },
       {
-        "link": "/f-form",
-        "text": "Form"
+        "link": "/f-form-grid",
+        "text": "FormGrid"
       },
       {
         "link": "/f-form-layout",

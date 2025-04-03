@@ -77,6 +77,10 @@
         "text": "Input 输入框"
       },
       {
+        "link": "/f-input-number",
+        "text": "InputNumber 数字输入框"
+      },
+      {
         "link": "/f-select",
         "text": "Select 选择器"
       },
@@ -89,16 +93,36 @@
         "text": "TimePicker 时间选择器"
       },
       {
-        "link": "/f-form-grid",
-        "text": "FormGrid 表单网格"
+        "link": "/f-cascader",
+        "text": "Cascader 级联选择器"
+      },
+      {
+        "link": "/f-radio",
+        "text": "Radio 单选框"
+      },
+      {
+        "link": "/f-checkbox",
+        "text": "Checkbox 复选框"
+      },
+      {
+        "link": "/f-switch",
+        "text": "Switch 开关"
+      },
+      {
+        "link": "/f-preview-text",
+        "text": "PreviewText 阅读态"
+      },
+      {
+        "link": "/f-form",
+        "text": "Form 表单"
       },
       {
         "link": "/f-form-item",
         "text": "FormItem 表单项"
       },
       {
-        "link": "/f-form",
-        "text": "Form 表单"
+        "link": "/f-form-grid",
+        "text": "FormGrid 表单网格"
       },
       {
         "link": "/f-form-layout",
