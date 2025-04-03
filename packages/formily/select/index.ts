@@ -69,7 +69,7 @@ export const Select = connect(
     change: 'update:modelValue',
   }),
   mapProps({ dataSource: 'options', value: 'modelValue', loading: true }),
-  mapReadPretty(PreviewText.TextArray)
+  mapReadPretty(PreviewText.Select)
 )
 
 export default Select

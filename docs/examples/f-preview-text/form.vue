@@ -14,6 +14,7 @@
           x-component="Select"
           :x-component-props="{
             multiple: true,
+            // displayType: 'text',
           }"
           :default="['123', '222']"
           :enum="[
@@ -40,11 +41,27 @@
           x-decorator="FormItem"
           title="Cascader预览"
           x-component="Cascader"
+          :x-component-props="{
+            // displayType: 'text',
+            clearable: true,
+          }"
           :default="['hangzhou']"
           :enum="[
             { label: '杭州', value: 'hangzhou' },
             { label: '余杭', value: 'yuhang' },
           ]"
+        />
+        <SchemaStringField
+          x-decorator="FormItem"
+          title="开关"
+          x-component="Switch"
+          :x-component-props="{
+            activeText: '是',
+            inactiveText: '否',
+            // activeValue: 1,
+            // inactiveValue: 0,
+          }"
+          :default="true"
         />
       </SchemaField>
       <FormButtonGroup align-form-item>
@@ -76,6 +93,7 @@ const {
   DatePicker,
   TimePicker,
   Cascader,
+  Switch,
   FormButtonGroup,
 } = Formily
 
@@ -87,6 +105,7 @@ const fields = createSchemaField({
     DatePicker,
     TimePicker,
     Cascader,
+    Switch,
     FormButtonGroup,
   },
 })

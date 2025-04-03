@@ -1,9 +1,9 @@
-import { Ref, computed, defineComponent, h, toRef } from 'vue'
+import { computed, defineComponent, h, toRef } from 'vue'
 import { Field } from '@formily/core'
 import { observer } from '@formily/reactive-vue'
 import { useField } from '@formily/vue'
-import { isArr, isValid } from '@formily/shared'
-import { ElSpace, ElTag, formatter, useLocale } from 'element-plus'
+import { isArr, isUndef, isValid } from '@formily/shared'
+import { ElSpace, ElTag, ElText, formatter, useLocale } from 'element-plus'
 import { getDefaultFormat } from '../date-picker/util'
 import {
   composeExport,
@@ -17,6 +17,7 @@ import type { SelectProps } from '../select'
 import type { CascaderProps } from '../cascader'
 import type { DatePickerProps } from '../date-picker/util'
 import type { TimePickerProps } from '../time-picker'
+import type { Component, Ref } from 'vue'
 
 const prefixCls = `${stylePrefix}-preview-text`
 const PlaceholderContext = createContext('N/A')
@@ -32,47 +33,51 @@ export const usePlaceholder = (value?: Ref<any>) => {
   return placeholder
 }
 
-const Input = observer(
-  defineComponent({
-    name: 'FPreviewTextInput',
-    props: {
-      value: {
-        type: null,
-      },
+const Input = defineComponent({
+  name: 'FPreviewTextInput',
+  props: {
+    value: {
+      type: null,
     },
-    setup(props, { attrs, slots }) {
-      const value = toRef(props, 'value')
-      const placeholder = usePlaceholder(value)
-      return () => {
-        return h(
-          ElSpace,
-          {
-            class: [prefixCls],
-            style: { ...(attrs.style ?? {}) },
-          },
-          {
-            default: () =>
-              [
-                slots?.prepend?.(),
-                slots?.prefix?.(),
-                placeholder.value,
-                slots?.suffix?.(),
-                slots?.append?.(),
-              ].filter((child) => !!child),
-          }
-        )
-      }
-    },
-  })
-)
+  },
+  setup(props, { attrs, slots }) {
+    const value = toRef(props, 'value')
+    const placeholder = usePlaceholder(value)
+    return () => {
+      return h(
+        ElSpace,
+        {
+          class: [prefixCls, `${prefixCls}__input`],
+          style: { ...(attrs.style ?? {}) },
+        },
+        {
+          default: () => [
+            slots?.prepend?.(),
+            slots?.prefix?.(),
+            placeholder.value,
+            slots?.suffix?.(),
+            slots?.append?.(),
+          ],
+        }
+      )
+    }
+  },
+})
 
 const Select = observer(
-  defineComponent<SelectProps>({
+  defineComponent<SelectProps & { type: string; separator: string }>({
     name: 'FPreviewTextSelect',
     setup(_props, { attrs }) {
       const fieldRef = useField<Field>()
       const field = fieldRef.value
       const props = attrs as unknown as SelectProps
+      const isTag = attrs.displayType !== 'text' // 渲染类型 tag|text
+      const separator = attrs.separator ?? defaultSeparator // text分隔符
+      const dataSource: any[] = field?.dataSource?.length
+        ? field.dataSource
+        : props?.options?.length
+        ? props.options
+        : []
       const placeholder = usePlaceholder()
       const getSelected = () => {
         const value = props.value
@@ -87,42 +92,60 @@ const Select = observer(
 
       const getLabels = () => {
         const selected = getSelected()
-        const dataSource: any[] = field?.dataSource?.length
-          ? field.dataSource
-          : props?.options?.length
-          ? props.options
-          : []
         if (!selected.length) {
           return h(
-            ElTag,
-            {},
+            (isTag ? ElTag : ElText) as Component,
+            isTag
+              ? {
+                  type: 'info',
+                  effect: 'light',
+                }
+              : {},
             {
               default: () => placeholder.value,
             }
           )
         }
-        return selected.map(({ value, label }, key) => {
-          const text =
-            dataSource?.find((item) => item.value == value)?.label || label
-          return h(
-            ElTag,
-            {
-              key,
-              type: 'info',
-              effect: 'light',
-            },
-            {
-              default: () => text || placeholder.value,
-            }
-          )
-        })
+        return isTag
+          ? selected.map(({ value, label }, key) => {
+              const text =
+                dataSource?.find((item) => item.value == value)?.label || label
+              return h(
+                ElTag,
+                {
+                  key,
+                  type: 'info',
+                  effect: 'light',
+                },
+                {
+                  default: () => text || placeholder.value,
+                }
+              )
+            })
+          : h(
+              ElText,
+              {},
+              {
+                default: () =>
+                  selected
+                    .map(
+                      ({ value, label }) =>
+                        dataSource?.find((item) => item.value == value)
+                          ?.label ||
+                        label ||
+                        placeholder.value
+                    )
+                    .filter((_) => _)
+                    .join(separator as string),
+              }
+            )
       }
 
       return () => {
         return h(
           ElSpace,
           {
-            class: [prefixCls],
+            class: [prefixCls, `${prefixCls}__select`],
             style: { ...(attrs.style ?? {}) },
           },
           {
@@ -141,6 +164,8 @@ const Cascader = observer(
       const fieldRef = useField<Field>()
       const field = fieldRef.value
       const props = attrs as unknown as CascaderProps
+      const isTag = attrs.displayType !== 'text' // 渲染类型 tag|text
+      const separator = attrs.separator ?? defaultSeparator // text分隔符
       const dataSource: any[] = field?.dataSource?.length
         ? field.dataSource
         : props?.options?.length
@@ -153,10 +178,7 @@ const Cascader = observer(
         return isArr(props.value) ? props.value : []
       }
 
-      const findLabel: (value: any, dataSource: any) => any = (
-        value,
-        dataSource
-      ) => {
+      const findLabel = (value: any, dataSource: any[]): any => {
         for (let i = 0; i < dataSource?.length; i++) {
           const item = dataSource[i]
           if (item?.[valueKey] === value) {
@@ -172,34 +194,54 @@ const Cascader = observer(
         const selected = getSelected()
         if (!selected?.length) {
           return h(
-            ElTag,
-            {},
+            (isTag ? ElTag : ElText) as Component,
+            isTag
+              ? {
+                  type: 'info',
+                  effect: 'light',
+                }
+              : {},
             {
               default: () => placeholder.value,
             }
           )
         }
-        return selected.map((value, key) => {
-          const text = findLabel(value, dataSource)
-          return h(
-            ElTag,
-            {
-              key,
-              type: 'info',
-              effect: 'light',
-            },
-            {
-              default: () => text || placeholder.value,
-            }
-          )
-        })
+        return isTag
+          ? selected.map((value, key) => {
+              const text = findLabel(value, dataSource)
+              return h(
+                ElTag,
+                {
+                  key,
+                  type: 'info',
+                  effect: 'light',
+                },
+                {
+                  default: () => text || placeholder.value,
+                }
+              )
+            })
+          : h(
+              ElText,
+              {},
+              {
+                default: () =>
+                  selected
+                    .map(
+                      (value) =>
+                        findLabel(value, dataSource) || placeholder.value
+                    )
+                    .filter((_) => _)
+                    .join(separator as string),
+              }
+            )
       }
 
       return () => {
         return h(
           ElSpace,
           {
-            class: [prefixCls],
+            class: [prefixCls, `${prefixCls}__cascader`],
             style: { ...(attrs.style ?? {}) },
           },
           {
@@ -304,7 +346,7 @@ const Text = defineComponent<any>({
       return h(
         'div',
         {
-          class: [prefixCls],
+          class: [prefixCls, `${prefixCls}__text`],
           style: attrs.style,
         },
         {
@@ -315,72 +357,10 @@ const Text = defineComponent<any>({
   },
 })
 
-const TextArray = observer(
-  defineComponent({
-    name: 'FPreviewTextArray',
-    setup(_props, { attrs }) {
-      const fieldRef = useField<Field>()
-      const field = fieldRef.value
-      const props = attrs as unknown as SelectProps
-      const placeholder = usePlaceholder()
-
-      const getItem = (value: any) => {
-        const dataSource: any[] = field?.dataSource?.length
-          ? field.dataSource
-          : props?.options?.length
-          ? props.options
-          : []
-        const item = dataSource.find((_) => _.value === value)
-        return {
-          label: item?.label ?? value,
-          value: item?.value ?? value,
-        }
-      }
-
-      const getSelected = () => {
-        const value = props.value
-
-        if (props.multiple) {
-          return isArr(value) ? value.map((val) => getItem(val)) : []
-        } else {
-          return isValid(value) ? [getItem(value)] : []
-        }
-      }
-
-      const getLabels = () => {
-        const selected = getSelected()
-        const separator = props.separator ?? defaultSeparator
-        const text = selected.length
-          ? selected.map((_) => _.label).join(separator)
-          : placeholder.value
-        return h('div', { class: [prefixCls] }, text)
-      }
-
-      return () => {
-        return h(
-          ElSpace,
-          {
-            class: [prefixCls],
-            style: { ...(attrs.style ?? {}) },
-          },
-          {
-            default: () => getLabels(),
-          }
-        )
-      }
-    },
-  })
-)
-
 const TextSwitch = defineComponent({
   name: 'FPreviewTextSwitch',
-  props: {
-    value: {
-      type: null,
-    },
-  },
   setup(props, { attrs }) {
-    const value = toRef(props, 'value')
+    const value = toRef(attrs, 'value')
     const activeText = attrs.activeText ?? attrs['active-text']
     const inactiveText = attrs.inactiveText ?? attrs['inactive-text']
     const activeValue = attrs.activeValue ?? attrs['active-value']
@@ -391,96 +371,27 @@ const TextSwitch = defineComponent({
       const realValue = value.value
 
       const text =
-        realValue === activeValue
-          ? activeText ?? realValue
+        isUndef(activeValue) && isUndef(inactiveValue)
+          ? (realValue ? activeText : inactiveText) ?? placeholder.value
+          : realValue === activeValue
+          ? activeText
           : realValue === inactiveValue
-          ? inactiveText ?? realValue
+          ? inactiveText
           : placeholder.value
 
       return h(
         ElSpace,
         {
-          class: [prefixCls],
+          class: [prefixCls, `${prefixCls}__switch`],
           style: { ...(attrs.style ?? {}) },
         },
         {
-          default: () => text,
+          default: () => String(text),
         }
       )
     }
   },
 })
-
-const TextTree = observer(
-  defineComponent({
-    name: 'FPreviewTextTree',
-    setup(_props, { attrs }) {
-      const fieldRef = useField<Field>()
-      const field = fieldRef.value
-      const props = attrs as unknown as CascaderProps
-
-      const placeholder = usePlaceholder()
-      const valueKey = props.props?.value || 'value'
-      const labelKey = props.props?.label || 'label'
-      const getSelected = (dataSource: any) => {
-        const values = isArr(props.value)
-          ? props.value
-          : props.value
-          ? [props.value]
-          : []
-        return values.map((value) => {
-          return {
-            label: findLabel(value, dataSource) ?? value,
-            value,
-          }
-        })
-      }
-
-      const findLabel: (value: any, dataSource: any) => any = (
-        value,
-        dataSource
-      ) => {
-        for (let i = 0; i < dataSource?.length; i++) {
-          const item = dataSource[i]
-          if (item?.[valueKey] === value) {
-            return item?.[labelKey]
-          } else {
-            const childLabel = findLabel(value, item?.children)
-            if (childLabel) return childLabel
-          }
-        }
-      }
-
-      const getLabels = () => {
-        const dataSource: any[] = field?.dataSource?.length
-          ? field.dataSource
-          : props?.options?.length
-          ? props.options
-          : []
-
-        const selected = getSelected(dataSource)
-        const separator = props.separator ?? defaultSeparator
-        const text = selected.length
-          ? selected.map((_) => _.label).join(separator)
-          : placeholder.value
-        return h('div', { class: [prefixCls] }, text)
-      }
-
-      return () => {
-        return h(
-          ElSpace,
-          {
-            class: [prefixCls],
-            style: { ...(attrs.style ?? {}) },
-          },
-          {
-            default: () => getLabels(),
-          }
-        )
-      }
-    },
-  })
-)
 
 export const PreviewText = composeExport(Text, {
   Input,
@@ -490,9 +401,7 @@ export const PreviewText = composeExport(Text, {
   TimePicker,
   Placeholder: PlaceholderContext.Provider,
   usePlaceholder,
-  TextArray,
   TextSwitch,
-  TextTree,
-}) as any
+})
 
 export default PreviewText
