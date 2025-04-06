@@ -1,18 +1,16 @@
-import { defineComponent } from 'vue'
-import { h } from '@formily/vue'
+import { computed, defineComponent, h } from 'vue'
 import { ElSpace } from 'element-plus'
-// import { Space, SpaceProps } from '../space'
 import { FormBaseItem } from '../form-item'
-import { stylePrefix } from '../__builtins__'
+import { stylePrefix } from '../__builtins__/configs'
+import type { SpaceProps } from 'element-plus'
 
-export type FormButtonGroupProps = Omit<typeof ElSpace, 'align' | 'size'> & {
+export type FormButtonGroupProps = Omit<SpaceProps, 'size'> & {
   align?: 'left' | 'right' | 'center'
   gutter?: number
-  className?: string
   alignFormItem: boolean
 }
 
-export const FormButtonGroup = defineComponent({
+export const FormButtonGroup = defineComponent<FormButtonGroupProps>({
   name: 'FFormButtonGroup',
   props: {
     align: {
@@ -30,39 +28,49 @@ export const FormButtonGroup = defineComponent({
   },
   setup(props, { slots, attrs }) {
     const prefixCls = `${stylePrefix}-form-button-group`
+
+    const spaceStyle = computed(() => {
+      return {
+        justifyContent:
+          props.align === 'left'
+            ? 'flex-start'
+            : props.align === 'right'
+            ? 'flex-end'
+            : 'center',
+        display: 'flex',
+      }
+    })
+
     return () => {
       if (props.alignFormItem) {
         return h(
           FormBaseItem,
           {
-            colon: false,
-            label: ' ',
-            ...attrs,
             style: {
               margin: 0,
               padding: 0,
               width: '100%',
             },
+            colon: false,
+            label: ' ',
+            ...attrs,
           },
           {
-            default: () => h(ElSpace, { size: props.gutter }, slots),
+            default: () =>
+              h(
+                ElSpace,
+                { size: props.gutter, style: [{ ...spaceStyle.value }] },
+                slots
+              ),
           }
         )
       } else {
         return h(
           ElSpace,
           {
-            ...attrs,
             class: [prefixCls],
-            style: {
-              justifyContent:
-                props.align === 'left'
-                  ? 'flex-start'
-                  : props.align === 'right'
-                  ? 'flex-end'
-                  : 'center',
-              display: 'flex',
-            },
+            style: [{ ...spaceStyle.value }],
+            ...attrs,
             size: props.gutter,
           },
           slots
