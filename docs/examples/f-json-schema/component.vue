@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 400px; overflow: auto">
+  <div style="height: 500px; overflow: auto">
     <JsonSchema
       label-width="140"
       :schema="schema"
