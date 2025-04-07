@@ -97,13 +97,14 @@ export const JsonSchema = defineComponent({
     })
 
     const handleScrollIntoView = () => {
-      const container = containerRef.value?.$el
+      const container = containerRef.value
       if (container) {
         const elements = container.querySelectorAll('.fep-form-item-error-help')
         if (elements && elements.length) {
-          elements[0].scrollIntoView({
+          const formItemEle = elements[0]?.parentElement?.parentElement // fep-form-item-control -> fep-form-item
+          formItemEle.scrollIntoView({
             behavior: 'smooth',
-            block: 'end',
+            block: 'nearest',
             inline: 'nearest',
           })
         }
@@ -140,18 +141,25 @@ export const JsonSchema = defineComponent({
       const { SchemaField } = fields.value
 
       return h(
-        Form as Component,
+        'div',
         {
-          colon: false,
-          component: 'div',
-          ...attrs,
-          form: proxyForm,
           class: staticKlass,
           ref: containerRef,
         },
-        {
-          default: () => h(SchemaField, { schema }),
-        }
+        [
+          h(
+            Form as Component,
+            {
+              colon: false,
+              component: 'div',
+              ...attrs,
+              form: proxyForm,
+            },
+            {
+              default: () => h(SchemaField, { schema }),
+            }
+          ),
+        ]
       )
     }
   },
