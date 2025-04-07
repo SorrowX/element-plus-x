@@ -99,7 +99,7 @@ export const JsonSchema = defineComponent({
     const handleScrollIntoView = () => {
       const container = containerRef.value?.$el
       if (container) {
-        const elements = document.querySelectorAll('.fep-form-item-error-help')
+        const elements = container.querySelectorAll('.fep-form-item-error-help')
         if (elements && elements.length) {
           elements[0].scrollIntoView({
             behavior: 'smooth',

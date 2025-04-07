@@ -113,6 +113,22 @@
         "text": "PreviewText 阅读态"
       },
       {
+        "link": "/f-submit",
+        "text": "Submit 提交"
+      },
+      {
+        "link": "/f-reset",
+        "text": "Reset 重置"
+      },
+      {
+        "link": "/f-form-button-group",
+        "text": "FormButtonGroup 按钮组"
+      },
+      {
+        "link": "/f-json-schema",
+        "text": "JsonSchema 配置项"
+      },
+      {
         "link": "/f-form",
         "text": "Form 表单"
       },
