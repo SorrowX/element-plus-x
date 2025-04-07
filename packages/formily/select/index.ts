@@ -2,7 +2,7 @@ import { defineComponent, h } from 'vue'
 import { connect, mapProps, mapReadPretty } from '@formily/vue'
 import { ElOption, ElSelect } from 'element-plus'
 import { PreviewText } from '../preview-text'
-import { resolveComponent, transformComponent } from '../__builtins__'
+import { resolveComponent } from '../__builtins__'
 
 type IOption = Pick<typeof ElOption, 'value' | 'label' | 'disabled'> | string
 type IOptions = IOption[]
@@ -13,6 +13,7 @@ export type SelectProps = typeof ElSelect & {
 
 const SelectOption = defineComponent({
   name: 'FSelect',
+  inheritAttrs: false,
   props: {
     options: {
       type: Array as () => IOptions,
@@ -65,9 +66,7 @@ const SelectOption = defineComponent({
 })
 
 export const Select = connect(
-  transformComponent<SelectProps>(SelectOption, {
-    change: 'update:modelValue',
-  }),
+  SelectOption,
   mapProps({ dataSource: 'options', value: 'modelValue', loading: true }),
   mapReadPretty(PreviewText.Select)
 )

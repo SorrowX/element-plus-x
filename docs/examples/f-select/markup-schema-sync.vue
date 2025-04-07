@@ -12,6 +12,9 @@
             width: '240px',
           },
           clearable: true,
+          onChange: (e) => {
+            console.log('change')
+          },
         }"
         :enum="[
           {
