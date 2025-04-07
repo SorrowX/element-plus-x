@@ -4,6 +4,7 @@ import { observer } from '@formily/reactive-vue'
 import { useParentForm } from '@formily/vue'
 import { ElButton } from 'element-plus'
 import type { ButtonProps as ElButtonProps } from 'element-plus'
+import type { FormSubmit } from '../json-schema'
 
 export interface ISubmitProps extends ElButtonProps {
   onClick?: (e: MouseEvent) => any
@@ -38,8 +39,10 @@ export const Submit = observer(
                 if (onClick(e) === false) return
               }
               if (onSubmit) {
-                form
-                  ?.submit(onSubmit as (e: any) => void)
+                ;(form?.submit as FormSubmit<any>)(
+                  onSubmit,
+                  attrs.scrollIntoView as boolean
+                )
                   .then(onSubmitSuccess as (e: any) => void)
                   .catch(onSubmitFailed as (e: any) => void)
               }
