@@ -1,7 +1,15 @@
-import { defineComponent, h, onBeforeUnmount, provide, ref, watch } from 'vue'
+import {
+  Transition,
+  defineComponent,
+  h,
+  onBeforeUnmount,
+  provide,
+  ref,
+  watch,
+} from 'vue'
 import { isVoidField } from '@formily/core'
 import { connect, mapProps } from '@formily/vue'
-import { ElIcon, ElPopover, ElTooltip } from 'element-plus'
+import { ElIcon, ElPopover, ElTooltip, useNamespace } from 'element-plus'
 import {
   CircleCheck,
   CircleClose,
@@ -142,6 +150,8 @@ export const FormBaseItem = defineComponent<FormItemProps>({
     const deepLayoutRef = useFormLayout()
     const prefixCls = `${stylePrefix}-form-item`
 
+    const ns = useNamespace('f-form-item')
+
     const containerRef: Ref<any> = ref<HTMLElement>()
     const overflow = useOverflow(containerRef)
 
@@ -174,7 +184,7 @@ export const FormBaseItem = defineComponent<FormItemProps>({
         size = deepLayout.size,
         extra,
         feedbackText,
-        feedbackLayout = deepLayout.feedbackLayout ?? 'loose',
+        feedbackLayout = deepLayout.feedbackLayout,
         tooltipLayout = deepLayout.tooltipLayout ?? 'icon',
         feedbackStatus,
         feedbackIcon,
@@ -223,7 +233,6 @@ export const FormBaseItem = defineComponent<FormItemProps>({
                       class: {
                         [`${prefixCls}-${feedbackStatus}-help`]:
                           !!feedbackStatus,
-                        [`${prefixCls}-help`]: true,
                       },
                     },
                     {
@@ -328,8 +337,8 @@ export const FormBaseItem = defineComponent<FormItemProps>({
           {
             class: {
               [`${prefixCls}-label`]: true,
-              [`${prefixCls}-label-tooltip`]:
-                (tooltip && tooltipLayout === 'text') || overflow.value,
+              // [`${prefixCls}-label-tooltip`]:
+              //   (tooltip && tooltipLayout === 'text') || overflow.value,
               [`${prefixCls}-item-col-${labelCol}`]: enableCol && !!labelCol,
             },
             style: labelStyle,
@@ -369,22 +378,32 @@ export const FormBaseItem = defineComponent<FormItemProps>({
           }
         )
 
-      const renderFeedback =
+      const shouldShowError =
         !!feedbackText &&
         feedbackLayout !== 'popover' &&
-        feedbackLayout !== 'none' &&
-        h(
-          'div',
-          {
-            class: {
-              [`${prefixCls}-${feedbackStatus}-help`]: !!feedbackStatus,
-              [`${prefixCls}-help`]: true,
-              [`${prefixCls}-help-enter`]: true,
-              [`${prefixCls}-help-enter-active`]: true,
-            },
-          },
-          { default: () => [resolveComponent(feedbackText)] }
-        )
+        feedbackLayout !== 'none'
+
+      const renderFeedback = h(
+        Transition,
+        {
+          name: `${ns.namespace.value}-zoom-in-top`,
+        },
+        {
+          default: () =>
+            shouldShowError
+              ? h(
+                  'div',
+                  {
+                    class: {
+                      [`${prefixCls}-${feedbackStatus}-help`]: !!feedbackStatus,
+                      [`${prefixCls}-help`]: true,
+                    },
+                  },
+                  { default: () => [resolveComponent(feedbackText)] }
+                )
+              : '',
+        }
+      )
 
       const renderExtra =
         extra &&

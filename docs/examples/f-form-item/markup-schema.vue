@@ -1,5 +1,5 @@
 <template>
-  <Form :form="form">
+  <Form :form="form" @auto-submit="onSubmit">
     <SchemaField>
       <SchemaStringField
         name="input"
@@ -9,7 +9,8 @@
         required
       />
     </SchemaField>
-    <Submit @submit="onSubmit">提交</Submit>
+    <Submit>提交</Submit>
+    <Reset>重置</Reset>
   </Form>
 </template>
 
@@ -17,7 +18,7 @@
 import { createForm } from '@formily/core'
 import { createSchemaField } from '@formily/vue'
 import { Formily } from 'element-plus-x'
-const { Form, FormItem, Input, Submit } = Formily
+const { Form, FormItem, Input, Submit, Reset } = Formily
 
 const form = createForm()
 const fields = createSchemaField({
@@ -28,7 +29,7 @@ const fields = createSchemaField({
 })
 
 export default {
-  components: { Form, ...fields, Submit },
+  components: { Form, ...fields, Submit, Reset },
   data() {
     return {
       form,

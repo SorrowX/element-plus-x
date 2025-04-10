@@ -3,12 +3,11 @@
 @use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
 @use './common.scss' as *;
 @use './grid.scss';
-@use './animation.scss';
 
 // form-item
 .#{$form-item-prefix} {
   display: flex;
-  margin-bottom: $form-item-margin-bottom;
+  margin-bottom: 18px;
   position: relative;
   line-height: $form-item-medium-line-height;
   font-size: $form-font-size;
@@ -21,29 +20,27 @@
     min-height: $form-item-medium-line-height;
   }
 
-  &-content-component {
+  &-control-content-component {
     line-height: $form-item-medium-line-height;
-  }
-
-  .#{$namespace}-input,
-  .#{$namespace}-input-number,
-  .#{$namespace}-input-number.is-controls-right,
-  .#{$namespace}-select,
-  .#{$namespace}-cascader,
-  .#{$namespace}-date-editor--daterange,
-  .#{$namespace}-date-editor--timerange,
-  .#{$namespace}-date-editor--datetimerange,
-  .#{$namespace}-date-editor.#{$namespace}-input,
-  .#{$namespace}-date-editor.#{$namespace}-input__inner,
-  .#{$namespace}-tree-select {
-    width: 100%;
-  }
-
-  .#{$namespace}-input-group {
-    vertical-align: top;
   }
 }
 
+// form-item vertical模式
+.#{$form-item-prefix} {
+  &-layout-vertical {
+    display: block;
+
+    .#{$form-item-prefix}-label * {
+      line-height: $form-item-label-top-line-height;
+    }
+
+    .#{$form-item-prefix}-label-content {
+      min-height: $form-item-label-top-line-height;
+    }
+  }
+}
+
+// label
 .#{$form-item-prefix}-label {
   position: relative;
   display: flex;
@@ -56,33 +53,32 @@
 
   &-tooltip {
     cursor: help;
-
     * {
       cursor: help;
     }
-
     label {
       border-bottom: 1px dashed currentColor;
     }
+    margin-left: 4px;
+    color: $color-text-secondary;
+    display: flex;
+    align-items: center;
+    height: $form-item-medium-line-height;
   }
 }
-
 .#{$form-item-prefix}-label label {
   color: var(--el-text-color-regular);
 }
-
 .#{$form-item-prefix}-label-align-left {
   > .#{$form-item-prefix}-label {
     justify-content: flex-start;
   }
 }
-
 .#{$form-item-prefix}-label-align-right {
   > .#{$form-item-prefix}-label {
     justify-content: flex-end;
   }
 }
-
 .#{$form-item-prefix}-label-wrap {
   .#{$form-item-prefix}-label {
     label {
@@ -90,32 +86,39 @@
     }
   }
 }
+.#{$form-item-prefix}-asterisk {
+  color: $color-danger;
+  margin-right: 4px;
+  display: inline-block;
+  font-family: SimSun, sans-serif;
+}
+.#{$form-item-prefix}-colon {
+  margin-left: 2px;
+  margin-right: 8px;
+}
 
+// 反馈信息的布局
 .#{$form-item-prefix}-feedback-layout-terse {
-  margin-bottom: 8px;
-
-  &.#{$form-item-prefix}-feedback-has-text:not(.#{$form-item-prefix}-inset) {
-    margin-bottom: 0;
+  margin-bottom: 12px;
+  .#{$form-item-prefix}-help {
+    top: 100%;
   }
 }
 
 .#{$form-item-prefix}-feedback-layout-loose {
   margin-bottom: $form-error-line-height;
-
-  &.#{$form-item-prefix}-feedback-has-text:not(.#{$form-item-prefix}-inset) {
-    margin-bottom: 0;
+  .#{$form-item-prefix}-help {
+    top: calc(100% + 4px);
   }
 }
 
 .#{$form-item-prefix}-feedback-layout-none {
   margin-bottom: 0;
-
-  &.#{$form-item-prefix}-feedback-has-text:not(.#{$form-item-prefix}-inset) {
-    margin-bottom: 0;
-  }
 }
 
+// control
 .#{$form-item-prefix}-control {
+  position: relative;
   width: 100%;
   flex: 1;
 
@@ -152,6 +155,60 @@
     }
   }
 }
+.#{$form-item-prefix}-control-align-left {
+  .#{$form-item-prefix}-control-content {
+    justify-content: flex-start;
+  }
+}
+.#{$form-item-prefix}-control-align-right {
+  .#{$form-item-prefix}-control-content {
+    justify-content: flex-end;
+  }
+}
+.#{$form-item-prefix}-control-wrap {
+  .#{$form-item-prefix}-control {
+    white-space: pre-line;
+  }
+}
+
+// feedback 反馈样式
+.#{$form-item-prefix}-help {
+  position: absolute;
+  font-size: 12px;
+  color: $color-danger;
+  line-height: 1;
+  top: calc(100% + 2px);
+  left: 0;
+  z-index: 1;
+}
+.#{$form-item-prefix}-error-help,
+.#{$form-item-prefix}-warning-help,
+.#{$form-item-prefix}-success-help {
+  display: flex;
+  align-items: center;
+  i {
+    margin-right: 8px;
+  }
+}
+.#{$form-item-prefix}-error-help {
+  color: $color-danger;
+}
+.#{$form-item-prefix}-warning-help {
+  color: $color-warning;
+}
+.#{$form-item-prefix}-success-help {
+  color: $color-success;
+}
+
+// extra 内容样式
+.#{$form-item-prefix}-extra {
+  clear: both;
+  min-height: $form-error-line-height;
+  line-height: $form-error-line-height;
+  color: $color-text-secondary;
+  transition: $color-transition-base;
+  padding-top: 0;
+}
 
 // small 尺寸
 .#{$form-item-prefix}-size-small {
@@ -172,7 +229,6 @@
     }
   }
 
-  .#{$form-item-prefix}-help,
   .#{$form-item-prefix}-extra {
     min-height: $form-error-line-height;
   }
@@ -236,7 +292,6 @@
     }
   }
 
-  .#{$form-item-prefix}-help,
   .#{$form-item-prefix}-extra {
     min-height: $form-error-line-height;
   }
@@ -275,74 +330,8 @@
   }
 }
 
-.#{$form-item-prefix} {
-  &-layout-vertical {
-    display: block;
-
-    .#{$form-item-prefix}-label * {
-      line-height: $form-item-label-top-line-height;
-    }
-
-    .#{$form-item-prefix}-label-content {
-      min-height: $form-item-label-top-line-height;
-    }
-  }
-}
-
 .#{$form-item-prefix}-feedback-layout-popover {
   margin-bottom: 8px;
-}
-
-.#{$form-item-prefix}-label-tooltip {
-  margin-left: 4px;
-  color: $color-text-secondary;
-  display: flex;
-  align-items: center;
-  height: $form-item-medium-line-height;
-  cursor: pointer;
-  i {
-    line-height: 1;
-  }
-}
-
-.#{$form-item-prefix}-control-align-left {
-  .#{$form-item-prefix}-control-content {
-    justify-content: flex-start;
-  }
-}
-
-.#{$form-item-prefix}-control-align-right {
-  .#{$form-item-prefix}-control-content {
-    justify-content: flex-end;
-  }
-}
-
-.#{$form-item-prefix}-control-wrap {
-  .#{$form-item-prefix}-control {
-    white-space: pre-line;
-  }
-}
-
-.#{$form-item-prefix}-asterisk {
-  color: $color-danger;
-  margin-right: 4px;
-  display: inline-block;
-  font-family: SimSun, sans-serif;
-}
-
-.#{$form-item-prefix}-colon {
-  margin-left: 2px;
-  margin-right: 8px;
-}
-
-.#{$form-item-prefix}-help,
-.#{$form-item-prefix}-extra {
-  clear: both;
-  min-height: $form-error-line-height;
-  line-height: $form-error-line-height;
-  color: $color-text-secondary;
-  transition: $color-transition-base;
-  padding-top: 0;
 }
 
 .#{$form-item-prefix}-fullness {
@@ -409,52 +398,6 @@
   & .#{$namespace}-select__wrapper {
     box-shadow: 0 0 0 1px $color-danger inset !important;
   }
-
-  // old
-  // & .#{$namespace}-input__inner,
-  // & .#{$namespace}-textarea__inner {
-  //   &,
-  //   &.hover {
-  //     border-color: $color-danger;
-  //   }
-  // }
-
-  // & .#{$namespace}-input__inner,
-  // & .#{$namespace}-textarea__inner {
-  //   &:focus {
-  //     border-color: $color-danger;
-  //   }
-  // }
-
-  // & .#{$namespace}-input-group__append,
-  // & .#{$namespace}-input-group__prepend {
-  //   & .#{$namespace}-input__inner {
-  //     border-color: transparent;
-  //   }
-  // }
-  // .#{$namespace}-input__validateIcon {
-  //   color: $color-danger !important;
-  // }
-}
-
-.#{$form-item-prefix}-error-help,
-.#{$form-item-prefix}-warning-help,
-.#{$form-item-prefix}-success-help {
-  i {
-    margin-right: 8px;
-  }
-}
-
-.#{$form-item-prefix}-error-help {
-  color: $color-danger;
-}
-
-.#{$form-item-prefix}-warning-help {
-  color: $color-warning;
-}
-
-.#{$form-item-prefix}-success-help {
-  color: $color-success;
 }
 
 .#{$form-item-prefix}-warning {
@@ -463,32 +406,6 @@
   & .#{$namespace}-select__wrapper {
     box-shadow: 0 0 0 1px $color-warning inset !important;
   }
-
-  // old
-  // & .#{$namespace}-input__inner,
-  // & .#{$namespace}-textarea__inner {
-  //   &,
-  //   &.hover {
-  //     border-color: $color-warning;
-  //   }
-  // }
-
-  // & .#{$namespace}-input__inner,
-  // & .#{$namespace}-textarea__inner {
-  //   &:focus {
-  //     border-color: $color-warning;
-  //   }
-  // }
-
-  // & .#{$namespace}-input-group__append,
-  // & .#{$namespace}-input-group__prepend {
-  //   & .#{$namespace}-input__inner {
-  //     border-color: transparent;
-  //   }
-  // }
-  // .#{$namespace}-input__validateIcon {
-  //   color: $color-warning !important;
-  // }
 }
 
 .#{$form-item-prefix}-success {
@@ -497,32 +414,6 @@
   & .#{$namespace}-select__wrapper {
     box-shadow: 0 0 0 1px $color-success inset !important;
   }
-
-  // old
-  // & .#{$namespace}-input__inner,
-  // & .#{$namespace}-textarea__inner {
-  //   &,
-  //   &.hover {
-  //     border-color: $color-success;
-  //   }
-  // }
-
-  // & .#{$namespace}-input__inner,
-  // & .#{$namespace}-textarea__inner {
-  //   &:focus {
-  //     border-color: $color-success;
-  //   }
-  // }
-
-  // & .#{$namespace}-input-group__append,
-  // & .#{$namespace}-input-group__prepend {
-  //   & .#{$namespace}-input__inner {
-  //     border-color: transparent;
-  //   }
-  // }
-  // .#{$namespace}-input__validateIcon {
-  //   color: $color-success !important;
-  // }
 }
 
 // 去除ep组件的边框

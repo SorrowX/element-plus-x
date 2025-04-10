@@ -9,6 +9,8 @@
     />
     <JsonSchema
       ref="jsonSchemaRef"
+      :colon="true"
+      label-width="80"
       :schema="schema"
       :i-form-props="formProps"
       preview-text-placeholder="当没有值的时候会显示这个文本"
@@ -288,6 +290,7 @@ const schema = {
       default: 0,
     },
     textArea: {
+      required: true,
       type: 'boolean',
       title: '文本框',
       'x-decorator': 'FormItem',
@@ -304,11 +307,17 @@ const schema = {
       title: ' ',
       'x-decorator': 'FormItem',
       'x-component': 'Actions',
+      'x-decorator-props': {
+        colon: false,
+      },
       'x-component-props': {
         submitText: '提交',
         resetText: '重置',
         submitProps: {
           // icon: Search,
+        },
+        resetProps: {
+          forceClear: true,
         },
         onSubmit,
       },

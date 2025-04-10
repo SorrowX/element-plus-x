@@ -394,10 +394,10 @@
 <script>
 import { h } from 'vue'
 import { createForm } from '@formily/core'
-import { createSchemaField, FormProvider } from '@formily/vue'
+import { FormProvider, createSchemaField } from '@formily/vue'
 import { Formily } from 'element-plus-x'
-import { CircleCheck } from '@element-plus/icons-vue'
 import { ElIcon } from 'element-plus'
+import { CircleCheck } from '@element-plus/icons-vue'
 
 const {
   FormItem,

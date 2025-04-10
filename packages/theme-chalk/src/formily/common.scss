@@ -31,7 +31,7 @@ $form-item-large-line-height: 40px !default;
 $form-item-medium-line-height: 32px !default;
 $form-item-small-line-height: 24px !default;
 $form-item-label-top-line-height: 40px !default;
-$form-error-line-height: 22px !default;
+$form-error-line-height: 22px !default; // 22px !default;
 $form-item-margin-bottom: $form-error-line-height !default;
 $color-text-secondary: getCssVar('text-color', 'secondary');
 $color-danger: getCssVar('color-danger');

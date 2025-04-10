@@ -24,11 +24,11 @@ import { merge } from 'lodash-unified'
 
 import { ElCase } from 'element-plus-x'
 
-// import Test from '../../docs/examples/f-form-item/basic.vue'
-import Test from '../../docs/examples/f-json-schema/component.vue'
-// import Test from '../../docs/examples/f-json-schema/json1.vue'
+// import Test from '../../docs/examples/f-form-item/common.vue'
+// import Test from '../../docs/examples/f-json-schema/component.vue'
+import Test from '../../docs/examples/f-json-schema/json1.vue'
 // import Test from '../../docs/examples/f-input/markup-schema.vue'
-// import Test from '../../docs/examples/emoji/parser.vue'
+// import Test from '../../docs/examples/table-page/boundary-value.vue'
 
 import { computed, ref } from 'vue'
 import ElZhCn from 'element-plus/dist/locale/zh-cn.mjs'
@@ -53,7 +53,8 @@ body {
   height: 100vh;
   margin: 0;
   // padding: 50px;
-  overflow: hidden;
+  // overflow: hidden;
+  overflow-x: hidden;
 
   #play {
     height: 100%;
