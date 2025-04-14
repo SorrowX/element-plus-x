@@ -169,6 +169,7 @@ export default defineComponent({
       getState,
       getCurrentPageCounts,
       getCurrentPageBySubtract,
+      tableRef: tableWrapperRef,
     })
 
     return () => {
