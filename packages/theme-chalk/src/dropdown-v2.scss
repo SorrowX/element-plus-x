@@ -4,6 +4,13 @@
 @use './common/var.scss' as *;
 
 @include b(dropdown-v2) {
+  &--split-button {
+    pointer-events: none;
+    & button[role='icon'] {
+      width: 32px;
+      pointer-events: auto;
+    }
+  }
 }
 
 @include b(dropdown-v2-panel) {

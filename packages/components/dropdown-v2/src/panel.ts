@@ -44,7 +44,7 @@ export const panelProps = buildProps({
   },
   width: {
     type: definePropType<string | number>([String, Number]),
-    default: '160px',
+    default: '140px',
   },
   trigger: {
     type: definePropType<string>(String),
@@ -56,6 +56,7 @@ export type PanelProps = ExtractPropTypes<typeof panelProps>
 
 export default defineComponent({
   name: 'ElDropdownV2Panel',
+  inheritAttrs: false,
   props: panelProps,
   emits: ['open', 'close', 'select'],
   setup(props, { emit, attrs }) {

@@ -1,15 +1,35 @@
 <template>
-  <el-dropdown-v2 :options="options" @change="handleChange">
-    <el-button type="primary">
-      Hover Me<el-icon class="el-icon--right"><arrow-down /></el-icon>
-    </el-button>
-  </el-dropdown-v2>
+  <el-space>
+    <el-dropdown-v2
+      trigger="hover"
+      :options="options"
+      :trigger-props="{ triggerText: 'Hover Me' }"
+      @change="handleChange"
+    />
+    <el-dropdown-v2
+      split-button
+      trigger="hover"
+      :options="options"
+      :trigger-props="{ triggerText: 'Hover Icon' }"
+      @change="handleChange"
+    />
+    <el-dropdown-v2
+      trigger="click"
+      :options="options"
+      :trigger-props="{ triggerText: 'Click Me' }"
+      @change="handleChange"
+    />
+    <el-dropdown-v2
+      trigger="click"
+      split-button
+      :options="options"
+      :trigger-props="{ triggerText: 'Click Icon' }"
+      @change="handleChange"
+    />
+  </el-space>
 </template>
 
 <script lang="ts" setup>
-import { ElButton, ElIcon } from 'element-plus'
-import { ArrowDown } from '@element-plus/icons-vue'
-
 const handleChange = (value, valuePath) => {
   console.log(value, valuePath)
 }
