@@ -58,12 +58,35 @@ export default defineComponent({
       }
     }
 
+    const hasLabelSlot = computed(() => !!slots.label)
+
+    const recursion = (options: DropdownOption[]) => {
+      return options.map((option: DropdownOption) => {
+        const newOption = {
+          children: [],
+          disabled: false,
+          divided: false,
+          ...option,
+        }
+        if (hasLabelSlot.value) {
+          newOption.renderLabel = (option: DropdownOption) =>
+            slots.label?.(option)
+        }
+        if (option.children) {
+          newOption.children = recursion(option.children)
+        }
+        return newOption
+      })
+    }
+
+    const userOptions = computed(() => recursion(props.options))
+
     const options = computed(() => {
       return [
         {
           label: TRIGGER,
           value: TRIGGER,
-          children: props.options,
+          children: userOptions.value,
           renderLabel: (option: DropdownOption) => renderTrigger(option),
         },
       ]
