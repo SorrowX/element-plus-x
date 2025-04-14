@@ -28,6 +28,7 @@ export default defineComponent({
     }
 
     const rednerButtonGroup = () => {
+      const { triggerProps } = props
       return h(
         ElButtonGroup,
         {},
@@ -36,7 +37,7 @@ export default defineComponent({
             renderButton(),
             h(
               ElButton,
-              { type: 'primary', role: 'icon' },
+              { type: 'primary', ...triggerProps, role: 'icon' },
               {
                 default: () => renderIcon(),
               }

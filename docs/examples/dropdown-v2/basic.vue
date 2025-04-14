@@ -23,7 +23,7 @@
       trigger="click"
       split-button
       :options="options"
-      :trigger-props="{ triggerText: 'Click Icon' }"
+      :trigger-props="{ triggerText: 'Click Icon', type: '' }"
       @change="handleChange"
     />
   </el-space>
