@@ -7,7 +7,7 @@
     @change="handleChange"
   >
     <template #label="{ label, value, disabled, children }">
-      <div v-if="children?.length" class="el-dropdown-v2-item">
+      <div v-if="children.length" class="el-dropdown-v2-item">
         <div>
           {{ label }}-{{ value }}-{{ disabled }}-childs:{{ children.length }}
         </div>
