@@ -34,6 +34,15 @@ dropdown-v2/icon
 
 :::
 
+## 自定义 label
+
+使用`label`插槽
+:::demo
+
+dropdown-v2/label
+
+:::
+
 ## 面板
 
 使用`el-dropdown-v2-panel`组件
@@ -45,6 +54,13 @@ dropdown-v2/panel
 
 ## API
 
+### DropdownV2 独有属性
+
+| 属性名        | 说明                     | 类型                                                     | 默认值 |
+| ------------- | ------------------------ | -------------------------------------------------------- | ------ |
+| split-button  | 下拉触发元素呈现为按钮组 | ^[Boolean]                                               | false  |
+| trigger-props | 触发器按钮所有属性设置   | ^[Object]`Partial<ButtonProps> & {triggerText?: string}` | -      |
+
 ### DropdownV2 、 Panel 属性
 
 | 属性名          | 说明                    | 类型                               | 默认值 |
@@ -53,11 +69,23 @@ dropdown-v2/panel
 | show-timeout    | 弹窗出现前的时间        | ^[Number]                          | 200    |
 | hide-timeout    | 弹窗关闭时的时间        | ^[Number]                          | 200    |
 | tooltip-options | 第一层级的 tooltip 选项 | ^[Object]`Partial<ElTooltipProps>` | -      |
-| width           | 面板的宽度              | ^[Number \| String]                | 160    |
+| width           | 面板的宽度              | ^[Number \| String]                | 140    |
 | trigger         | 触发方式                | ^[enum]`hover\|click`              | hover  |
+
+### DropdownOption 属性
+
+| 属性名      | 说明              | 类型                               | 默认值 |
+| ----------- | ----------------- | ---------------------------------- | ------ |
+| label       | label             | ^[String]                          | -      |
+| value       | value             | ^[String \| Number]`DropdownValue` | -      |
+| children    | 孩子              | ^[Array]`DropdownOption[]`         | -      |
+| disabled    | 是否禁用          | ^[Boolean]                         | -      |
+| divided     | 分割线            | ^[Boolean]                         | -      |
+| renderLabel | 自定义渲染 render | ^[Function]`RenderLabel`           | -      |
 
 ### Slots
 
-| 事件名  | 说明         |
-| ------- | ------------ |
-| default | 触发器的内容 |
+| 事件名  | 说明                                                                                         |
+| ------- | -------------------------------------------------------------------------------------------- |
+| default | 触发器的内容                                                                                 |
+| label   | label 的内容(只有 DropdownV2 才有该插槽，panel 组件使用选项 renderLabel 函数返回 VNode 即可) |

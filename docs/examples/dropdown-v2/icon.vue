@@ -2,6 +2,7 @@
   <el-card class="dropdown-v2-card">
     <el-dropdown-v2
       width="110"
+      trigger="click"
       :options="options"
       :tooltip-options="tooltipOptions"
       @change="handleChange"
@@ -39,7 +40,6 @@ const options = [
   {
     label: '复制',
     value: 'copy',
-    disabled: true,
     children: [
       {
         label: '该节点',

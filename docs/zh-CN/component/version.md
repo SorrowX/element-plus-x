@@ -119,7 +119,10 @@
 
 1. 新增 Formily 表单组件
 
-## V1.1.3 (更新时间: 2025-04-07 16:10)
+## V1.1.3 (更新时间: 2025-04-14 13:39)
 
 1. JsonSchema 组件滚动定位问题修复
 2. FormItem 组件优化(transition 动画使用 el-zoom-in-top,其优化 FormItem Css)
+3. DropdownV2 下拉菜单组件支持 label 插槽
+4. DropdownV2 下拉菜单组件禁用样式添加
+5. DropdownV2 下拉菜单组件支持 trigger 备选内容
