@@ -122,3 +122,4 @@
 ## V1.1.3 (更新时间: 2025-04-07 16:10)
 
 1. JsonSchema 组件滚动定位问题修复
+2. FormItem 组件优化(transition 动画使用 el-zoom-in-top,其优化 FormItem Css)
