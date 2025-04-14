@@ -29,6 +29,7 @@ const fallbackPlacements = [
 
 export default defineComponent({
   name: 'ElDropdownV2SubItem',
+  inheritAttrs: false,
   props: {
     option: {
       type: definePropType<DropdownOption>(Object),

@@ -15,6 +15,7 @@ import type { DropdownOption, PanelProvider } from './types'
 
 export default defineComponent({
   name: 'ElDropdownV2Item',
+  inheritAttrs: false,
   props: {
     option: {
       type: definePropType<DropdownOption>(Object),

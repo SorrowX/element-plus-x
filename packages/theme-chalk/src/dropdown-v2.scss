@@ -52,4 +52,8 @@
   &--divided {
     border-bottom: 1px solid getCssVar('border-color-lighter');
   }
+  &--disabled {
+    cursor: not-allowed;
+    color: getCssVar('text-color-disabled');
+  }
 }

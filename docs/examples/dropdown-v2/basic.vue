@@ -42,6 +42,7 @@ const options = [
   {
     label: '选项二',
     value: '2',
+    disabled: true,
   },
   {
     label: '选项三',
