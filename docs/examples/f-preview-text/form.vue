@@ -31,7 +31,7 @@
           :x-component-props="{
             multiple: true,
             displayType: 'text',
-            separator: '、',
+            separator: '; ',
           }"
           :default="['123', '222']"
           :enum="[
@@ -47,12 +47,22 @@
           title="日期预览"
           x-component="DatePicker"
           default="2020-11-23 22:15:20"
+          :x-component-props="{
+            style: {
+              width: '100%',
+            },
+          }"
         />
         <SchemaStringField
           x-decorator="FormItem"
           title="时间预览"
           x-component="TimePicker"
           :default="'2020-11-23 22:15:20'"
+          :x-component-props="{
+            style: {
+              width: '100%',
+            },
+          }"
         />
         <SchemaStringField
           x-decorator="FormItem"
@@ -61,6 +71,9 @@
           :x-component-props="{
             clearable: true,
             separator: '、',
+            style: {
+              width: '100%',
+            },
           }"
           :default="['hangzhou', 'aa']"
           :enum="[
@@ -80,6 +93,9 @@
             displayType: 'text',
             clearable: true,
             separator: '、',
+            style: {
+              width: '100%',
+            },
           }"
           :default="['hangzhou', 'aa']"
           :enum="[
