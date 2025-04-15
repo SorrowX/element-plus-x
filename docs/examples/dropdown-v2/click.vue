@@ -6,14 +6,14 @@
     @change="handleChange"
   >
     <el-button type="primary">
-      Click Me<el-icon class="el-icon--right"><arrow-down /></el-icon>
+      Click Me<el-icon class="el-icon--right"><CaretBottom /></el-icon>
     </el-button>
   </el-dropdown-v2>
 </template>
 
 <script lang="ts" setup>
 import { ElButton, ElIcon } from 'element-plus'
-import { ArrowDown } from '@element-plus/icons-vue'
+import { CaretBottom } from '@element-plus/icons-vue'
 
 const handleChange = (value, valuePath) => {
   console.log(value, valuePath)

@@ -59,7 +59,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: panelProps,
   emits: ['open', 'close', 'select'],
-  setup(props, { emit, attrs }) {
+  setup(props, { emit, attrs, expose }) {
     const ns = useNamespace('dropdown-v2')
     const instance = getCurrentInstance()!
 
@@ -122,6 +122,12 @@ export default defineComponent({
     provide<SubItemProvider>(`subItem:${instance.uid}`, {
       mouseInChild,
       level: 0,
+    })
+
+    expose({
+      close,
+      openItem,
+      closeItem,
     })
 
     return () => {

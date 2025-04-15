@@ -1,4 +1,4 @@
-import { computed, defineComponent, h, unref } from 'vue'
+import { computed, defineComponent, h, mergeProps, ref, unref } from 'vue'
 import { ElButton, ElButtonGroup, ElIcon, useNamespace } from 'element-plus'
 import { ArrowDown } from '@element-plus/icons-vue'
 import { dropdownV2Props } from './dropdown-v2'
@@ -13,31 +13,55 @@ export default defineComponent({
   props: dropdownV2Props,
   setup(props, { attrs, emit, slots }) {
     const ns = useNamespace('dropdown-v2')
+    const panelRef = ref()
 
-    const renderIcon = (attrs?: any) => {
+    const renderIcon = (attrs?: Record<string, any>) => {
       return h(ElIcon, { ...attrs }, { default: () => h(ArrowDown) })
     }
 
-    const renderButton = (vNode?: VNode) => {
+    const renderButton = (
+      attrs: Record<string, any> = {},
+      children: VNode[]
+    ) => {
       const { triggerProps } = props
       return h(
         ElButton,
-        { type: 'primary', ...triggerProps, role: 'trigger' },
-        { default: () => [triggerProps?.triggerText, vNode] }
+        {
+          type: 'primary',
+          ...mergeProps(attrs, { ...triggerProps }),
+          role: 'trigger',
+        },
+        { default: () => [triggerProps?.triggerText, ...children] }
       )
     }
 
+    let tick: number
     const rednerButtonGroup = () => {
-      const { triggerProps } = props
       return h(
         ElButtonGroup,
         {},
         {
           default: () => [
-            renderButton(),
+            renderButton(
+              {
+                trigger: 'disabled',
+                onClick(e: Event) {
+                  // 禁用点击出现弹窗
+                  e.stopPropagation()
+                },
+                onMouseenter() {
+                  // 禁用移入出现弹窗
+                  clearTimeout(tick)
+                  tick = setTimeout(() => {
+                    panelRef.value.close(TRIGGER)
+                  }, 200)
+                },
+              },
+              []
+            ),
             h(
               ElButton,
-              { type: 'primary', ...triggerProps, role: 'icon' },
+              { type: 'primary', ...iconProps.value, role: 'icon' },
               {
                 default: () => renderIcon(),
               }
@@ -54,7 +78,7 @@ export default defineComponent({
       } else {
         return splitButton
           ? rednerButtonGroup()
-          : renderButton(renderIcon({ style: { marginLeft: '8px' } }))
+          : renderButton({}, [renderIcon({ style: { marginLeft: '8px' } })])
       }
     }
 
@@ -79,6 +103,19 @@ export default defineComponent({
       })
     }
 
+    const iconProps = computed(() => {
+      const { triggerProps = {} } = props
+      return Object.keys(triggerProps).reduce(
+        (pre: Record<string, any>, key: string) => {
+          if (!key.startsWith('on')) {
+            pre[key] = (triggerProps as Record<string, any>)[key]
+          }
+          return pre
+        },
+        {}
+      )
+    })
+
     const userOptions = computed(() => recursion(props.options))
 
     const options = computed(() => {
@@ -102,6 +139,7 @@ export default defineComponent({
 
     return () => {
       return h(Panel, {
+        ref: panelRef,
         tooltipOptions: {
           offset: 12,
           placement: 'bottom-start',

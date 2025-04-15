@@ -10,6 +10,9 @@
       width: 32px;
       pointer-events: auto;
     }
+    & button[role='trigger'] {
+      pointer-events: auto;
+    }
   }
 }
 

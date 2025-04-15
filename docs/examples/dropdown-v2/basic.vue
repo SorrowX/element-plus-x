@@ -10,26 +10,41 @@
       split-button
       trigger="hover"
       :options="options"
-      :trigger-props="{ triggerText: 'Hover Icon' }"
+      :trigger-props="{
+        triggerText: 'Hover Icon',
+        onClick() {
+          ElMessage('do some thing')
+        },
+      }"
       @change="handleChange"
     />
     <el-dropdown-v2
       trigger="click"
       :options="options"
-      :trigger-props="{ triggerText: 'Click Me' }"
+      :trigger-props="{
+        triggerText: 'Click Me',
+      }"
       @change="handleChange"
     />
     <el-dropdown-v2
       trigger="click"
       split-button
       :options="options"
-      :trigger-props="{ triggerText: 'Click Icon', type: '' }"
+      :trigger-props="{
+        triggerText: 'Click Icon',
+        type: '',
+        onClick() {
+          ElMessage('do some thing')
+        },
+      }"
       @change="handleChange"
     />
   </el-space>
 </template>
 
 <script lang="ts" setup>
+import { ElMessage } from 'element-plus'
+
 const handleChange = (value, valuePath) => {
   console.log(value, valuePath)
 }
