@@ -14,7 +14,24 @@
           x-component="Select"
           :x-component-props="{
             multiple: true,
-            // displayType: 'text',
+          }"
+          :default="['123', '222']"
+          :enum="[
+            { label: 'A111', value: '123' },
+            {
+              label: 'A222',
+              value: '222',
+            },
+          ]"
+        />
+        <SchemaStringField
+          x-decorator="FormItem"
+          title="选择项预览2"
+          x-component="Select"
+          :x-component-props="{
+            multiple: true,
+            displayType: 'text',
+            separator: '、',
           }"
           :default="['123', '222']"
           :enum="[
@@ -42,12 +59,35 @@
           title="Cascader预览"
           x-component="Cascader"
           :x-component-props="{
-            // displayType: 'text',
             clearable: true,
+            separator: '、',
           }"
-          :default="['hangzhou']"
+          :default="['hangzhou', 'aa']"
           :enum="[
-            { label: '杭州', value: 'hangzhou' },
+            {
+              label: '杭州',
+              value: 'hangzhou',
+              children: [{ label: 'aa', value: 'aa' }],
+            },
+            { label: '余杭', value: 'yuhang' },
+          ]"
+        />
+        <SchemaStringField
+          x-decorator="FormItem"
+          title="Cascader预览2"
+          x-component="Cascader"
+          :x-component-props="{
+            displayType: 'text',
+            clearable: true,
+            separator: '、',
+          }"
+          :default="['hangzhou', 'aa']"
+          :enum="[
+            {
+              label: '杭州',
+              value: 'hangzhou',
+              children: [{ label: 'aa', value: 'aa' }],
+            },
             { label: '余杭', value: 'yuhang' },
           ]"
         />

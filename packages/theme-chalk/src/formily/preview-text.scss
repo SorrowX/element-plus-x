@@ -1,0 +1,10 @@
+@use './common.scss' as *;
+
+.#{$formily-prefix}-preview-text {
+  &__select {
+    height: 100%;
+  }
+  &__cascader {
+    height: 100%;
+  }
+}
