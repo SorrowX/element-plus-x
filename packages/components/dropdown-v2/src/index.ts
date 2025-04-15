@@ -46,22 +46,32 @@ export default defineComponent({
               {
                 trigger: 'disabled',
                 onClick(e: Event) {
-                  // 禁用点击出现弹窗
                   e.stopPropagation()
                 },
                 onMouseenter() {
-                  // 禁用移入出现弹窗
                   clearTimeout(tick)
                   tick = setTimeout(() => {
                     panelRef.value.close(TRIGGER)
                   }, 200)
+                },
+                onMouseleave() {
+                  clearTimeout(tick)
                 },
               },
               []
             ),
             h(
               ElButton,
-              { type: 'primary', ...iconProps.value, role: 'icon' },
+              {
+                type: 'primary',
+                ...{
+                  ...iconProps.value,
+                  onMouseenter() {
+                    panelRef.value.openItem(TRIGGER, [TRIGGER])
+                  },
+                },
+                role: 'icon',
+              },
               {
                 default: () => renderIcon(),
               }
