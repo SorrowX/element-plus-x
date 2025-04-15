@@ -23,7 +23,9 @@ f-preview-text/extend
 
 :::
 
-## 切换
+## 显示类型
+
+`FPreviewTextSelect` 和 `FPreviewTextCascader` 组件支持 2 种显示类型及自定义分隔符
 
 :::demo
 
@@ -41,9 +43,19 @@ f-preview-text/form
 
 参考 [https://element-plus.org/zh-CN/component/select.html](https://element-plus.org/zh-CN/component/select.html)
 
+| 属性名      | 说明               | 类型                  | 默认值 |
+| ----------- | ------------------ | --------------------- | ------ |
+| displayType | 显示类型           | ^[String]`tag\|text>` | tag    |
+| separator   | 数组转字符串分隔符 | `String`              | ;      |
+
 ### PreviewText.Cascader
 
 参考 [https://element-plus.org/zh-CN/component/cascader.html](https://element-plus.org/zh-CN/component/cascader.html)
+
+| 属性名      | 说明               | 类型                  | 默认值 |
+| ----------- | ------------------ | --------------------- | ------ |
+| displayType | 显示类型           | ^[String]`tag\|text>` | tag    |
+| separator   | 数组转字符串分隔符 | `String`              | ;      |
 
 ### PreviewText.DatePicker
 
