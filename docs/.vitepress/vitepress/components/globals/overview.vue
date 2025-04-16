@@ -31,7 +31,9 @@
             @keydown.enter="toPage(item.link)"
           >
             <template #header>
-              <el-text truncated>{{ item.text }}</el-text>
+              <el-text truncated>{{
+                item.text.split(' ')?.[0] ?? item.text
+              }}</el-text>
               <span v-if="item.promotion" class="vp-tag">
                 {{ item.promotion }}
               </span>
@@ -39,7 +41,7 @@
 
             <template #default>
               <component :is="getIcon(item.link)" v-if="getIcon(item.link)" />
-              <span v-else>Todo</span>
+              <span v-else>{{ item.text }}</span>
             </template>
           </el-card>
         </div>
