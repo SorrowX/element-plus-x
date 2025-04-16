@@ -5,8 +5,10 @@ import { useLang } from '../../composables/lang'
 import homeLocale from '../../../i18n/pages/home.json'
 import HomeSponsors from '../home/home-sponsors.vue'
 import HomeCards from '../home/home-cards.vue'
+import { baseUrl } from '../../constant'
 import HomeFooter from './vp-footer.vue'
 import type { CSSProperties } from 'vue'
+
 const target = ref<HTMLElement | null>(null)
 const parallax = reactive(useParallax(target))
 const jumbotronRedOffset = ref(0)
@@ -16,7 +18,10 @@ const homeLang = computed(() => homeLocale[lang.value])
 
 function jumpTo(path: string) {
   // vitepress has not router
-  location.href = `/${lang.value}/${path}`
+  location.href =
+    baseUrl === ('/' as string)
+      ? `/${lang.value}/${path}`
+      : `${baseUrl}${lang.value}/${path}`
 }
 
 const containerStyle: CSSProperties = {

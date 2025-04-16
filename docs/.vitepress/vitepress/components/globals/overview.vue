@@ -70,6 +70,7 @@ import { computed, ref } from 'vue'
 import { useRouter } from 'vitepress'
 import { Search } from '@element-plus/icons-vue'
 import overviewLocale from '../../../i18n/component/overview.json'
+import { getHref } from '../../constant'
 import { useSidebar } from '~/composables/sidebar'
 import { useLang } from '~/composables/lang'
 import overviewIcons from '~/components/overview-icons'
@@ -99,7 +100,8 @@ const filteredSidebars = computed(() =>
 )
 
 const toPage = (link: string) => {
-  router.go(link)
+  // router.go(link)
+  router.go(getHref(link))
 }
 
 const getIcon = (link: string) => {

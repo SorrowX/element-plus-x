@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { isExternal } from '../../utils'
+import { getHref } from '../../constant'
 
 defineProps<{
   href?: string
@@ -12,7 +13,7 @@ defineProps<{
     :is="href ? 'a' : 'span'"
     class="link-item"
     :class="{ link: href }"
-    :href="href"
+    :href="getHref(href as string)"
     :target="isExternal(href) ? '_blank' : undefined"
     :rel="isExternal(href) ? 'noopener noreferrer' : undefined"
   >

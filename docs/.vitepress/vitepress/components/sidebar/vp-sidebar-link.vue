@@ -2,6 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vitepress'
 import { isActive } from '../../utils'
+import { getHref } from '../../constant'
 
 import type { Link } from '../../types'
 
@@ -34,7 +35,7 @@ watch([activeLink, sidebarItem], ([active, el]) => {
       active: activeLink,
       'flex items-center': item.promotion,
     }"
-    :href="item.link"
+    :href="getHref(item.link)"
     @click="$emit('close')"
   >
     <p class="link-text">{{ item.text }}</p>

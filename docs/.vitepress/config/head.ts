@@ -83,7 +83,7 @@ export const head: HeadConfig[] = [
     'script',
     {},
     `;(() => {
-      window.supportedLangs = ${JSON.stringify(languages)}
+      // window.supportedLangs = ${JSON.stringify(languages)}
     })()`,
   ],
 

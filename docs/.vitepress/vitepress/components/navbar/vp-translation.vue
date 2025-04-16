@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { useRouter } from 'vitepress'
 import { useTranslation } from '../../composables/translation'
+import { getHref } from '../../constant'
 
 const router = useRouter()
 const { switchLang, languageMap, langs, lang, locale } = useTranslation()
 
 const toTranslation = () => {
-  router.go(`/${lang.value}/guide/translation`)
+  // router.go(`/${lang.value}/guide/translation`)
+  router.go(getHref(`${lang.value}/guide/translation`))
 }
 </script>
 
 <template>
-  <div class="translation-container">
+  <div v-if="false" class="translation-container">
     <ClientOnly>
       <ElDropdown popper-class="translation-popup" role="navigation">
         <ElIcon :size="24" :aria-label="locale.language">

@@ -80,22 +80,6 @@ Emoji 表情包
 
 等其他业务组件，以上均是 element-plus 不具备的组件。
 
-> 下面是文档图
-
-因为 element-plus-x 域名已被占用,所以暂时不准备提供在线文档地址，需要自己本地启动。
-
-其实该项目是在去年 7 月份已经开发了，只是一直在 gitee 维护，现在挪到 github 来继续开发及维护，里面借鉴了很多 ui 组件库代码的实现。
-
-因为项目开发中 element-plus ui 库是必备的，所以就衍生出这个组件库。
-
-![home](./.github/images/1.png)
-![split](./.github/images/2.png)
-![editor](./.github/images/3.png)
-![array-table](./.github/images/4.png)
-![list](./.github/images/5.png)
-![dropdownV2](./.github/images/6.png)
-![emoji](./.github/images/7.png)
-
 ## 安装
 
 node 版本: 18.19.1; npm 版本: 10.2.4; pnpm 版本: 9.3.0

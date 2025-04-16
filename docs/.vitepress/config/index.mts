@@ -2,6 +2,7 @@ import consola from 'consola'
 import { REPO_BRANCH, REPO_PATH } from '@element-plus/build-constants'
 import { docsDirName } from '@element-plus/build-utils'
 import { languages } from '../utils/lang'
+import { baseUrl } from '../vitepress/constant'
 import { features } from './features'
 import { head } from './head'
 import { nav } from './nav'
@@ -50,6 +51,7 @@ languages.forEach((lang) => {
 
 const setupConfig = (configEnv) => {
   const config: UserConfig<any> = {
+    base: baseUrl,
     title: 'Element Plus',
     description: 'A Vue 3 based component library for designers and developers',
     lastUpdated: true,
