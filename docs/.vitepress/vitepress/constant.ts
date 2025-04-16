@@ -1,4 +1,4 @@
-export const baseUrl = '/element-plus-x/'
+export const baseUrl = '/epx/'
 // export const baseUrl = '/'
 
 export const defaultLang = 'zh-CN'
