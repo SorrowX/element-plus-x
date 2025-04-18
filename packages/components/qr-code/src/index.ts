@@ -47,7 +47,7 @@ const QRCodeComp = defineComponent({
     const drawCanvas = async () => {
       const canvas = canvasRef.value
       if (!canvas) return
-      const options: any = props.options
+      const options: QRCode.QRCodeToDataURLOptions = props.options
 
       await QRCode.toCanvas(canvas, props.text, options)
 

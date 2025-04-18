@@ -102,6 +102,7 @@
     "@tiptap/vue-3": "^2.10.4",
     "@types/lodash": "^4.14.182",
     "@types/lodash-es": "^4.17.6",
+    "@types/qrcode": "^1.5.5",
     "@vueuse/core": "^9.1.0",
     "@vueuse/integrations": "^12.5.0",
     "async-validator": "^4.2.5",
@@ -112,7 +113,7 @@
     "lodash-unified": "^1.0.2",
     "memoize-one": "^6.0.0",
     "normalize-wheel-es": "^1.2.0",
-    "vuedraggable": "^4.1.0"
+    "qrcode": "^1.5.4"
   },
   "devDependencies": {
     "@types/node": "*",
