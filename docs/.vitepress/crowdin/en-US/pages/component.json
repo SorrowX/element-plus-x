@@ -221,6 +221,11 @@
         "link": "/full-screen",
         "text": "FullScreen",
         "promotion": "1.0.9"
+      },
+      {
+        "link": "/qr-code",
+        "text": "QRCode",
+        "promotion": "1.1.4"
       }
     ]
   },

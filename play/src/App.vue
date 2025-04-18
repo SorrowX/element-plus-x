@@ -26,7 +26,7 @@ import { ElCase } from 'element-plus-x'
 
 // import Test from '../../docs/examples/f-form-item/common.vue'
 // import Test from '../../docs/examples/dropdown-v2/basic.vue'
-import Test from '../../docs/examples/f-preview-text/form.vue'
+import Test from '../../docs/examples/qr-code/download.vue'
 // import Test from '../../docs/examples/f-input/markup-schema.vue'
 // import Test from '../../docs/examples/table-page/boundary-value.vue'
 

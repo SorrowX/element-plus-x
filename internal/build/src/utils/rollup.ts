@@ -12,7 +12,7 @@ export const generateExternal = async (options: { full: boolean }) => {
       // packages.push('@vue', 'element-plus', ...dependencies)
     }
     // 排除 element-plus和vuedraggable
-    packages.push('element-plus', '@vueuse', '@tiptap', '@formily')
+    packages.push('element-plus', '@vueuse', '@tiptap', '@formily', 'qrcode')
 
     return [...new Set(packages)].some(
       (pkg) => id === pkg || id.startsWith(`${pkg}/`)

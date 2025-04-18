@@ -35,7 +35,7 @@ export default defineComponent({
       )
     }
 
-    let tick: number
+    let tick: any
     const rednerButtonGroup = () => {
       return h(
         ElButtonGroup,

@@ -17,8 +17,7 @@
     "children": [
       {
         "link": "/icons-vue",
-        "text": "IconsVue 图标",
-        "promotion": "1.0.2"
+        "text": "IconsVue 图标"
       },
       {
         "link": "/flex",
@@ -26,8 +25,7 @@
       },
       {
         "link": "/split",
-        "text": "Split 分割面板",
-        "promotion": "1.1.0"
+        "text": "Split 分割面板"
       },
       {
         "link": "/bubble",
@@ -150,8 +148,7 @@
     "children": [
       {
         "link": "/list",
-        "text": "List 列表",
-        "promotion": "1.0.8"
+        "text": "List 列表"
       },
       {
         "link": "/virtual-list",
@@ -159,8 +156,7 @@
       },
       {
         "link": "/sortable-list",
-        "text": "SortableList 可排序列表",
-        "promotion": "1.0.5"
+        "text": "SortableList 可排序列表"
       },
       {
         "link": "/collapse-content",
@@ -189,8 +185,7 @@
       },
       {
         "link": "/contextmenu",
-        "text": "Contextmenu 右键菜单",
-        "promotion": "1.0.0"
+        "text": "Contextmenu 右键菜单"
       }
     ]
   },
@@ -203,23 +198,24 @@
       },
       {
         "link": "/load-more",
-        "text": "LoadMore 加载更多",
-        "promotion": "1.0.5"
+        "text": "LoadMore 加载更多"
       },
       {
         "link": "/dropdown-v2",
-        "text": "DropdownV2 下拉菜单",
-        "promotion": "1.0.4"
+        "text": "DropdownV2 下拉菜单"
       },
       {
         "link": "/renderer",
-        "text": "Renderer 渲染器",
-        "promotion": "1.0.2"
+        "text": "Renderer 渲染器"
       },
       {
         "link": "/full-screen",
-        "text": "FullScreen 全屏",
-        "promotion": "1.0.9"
+        "text": "FullScreen 全屏"
+      },
+      {
+        "link": "/qr-code",
+        "text": "QRCode 二维码",
+        "promotion": "1.1.4"
       }
     ]
   },
@@ -244,13 +240,11 @@
       },
       {
         "link": "/select-v3",
-        "text": "SelectV3 选择器",
-        "promotion": "1.0.3"
+        "text": "SelectV3 选择器"
       },
       {
         "link": "/preview-file",
-        "text": "PreviewFile 文件预览",
-        "promotion": "1.0.3"
+        "text": "PreviewFile 文件预览"
       },
       {
         "link": "/affix-bottom",

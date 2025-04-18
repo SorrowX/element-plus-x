@@ -40,6 +40,7 @@ import { ElSortableList } from '@element-plus/components/sortable-list'
 import { ElList } from '@element-plus/components/list'
 import { ElFullScreen } from '@element-plus/components/full-screen'
 import { ElSplit } from '@element-plus/components/split'
+import { ElQrCode } from '@element-plus/components/qr-code'
 
 import type { Plugin } from 'vue'
 
@@ -82,4 +83,5 @@ export default [
   ElList,
   ElFullScreen,
   ElSplit,
+  ElQrCode,
 ] as Plugin[]
