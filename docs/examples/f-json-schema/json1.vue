@@ -235,10 +235,10 @@ const schema = {
       ],
       default: 1,
     },
-    radio1: {
+    radio2: {
       required: true,
       type: 'string',
-      title: '单选框',
+      title: '单选框2',
       'x-decorator': 'FormItem',
       'x-component': 'Radio.Group',
       'x-component-props': {
@@ -265,10 +265,10 @@ const schema = {
       ],
       default: [1, 2],
     },
-    checkbox1: {
+    checkbox2: {
       required: true,
       type: 'array',
-      title: '复选框',
+      title: '复选框2',
       'x-decorator': 'FormItem',
       'x-component': 'Checkbox.Group',
       'x-component-props': {

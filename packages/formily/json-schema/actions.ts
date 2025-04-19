@@ -65,7 +65,7 @@ export default defineComponent({
         return resetText
           ? h(
               Reset as Component,
-              { click: handleReset, ...resetProps },
+              { onClick: handleReset, ...resetProps },
               { default: () => resetText }
             )
           : ''
