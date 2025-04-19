@@ -35,7 +35,6 @@ declare module 'vue' {
     IRiFileCopyLine: typeof import('~icons/ri/file-copy-line')['default']
     IRiFlaskLine: typeof import('~icons/ri/flask-line')['default']
     IRiGithubLine: typeof import('~icons/ri/github-line')['default']
-    IRiTranslate2: typeof import('~icons/ri/translate2')['default']
     L1Categories: typeof import('./.vitepress/vitepress/components/nav/l1-categories.vue')['default']
     L2Categories: typeof import('./.vitepress/vitepress/components/nav/l2-categories.vue')['default']
     L3Categories: typeof import('./.vitepress/vitepress/components/nav/l3-categories.vue')['default']
