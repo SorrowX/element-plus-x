@@ -128,7 +128,8 @@
       },
       {
         "link": "/f-json-schema",
-        "text": "JsonSchema 配置项"
+        "text": "JsonSchema 配置",
+        "promotion": "updated"
       },
       {
         "link": "/f-form",
