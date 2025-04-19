@@ -4,6 +4,7 @@ import { observer } from '@formily/reactive-vue'
 import { useField } from '@formily/vue'
 import { isArr, isUndef, isValid } from '@formily/shared'
 import { ElSpace, ElTag, ElText, formatter, useLocale } from 'element-plus'
+import { isDef } from '@element-plus/utils'
 import { getDefaultFormat } from '../date-picker/util'
 import {
   composeExport,
@@ -270,13 +271,13 @@ const DatePicker = defineComponent<
         )
         return labels.join('~')
       } else {
-        return (
-          formatter(
-            attrs.value as string | Date,
-            format as string,
-            lang.value
-          ) || placeholder.value
-        )
+        return isDef(attrs.value)
+          ? formatter(
+              attrs.value as string | Date,
+              format as string,
+              lang.value
+            )
+          : placeholder.value
       }
     }
 
@@ -312,13 +313,13 @@ const TimePicker = defineComponent<
         )
         return labels.join('~')
       } else {
-        return (
-          formatter(
-            attrs.value as string | Date,
-            format as string,
-            lang.value
-          ) || placeholder.value
-        )
+        return isDef(attrs.value)
+          ? formatter(
+              attrs.value as string | Date,
+              format as string,
+              lang.value
+            )
+          : placeholder.value
       }
     }
 
