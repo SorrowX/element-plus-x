@@ -1,4 +1,5 @@
 import { computed, defineComponent, h, ref } from 'vue'
+import { ElSpace } from 'element-plus'
 import { createForm } from '@formily/core'
 import { createSchemaField, useForm } from '@formily/vue'
 
@@ -17,6 +18,7 @@ import Radio from '../radio'
 import Checkbox from '../checkbox'
 import Switch from '../switch'
 import Cascader from '../cascader'
+import TreeSelect from '../tree-select'
 import Actions from './actions'
 
 import type { Component } from 'vue'
@@ -47,6 +49,8 @@ const defaultComponents = {
   Switch,
   Cascader,
   Actions,
+  TreeSelect,
+  Space: ElSpace,
 }
 
 const staticKlass = 'json-schema__form'
@@ -102,7 +106,7 @@ export const JsonSchema = defineComponent({
         const elements = container.querySelectorAll('.fep-form-item-error-help')
         if (elements && elements.length) {
           const formItemEle = elements[0]?.parentElement?.parentElement // fep-form-item-control -> fep-form-item
-          formItemEle.scrollIntoView({
+          formItemEle?.scrollIntoView?.({
             behavior: 'smooth',
             block: 'nearest',
             inline: 'nearest',

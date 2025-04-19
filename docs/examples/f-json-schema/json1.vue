@@ -10,7 +10,8 @@
     <JsonSchema
       ref="jsonSchemaRef"
       :colon="true"
-      label-width="80"
+      label-width="120"
+      wrapper-width="400"
       :schema="schema"
       :i-form-props="formProps"
       preview-text-placeholder="当没有值的时候会显示这个文本"
@@ -122,9 +123,8 @@ const formProps = ref({
   initialValues: {},
   effects() {
     onFormMount((form) => {
-      console.log('一次')
       getData().then((data) => {
-        form.query('tree').forEach((field: any) => {
+        form.query(/(cascader|tree)/).forEach((field: any) => {
           field.setDataSource?.(data)
         })
       })
@@ -141,11 +141,7 @@ const schema = {
       title: '输入框',
       'x-decorator': 'FormItem',
       'x-component': 'Input',
-      'x-component-props': {
-        style: {
-          width: '320px',
-        },
-      },
+      'x-component-props': {},
     },
     inputNumber: {
       required: true,
@@ -153,11 +149,7 @@ const schema = {
       title: '数字',
       'x-decorator': 'FormItem',
       'x-component': 'InputNumber',
-      'x-component-props': {
-        style: {
-          width: '320px',
-        },
-      },
+      'x-component-props': {},
       default: 10,
     },
     select: {
@@ -167,29 +159,37 @@ const schema = {
       'x-decorator': 'FormItem',
       'x-component': 'Select',
       'x-component-props': {
-        style: {
-          width: '320px',
-        },
         multiple: true,
         clearable: true,
       },
       enum: ['选项一', '选项二'],
       default: ['选项一', '选项二', 'sfsfd'],
     },
-    // tree: {
-    //   required: true,
-    //   type: 'string',
-    //   title: '树形选择',
-    //   'x-decorator': 'FormItem',
-    //   'x-component': 'TreeSelect',
-    //   'x-component-props': {
-    //     style: {
-    //       width: '320px',
-    //     },
-    //     clearable: true,
-    //   },
-    //   default: '1-1-1',
-    // },
+    tree: {
+      required: true,
+      type: 'string',
+      title: '树形选择',
+      'x-decorator': 'FormItem',
+      'x-component': 'TreeSelect',
+      'x-component-props': {
+        clearable: true,
+      },
+      default: '1-1-1',
+    },
+    cascader: {
+      required: true,
+      type: 'string',
+      title: '级联选择',
+      'x-decorator': 'FormItem',
+      'x-component': 'Cascader',
+      'x-component-props': {
+        clearable: true,
+        style: {
+          width: '100%',
+        },
+      },
+      default: '1-1-1',
+    },
     datePicker: {
       required: true,
       type: 'string',
@@ -198,7 +198,7 @@ const schema = {
       'x-component': 'DatePicker',
       'x-component-props': {
         style: {
-          width: '320px',
+          width: '100%',
         },
       },
       default: '2024/07/23',
@@ -211,7 +211,7 @@ const schema = {
       'x-component': 'TimePicker',
       'x-component-props': {
         style: {
-          width: '320px',
+          width: '100%',
         },
       },
       default: '2024/07/23 15:27:10',
@@ -295,11 +295,7 @@ const schema = {
       title: '文本框',
       'x-decorator': 'FormItem',
       'x-component': 'Input.TextArea',
-      'x-component-props': {
-        style: {
-          width: '320px',
-        },
-      },
+      'x-component-props': {},
       default: 'hi 你好啊',
     },
     actions: {
