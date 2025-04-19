@@ -93,7 +93,7 @@ const renderContent = (h, { data }) => {
         color: '#626AEF',
       },
     },
-    data.label
+    `${data.label}[${data.value}]`
   )
 }
 
@@ -102,7 +102,7 @@ const schema = {
   properties: {
     select: {
       type: 'string',
-      title: 'TreeSelect',
+      title: '同步数据源',
       required: true,
       enum: data,
       'x-decorator': 'FormItem',

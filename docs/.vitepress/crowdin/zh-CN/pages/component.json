@@ -94,6 +94,11 @@
         "text": "Cascader 级联选择器"
       },
       {
+        "link": "/f-tree-select",
+        "text": "TreeSelect 树形选择",
+        "promotion": "1.1.4"
+      },
+      {
         "link": "/f-radio",
         "text": "Radio 单选框"
       },

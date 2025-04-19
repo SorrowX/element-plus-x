@@ -3,7 +3,7 @@
     <SchemaField>
       <SchemaStringField
         name="address"
-        title="地址选择"
+        title="异步数据源"
         required
         x-decorator="FormItem"
         x-component="TreeSelect"

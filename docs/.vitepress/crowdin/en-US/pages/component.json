@@ -97,6 +97,11 @@
         "text": "Cascader"
       },
       {
+        "link": "/f-tree-select",
+        "text": "TreeSelect",
+        "promotion": "1.1.4"
+      },
+      {
         "link": "/f-radio",
         "text": "Radio"
       },
