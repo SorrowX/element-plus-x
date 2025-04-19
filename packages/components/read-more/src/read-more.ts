@@ -1,9 +1,8 @@
 import { buildProps, isBoolean } from '@element-plus/utils'
 import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@element-plus/constants'
-
 import type { ExtractPropTypes } from 'vue'
 
-export const collapseContentProps = buildProps({
+export const readMoreProps = buildProps({
   height: {
     type: String,
     default: '200px',
@@ -22,11 +21,15 @@ export const collapseContentProps = buildProps({
   closeText: {
     type: String,
   },
+  overlay: {
+    type: Boolean,
+    default: false,
+  },
 } as const)
-export type CollapseContentProps = ExtractPropTypes<typeof collapseContentProps>
+export type ReadMoreProps = ExtractPropTypes<typeof readMoreProps>
 
-export const collapseContentEmits = {
+export const readMoreEmits = {
   [CHANGE_EVENT]: (value: boolean) => isBoolean(value),
   [UPDATE_MODEL_EVENT]: (value: boolean) => isBoolean(value),
 }
-export type CollapseContentEmits = typeof collapseContentEmits
+export type ReadMoreEmits = typeof readMoreEmits

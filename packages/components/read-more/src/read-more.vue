@@ -2,13 +2,17 @@
   <div :class="[ns.b(), transition && initial ? ns.m('transition') : '']">
     <div
       ref="wrapper"
-      :class="[ns.b('wrapper'), warpperClass]"
+      :class="[ns.e('wrapper'), warpperClass]"
       :style="warpperStyle"
     >
       <slot />
+      <div
+        v-if="overlay && modelValue && hasTrigger"
+        :class="ns.e('overlay')"
+      />
     </div>
     <slot name="trigger" v-bind="{ hasTrigger }">
-      <div v-if="hasTrigger" :class="ns.b('trigger')" @click="handleToggle">
+      <div v-if="hasTrigger" :class="ns.e('trigger')" @click="handleToggle">
         <span>{{ modelValue ? openText : closeText }}</span>
         <el-icon><ArrowDown v-if="modelValue" /> <ArrowUp v-else /></el-icon>
       </div>
@@ -21,18 +25,18 @@ import { computed, nextTick, onMounted, onUpdated, reactive, ref } from 'vue'
 import { ElIcon, useLocale, useNamespace } from 'element-plus'
 import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@element-plus/constants'
 import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
-import { collapseContentEmits, collapseContentProps } from './collapse-content'
+import { readMoreEmits, readMoreProps } from './read-more'
 import type { RendererElement } from '@vue/runtime-core'
 
 defineOptions({
-  name: 'ElCollapseContent',
+  name: 'ElReadMore',
 })
 
 const { t } = useLocale()
-const ns = useNamespace('collapse-content')
+const ns = useNamespace('read-more')
 
-const props = defineProps(collapseContentProps)
-const emit = defineEmits(collapseContentEmits)
+const props = defineProps(readMoreProps)
+const emit = defineEmits(readMoreEmits)
 
 const wrapper = ref()
 const initial = ref(false)
@@ -94,5 +98,6 @@ const handleToggle = () => {
 defineExpose({
   handleToggle,
   hasTrigger,
+  updateDataset,
 })
 </script>

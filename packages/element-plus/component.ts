@@ -3,7 +3,7 @@ import { ElAffixBottom } from '@element-plus/components/affix-bottom'
 import { ElTablePage } from '@element-plus/components/table-page'
 import { ElTableDialog } from '@element-plus/components/table-dialog'
 import { ElEditable } from '@element-plus/components/editable'
-import { ElCollapseContent } from '@element-plus/components/collapse-content'
+import { ElReadMore } from '@element-plus/components/read-more'
 import { ElDraggableTable } from '@element-plus/components/draggable-table'
 import { ElTextEllipsis } from '@element-plus/components/text-ellipsis'
 import { ElEditor, ElEditorToolbar } from '@element-plus/components/editor'
@@ -50,7 +50,7 @@ export default [
   ElTablePage,
   ElTableDialog,
   ElEditable,
-  ElCollapseContent,
+  ElReadMore,
   ElDraggableTable,
   ElTextEllipsis,
   ElEditor,

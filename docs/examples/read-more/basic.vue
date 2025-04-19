@@ -1,5 +1,5 @@
 <template>
-  <el-collapse-content v-model="collapse" height="305px">
+  <el-read-more v-model="collapse" height="305px">
     <p
       v-for="item in 8"
       :key="item"
@@ -7,7 +7,7 @@
     >
       {{ item }}
     </p>
-  </el-collapse-content>
+  </el-read-more>
 </template>
 
 <script setup>

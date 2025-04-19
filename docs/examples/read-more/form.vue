@@ -1,5 +1,5 @@
 <template>
-  <el-collapse-content v-model="collapse" height="100px">
+  <el-read-more v-model="collapse" height="100px">
     <el-form
       ref="ruleFormRef"
       inline
@@ -62,13 +62,13 @@
             查询
           </el-button>
           <el-button @click="resetForm(ruleFormRef)">重置</el-button>
-          <el-button type="text" @click="collapse = !collapse">
+          <el-button link @click="collapse = !collapse">
             {{ collapse ? '全部展开' : '收起' }}
           </el-button>
         </div>
       </div>
     </template>
-  </el-collapse-content>
+  </el-read-more>
 </template>
 
 <script setup lang="ts">

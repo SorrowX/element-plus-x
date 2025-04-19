@@ -5,6 +5,8 @@
 ## V1.1.4 (更新时间: 2025-04-18 14:07) 未发布
 
 1. 新增 QRCode 二维码
+2. CollapseContent 组件改名为 ReadMore 组件
+3. ReadMore 组件 增加 overlay 属性
 
 ## V1.1.3 (更新时间: 2025-04-14 14:07)
 

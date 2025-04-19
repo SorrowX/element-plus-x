@@ -1,23 +1,18 @@
 <template>
-  <el-collapse-content v-model="collapse" height="305px" :transition="false">
+  <el-read-more v-model="collapse" height="305px">
     <p
-      v-for="item in list"
+      v-for="item in 3"
       :key="item"
       class="scrollbar-demo-item ep-bg-purple-light"
     >
       {{ item }}
     </p>
-  </el-collapse-content>
+  </el-read-more>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-const collapse = ref(false)
-const list = ref(0)
-
-setTimeout(() => {
-  list.value = 8
-}, 1000 * 1)
+const collapse = ref(true)
 </script>
 
 <style scoped>

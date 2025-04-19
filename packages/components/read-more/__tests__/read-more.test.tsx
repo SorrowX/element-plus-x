@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, test } from 'vitest'
-import CollapseContent from '../src/collapse-content.vue'
+import ReadMore from '../src/read-more.vue'
 
 const AXIOM = 'Rem is the best girl'
 
-describe('CollapseContent.vue', () => {
+describe('ReadMore.vue', () => {
   test('render test', () => {
-    const wrapper = mount(() => <CollapseContent>{AXIOM}</CollapseContent>)
+    const wrapper = mount(() => <ReadMore>{AXIOM}</ReadMore>)
 
     expect(wrapper.text()).toEqual(AXIOM)
   })

@@ -164,8 +164,9 @@
         "promotion": "1.0.5"
       },
       {
-        "link": "/collapse-content",
-        "text": "CollapseContent"
+        "link": "/read-more",
+        "text": "ReadMore",
+        "promotion": "updated"
       },
       {
         "link": "/table-page",

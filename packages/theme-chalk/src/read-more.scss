@@ -2,13 +2,14 @@
 @use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
 @use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
 
-@include b(collapse-content) {
+@include b(read-more) {
   &--transition {
-    .#{$namespace}-collapse-content-wrapper {
+    .#{$namespace}-read-more__wrapper {
       transition: height 0.3s;
     }
   }
-  &-wrapper {
+  &__wrapper {
+    position: relative;
     &.collapse {
       overflow: hidden;
     }
@@ -16,14 +17,27 @@
       overflow: hidden;
     }
   }
-  &-trigger {
+  &__overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-image: linear-gradient(
+      -180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgb(255, 255, 255) 100%
+    );
+  }
+  &__trigger {
     box-sizing: border-box;
     cursor: pointer;
-    height: 44px;
+    height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 1px solid #ebedf0;
     color: #323233;
     font-size: 14px;
     span {

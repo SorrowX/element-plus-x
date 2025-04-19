@@ -159,8 +159,9 @@
         "text": "SortableList 可排序列表"
       },
       {
-        "link": "/collapse-content",
-        "text": "CollapseContent 折叠内容"
+        "link": "/read-more",
+        "text": "ReadMore 阅读更多",
+        "promotion": "updated"
       },
       {
         "link": "/table-page",
