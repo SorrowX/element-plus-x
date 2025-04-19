@@ -2,7 +2,7 @@
   <JsonSchema
     ref="jsonSchemaRef"
     label-width="100"
-    wrapper-width="240"
+    wrapper-width="320"
     feedback-layout="terse"
     :schema="schema"
   />

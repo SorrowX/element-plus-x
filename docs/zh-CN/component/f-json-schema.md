@@ -15,6 +15,14 @@ f-json-schema/json1
 
 :::
 
+## 列表查询项
+
+:::demo 除了使用`Space`布局也可以使用`FormGrid` `FormLayout`组件来进行布局，请参考各自文档
+
+f-json-schema/search
+
+:::
+
 ## 自定义组件
 
 :::demo
