@@ -116,6 +116,11 @@
         "text": "Switch 开关"
       },
       {
+        "link": "/f-slider",
+        "text": "Slider 滑块",
+        "promotion": "1.1.4"
+      },
+      {
         "link": "/f-preview-text",
         "text": "PreviewText 阅读态"
       },
