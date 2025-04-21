@@ -8,7 +8,8 @@
 2. CollapseContent 组件改名为 ReadMore 组件
 3. ReadMore 组件 增加 overlay 属性
 4. 新增 TreeSelect(Formily 版) 树形选择
-5. JsonSchema 组件新增内置 Space 和 TreeSelect 组件
+5. 新增 Virtualized Select(Formily 版) 虚拟化选择器
+6. JsonSchema 组件新增内置 Space 和 TreeSelect 和 SelectV2 组件
 
 ## V1.1.3 (更新时间: 2025-04-14 14:07)
 

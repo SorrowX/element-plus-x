@@ -82,6 +82,11 @@
         "text": "Select 选择器"
       },
       {
+        "link": "/f-select-v2",
+        "text": "SelectV2 虚拟化选择器",
+        "promotion": "1.1.4"
+      },
+      {
         "link": "/f-date-picker",
         "text": "DatePicker 日期时间选择器"
       },
