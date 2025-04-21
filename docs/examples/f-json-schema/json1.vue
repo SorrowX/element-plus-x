@@ -165,6 +165,22 @@ const schema = {
       enum: ['选项一', '选项二'],
       default: ['选项一', '选项二', 'sfsfd'],
     },
+    select2: {
+      type: 'array',
+      title: '虚拟选择器',
+      required: true,
+      enum: [
+        { label: '选项1', value: 1 },
+        { label: '选项2', value: 2 },
+      ],
+      'x-decorator': 'FormItem',
+      'x-component': 'SelectV2',
+      'x-component-props': {
+        multiple: true,
+        collapseTags: true,
+        collapseTagsTooltip: true,
+      },
+    },
     tree: {
       required: true,
       type: 'string',
@@ -298,6 +314,20 @@ const schema = {
       'x-component-props': {},
       default: 'hi 你好啊',
     },
+    slider: {
+      type: 'number',
+      title: '滑块',
+      required: true,
+      'x-decorator': 'FormItem',
+      'x-component': 'Slider',
+      'x-component-props': {
+        style: {
+          margin: '0 4px',
+        },
+        showStops: true,
+        step: 10,
+      },
+    },
     actions: {
       type: 'void',
       title: ' ',
@@ -309,9 +339,6 @@ const schema = {
       'x-component-props': {
         submitText: '提交',
         resetText: '重置',
-        submitProps: {
-          // icon: Search,
-        },
         resetProps: {
           forceClear: true,
         },
