@@ -1,23 +1,22 @@
 import { connect, mapProps, mapReadPretty } from '@formily/vue'
-import { ElSelectV2 } from 'element-plus'
+import { ElSlider } from 'element-plus'
 import { FormPath } from '@formily/shared'
 import { transformComponent } from '../__builtins__'
 import { PreviewText } from '../preview-text'
-import type { ISelectV2Props } from 'element-plus'
+import type { SliderProps } from 'element-plus'
 
-const TransformElSelectV2 = transformComponent<ISelectV2Props>(ElSelectV2, {
+const TransformElSlider = transformComponent<SliderProps>(ElSlider, {
   change: 'update:modelValue',
 })
 
-export const SelectV2 = connect(
-  TransformElSelectV2,
+export const Slider = connect(
+  TransformElSlider,
   mapProps((props, field) => {
     return {
-      options: FormPath.getIn(field, 'dataSource') ?? [],
       modelValue: FormPath.getIn(field, 'value'),
     }
   }),
-  mapReadPretty(PreviewText.Select)
+  mapReadPretty(PreviewText.Input)
 )
 
-export default SelectV2
+export default Slider

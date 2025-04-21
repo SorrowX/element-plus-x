@@ -25,7 +25,7 @@ import { merge } from 'lodash-unified'
 import { ElCase } from 'element-plus-x'
 
 // import Test from '../../docs/examples/f-tree-select/markup-schema.vue'
-import Test from '../../docs/examples/f-select-v2/template.vue'
+import Test from '../../docs/examples/f-slider/template.vue'
 // import Test from '../../docs/examples/qr-code/download.vue'
 // import Test from '../../docs/examples/f-input/markup-schema.vue'
 // import Test from '../../docs/examples/table-page/boundary-value.vue'
