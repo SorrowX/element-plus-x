@@ -22,11 +22,15 @@ const content = ref()
 const html = ref()
 const editor = ref(null)
 
-const insertImage = (item) => {
-  editor.value.setImage({
-    src: item.image,
-    alt: item.text,
-  })
+const insertImage = (item, type) => {
+  if (type === 'wx') {
+    editor.value.setImage({
+      src: item.image,
+      alt: item.text,
+    })
+  } else {
+    editor.value.insertHtml(item.text)
+  }
 }
 </script>
 
