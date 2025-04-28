@@ -84,7 +84,7 @@ const handleChange = (item: EmoticonListItem | FontEmoticonListItem) => {
   hidden()
   const value = item[props.type] ?? item['text']
   emit(UPDATE_MODEL_EVENT, value)
-  emit(CHANGE_EVENT, item)
+  emit(CHANGE_EVENT, item, curTab.value)
 }
 
 const handleEnter = () => {

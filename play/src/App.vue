@@ -24,7 +24,7 @@ import { merge } from 'lodash-unified'
 
 import { ElCase } from 'element-plus-x'
 
-import Test from '../../docs/examples/f-json-schema/json1.vue'
+import Test from '../../docs/examples/emoji/basic.vue'
 // import Test from '../../docs/examples/f-slider/template.vue'
 // import Test from '../../docs/examples/qr-code/download.vue'
 // import Test from '../../docs/examples/f-input/markup-schema.vue'

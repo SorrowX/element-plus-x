@@ -20,8 +20,10 @@ const commonProps = {
 
 const commonEmits = {
   [UPDATE_MODEL_EVENT]: (str: string) => isString(str),
-  [CHANGE_EVENT]: (item: EmoticonListItem | FontEmoticonListItem) =>
-    isObject(item),
+  [CHANGE_EVENT]: (
+    item: EmoticonListItem | FontEmoticonListItem,
+    type: string
+  ) => isObject(item) && isString(type),
 }
 
 export const emojiProps = buildProps({ ...commonProps } as const)
