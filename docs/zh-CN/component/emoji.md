@@ -59,6 +59,6 @@ emoji/parser
 
 ### Emoticon/Emoji Events
 
-| 方法名 | 说明             | 参数            |
-| ------ | ---------------- | --------------- |
-| change | 值发生变化时触发 | `value: string` |
+| 方法名 | 说明             | 参数                                                             |
+| ------ | ---------------- | ---------------------------------------------------------------- |
+| change | 值发生变化时触发 | `(item: EmoticonListItem \| FontEmoticonListItem, type: string)` |
