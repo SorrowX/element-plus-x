@@ -9,18 +9,12 @@
   <a href="https://github.com/element-plus/element-plus">
     <img src="https://img.shields.io/badge/node-%20%3E%3D%2018-47c219" />
   </a>
-  <a href="https://npmcharts.com/compare/element-plus?minimal=true">
-    <img src="https://img.shields.io/npm/dm/element-plus.svg" />
-  </a>
-  <a href="https://codecov.io/gh/element-plus/element-plus">
-    <img src="https://codecov.io/gh/element-plus/element-plus/branch/dev/graph/badge.svg?token=BKSBO2GLZI"/>
-  </a>
   <br>
 </p>
 
 <p align="center">基于 Element Plus 拓展的  Element Plus X 组件库</p>
 
-> element-plus-x 组件
+> element-plus-x 组件,持续维护迭代开发中。为了可以提升平时业务开发的效率，希望感兴趣的同学可以一起共建下。
 
 #### 目前包含:
 
@@ -118,3 +112,9 @@ npm run docs:dev
 ```js
 npm run docs:build
 ```
+
+> 交流群
+
+如有问题，加群交流
+
+![home](./.github/images/qq.jpg)
