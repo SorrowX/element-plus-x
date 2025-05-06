@@ -12,7 +12,6 @@
 
 <script lang="ts" setup>
 import { h } from 'vue'
-import { ElButton } from 'element-plus'
 import { Formily } from 'element-plus-x'
 import { Search } from '@element-plus/icons-vue'
 const { JsonSchema } = Formily

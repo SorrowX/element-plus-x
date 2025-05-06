@@ -21,6 +21,7 @@ import Cascader from '../cascader'
 import TreeSelect from '../tree-select'
 import SelectV2 from '../select-v2'
 import Slider from '../slider'
+import Mention from '../mention'
 import Actions from './actions'
 
 import type { Component } from 'vue'
@@ -54,6 +55,7 @@ const defaultComponents = {
   TreeSelect,
   SelectV2,
   Slider,
+  Mention,
   Space: ElSpace,
 }
 

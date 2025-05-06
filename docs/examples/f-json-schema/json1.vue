@@ -118,6 +118,25 @@ const getData = () => {
   })
 }
 
+const options = ref([
+  {
+    label: 'Fuphoenixes',
+    value: 'Fuphoenixes',
+  },
+  {
+    label: 'kooriookami',
+    value: 'kooriookami',
+  },
+  {
+    label: 'Jeremy',
+    value: 'Jeremy',
+  },
+  {
+    label: 'btea',
+    value: 'btea',
+  },
+])
+
 const formProps = ref({
   readPretty: false,
   initialValues: {},
@@ -142,6 +161,16 @@ const schema = {
       'x-decorator': 'FormItem',
       'x-component': 'Input',
       'x-component-props': {},
+    },
+    mention: {
+      required: true,
+      type: 'string',
+      title: '提及',
+      'x-decorator': 'FormItem',
+      'x-component': 'Mention',
+      'x-component-props': {},
+      default: '@',
+      enum: options.value,
     },
     inputNumber: {
       required: true,
