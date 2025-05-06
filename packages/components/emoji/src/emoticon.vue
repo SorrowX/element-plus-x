@@ -17,7 +17,7 @@ import { computed } from 'vue'
 import { useNamespace } from 'element-plus'
 import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@element-plus/constants'
 import { emoticonEmits, emoticonProps } from './emoji'
-import { emoticonList } from './helper'
+import { WX_TYPE, emoticonList } from './helper'
 import type { EmoticonListItem } from './helper'
 
 defineOptions({
@@ -40,6 +40,6 @@ const list = computed(() => [...emoticonList])
 
 const handleClick = (item: EmoticonListItem) => {
   model.value = item[props.type] ?? ''
-  emit(CHANGE_EVENT, item)
+  emit(CHANGE_EVENT, item, WX_TYPE)
 }
 </script>

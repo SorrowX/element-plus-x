@@ -38,11 +38,10 @@ import Emoticon from './emoticon.vue'
 import FontEmoticon from './font-emoticon.vue'
 import Tabs from './tabs.vue'
 import { emojiEmits, emojiProps } from './emoji'
+import { COMMOM_TYPE, WX_TYPE } from './helper'
 import type { EmoticonListItem, FontEmoticonListItem } from './helper'
 
 const TransitionAlias = Transition
-const WX_TYPE = 'wx'
-const COMMOM_TYPE = 'cm'
 
 defineOptions({
   name: 'ElEmoji',

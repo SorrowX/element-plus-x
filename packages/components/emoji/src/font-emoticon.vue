@@ -16,7 +16,7 @@ import { computed } from 'vue'
 import { useNamespace } from 'element-plus'
 import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@element-plus/constants'
 import { emoticonEmits, emoticonProps } from './emoji'
-import { useFontEmoticon } from './helper'
+import { COMMOM_TYPE, useFontEmoticon } from './helper'
 import type { FontEmoticonListItem } from './helper'
 
 defineOptions({
@@ -39,6 +39,6 @@ const { peopleList } = useFontEmoticon()
 
 const handleClick = (item: FontEmoticonListItem) => {
   model.value = item['text'] ?? ''
-  emit(CHANGE_EVENT, item)
+  emit(CHANGE_EVENT, item, COMMOM_TYPE)
 }
 </script>

@@ -463,6 +463,9 @@ export const emoticonListMap = emoticonListKeys.reduce(
   {}
 )
 
+export const WX_TYPE = 'wx'
+export const COMMOM_TYPE = 'cm'
+
 interface Categorie {
   id: string
   emojis: string[]
