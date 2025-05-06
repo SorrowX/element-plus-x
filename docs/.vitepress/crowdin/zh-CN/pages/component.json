@@ -74,6 +74,11 @@
         "text": "Input 输入框"
       },
       {
+        "link": "/f-mention",
+        "text": "Mention 提及",
+        "promotion": "1.1.4"
+      },
+      {
         "link": "/f-input-number",
         "text": "InputNumber 数字输入框"
       },
