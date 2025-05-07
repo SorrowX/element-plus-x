@@ -43,7 +43,7 @@ function getText() {
 
 const insertTag = () =>
   insert(
-    `<tag id="${getRandom()}" class="tag" text="Summer${getRandom()}"></tag>`
+    `<tag other-attr="hi" disable-transitions  id="${getRandom()}" class="tag" text="Summer${getRandom()}"></tag>`
   )
 
 const insertHtml = () =>

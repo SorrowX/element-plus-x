@@ -10,8 +10,9 @@
 4. 新增 TreeSelect(Formily 版) 树形选择
 5. 新增 Virtualized(Formily 版) 虚拟化选择器
 6. 新增 Slider(Formily 版) 滑块
-7. JsonSchema 组件新增内置 Space 和 TreeSelect 和 SelectV2 和 Slider 组件
-8. Emoji 组件 change 事件新增第二个参数 type 类型
+7. 新增 Mention(Formily 版) 提及
+8. JsonSchema 组件新增内置 Space 和 TreeSelect 和 SelectV2 和 Slider 和 Mention 组件
+9. Emoji 组件 change 事件新增第二个参数 type 类型
 
 ## V1.1.3 (更新时间: 2025-04-14 14:07)
 

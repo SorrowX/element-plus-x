@@ -5,8 +5,9 @@
       type="primary"
       size="small"
       :class="node.attrs.class"
+      v-bind="node.attrs.props"
     >
-      {{ node.attrs.text }}
+      {{ node.attrs.props.text }}
     </el-tag>
   </NodeViewWrapper>
 </template>

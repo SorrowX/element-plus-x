@@ -12,14 +12,18 @@ export default Node.create({
 
   addAttributes() {
     return {
-      id: {
-        default: '',
-      },
-      class: {
-        default: '',
-      },
-      text: {
-        default: '',
+      props: {
+        default: null,
+        parseHTML: (element) => {
+          const attributes: Record<string, string> = {}
+          for (const attr of element.attributes) {
+            attributes[attr.name] = attr.value
+          }
+          return attributes
+        },
+        renderHTML: (attributes) => {
+          return attributes.props || {}
+        },
       },
     }
   },
