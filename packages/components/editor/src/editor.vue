@@ -35,6 +35,7 @@ import Link from '@tiptap/extension-link'
 import { UPDATE_MODEL_EVENT } from '@element-plus/constants'
 import Tag from './plugins/extension-tag/index'
 import Video from './plugins/video/index'
+import Component from './plugins/component/index'
 import { useSuggestion } from './mention/suggestion'
 import { editorEmits, editorProps } from './editor'
 import type { EditorOptions } from '@tiptap/core'
@@ -132,6 +133,7 @@ const options: Partial<EditorOptions> = {
   extensions: [
     Tag,
     Video,
+    Component,
     Underline,
     Link.configure({
       validate: (link) => /^https?:\/\//.test(link),
