@@ -7,7 +7,7 @@ lang: zh-CN
 
 可得到`html`标签内容，且能插入自定义元素，含有提及和字数统计功能的极简编辑器。
 
-该组件基于 [tiptap](https://tiptap.dev/docs/editor/getting-started/overview) 及 [el-tooltip](https://element-plus.org/zh-CN/component/tooltip.html) 封装而来。
+该组件基于 [Tiptap](https://tiptap.dev/docs/editor/getting-started/overview) 及 [ElTooltip](https://element-plus.org/zh-CN/component/tooltip.html) 封装而来。
 
 ## 基础用法
 
@@ -51,6 +51,15 @@ editor/slot
 :::demo
 
 editor/api
+
+:::
+
+## 插入任意内容（component 插件）
+
+Tiptap 是不支持插入任意原生标签的，且支持的元素(比如 h1 和 p)也不支持编写内联样式。于是 editor 内置了`component 插件`用来解决此问题，使用姿势和 vue 中的`component`类似
+:::demo `component 插件`相比 vue 中的`component`有一些限制。1：子内容只能最为组件的默认插槽，其他插槽不支持 2：属性只能传递字符串，引用类型不支持 3：上述问题可以通过把复杂的业务 UI 封装到一个 Vue 组件中(ui 的交互全在该组件中编写)，最后用`component`渲染即可
+
+editor/component
 
 :::
 

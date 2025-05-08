@@ -37,18 +37,22 @@ const insertImage = (item, type) => {
 
 <style lang="scss">
 .edit-wrapper {
+  p {
+    vertical-align: middle;
+  }
   img {
     display: inline-block;
     vertical-align: text-bottom;
   }
   .wrap-class {
     display: inline-flex;
-    width: 24px;
-    height: 24px;
-    overflow: hidden;
-    font-size: 21px;
     align-items: center;
     justify-content: center;
+    span {
+      width: 24px;
+      height: 24px;
+      font-size: 22px;
+    }
   }
 }
 </style>
