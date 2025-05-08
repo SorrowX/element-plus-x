@@ -13,6 +13,7 @@
 7. 新增 Mention(Formily 版) 提及
 8. JsonSchema 组件新增内置 Space 和 TreeSelect 和 SelectV2 和 Slider 和 Mention 组件
 9. Emoji 组件 change 事件新增第二个参数 type 类型
+10. Editor 组件新增 component 插件，用于支持插入任意原生标签及 Vue 组件
 
 ## V1.1.3 (更新时间: 2025-04-14 14:07)
 

@@ -38,7 +38,8 @@
     "children": [
       {
         "link": "/editor",
-        "text": "Editor 编辑器"
+        "text": "Editor 编辑器",
+        "promotion": "updated"
       },
       {
         "link": "/editable",

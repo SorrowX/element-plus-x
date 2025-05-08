@@ -26,8 +26,6 @@ const content = ref()
 const html = ref()
 const editor = ref(null)
 
-const getRandom = () => Math.floor(Math.random() * 100)
-
 function insert(text) {
   editor.value.insertHtml(text)
 }
@@ -40,7 +38,7 @@ const insert1 = () =>
   insert(
     `<component is="div" style="border: 1px solid #ccc; width: 80%; margin-bottom: 12px; padding: 12px;">
       <p>1.component最终渲染为div</p>
-      <span>2.这里的 h3和span元素都会作为div的子内容</span>
+      <span>2.这里的 p和span元素都会作为div的子内容</span>
     </component>`
   )
 
