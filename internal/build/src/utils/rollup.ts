@@ -8,11 +8,18 @@ export const generateExternal = async (options: { full: boolean }) => {
   return (id: string) => {
     const packages: string[] = [...peerDependencies]
     if (!options.full) {
-      packages.push('@vue', ...dependencies)
-      // packages.push('@vue', 'element-plus', ...dependencies)
+      packages.push(...dependencies)
+      // packages.push('@vue', ...dependencies)
     }
     // 排除 element-plus和vuedraggable
-    packages.push('element-plus', '@vueuse', '@tiptap', '@formily', 'qrcode')
+    packages.push(
+      '@vue',
+      'element-plus',
+      '@vueuse',
+      '@tiptap',
+      '@formily',
+      'qrcode'
+    )
 
     return [...new Set(packages)].some(
       (pkg) => id === pkg || id.startsWith(`${pkg}/`)
