@@ -18,7 +18,6 @@
 <script setup>
 import { ref } from 'vue'
 
-const content = ref()
 const html = ref()
 const editor = ref(null)
 
