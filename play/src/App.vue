@@ -28,7 +28,7 @@ import { ElCase } from 'element-plus-x'
 // import Test from '../../docs/examples/editor/image.vue'
 // import Test from '../../docs/examples/f-mention/template.vue'
 // import Test from '../../docs/examples/f-json-schema/json1.vue'
-import Test from '../../docs/examples/editor/api.vue'
+import Test from '../../docs/examples/editor/image.vue'
 // import Test from '../../docs/examples/f-input/markup-schema.vue'
 // import Test from '../../docs/examples/table-page/boundary-value.vue'
 

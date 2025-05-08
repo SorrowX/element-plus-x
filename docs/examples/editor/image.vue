@@ -29,7 +29,9 @@ const insertImage = (item, type) => {
       alt: item.text,
     })
   } else {
-    editor.value.insertHtml(item.text)
+    editor.value.insertHtml(
+      `<component is="span" wrap-class="wrap-class">${item.text}</component>`
+    )
   }
 }
 </script>
@@ -39,6 +41,15 @@ const insertImage = (item, type) => {
   img {
     display: inline-block;
     vertical-align: text-bottom;
+  }
+  .wrap-class {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    font-size: 21px;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>
