@@ -16,7 +16,7 @@ import {
   getDefaultPagination,
   tablePageProps,
 } from './table-page'
-import type { queryParams } from './types'
+import type { IQueryParams } from './types'
 
 export default defineComponent({
   name: 'ElTablePage',
@@ -68,7 +68,7 @@ export default defineComponent({
     })
 
     // methods
-    const query = async (params: queryParams = {}) => {
+    const query = async (params: IQueryParams = {}) => {
       const currentPageValue =
         params[currentPageKey.value] ?? state[currentPageKey.value]
       const pageSizeValue =

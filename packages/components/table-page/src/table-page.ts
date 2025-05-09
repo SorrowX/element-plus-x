@@ -1,6 +1,11 @@
 import { buildProps } from '@element-plus/utils'
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { ColumnProps, Config, PaginationProp } from './types'
+import type {
+  ColumnProps,
+  Config,
+  IHttpRequestParams,
+  PaginationProp,
+} from './types'
 
 export const getDefaultPagination = () => {
   return {
@@ -23,7 +28,7 @@ export const getDefaultConfig = (): Config => {
 
 export const tablePageProps = buildProps({
   httpRequest: {
-    type: Function as PropType<(params: any) => void>,
+    type: Function as PropType<(params: IHttpRequestParams) => void>,
   },
   columns: {
     type: Array as PropType<ColumnProps[]>,

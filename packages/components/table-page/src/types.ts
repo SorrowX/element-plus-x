@@ -1,6 +1,8 @@
 import type { VNode } from 'vue'
 import type { PaginationProps, TableColumnCtx } from 'element-plus'
 
+export type DefaultRow = any
+
 export type CI<T> = {
   column: TableColumnCtx<T>
   $index: number
@@ -8,7 +10,7 @@ export type CI<T> = {
 
 export type CRI<T> = {
   column: TableColumnCtx<T>
-  row: any
+  row: DefaultRow
   $index: number
 }
 
@@ -24,7 +26,7 @@ export interface Config {
   total: string
 }
 
-export type queryParams = {
+export type IQueryParams = {
   [key: string]: any
 }
 
@@ -32,4 +34,15 @@ export type PaginationProp = PaginationProps & {
   defaultPageSize?: number
   showRecord?: boolean
   showTotal?: boolean
+}
+
+export type IResolveData = {
+  list: any[]
+  total: number
+}
+
+export type IHttpRequestParams = {
+  params: IQueryParams
+  resolve: (data: IResolveData) => void
+  reject: (e: Error) => void
 }

@@ -40,3 +40,9 @@ f-json-schema/component
 | scope           | 模版编译选项 [ISchemaFieldFactoryProps 类型中的 scope 属性值](https://vue.formilyjs.org/api/components/schema-field.html)   | ^[Object] | -      |
 | schema          | [schema 数据](https://vue.formilyjs.org/api/shared/schema.html)                                                             | ^[Object] | -      |
 | forceCreateForm | 是否强制创建 form 实例，不使用继承关系的 form 实例                                                                          | ^[Object] | -      |
+
+### Expose
+
+| 属性名       | 说明      | 参数                                                                 |
+| ------------ | --------- | -------------------------------------------------------------------- |
+| formInstance | form 实例 | [用于操作各种 api](https://core.formilyjs.org/zh-CN/api/models/form) |

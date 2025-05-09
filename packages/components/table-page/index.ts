@@ -8,3 +8,4 @@ export default ElTablePage
 
 export * from './src/table-page'
 export type { TablePageInstance } from './src/instance'
+export * from './src/types'
