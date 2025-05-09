@@ -15,6 +15,7 @@
         wrapper-width="180"
         feedback-layout="terse"
         :schema="schema"
+        :i-form-props="formProps"
       />
     </template>
   </el-table-page>
@@ -22,8 +23,9 @@
 
 <script setup lang="ts">
 import { h, ref } from 'vue'
-import { ElLink } from 'element-plus'
+import { ElLink, ElSwitch, ElTag } from 'element-plus'
 import { Formily } from 'element-plus-x'
+import { onFormMount } from '@formily/core'
 import { Refresh, Search } from '@element-plus/icons-vue'
 import type {
   CRI,
@@ -50,6 +52,53 @@ const onSubmit = (values: Record<string, any>) => {
 const onReset = (values: Record<string, any>) => {
   query(values)
 }
+
+const status = [
+  {
+    label: '草稿',
+    value: 1,
+    type: 'success',
+  },
+  {
+    label: '未开始',
+    value: 2,
+    type: 'warning',
+  },
+  {
+    label: '进行中',
+    value: 3,
+    type: 'primary',
+  },
+  {
+    label: '已结束',
+    value: 4,
+    type: 'danger',
+  },
+]
+
+const formProps = ref({
+  readPretty: false,
+  initialValues: {},
+  effects() {
+    onFormMount((form) => {
+      // 调用接口更新下拉数据源
+      setTimeout(() => {
+        form.query(/(person)/).forEach((field: any) => {
+          field.setDataSource?.([
+            {
+              label: '选项1',
+              value: 1,
+            },
+            {
+              label: '选项2',
+              value: 2,
+            },
+          ])
+        })
+      }, 1000)
+    })
+  },
+})
 
 const schema = {
   type: 'object',
@@ -79,7 +128,7 @@ const schema = {
           'x-component-props': {
             clearable: true,
           },
-          enum: ['选项一', '选项二'],
+          enum: [...status],
         },
         person: {
           type: 'string',
@@ -89,7 +138,6 @@ const schema = {
           'x-component-props': {
             clearable: true,
           },
-          enum: ['选项一', '选项二'],
         },
         actions: {
           type: 'void',
@@ -144,11 +192,39 @@ const columns = [
     label: '状态',
     prop: 'prop4',
     minWidth: 160,
+    cellRenderer({ row }: CRI<DefaultRow>) {
+      const item: any = status.find((_) => _.value === row.prop2) ?? {}
+      return h(
+        ElTag,
+        { type: item.type },
+        {
+          default: () => item.label,
+        }
+      )
+    },
   },
   {
     label: '是否暂停',
     prop: 'prop5',
     minWidth: 160,
+    cellRenderer({ row }: CRI<DefaultRow>) {
+      return h(ElSwitch, {
+        modelValue: row.prop5,
+        activeValue: 1,
+        inactiveValue: 0,
+        loading: row.loading,
+        beforeChange() {
+          row.loading = true
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              row.loading = false
+              row.prop5 = row.prop5 === 0 ? 1 : 0
+              return resolve(row.prop5)
+            }, 1000)
+          })
+        },
+      })
+    },
   },
   {
     label: '创建人',
@@ -199,10 +275,10 @@ const requestData = (() => {
             index = base + index + 1
             return {
               prop1: `字段1_${index}`,
-              prop2: `字段2_${index}`,
+              prop2: Math.random() > 0.5 ? 1 : 2,
               prop3: `字段3_${index}`,
-              prop4: `字段4_${index}`,
-              prop5: `字段5_${index}`,
+              prop4: Math.random() > 0.5 ? 1 : 2,
+              prop5: Math.random() > 0.5 ? 1 : 0,
               prop6: `字段6_${index}`,
               prop7: `字段7_${index}`,
               prop8: `字段8_${index}`,
@@ -218,15 +294,17 @@ const requestData = (() => {
   return f
 })()
 
-const getList = ({ params, resolve }: IHttpRequestParams) => {
+const getList = ({ params, resolve, reject }: IHttpRequestParams) => {
   const values = jsonSchemaRef.value?.formInstance?.values ?? {}
   requestData({
     ...params,
     ...values,
-  }).then((res) => {
-    resolve(res as IResolveData)
   })
+    .then((res) => {
+      resolve(res as IResolveData)
+    })
+    .catch((e) => {
+      reject(e)
+    })
 }
 </script>
-
-<style lang="scss" scoped></style>

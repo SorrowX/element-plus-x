@@ -75,6 +75,14 @@ table-page/header
 
 :::
 
+## 配合 JsonSchema 组件
+
+:::demo 配合 JsonSchema 组件来配置化搜索项
+
+table-page/page
+
+:::
+
 ## 自定义 table
 
 :::demo 使用 `table` 插槽替换 table 组件，当成普通列表页展示
