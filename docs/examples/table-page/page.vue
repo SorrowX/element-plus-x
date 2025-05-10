@@ -45,14 +45,6 @@ const query = (values: Record<string, any>) => {
   })
 }
 
-const onSubmit = (values: Record<string, any>) => {
-  query(values)
-}
-
-const onReset = (values: Record<string, any>) => {
-  query(values)
-}
-
 const status = [
   {
     label: '草稿',
@@ -157,8 +149,8 @@ const schema = {
               icon: Refresh,
               forceClear: true,
             },
-            onSubmit,
-            onReset,
+            onSubmit: query,
+            onReset: query,
           },
         },
       },

@@ -30,7 +30,8 @@ export default defineComponent({
 
     const { onSubmit, onReset } = props
 
-    const handleReset = () => onReset?.({})
+    // 异步是为了让用户拿到form.values时是重置后的数据，然后再执行用户的重置方法
+    const handleReset = () => setTimeout(() => onReset?.({}), 0)
 
     const handleSubmit = async (values: Record<string, any>) => {
       values = Object.keys(values).reduce((pre, key) => {
