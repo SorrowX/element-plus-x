@@ -268,10 +268,6 @@
       {
         "link": "/preview-file",
         "text": "PreviewFile 文件预览"
-      },
-      {
-        "link": "/affix-bottom",
-        "text": "AffixBottom 固定底部"
       }
     ]
   }

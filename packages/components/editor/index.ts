@@ -11,4 +11,5 @@ export const ElEditorToolbar: SFCWithInstall<typeof EditorToolbar> =
 
 export * from './src/editor'
 export * from './src/types'
+export * from './src/helper'
 export type { EditorInstance } from './src/instance'

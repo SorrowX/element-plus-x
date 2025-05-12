@@ -77,3 +77,9 @@ export interface ISetVideOptions {
   height?: number | string
   preload?: 'auto' | 'metadata' | 'none'
 }
+
+export interface ITagRule {
+  tag: string
+  attr: string
+  defaultValue?: string
+}

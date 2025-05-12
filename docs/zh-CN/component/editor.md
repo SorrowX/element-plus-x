@@ -100,6 +100,16 @@ editor/toolbar
 
 :::
 
+## 转换为纯文本(html2text)
+
+Tiptap 支持自定义标签来渲染任意 ui,但是调用实例 getText 方法并不会返回文本，下面这个案例是把自定义标签解析成对应的值传给后端
+
+:::demo html 内容可以用来回显编辑器的内容，有时需要解析 html 变成纯文本给后端，可以使用`getTextContent`方法即可,回车换行符 br 默认替换成了`\n`
+
+editor/text
+
+:::
+
 ## 极简编辑器
 
 使用`ElEditorToolbar`组件来渲染工具栏，使用`character-count`插槽来渲染文字统计。
