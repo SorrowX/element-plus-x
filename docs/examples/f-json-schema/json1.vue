@@ -161,6 +161,7 @@ const schema = {
       'x-decorator': 'FormItem',
       'x-component': 'Input',
       'x-component-props': {},
+      default: 'Summer',
     },
     mention: {
       required: true,
@@ -190,6 +191,8 @@ const schema = {
       'x-component-props': {
         multiple: true,
         clearable: true,
+        displayType: 'text',
+        separator: '、',
       },
       enum: ['选项一', '选项二'],
       default: ['选项一', '选项二', 'sfsfd'],
@@ -209,6 +212,7 @@ const schema = {
         collapseTags: true,
         collapseTagsTooltip: true,
       },
+      default: [1],
     },
     tree: {
       required: true,
@@ -218,6 +222,7 @@ const schema = {
       'x-component': 'TreeSelect',
       'x-component-props': {
         clearable: true,
+        displayType: 'text',
       },
       default: '1-1-1',
     },
@@ -267,7 +272,10 @@ const schema = {
       title: '单选框',
       'x-decorator': 'FormItem',
       'x-component': 'Radio.Group',
-      'x-component-props': {},
+      'x-component-props': {
+        displayType: 'text',
+        separator: '、',
+      },
       enum: [
         {
           label: '选项1',
@@ -297,7 +305,9 @@ const schema = {
       title: '复选框',
       'x-decorator': 'FormItem',
       'x-component': 'Checkbox.Group',
-      'x-component-props': {},
+      'x-component-props': {
+        displayType: 'text',
+      },
       enum: [
         {
           label: '选项1',
@@ -356,6 +366,7 @@ const schema = {
         showStops: true,
         step: 10,
       },
+      default: 10,
     },
     actions: {
       type: 'void',

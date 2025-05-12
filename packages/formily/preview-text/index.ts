@@ -176,7 +176,12 @@ const Cascader = observer(
       const valueKey = props.props?.value || 'value'
       const labelKey = props.props?.label || 'label'
       const getSelected = () => {
-        return isArr(props.value) ? props.value : []
+        // return isArr(props.value) ? props.value : []
+        return isArr(props.value)
+          ? props.value
+          : isUndef(props.value)
+          ? []
+          : [props.value]
       }
 
       const findLabel = (value: any, dataSource: any[]): any => {
