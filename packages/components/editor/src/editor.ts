@@ -52,6 +52,10 @@ export const editorProps = buildProps({
     type: definePropType<Partial<EditorOptions>>(Object),
     default: () => ({}),
   },
+  resize: {
+    type: Boolean,
+    default: false,
+  },
 } as const)
 export type EditorProps = ExtractPropTypes<typeof editorProps>
 

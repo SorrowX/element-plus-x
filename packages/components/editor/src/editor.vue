@@ -1,7 +1,11 @@
 <template>
   <div
     v-click-outside="handleClickOutside"
-    :class="[ns.b(), border ? ns.m('border') : '']"
+    :class="[
+      ns.b(),
+      border ? ns.m('border') : '',
+      resize ? ns.m('resize') : '',
+    ]"
     @click="handleClick"
   >
     <div :class="ns.b('prepend')">

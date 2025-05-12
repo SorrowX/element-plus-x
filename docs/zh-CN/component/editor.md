@@ -18,6 +18,15 @@ editor/basic
 
 :::
 
+## resize 缩放
+
+使用`resize`属性来缩放高度,如需缩放宽度，重写 css `resize: both`即可
+:::demo
+
+editor/resize
+
+:::
+
 ## 宽高
 
 使用`style`样式来直接控制编辑器的宽高

@@ -12,6 +12,11 @@
     border-radius: getCssVar('border-radius-base');
   }
 
+  &--resize {
+    resize: vertical;
+    overflow: auto;
+  }
+
   &-wrapper {
     height: 100%;
     font-size: getCssVar('font-size', 'base');
