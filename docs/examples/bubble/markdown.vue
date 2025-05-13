@@ -19,7 +19,7 @@ const content = ref(
   `
   > Render as markdown content to show rich text!
 
-  Link: [ElementPlus X](http://192.168.3.60:86/zh-CN/component/overview.html)
+  Link: [ElementPlus X](https://sorrowx.github.io/epx/zh-CN/component/overview.html)
 
 
 `.trim()

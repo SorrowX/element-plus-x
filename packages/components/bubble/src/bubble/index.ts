@@ -134,8 +134,10 @@ export default defineComponent({
                 : h(Loading),
             ]
           } else {
+            // 默认插槽和content插槽都可以作为内容
+            const contentSlot = slots.default ?? slots.content
             return [
-              slots.content ? slots.content() : mergedContent(),
+              contentSlot ? contentSlot() : mergedContent(),
               isTyping.value ? toValue(typingSuffix) : '',
             ]
           }

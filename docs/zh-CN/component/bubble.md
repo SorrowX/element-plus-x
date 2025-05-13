@@ -9,9 +9,17 @@ lang: zh-CN
 
 ## 基础用法
 
-:::demo 使用 `content` 属性将文字渲染出
+:::demo 三种渲染方式，使用 `content` 属性将文字渲染出,也可以使用`default`和`content`插槽来渲染，
 
 bubble/basic
+
+:::
+
+## 聊天
+
+:::demo 如果不搭配打字效果，建议使用插槽形式来渲染
+
+bubble/arrow
 
 :::
 
@@ -118,7 +126,7 @@ bubble/list-custom
 | typing             | 打字配置                                                     | `boolean \| TypingOption`                                | -      |
 | placement          | 位置                                                         | ^[enum]`'start'\| 'end'`                                 | -      |
 | message-render     | 自定义内容渲染                                               | `(content: any) => VNode \| string`                      | -      |
-| shape              | 形状                                                         | ^[enum]`'round'\| 'corner'`                              | -      |
+| shape              | 形状                                                         | ^[enum]`'round'\| 'corner' \| 'arrow'`                   | -      |
 | content            | 内容                                                         | `string`                                                 | -      |
 | header             | 头部内容                                                     | `string \| VNode`                                        | -      |
 | footer             | 底部内容                                                     | `string \| VNode`                                        | -      |

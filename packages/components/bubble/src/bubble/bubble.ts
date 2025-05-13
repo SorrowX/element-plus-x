@@ -65,8 +65,8 @@ export const bubbleProps = buildProps({
     values: ['filled', 'borderless', 'outlined', 'shadow'],
   },
   shape: {
-    type: definePropType<'round' | 'corner'>(String),
-    values: ['round', 'corner'],
+    type: definePropType<'round' | 'corner' | 'arrow'>(String),
+    values: ['round', 'corner', 'arrow'],
   },
   onTypingComplete: {
     type: definePropType<VoidFunction>(Function),

@@ -8,6 +8,8 @@
     <el-bubble avatar v-bind="sharedLongTextProps" shape="round" />
     <el-bubble avatar content="shape: corner" shape="corner" />
     <el-bubble avatar v-bind="sharedLongTextProps" shape="corner" />
+    <el-bubble avatar content="shape: arrow" shape="arrow" />
+    <el-bubble avatar v-bind="sharedLongTextProps" shape="arrow" />
   </div>
 </template>
 
