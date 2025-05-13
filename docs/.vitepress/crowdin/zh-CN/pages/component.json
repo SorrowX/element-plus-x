@@ -29,7 +29,8 @@
       },
       {
         "link": "/bubble",
-        "text": "Bubble 对话气泡"
+        "text": "Bubble 对话气泡",
+        "promotion": "updated"
       }
     ]
   },
@@ -76,8 +77,7 @@
       },
       {
         "link": "/f-mention",
-        "text": "Mention 提及",
-        "promotion": "1.1.4"
+        "text": "Mention 提及"
       },
       {
         "link": "/f-input-number",
@@ -89,8 +89,7 @@
       },
       {
         "link": "/f-select-v2",
-        "text": "SelectV2 虚拟化选择器",
-        "promotion": "1.1.4"
+        "text": "SelectV2 虚拟化选择器"
       },
       {
         "link": "/f-date-picker",
@@ -106,8 +105,7 @@
       },
       {
         "link": "/f-tree-select",
-        "text": "TreeSelect 树形选择",
-        "promotion": "1.1.4"
+        "text": "TreeSelect 树形选择"
       },
       {
         "link": "/f-radio",
@@ -123,12 +121,12 @@
       },
       {
         "link": "/f-slider",
-        "text": "Slider 滑块",
-        "promotion": "1.1.4"
+        "text": "Slider 滑块"
       },
       {
         "link": "/f-preview-text",
-        "text": "PreviewText 阅读态"
+        "text": "PreviewText 阅读态",
+        "promotion": "updated"
       },
       {
         "link": "/f-submit",
@@ -144,8 +142,7 @@
       },
       {
         "link": "/f-json-schema",
-        "text": "JsonSchema 配置",
-        "promotion": "updated"
+        "text": "JsonSchema 配置"
       },
       {
         "link": "/f-form",
@@ -182,8 +179,7 @@
       },
       {
         "link": "/read-more",
-        "text": "ReadMore 阅读更多",
-        "promotion": "updated"
+        "text": "ReadMore 阅读更多"
       },
       {
         "link": "/table-page",
@@ -237,8 +233,7 @@
       },
       {
         "link": "/qr-code",
-        "text": "QRCode 二维码",
-        "promotion": "1.1.4"
+        "text": "QRCode 二维码"
       }
     ]
   },
