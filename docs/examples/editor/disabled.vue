@@ -11,18 +11,13 @@
     style="width: 320px"
     :disabled="disabled"
     placeholder="Please input"
-    @enter="handleEnter"
+    disable-enter-emit
   />
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
 
 const value = ref('hi 徐尹啊 <br /> 今天又是苦逼的一天')
 const disabled = ref(true)
-
-const handleEnter = (values) => {
-  ElMessage('回车做点什么')
-}
 </script>

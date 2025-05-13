@@ -7,7 +7,8 @@
 1. 修复 PreviewText.Cascader 组件显示问题
 2. 新增 getTextContent 方法用于 Editor 组件的 html 内容转换为纯文本
 3. Editor 组件新增 resize 功能
-4. Bubble 组件新增 shape 值为 arrow 形状
+4. Editor 组件修复 disabled 只在初始化时生效的问题
+5. Bubble 组件新增 shape 值为 arrow 形状
 
 ## V1.1.4 (更新时间: 2025-05-09 14:31)
 

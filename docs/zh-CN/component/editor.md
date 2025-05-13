@@ -18,6 +18,15 @@ editor/basic
 
 :::
 
+## 禁用
+
+使用`disabled`属性控制编辑器是否可以编辑
+:::demo
+
+editor/disabled
+
+:::
+
 ## resize 缩放
 
 使用`resize`属性来缩放高度,如需缩放宽度，重写 css `resize: both`即可
