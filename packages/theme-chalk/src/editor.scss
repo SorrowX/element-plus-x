@@ -17,10 +17,19 @@
     overflow: auto;
   }
 
+  &--disabled {
+    background-color: getCssVar('disabled-bg-color');
+    cursor: not-allowed;
+    div[contenteditable='false'] {
+      color: getCssVar('disabled-text-color');
+    }
+  }
+
   &-wrapper {
     height: 100%;
     font-size: getCssVar('font-size', 'base');
-    div[contenteditable='true'] {
+    div[contenteditable='true'],
+    div[contenteditable='false'] {
       padding: 6px;
       &:focus-visible {
         outline: 0;

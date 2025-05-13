@@ -5,6 +5,7 @@
       ns.b(),
       border ? ns.m('border') : '',
       resize ? ns.m('resize') : '',
+      disabled ? ns.m('disabled') : '',
     ]"
     @click="handleClick"
   >
@@ -208,6 +209,14 @@ watch(
     setTextLength()
     if (getHtml() === value) return
     resetHtml(value)
+  }
+)
+
+watch(
+  () => props.disabled,
+  (value: boolean) => {
+    const editable = !value
+    editor.value.setEditable(editable)
   }
 )
 

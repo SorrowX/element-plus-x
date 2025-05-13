@@ -26,9 +26,9 @@ import { ElCase } from 'element-plus-x'
 
 // import Test from '../../docs/examples/emoji/basic.vue'
 // import Test from '../../docs/examples/table-page/page.vue'
-import Test from '../../docs/examples/bubble/arrow.vue'
+// import Test from '../../docs/examples/bubble/arrow.vue'
 // import Test from '../../docs/examples/f-json-schema/json1.vue'
-// import Test from '../../docs/examples/editor/resize.vue'
+import Test from '../../docs/examples/editor/disabled.vue'
 // import Test from '../../docs/examples/f-input/markup-schema.vue'
 // import Test from '../../docs/examples/table-page/boundary-value.vue'
 
