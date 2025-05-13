@@ -141,13 +141,13 @@ bubble/list-custom
 
 ### Bubble Slots
 
-| 插槽名  | 说明           | 类型 |
-| ------- | -------------- | ---- |
-| avatar  | 自定义头像     | -    |
-| header  | 自定义内容头部 | -    |
-| footer  | 自定义内容底部 | -    |
-| content | 自定义内容     | -    |
-| loading | 自定义 loading | -    |
+| 插槽名  | 说明                                                     | 类型 |
+| ------- | -------------------------------------------------------- | ---- |
+| avatar  | 自定义头像                                               | -    |
+| header  | 自定义内容头部                                           | -    |
+| footer  | 自定义内容底部                                           | -    |
+| content | 自定义内容（和默认插槽功能一致，优先级 default>content） | -    |
+| loading | 自定义 loading                                           | -    |
 
 ### BubbleList 属性
 
