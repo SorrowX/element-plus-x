@@ -34,6 +34,16 @@
       }
     ]
   },
+  "configuration": {
+    "text": "配置组件",
+    "children": [
+      {
+        "link": "/config-provider-v2",
+        "text": "ConfigProviderV2 配置",
+        "promotion": "1.1.5"
+      }
+    ]
+  },
   "form": {
     "text": "Form 表单组件",
     "children": [
