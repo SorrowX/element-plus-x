@@ -21,7 +21,9 @@ import '../packages/theme-chalk/src/dark/css-vars.scss'
   const app = createApp(App)
 
   app.use(ElementPlus)
-  app.use(ElementPlusX)
+  app.use(ElementPlusX, {
+    size: 'small',
+  })
 
   app.mount('#play')
 })()

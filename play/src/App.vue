@@ -1,6 +1,6 @@
 <template>
   <!-- If you want to apply a custom namespace, uncomment the following and apply the css configuration in `vite.config.ts`. -->
-  <el-config-provider namespace="el" :locale="locale">
+  <el-config-provider-v2 namespace="el" :locale="locale">
     <el-button mb-2 @click="toggle">语言切换</el-button>
     <el-button mb-2 @click="() => toggleDark()">主题切换</el-button>
     <div class="play-container">
@@ -10,7 +10,7 @@
 
       <Test />
     </div>
-  </el-config-provider>
+  </el-config-provider-v2>
 </template>
 
 <script setup lang="ts">

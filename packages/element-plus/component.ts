@@ -41,6 +41,7 @@ import { ElList } from '@element-plus/components/list'
 import { ElFullScreen } from '@element-plus/components/full-screen'
 import { ElSplit } from '@element-plus/components/split'
 import { ElQrCode } from '@element-plus/components/qr-code'
+import { ElConfigProviderV2 } from '@element-plus/components/config-provider-v2'
 
 import type { Plugin } from 'vue'
 
@@ -84,4 +85,5 @@ export default [
   ElFullScreen,
   ElSplit,
   ElQrCode,
+  ElConfigProviderV2,
 ] as Plugin[]
