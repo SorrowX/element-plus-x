@@ -10,6 +10,8 @@ import {
   defaultTablePageConfig,
   tablePageContextKey,
 } from './hooks/use-global-config'
+import type { ConfigProviderV2Context } from './constants'
+import type { Ref } from 'vue'
 
 const ConfigProviderV2 = defineComponent({
   name: 'ElConfigProviderV2',
@@ -25,7 +27,7 @@ const ConfigProviderV2 = defineComponent({
       }, {})
 
     const epCfg = computed(() => pickupProps(configProviderProps)) // element-plus config
-    const allCfg = provideGlobalConfig(props)! // all config
+    const allCfg: Ref<ConfigProviderV2Context> = provideGlobalConfig(props)! // all config
 
     provide(configProviderV2ContextKey, allCfg)
 
