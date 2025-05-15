@@ -1,2 +1,1 @@
-import '@element-plus/components/base/style'
-import '@element-plus/theme-chalk/src/config-provider.scss'
+import '@element-plus/theme-chalk/src/config-provider-v2.scss'

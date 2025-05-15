@@ -1,5 +1,4 @@
 // component styles
-@use './case.scss'; // 待删除
 @use './affix-bottom.scss';
 @use './table-page.scss';
 @use './table-dialog.scss';
@@ -37,3 +36,4 @@
 @use './split.scss';
 @use './formily/index.scss';
 @use './qr-code.scss';
+@use './config-provider-v2.scss';
