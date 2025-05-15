@@ -2,9 +2,7 @@ import { configProviderProps } from 'element-plus'
 import { buildProps, definePropType } from '@element-plus/utils'
 import type { ExtractPropTypes } from 'vue'
 
-export interface TablePageContext {
-  defaultPageSize?: number
-}
+import type { TablePageContext } from '@element-plus/components/table-page'
 
 export const cfgProps = {
   tablePage: {

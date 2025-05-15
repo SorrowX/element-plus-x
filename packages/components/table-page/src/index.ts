@@ -9,13 +9,10 @@ import {
 } from 'vue'
 import { ElEmpty, useNamespace, vLoading } from 'element-plus'
 import { DIV_TAG } from '@element-plus/constants'
+import { useTablePageConfig } from '@element-plus/components/config-provider-v2'
 import EpTable from './table'
 import EpPagination from './pagination'
-import {
-  getDefaultConfig,
-  getDefaultPagination,
-  tablePageProps,
-} from './table-page'
+import { tablePageProps } from './table-page'
 import type { IQueryParams } from './types'
 
 export default defineComponent({
@@ -34,9 +31,11 @@ export default defineComponent({
     const ROOT_PREFIX = ns.b('page')
     const TABLE_PREFIX = ns.b('wrapper')
 
+    const { tablePageConfig } = useTablePageConfig()
+
     const pagination = computed(() => {
       return {
-        ...getDefaultPagination(),
+        ...tablePageConfig.value.pagination,
         ...props.pagination,
       }
     })
@@ -48,7 +47,7 @@ export default defineComponent({
     )
     const config = computed(() => {
       return {
-        ...getDefaultConfig(),
+        ...tablePageConfig.value.config,
         ...props.config,
       }
     })

@@ -23,6 +23,11 @@ import '../packages/theme-chalk/src/dark/css-vars.scss'
   app.use(ElementPlus)
   app.use(ElementPlusX, {
     size: 'small',
+    tablePage: {
+      pagination: {
+        showRecord: false,
+      },
+    },
   })
 
   app.mount('#play')

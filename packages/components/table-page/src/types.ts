@@ -46,3 +46,8 @@ export type IHttpRequestParams = {
   resolve: (data: IResolveData) => void
   reject: (e: Error) => void
 }
+
+export interface TablePageContext {
+  pagination: Partial<PaginationProp>
+  config?: Partial<Config>
+}

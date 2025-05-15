@@ -7,11 +7,12 @@ import {
 import { configProviderV2Props } from './config-provider-v2-props'
 import { configProviderV2ContextKey } from './constants'
 import {
-  defaultTablePageConfig,
+  getDefaultTablePageConfig,
   tablePageContextKey,
 } from './hooks/use-global-config'
 import type { ConfigProviderV2Context } from './constants'
 import type { Ref } from 'vue'
+import type { TablePageContext } from '@element-plus/components/table-page'
 
 const ConfigProviderV2 = defineComponent({
   name: 'ElConfigProviderV2',
@@ -31,9 +32,24 @@ const ConfigProviderV2 = defineComponent({
 
     provide(configProviderV2ContextKey, allCfg)
 
+    const defaultTablePageConfig = getDefaultTablePageConfig()
+    const tablePageConfig = props.tablePage as TablePageContext
     provide(
       tablePageContextKey,
-      computed(() => props.tablePage ?? { ...defaultTablePageConfig })
+      computed(() => {
+        return {
+          pagination: {
+            ...defaultTablePageConfig.pagination,
+            ...allCfg.value.tablePage?.pagination,
+            ...tablePageConfig?.pagination,
+          },
+          config: {
+            ...defaultTablePageConfig.config,
+            ...allCfg.value.tablePage?.config,
+            ...tablePageConfig?.config,
+          },
+        }
+      })
     )
 
     return () =>

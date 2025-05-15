@@ -7,25 +7,6 @@ import type {
   PaginationProp,
 } from './types'
 
-export const getDefaultPagination = () => {
-  return {
-    defaultPageSize: 50,
-    pageSizes: [10, 20, 50, 100, 200],
-    layout: 'sizes, prev, pager, next, jumper',
-    background: true,
-    showRecord: true,
-    showTotal: true,
-  }
-}
-
-export const getDefaultConfig = (): Config => {
-  return {
-    currentPage: 'current',
-    pageSize: 'size',
-    total: 'total',
-  }
-}
-
 export const tablePageProps = buildProps({
   httpRequest: {
     type: Function as PropType<(params: IHttpRequestParams) => void>,
@@ -36,11 +17,11 @@ export const tablePageProps = buildProps({
   },
   pagination: {
     type: Object as PropType<PaginationProp>,
-    default: () => getDefaultPagination(),
+    default: () => ({}),
   },
   config: {
     type: Object as PropType<Config>,
-    default: () => getDefaultConfig(),
+    default: () => ({}),
   },
   firstInvoke: {
     type: Boolean,
