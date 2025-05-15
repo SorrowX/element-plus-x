@@ -20,12 +20,15 @@ import '../packages/theme-chalk/src/dark/css-vars.scss'
   const App = (await file()).default
   const app = createApp(App)
 
-  app.use(ElementPlus)
-  app.use(ElementPlusX, {
+  app.use(ElementPlus, {
     size: 'small',
+  })
+  app.use(ElementPlusX, {
     tablePage: {
       pagination: {
         showRecord: false,
+        defaultPageSize: 55,
+        pageSizes: [10, 20, 300],
       },
     },
   })

@@ -1,17 +1,15 @@
 import { computed, defineComponent, h, provide, unref } from 'vue'
-import {
-  ElConfigProvider,
-  configProviderProps,
-  provideGlobalConfig,
-} from 'element-plus'
+import { ElConfigProvider } from 'element-plus'
 import { configProviderV2Props } from './config-provider-v2-props'
 import { configProviderV2ContextKey } from './constants'
 import {
+  getCfgOptions,
   getDefaultTablePageConfig,
+  globalConfig,
+  mergeGlobalConfig,
   tablePageContextKey,
 } from './hooks/use-global-config'
-import type { ConfigProviderV2Context } from './constants'
-import type { Ref } from 'vue'
+
 import type { TablePageContext } from '@element-plus/components/table-page'
 
 const ConfigProviderV2 = defineComponent({
@@ -19,18 +17,11 @@ const ConfigProviderV2 = defineComponent({
   inheritAttrs: false,
   props: configProviderV2Props,
   setup(props, { slots }) {
-    const pickupProps = (obj: Record<string, any>) =>
-      Object.keys(obj).reduce((pre, key) => {
-        return {
-          ...pre,
-          [key]: (props as any)[key],
-        }
-      }, {})
+    const cfgs = computed(() => getCfgOptions(props))
 
-    const epCfg = computed(() => pickupProps(configProviderProps)) // element-plus config
-    const allCfg: Ref<ConfigProviderV2Context> = provideGlobalConfig(props)! // all config
+    mergeGlobalConfig(cfgs.value.epxCfg)
 
-    provide(configProviderV2ContextKey, allCfg)
+    provide(configProviderV2ContextKey, globalConfig)
 
     const defaultTablePageConfig = getDefaultTablePageConfig()
     const tablePageConfig = props.tablePage as TablePageContext
@@ -40,12 +31,12 @@ const ConfigProviderV2 = defineComponent({
         return {
           pagination: {
             ...defaultTablePageConfig.pagination,
-            ...allCfg.value.tablePage?.pagination,
+            ...globalConfig.value.tablePage?.pagination,
             ...tablePageConfig?.pagination,
           },
           config: {
             ...defaultTablePageConfig.config,
-            ...allCfg.value.tablePage?.config,
+            ...globalConfig.value.tablePage?.config,
             ...tablePageConfig?.config,
           },
         }
@@ -56,7 +47,7 @@ const ConfigProviderV2 = defineComponent({
       h(
         ElConfigProvider,
         {
-          ...unref(epCfg), // 防止vue报警告，因为ElConfigProvider没有根元素,只能传递该组件的原有props属性
+          ...unref(cfgs.value.epCfg),
         },
         {
           default: () => slots.default?.(),

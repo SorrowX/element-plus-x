@@ -11,7 +11,7 @@
     <el-config-provider-v2
       :locale="locale"
       :table-page="{
-        pagination: { defaultPageSize: 50, background: false },
+        pagination: { defaultPageSize: 35, pageSizes: [10, 20, 50] },
         config: { pageSize: 'size', currentPage: 'current' },
       }"
     >
