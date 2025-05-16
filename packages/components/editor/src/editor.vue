@@ -206,9 +206,9 @@ watch(
   () => props.modelValue,
   (value) => {
     if (!editor.value) return
-    setTextLength()
     if (getHtml() === value) return
     resetHtml(value)
+    setTextLength()
   }
 )
 
