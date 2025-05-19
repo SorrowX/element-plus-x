@@ -25,6 +25,3 @@ export {
   mutable,
   isClient,
 } from 'element-plus/es/utils/index'
-
-// formily内部工具函数
-export { merge } from '@formily/shared'

@@ -6,7 +6,6 @@ import {
   getCfgOptions,
   getDefaultTablePageConfig,
   globalConfig,
-  mergeGlobalConfig,
   tablePageContextKey,
 } from './hooks/use-global-config'
 
@@ -16,10 +15,8 @@ const ConfigProviderV2 = defineComponent({
   name: 'ElConfigProviderV2',
   inheritAttrs: false,
   props: configProviderV2Props,
-  setup(props, { slots }) {
-    const cfgs = computed(() => getCfgOptions(props))
-
-    mergeGlobalConfig(cfgs.value.epxCfg)
+  setup(props, { attrs, slots }) {
+    const cfgs = computed(() => getCfgOptions({ ...props, ...attrs }))
 
     provide(configProviderV2ContextKey, globalConfig)
 
@@ -31,12 +28,10 @@ const ConfigProviderV2 = defineComponent({
         return {
           pagination: {
             ...defaultTablePageConfig.pagination,
-            ...globalConfig.value.tablePage?.pagination,
             ...tablePageConfig?.pagination,
           },
           config: {
             ...defaultTablePageConfig.config,
-            ...globalConfig.value.tablePage?.config,
             ...tablePageConfig?.config,
           },
         }

@@ -5,7 +5,6 @@
     :boundary-value="600"
     :http-request="getList"
     :columns="columns"
-    :pagination="{ defaultPageSize: 20 }"
     @selection-change="handleSelectionChange"
   />
 </template>

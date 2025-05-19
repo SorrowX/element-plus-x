@@ -24,13 +24,13 @@ import '../packages/theme-chalk/src/dark/css-vars.scss'
     size: 'small',
   })
   app.use(ElementPlusX, {
-    tablePage: {
-      pagination: {
-        showRecord: false,
-        defaultPageSize: 55,
-        pageSizes: [10, 20, 300],
-      },
-    },
+    // tablePage: {
+    //   pagination: {
+    //     showRecord: false,
+    //     defaultPageSize: 35,
+    //     pageSizes: [10, 20, 300],
+    //   },
+    // },
   })
 
   app.mount('#play')

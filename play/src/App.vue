@@ -1,6 +1,6 @@
 <template>
   <!-- If you want to apply a custom namespace, uncomment the following and apply the css configuration in `vite.config.ts`. -->
-  <el-config-provider-v2 namespace="el" :locale="locale">
+  <el-config-provider namespace="el" :locale="locale">
     <el-button mb-2 @click="toggle">语言切换</el-button>
     <el-button mb-2 @click="() => toggleDark()">主题切换</el-button>
     <div class="play-container">
@@ -10,7 +10,7 @@
 
       <Test />
     </div>
-  </el-config-provider-v2>
+  </el-config-provider>
 </template>
 
 <script setup lang="ts">
@@ -28,8 +28,8 @@ import { ElCase } from 'element-plus-x'
 // import Test from '../../docs/examples/table-page/page.vue'
 // import Test from '../../docs/examples/bubble/arrow.vue'
 // import Test from '../../docs/examples/f-json-schema/json1.vue'
-import Test from '../../docs/examples/editor/count.vue'
-// import Test from '../../docs/examples/config-provider-v2/local.vue'
+// import Test from '../../docs/examples/editor/count.vue'
+import Test from '../../docs/examples/config-provider-v2/local.vue'
 // import Test from '../../docs/examples/f-input/markup-schema.vue'
 // import Test from '../../docs/examples/table-page/boundary-value.vue'
 
