@@ -8,7 +8,9 @@ import type { TablePageContext } from '@element-plus/components/table-page'
 import type { ConfigProviderV2Context } from '../constants'
 
 const overrideKeys = ['pageSizes']
-function merge<T extends object>(...sources: T[]): T {
+function merge<T extends Partial<ConfigProviderV2Context> | object>(
+  ...sources: T[]
+): T {
   return mergeWith(
     {},
     ...sources,
@@ -65,8 +67,8 @@ export const tablePageContextKey: InjectionKey<Ref<TablePageContext>> = Symbol(
 export const useTablePageConfig = () => {
   const initial = computed(() =>
     merge(
-      getDefaultTablePageConfig(),
-      (globalConfig.value.tablePage ?? {}) as object
+      getDefaultTablePageConfig() as TablePageContext,
+      globalConfig.value.tablePage as TablePageContext
     )
   )
   return {

@@ -9,16 +9,16 @@ export const generateExternal = async (options: { full: boolean }) => {
     const packages: string[] = [...peerDependencies]
     if (!options.full) {
       packages.push(...dependencies)
-      // packages.push('@vue', ...dependencies)
     }
-    // 排除 element-plus和vuedraggable
+    // 排除一些依赖包
     packages.push(
       '@vue',
       'element-plus',
       '@vueuse',
       '@tiptap',
       '@formily',
-      'qrcode'
+      'qrcode',
+      'lodash-unified'
     )
 
     return [...new Set(packages)].some(
