@@ -41,6 +41,7 @@
     "postinstall": "pnpm stub && concurrently \"pnpm gen:version\" \"pnpm run -C internal/metadata dev\""
   },
   "peerDependencies": {
+    "@tiptap/core": "^2.10.4",
     "@tiptap/extension-character-count": "^2.10.4",
     "@tiptap/extension-document": "^2.10.4",
     "@tiptap/extension-image": "^2.10.4",
@@ -51,11 +52,11 @@
     "@tiptap/extension-text": "^2.10.4",
     "@tiptap/extension-text-align": "^2.10.4",
     "@tiptap/extension-underline": "^2.10.4",
+    "@tiptap/pm": "^2.10.4",
     "@tiptap/starter-kit": "^2.10.4",
     "@tiptap/suggestion": "^2.10.4",
     "@tiptap/vue-3": "^2.10.4",
-    "vue": "^3.2.0",
-    "vuedraggable": "^4.1.0"
+    "vue": "^3.2.0"
   },
   "dependencies": {
     "@element-plus/components": "workspace:*",
