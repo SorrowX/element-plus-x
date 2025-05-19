@@ -53,8 +53,6 @@ app.use(ElementPlusX, {
 })
 ```
 
-提醒： 不管使用哪种方式，本质都是`ElementPlus`中的[globalConfig](https://github.com/element-plus/element-plus/blob/dev/packages/components/config-provider/src/hooks/use-global-config.ts)，`ElementPlusX`并不会单独去维护一份数据。
-
 ## API
 
 其余使用姿势参考[ElConfigProvider](https://element-plus.org/zh-CN/component/config-provider.html),剩下的则是`ConfigProviderV2`组件独有的

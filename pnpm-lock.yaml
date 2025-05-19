@@ -632,9 +632,6 @@ importers:
       '@tiptap/extension-underline':
         specifier: ^2.10.4
         version: 2.11.2(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
-      '@tiptap/pm':
-        specifier: ^2.10.4
-        version: 2.10.4
       '@tiptap/starter-kit':
         specifier: ^2.10.4
         version: 2.10.4
