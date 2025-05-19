@@ -21,7 +21,7 @@ import '../packages/theme-chalk/src/dark/css-vars.scss'
   const app = createApp(App)
 
   app.use(ElementPlus, {
-    size: 'small',
+    // size: 'small',
   })
   app.use(ElementPlusX, {
     // tablePage: {

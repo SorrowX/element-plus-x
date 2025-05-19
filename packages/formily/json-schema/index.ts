@@ -137,14 +137,13 @@ export const JsonSchema = defineComponent({
       return hasTopForm.value ? formRef.value : createForm(props.iFormProps)
     })
 
-    const proxyForm = new Proxy(form.value, {
-      get(target, prop, receiver) {
-        const value = Reflect.get(target, prop, receiver)
-        return prop === 'submit' ? submit(value) : value
-      },
-    })
+    // 重写 form实例 的submit方法，用于是否滚动到错误元素
+    if (form.value) {
+      const originSubmit = form.value.submit
+      form.value.submit = submit(originSubmit)
+    }
 
-    expose({ formInstance: proxyForm })
+    expose({ formInstance: form.value })
 
     return () => {
       const { schema } = props
@@ -163,7 +162,7 @@ export const JsonSchema = defineComponent({
               colon: false,
               component: 'div',
               ...attrs,
-              form: proxyForm,
+              form: form.value,
             },
             {
               default: () => h(SchemaField, { schema }),

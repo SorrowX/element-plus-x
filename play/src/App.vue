@@ -27,8 +27,8 @@ import { ElCase } from 'element-plus-x'
 // import Test from '../../docs/examples/emoji/basic.vue'
 // import Test from '../../docs/examples/table-page/page.vue'
 // import Test from '../../docs/examples/bubble/arrow.vue'
-// import Test from '../../docs/examples/f-json-schema/json1.vue'
-import Test from '../../docs/examples/editor/count.vue'
+import Test from '../../docs/examples/f-json-schema/component.vue'
+// import Test from '../../docs/examples/editor/count.vue'
 // import Test from '../../docs/examples/config-provider-v2/local.vue'
 // import Test from '../../docs/examples/f-input/markup-schema.vue'
 // import Test from '../../docs/examples/table-page/boundary-value.vue'
@@ -53,7 +53,7 @@ const toggle = () => {
 html,
 body {
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   margin: 0;
   // padding: 50px;
   // overflow: hidden;
