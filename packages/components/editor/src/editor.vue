@@ -206,9 +206,10 @@ watch(
   () => props.modelValue,
   (value) => {
     if (!editor.value) return
+    setTextLength()
     if (getHtml() === value) return
     resetHtml(value)
-    setTextLength()
+    setTextLength() // 异步数据源赋值时需要更新
   }
 )
 
