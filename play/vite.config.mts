@@ -19,6 +19,7 @@ import {
 export default defineConfig(async ({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   let { dependencies } = getPackageDependencies(epPackage)
+  dependencies = dependencies.filter((dep) => dep !== '@tiptap/pm') // exclude @tiptap/pm
   dependencies = dependencies.filter((dep) => !dep.startsWith('@types/')) // exclude dts deps
   const optimizeDeps = await glob(['dayjs/(locale|plugin)/*.js'], {
     cwd: path.resolve(projRoot, 'node_modules'),

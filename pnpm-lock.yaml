@@ -578,15 +578,9 @@ importers:
 
   packages/element-plus:
     dependencies:
-      '@ctrl/tinycolor':
-        specifier: ^3.4.1
-        version: 3.6.1
       '@element-plus/icons-vue':
         specifier: ^2.3.1
         version: 2.3.1(vue@3.5.13(typescript@5.5.4))
-      '@floating-ui/dom':
-        specifier: ^1.0.1
-        version: 1.6.12
       '@formily/core':
         specifier: ^2.3.2
         version: 2.3.2
@@ -596,9 +590,6 @@ importers:
       '@formily/vue':
         specifier: ^2.3.2
         version: 2.3.2(typescript@5.5.4)(vue@3.5.13(typescript@5.5.4))
-      '@popperjs/core':
-        specifier: npm:@sxzz/popperjs-es@^2.11.7
-        version: '@sxzz/popperjs-es@2.11.7'
       '@tiptap/core':
         specifier: ^2.10.4
         version: 2.10.4(@tiptap/pm@2.10.4)
@@ -632,6 +623,9 @@ importers:
       '@tiptap/extension-underline':
         specifier: ^2.10.4
         version: 2.11.2(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
+      '@tiptap/pm':
+        specifier: ^2.10.4
+        version: 2.10.4
       '@tiptap/starter-kit':
         specifier: ^2.10.4
         version: 2.10.4
@@ -662,9 +656,6 @@ importers:
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
-      escape-html:
-        specifier: ^1.0.3
-        version: 1.0.3
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -674,12 +665,6 @@ importers:
       lodash-unified:
         specifier: ^1.0.2
         version: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
-      memoize-one:
-        specifier: ^6.0.0
-        version: 6.0.0
-      normalize-wheel-es:
-        specifier: ^1.2.0
-        version: 1.2.0
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4

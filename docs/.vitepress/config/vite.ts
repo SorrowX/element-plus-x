@@ -23,7 +23,7 @@ type AliasOptions = Required<ResolveOptions>['alias']
 
 const { dependencies: epDeps } = getPackageDependencies(epPackage)
 const { dependencies: docsDeps } = getPackageDependencies(docPackage)
-const optimizeDeps = [...new Set([...epDeps, ...docsDeps])].filter(
+let optimizeDeps = [...new Set([...epDeps, ...docsDeps])].filter(
   (dep) =>
     !dep.startsWith('@types/') &&
     !['@element-plus/metadata', 'element-plus'].includes(dep)
@@ -34,6 +34,8 @@ optimizeDeps.push(
     onlyFiles: true,
   }))
 )
+
+optimizeDeps = optimizeDeps.filter((dep) => dep !== '@tiptap/pm') // exclude @tiptap/pm
 
 const alias: AliasOptions = [
   {
