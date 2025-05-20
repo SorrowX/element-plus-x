@@ -146,6 +146,7 @@ declare module 'vue' {
     ElList: typeof import('element-plus')['ElList']
     ElFullScreen: typeof import('element-plus')['ElFullScreen']
     ElSplit: typeof import('element-plus')['ElSplit']
+    ElVideo: typeof import('element-plus')['ElVideo']
   }
 
   interface ComponentCustomProperties {
