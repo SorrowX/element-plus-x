@@ -6,6 +6,8 @@
 
 1. 优化 ConfigProviderV2 配置和 ElConfigProvider 配置独立开
 2. 调整依赖包(Tiptap)
+3. 优化 JsonSchema 组件 submit 方法
+4. 修复 Editor 组件，输入值时字数不统计的问题
 
 ## V1.1.7 (更新时间: 2025-05-15 15:39)
 
