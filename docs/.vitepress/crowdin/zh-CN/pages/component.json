@@ -244,6 +244,11 @@
       {
         "link": "/qr-code",
         "text": "QRCode 二维码"
+      },
+      {
+        "link": "/video",
+        "text": "Video 视频",
+        "promotion": "1.1.8"
       }
     ]
   },

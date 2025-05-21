@@ -8,7 +8,8 @@
         <el-video
           readonly
           poster="https://realbot-oss.oss-accelerate.aliyuncs.com/scrm/2025/2025-05-20/16910ba6-0708-48d2-9693-27ea40e2cd30/1.jpg"
-          duration="9:56"
+          duration="1:56"
+          style="max-width: 180px"
         />
       </template>
     </el-bubble>
@@ -24,8 +25,9 @@
       <template #default>
         <el-video
           readonly
-          poster="https://realbot-oss.oss-accelerate.aliyuncs.com/scrm/2025/2025-05-20/d5a50cd7-c335-48bd-9a85-f7f2b28377ff/41.jpg"
-          duration="9:56"
+          poster="https://realbot-oss.oss-accelerate.aliyuncs.com/scrm/2025/2025-22-19/ab77e3d0-8933-4746-94af-bb66f6e58d38/视频.mp4?x-oss-process=video/snapshot,t_1000,f_jpg,m_fast"
+          duration="2:51"
+          style="max-width: 160px"
         />
       </template>
     </el-bubble>
@@ -38,7 +40,8 @@
         <el-video
           readonly
           poster="https://realbot-oss.oss-accelerate.aliyuncs.com/scrm/2025/2025-05-20/c87f2d68-f318-4463-a61f-c4fc44b1f297/报纸墙可爱女孩白媗4K动漫壁纸_彼岸图网.jpg"
-          duration="9:56"
+          duration="8:23"
+          style="max-width: 250px"
         />
       </template>
     </el-bubble>

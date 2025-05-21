@@ -1,33 +1,35 @@
 <template>
   <div :class="ns.b()">
-    <slot name="poster">
-      <img
-        v-if="hasPoster"
-        :class="ns.e('poster')"
-        :src="poster"
-        @load="onCoverLoad"
-      />
-    </slot>
+    <div v-if="hasPoster" :class="ns.e('poster')">
+      <slot name="poster">
+        <img :src="poster" @load="onPosterLoad" />
+      </slot>
+    </div>
+
     <slot name="duration" v-bind="{ formatDuration }">
       <span v-if="hasDuration" :class="ns.e('duration')">
         {{ formatDuration }}
       </span>
     </slot>
-    <video
-      ref="videoRef"
-      controls
-      :class="ns.e('video')"
-      :src="src"
-      :hidden="hasPoster"
-      @ended="handlePause"
-      @pause="handlePause"
-      @play="handlePlay"
-    >
-      <slot />
-    </video>
-    <div v-if="hasPoster" :class="ns.e('player-wrap')" @click="handleClick">
-      <slot name="player" v-bind="{ handleClick }">
-        <el-icon :class="ns.e('player')" size="42" color="rgba(0,0,0,0.6)">
+
+    <div v-if="!readonly" :class="ns.e('player')">
+      <video
+        ref="videoRef"
+        controls
+        :class="ns.e('video')"
+        :src="src"
+        :hidden="hasPoster"
+        @ended="handlePause"
+        @pause="handlePause"
+        @play="handlePlay"
+      >
+        <slot />
+      </video>
+    </div>
+
+    <div v-if="hasPoster" :class="ns.e('action')" @click="handleClick">
+      <slot name="play-icon" v-bind="{ handleClick }">
+        <el-icon :class="ns.e('btn')" size="42" color="rgba(0,0,0,0.6)">
           <VideoPlayer />
         </el-icon>
       </slot>
@@ -40,7 +42,7 @@ import { computed, ref } from 'vue'
 import { ElIcon, useNamespace } from 'element-plus'
 import { formatTime, isNumber } from '@element-plus/utils'
 import * as IconsVue from '@element-plus/components/icons-vue/index'
-import { videoEmits, videoProps } from './video'
+import { videoProps } from './video'
 
 defineOptions({
   name: 'ElVideo',
@@ -48,7 +50,6 @@ defineOptions({
 
 const { VideoPlayer } = IconsVue
 const props = defineProps(videoProps)
-const emit = defineEmits(videoEmits)
 const ns = useNamespace('video')
 
 const isPlayed = ref(false)
@@ -65,15 +66,16 @@ const formatDuration = computed(() =>
   isNumber(props.duration) ? formatTime(props.duration) : props.duration
 )
 
-const handlePlay = () => {
-  setPaused(false)
-}
+const handlePlay = () => setPaused(false)
 
-const handlePause = () => {
-  setPaused(true)
-}
+const handlePause = () => setPaused(true)
 
-const handleClick = (e: MouseEvent) => {
+const handleClick = (e: any) => {
+  if (props.readonly) {
+    props.onClick?.(e)
+    return
+  }
+
   setIsPlayed(true)
   const video = videoRef.value
 
@@ -84,7 +86,7 @@ const handleClick = (e: MouseEvent) => {
       video.pause()
     }
   }
-  emit('click', paused.value, e)
+  props.onClick?.(e)
 }
 
 defineExpose({

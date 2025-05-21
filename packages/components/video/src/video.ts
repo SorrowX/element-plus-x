@@ -1,4 +1,4 @@
-import { buildProps, definePropType, isBoolean } from '@element-plus/utils'
+import { buildProps, definePropType } from '@element-plus/utils'
 import type { ExtractPropTypes } from 'vue'
 
 export const videoProps = buildProps({
@@ -11,8 +11,11 @@ export const videoProps = buildProps({
   duration: {
     type: definePropType<string | number>([String, Number]),
   },
-  onCoverLoad: {
-    type: definePropType<(event: any) => void>(Function),
+  onPosterLoad: {
+    type: definePropType<(event: Event) => void>(Function),
+  },
+  onClick: {
+    type: definePropType<(event: PointerEvent) => void>(Function),
   },
   readonly: {
     type: definePropType<boolean>(Boolean),
@@ -21,9 +24,5 @@ export const videoProps = buildProps({
 } as const)
 export type VideoProps = ExtractPropTypes<typeof videoProps>
 
-export const videoEmits = {
-  click: (paused: boolean, event: MouseEvent) => {
-    return isBoolean(paused) && event instanceof MouseEvent
-  },
-}
+export const videoEmits = {}
 export type VideoEmits = typeof videoEmits

@@ -30,8 +30,8 @@ import { ElCase } from 'element-plus-x'
 // import Test from '../../docs/examples/f-json-schema/component.vue'
 // import Test from '../../docs/examples/editor/count.vue'
 // import Test from '../../docs/examples/config-provider-v2/local.vue'
-// import Test from '../../docs/examples/video/slot.vue'
-import Test from '../../docs/examples/video-viewer/basic.vue'
+import Test from '../../docs/examples/video/list.vue'
+// import Test from '../../docs/examples/video-viewer/basic.vue'
 // import Test from '../../docs/examples/table-page/boundary-value.vue'
 
 import { computed, ref } from 'vue'
@@ -53,24 +53,24 @@ const toggle = () => {
 <style lang="scss">
 html,
 body {
-  width: 100vw;
+  // width: 100vw;
   // height: 100vh;
-  margin: 0;
+  // margin: 0;
   // padding: 50px;
   // overflow: hidden;
-  overflow-x: hidden;
+  // overflow-x: hidden;
 
-  #play {
-    height: 100%;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+  // #play {
+  //   height: 100%;
+  //   width: 100%;
+  //   padding: 20px;
+  //   box-sizing: border-box;
 
-    .play-container {
-      height: 100%;
-      width: 100%;
-    }
-  }
+  //   .play-container {
+  //     height: 100%;
+  //     width: 100%;
+  //   }
+  // }
 }
 
 .ep-bg-purple {
