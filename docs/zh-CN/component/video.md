@@ -41,14 +41,15 @@ video/list
 
 ### 属性
 
-| 属性名         | 说明                          | 类型                                       | 默认值 |
-| -------------- | ----------------------------- | ------------------------------------------ | ------ |
-| src            | 视频地址                      | ^[String]                                  | -      |
-| poster         | 视频封面                      | ^[String]                                  | -      |
-| duration       | 时长,如果是数字内部会计算转换 | ^[String\|Number]                          | -      |
-| readonly       | 只读态                        | ^[Boolean]                                 | false  |
-| on-click       | 点击封面的回调                | ^[Function]`(event: PointerEvent) => void` | -      |
-| on-poster-load | 封面加载成功的回调            | ^[Function]`(event: Event) => void`        | -      |
+| 属性名       | 说明                          | 类型                                       | 默认值 |
+| ------------ | ----------------------------- | ------------------------------------------ | ------ |
+| src          | 视频地址                      | ^[String]                                  | -      |
+| poster       | 视频封面                      | ^[String]                                  | -      |
+| duration     | 时长,如果是数字内部会计算转换 | ^[String\|Number]                          | -      |
+| readonly     | 只读态                        | ^[Boolean]                                 | false  |
+| on-click     | 点击封面的回调                | ^[Function]`(event: PointerEvent) => void` | -      |
+| icon-props   | ElIcon 组件属性               | ^[Object]                                  | -      |
+| poster-props | img 属性                      | ^[Object]                                  | -      |
 
 ### Slots
 

@@ -11,15 +11,18 @@ export const videoProps = buildProps({
   duration: {
     type: definePropType<string | number>([String, Number]),
   },
-  onPosterLoad: {
-    type: definePropType<(event: Event) => void>(Function),
-  },
   onClick: {
     type: definePropType<(event: PointerEvent) => void>(Function),
   },
   readonly: {
     type: definePropType<boolean>(Boolean),
     default: false,
+  },
+  posterProps: {
+    type: definePropType<Record<string, any>>(Object),
+  },
+  iconProps: {
+    type: definePropType<Record<string, any>>(Object),
   },
 } as const)
 export type VideoProps = ExtractPropTypes<typeof videoProps>

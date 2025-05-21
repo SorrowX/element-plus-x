@@ -2,7 +2,7 @@
   <div :class="ns.b()">
     <div v-if="hasPoster" :class="ns.e('poster')">
       <slot name="poster">
-        <img :src="poster" @load="onPosterLoad" />
+        <img :src="poster" v-bind="posterProps" />
       </slot>
     </div>
 
@@ -29,7 +29,12 @@
 
     <div v-if="hasPoster" :class="ns.e('action')" @click="handleClick">
       <slot name="play-icon" v-bind="{ handleClick }">
-        <el-icon :class="ns.e('btn')" size="42" color="rgba(0,0,0,0.6)">
+        <el-icon
+          :class="ns.e('btn')"
+          size="42"
+          color="rgba(0,0,0,0.6)"
+          v-bind="iconProps"
+        >
           <VideoPlayer />
         </el-icon>
       </slot>
