@@ -24,4 +24,5 @@ export {
   addUnit,
   mutable,
   isClient,
+  keysOf,
 } from 'element-plus/es/utils/index'

@@ -43,6 +43,7 @@ import { ElSplit } from '@element-plus/components/split'
 import { ElQrCode } from '@element-plus/components/qr-code'
 import { ElConfigProviderV2 } from '@element-plus/components/config-provider-v2'
 import { ElVideo } from '@element-plus/components/video'
+import { ElVideoViewer } from '@element-plus/components/video-viewer'
 
 import type { Plugin } from 'vue'
 
@@ -88,4 +89,5 @@ export default [
   ElQrCode,
   ElConfigProviderV2,
   ElVideo,
+  ElVideoViewer,
 ] as Plugin[]

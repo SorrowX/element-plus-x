@@ -147,6 +147,7 @@ declare module 'vue' {
     ElFullScreen: typeof import('element-plus')['ElFullScreen']
     ElSplit: typeof import('element-plus')['ElSplit']
     ElVideo: typeof import('element-plus')['ElVideo']
+    ElVideoViewer: typeof import('element-plus')['ElVideoViewer']
   }
 
   interface ComponentCustomProperties {
