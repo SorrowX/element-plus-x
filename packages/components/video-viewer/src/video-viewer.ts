@@ -6,6 +6,7 @@ import {
 } from '@element-plus/utils'
 
 import type { Component, ExtractPropTypes } from 'vue'
+import type { VideoProps } from '@element-plus/components/video'
 
 export type VideoViewerAction =
   | 'zoomIn'
@@ -18,7 +19,7 @@ export const videoViewerProps = buildProps({
    * @description preview link list.
    */
   urlList: {
-    type: definePropType<string[]>(Array),
+    type: definePropType<string[] | VideoProps[]>(Array),
     default: () => mutable([] as const),
   },
   /**

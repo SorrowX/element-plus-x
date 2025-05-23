@@ -11,7 +11,7 @@
           duration="1:56"
           style="max-width: 180px"
           :icon-props="{ color: 'rgba(255,255,255,0.7)' }"
-          @click="handleClick"
+          @click="handleClick(0)"
         />
       </template>
     </el-bubble>
@@ -31,7 +31,7 @@
           duration="2:51"
           style="max-width: 160px"
           :icon-props="{ color: 'rgba(255,255,255,0.7)' }"
-          @click="handleClick"
+          @click="handleClick(1)"
         />
       </template>
     </el-bubble>
@@ -47,7 +47,7 @@
           duration="8:23"
           style="max-width: 250px"
           :icon-props="{ color: 'rgba(255,255,255,0.7)' }"
-          @click="handleClick"
+          @click="handleClick(0)"
         />
       </template>
     </el-bubble>
@@ -55,9 +55,27 @@
 </template>
 
 <script lang="ts" setup>
-import { ElMessage } from 'element-plus'
+import { previewVideo } from 'element-plus-x'
+import type { VideoViewerProps } from 'element-plus-x'
 
-const handleClick = () => {
-  ElMessage('使用全局的播放器播放视频')
+const handleClick = (index) => {
+  previewVideo({
+    initialIndex: index,
+    urlList: [
+      {
+        src: 'https://realbot-oss.oss-accelerate.aliyuncs.com/scrm/2025/2025-05-21/659fa31d-dc87-4882-8be5-1fba8fb7e6ff/flower.mp4',
+        poster:
+          'https://realbot-oss.oss-accelerate.aliyuncs.com/scrm/2025/2025-05-21/659fa31d-dc87-4882-8be5-1fba8fb7e6ff/flower.mp4?x-oss-process=video/snapshot,t_1000,f_jpg,m_fast',
+      },
+      {
+        src: 'https://realbot-oss.oss-accelerate.aliyuncs.com/scrm/2025/2025-22-19/ab77e3d0-8933-4746-94af-bb66f6e58d38/视频.mp4',
+        poster:
+          'https://realbot-oss.oss-accelerate.aliyuncs.com/scrm/2025/2025-22-19/ab77e3d0-8933-4746-94af-bb66f6e58d38/视频.mp4?x-oss-process=video/snapshot,t_1000,f_jpg,m_fast',
+        style: {
+          maxWidth: '200px',
+        },
+      },
+    ],
+  } as VideoViewerProps)
 }
 </script>
