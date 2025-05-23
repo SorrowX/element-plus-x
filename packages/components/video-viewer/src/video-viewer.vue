@@ -33,6 +33,7 @@
             </el-icon>
           </span>
         </template>
+
         <!-- ACTIONS -->
         <div :class="[ns.e('btn'), ns.e('actions')]">
           <div :class="ns.e('actions__inner')">
@@ -55,28 +56,14 @@
             </el-icon>
           </div>
         </div>
+
         <!-- CANVAS -->
         <div :class="ns.e('canvas')">
-          <img
-            v-for="(url, i) in urlList"
-            v-show="i === activeIndex"
-            :ref="(el) => (imgRefs[i] = el as HTMLImageElement)"
-            :key="url"
-            :src="url"
-            :style="imgStyle"
-            :class="ns.e('img')"
-            :crossorigin="crossorigin"
-            @load="handleImgLoad"
-            @error="handleImgError"
-            @mousedown="handleMouseDown"
+          <el-video
+            :key="videoProps.src"
+            :style="calcStyle"
+            v-bind="videoProps"
           />
-
-          <!-- <el-video
-            duration="00:11"
-            style="max-width: 80%; max-height: 65%"
-            src="https://realbot-oss.oss-accelerate.aliyuncs.com/scrm/2025/2025-22-19/ab77e3d0-8933-4746-94af-bb66f6e58d38/视频.mp4"
-            poster="https://realbot-oss.oss-accelerate.aliyuncs.com/scrm/2025/2025-22-19/ab77e3d0-8933-4746-94af-bb66f6e58d38/视频.mp4?x-oss-process=video/snapshot,t_1000,f_jpg,m_fast"
-          /> -->
         </div>
         <slot />
       </div>
@@ -90,7 +77,6 @@ import {
   computed,
   effectScope,
   markRaw,
-  nextTick,
   onMounted,
   ref,
   shallowRef,
@@ -98,8 +84,8 @@ import {
 } from 'vue'
 import { useEventListener } from '@vueuse/core'
 import { throttle } from 'lodash-unified'
-import { ElIcon, useLocale, useNamespace, useZIndex } from 'element-plus'
-// import ElVideo from '@element-plus/components/video'
+import { ElIcon, useNamespace, useZIndex } from 'element-plus'
+import ElVideo from '@element-plus/components/video'
 import { EVENT_CODE } from '@element-plus/constants'
 import { keysOf } from '@element-plus/utils'
 import {
@@ -136,15 +122,12 @@ defineOptions({
 const props = defineProps(videoViewerProps)
 const emit = defineEmits(videoViewerEmits)
 
-const { t } = useLocale()
 const ns = useNamespace('video-viewer')
 const { nextZIndex } = useZIndex()
 const wrapper = ref<HTMLDivElement>()
-const imgRefs = ref<HTMLImageElement[]>([])
 
 const scopeEventListener = effectScope()
 
-const loading = ref(true)
 const activeIndex = ref(props.initialIndex)
 const mode = shallowRef<VideoViewerMode>(modes.CONTAIN)
 const transform = ref({
@@ -169,8 +152,21 @@ const isLast = computed(() => {
   return activeIndex.value === props.urlList.length - 1
 })
 
-const currentImg = computed(() => {
-  return props.urlList[activeIndex.value]
+const list = computed(() => {
+  return props.urlList.map((url) => {
+    if (typeof url === 'string') {
+      return {
+        src: url,
+        poster: '',
+      }
+    } else {
+      return url
+    }
+  })
+})
+
+const videoProps = computed(() => {
+  return list.value[activeIndex.value]
 })
 
 const arrowPrevKls = computed(() => [
@@ -185,7 +181,7 @@ const arrowNextKls = computed(() => [
   ns.is('disabled', !props.infinite && isLast.value),
 ])
 
-const imgStyle = computed(() => {
+const calcStyle = computed(() => {
   const { scale, deg, offsetX, offsetY, enableTransition } = transform.value
   let translateX = offsetX / scale
   let translateY = offsetY / scale
@@ -258,38 +254,6 @@ function unregisterEventListener() {
   scopeEventListener.stop()
 }
 
-function handleImgLoad() {
-  loading.value = false
-}
-
-function handleImgError(e: Event) {
-  loading.value = false
-  ;(e.target as HTMLImageElement).alt = t('el.image.error')
-}
-
-function handleMouseDown(e: MouseEvent) {
-  if (loading.value || e.button !== 0 || !wrapper.value) return
-  transform.value.enableTransition = false
-
-  const { offsetX, offsetY } = transform.value
-  const startX = e.pageX
-  const startY = e.pageY
-
-  const dragHandler = throttle((ev: MouseEvent) => {
-    transform.value = {
-      ...transform.value,
-      offsetX: offsetX + ev.pageX - startX,
-      offsetY: offsetY + ev.pageY - startY,
-    }
-  })
-  const removeMousemove = useEventListener(document, 'mousemove', dragHandler)
-  useEventListener(document, 'mouseup', () => {
-    removeMousemove()
-  })
-
-  e.preventDefault()
-}
-
 function reset() {
   transform.value = {
     scale: 1,
@@ -301,8 +265,6 @@ function reset() {
 }
 
 function toggleMode() {
-  if (loading.value) return
-
   const modeNames = keysOf(modes)
   const modeValues = Object.values(modes)
   const currentMode = mode.value.name
@@ -328,7 +290,6 @@ function next() {
 }
 
 function handleActions(action: VideoViewerAction, options = {}) {
-  if (loading.value) return
   const { minScale, maxScale } = props
   const { zoomRate, rotateDeg, enableTransition } = {
     zoomRate: props.zoomRate,
@@ -362,15 +323,6 @@ function handleActions(action: VideoViewerAction, options = {}) {
   }
   transform.value.enableTransition = enableTransition
 }
-
-watch(currentImg, () => {
-  nextTick(() => {
-    const $img = imgRefs.value[0]
-    if (!$img?.complete) {
-      loading.value = true
-    }
-  })
-})
 
 watch(activeIndex, (val) => {
   reset()
