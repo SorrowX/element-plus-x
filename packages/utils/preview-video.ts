@@ -1,5 +1,5 @@
 import { h, render } from 'vue'
-import ElVideoViewer from '@element-plus/components/video-viewer'
+import ElVideoViewer from '@element-plus/components/video-viewer/src/video-viewer.vue'
 import type { VideoViewerProps } from '@element-plus/components/video-viewer'
 
 export const previewVideo = (options: Partial<VideoViewerProps>) => {

@@ -3,7 +3,7 @@ import {
   definePropType,
   isNumber,
   mutable,
-} from '@element-plus/utils'
+} from '@element-plus/utils/element-plus'
 
 import type { Component, ExtractPropTypes } from 'vue'
 import type { VideoProps } from '@element-plus/components/video'

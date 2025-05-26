@@ -45,7 +45,8 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 import { ElIcon, useNamespace } from 'element-plus'
-import { formatTime, isNumber } from '@element-plus/utils'
+import { isNumber } from '@element-plus/utils/element-plus'
+import { formatTime } from '@element-plus/utils/date-time'
 import * as IconsVue from '@element-plus/components/icons-vue/index'
 import { videoProps } from './video'
 

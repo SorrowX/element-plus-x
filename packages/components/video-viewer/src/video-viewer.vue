@@ -85,9 +85,9 @@ import {
 import { useEventListener } from '@vueuse/core'
 import { throttle } from 'lodash-unified'
 import { ElIcon, useNamespace, useZIndex } from 'element-plus'
-import ElVideo from '@element-plus/components/video'
+import ElVideo from '@element-plus/components/video/src/video.vue'
 import { EVENT_CODE } from '@element-plus/constants'
-import { keysOf } from '@element-plus/utils'
+import { keysOf } from '@element-plus/utils/element-plus'
 import {
   ArrowLeft,
   ArrowRight,
