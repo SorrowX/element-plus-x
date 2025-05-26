@@ -9,6 +9,7 @@
 3. 优化 JsonSchema 组件 submit 方法
 4. 修复 Editor 组件，输入值时字数不统计的问题
 5. 新增 Video 组件
+6. TableDialog 组件样式微调
 
 ## V1.1.7 (更新时间: 2025-05-15 15:39)
 
