@@ -20,7 +20,7 @@
       </el-steps>
     </template>
     <template #footer>
-      <div style="display: flex; justify-content: flex-end; margin-top: 12px">
+      <div style="display: flex; justify-content: flex-end; padding: 12px">
         <el-button> 取消 </el-button>
         <el-button type="primary"> 下一步 </el-button>
       </div>

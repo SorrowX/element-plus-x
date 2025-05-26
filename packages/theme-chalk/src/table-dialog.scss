@@ -11,6 +11,7 @@
   &__body {
     display: flex;
     overflow: auto;
+    padding: 0 16px;
 
     &-left {
       width: 100%;
@@ -64,11 +65,16 @@
   }
 
   &__class {
+    .#{$namespace}-dialog {
+      padding: 0px !important;
+    }
     .#{$namespace}-dialog__header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 0 16px 6px !important;
+      padding: 4px 16px !important;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
       .#{$namespace}-dialog__title {
         font-weight: bold;
       }
@@ -84,6 +90,9 @@
         background-color: transparent;
       }
     }
+    .#{$namespace}-dialog__headerbtn {
+      width: auto;
+    }
   }
 
   &__footer {
@@ -91,8 +100,9 @@
     height: 54px;
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
-    border-top: 1px solid #f5f7fa;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 0 16px;
     .#{$namespace}-button {
       min-width: 76px;
     }

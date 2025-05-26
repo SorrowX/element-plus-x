@@ -24,13 +24,13 @@ import { merge } from 'lodash-unified'
 
 import { ElCase } from 'element-plus-x'
 
-// import Test from '../../docs/examples/emoji/basic.vue'
+import Test from '../../docs/examples/table-dialog/top.vue'
 // import Test from '../../docs/examples/table-page/page.vue'
 // import Test from '../../docs/examples/bubble/arrow.vue'
 // import Test from '../../docs/examples/f-json-schema/component.vue'
 // import Test from '../../docs/examples/editor/count.vue'
 // import Test from '../../docs/examples/config-provider-v2/local.vue'
-import Test from '../../docs/examples/video/list.vue'
+// import Test from '../../docs/examples/video/list.vue'
 // import Test from '../../docs/examples/video-viewer/basic.vue'
 // import Test from '../../docs/examples/table-page/boundary-value.vue'
 

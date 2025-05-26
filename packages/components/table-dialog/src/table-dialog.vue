@@ -159,7 +159,7 @@ const pagination = computed(() => {
     showTotal: false,
     background: false,
     layout: 'prev, pager, next, jumper',
-    size: 'small',
+    // size: 'small',
     ...(pagination as any),
   }
 })
