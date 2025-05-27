@@ -208,7 +208,7 @@ const schema = {
         resetText: '重置',
         submitProps: {
           icon: Search,
-          scrollIntoView: true,
+          scrollToError: true,
         },
         onSubmit,
         onReset,

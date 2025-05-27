@@ -32,7 +32,7 @@ export type SubmitFunction<T> = (
 
 export type FormSubmit<T> = (
   onSubmit?: (values: any) => Promise<T> | void,
-  scrollIntoView?: boolean
+  scrollToError?: boolean
 ) => Promise<T>
 
 const defaultComponents = {
@@ -106,7 +106,7 @@ export const JsonSchema = defineComponent({
       })
     })
 
-    const handleScrollIntoView = () => {
+    const handleScrollToError = () => {
       const container = containerRef.value
       if (container) {
         const elements = container.querySelectorAll('.fep-form-item-error-help')
@@ -124,10 +124,10 @@ export const JsonSchema = defineComponent({
     const submit = (originSubmit: SubmitFunction<any>) => {
       return <T>(
         onSubmit?: (values: any) => Promise<T> | void,
-        scrollIntoView?: boolean
+        scrollToError?: boolean
       ): Promise<T> => {
         return originSubmit(onSubmit)?.catch((e: any) => {
-          if (scrollIntoView) handleScrollIntoView()
+          if (scrollToError) handleScrollToError()
           throw e
         })
       }

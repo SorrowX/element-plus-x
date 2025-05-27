@@ -41,7 +41,7 @@ export const Submit = observer(
               if (onSubmit) {
                 ;(form?.submit as FormSubmit<any>)(
                   onSubmit,
-                  attrs.scrollIntoView as boolean
+                  attrs.scrollToError as boolean
                 )
                   .then(onSubmitSuccess as (e: any) => void)
                   .catch(onSubmitFailed as (e: any) => void)
