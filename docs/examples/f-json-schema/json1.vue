@@ -16,12 +16,6 @@
       :i-form-props="formProps"
       preview-text-placeholder="当没有值的时候会显示这个文本"
     />
-    <!-- <el-date-picker
-      v-model="value1"
-      type="date"
-      placeholder="Pick a day"
-      @change="handle"
-    /> -->
   </div>
 </template>
 
@@ -30,11 +24,6 @@ import { ref } from 'vue'
 import { onFormMount } from '@formily/core'
 import { Formily } from 'element-plus-x'
 const { JsonSchema } = Formily
-
-const value1 = ref('2024/07/23')
-const handle = (value) => {
-  console.log('Date changed:', value)
-}
 
 const switchValue = ref(false)
 const jsonSchemaRef = ref()
@@ -211,23 +200,26 @@ const schema = {
     //   enum: ['选项一', '选项二'],
     //   default: ['选项一', '选项二', 'sfsfd'],
     // },
-    // select2: {
-    //   type: 'array',
-    //   title: '虚拟选择器',
-    //   required: true,
-    //   enum: [
-    //     { label: '选项1', value: 1 },
-    //     { label: '选项2', value: 2 },
-    //   ],
-    //   'x-decorator': 'FormItem',
-    //   'x-component': 'SelectV2',
-    //   'x-component-props': {
-    //     multiple: true,
-    //     collapseTags: true,
-    //     collapseTagsTooltip: true,
-    //   },
-    //   default: [1],
-    // },
+    select2: {
+      type: 'array',
+      title: '虚拟选择器',
+      required: true,
+      enum: [
+        { label: '选项1', value: 1 },
+        { label: '选项2', value: 2 },
+      ],
+      'x-decorator': 'FormItem',
+      'x-component': 'SelectV2',
+      'x-component-props': {
+        multiple: true,
+        collapseTags: true,
+        collapseTagsTooltip: true,
+        onChange() {
+          console.log('select2 change')
+        },
+      },
+      default: [1],
+    },
     // tree: {
     //   required: true,
     //   type: 'string',

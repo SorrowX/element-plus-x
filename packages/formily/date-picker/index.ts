@@ -1,9 +1,9 @@
-import { defineComponent, h } from 'vue'
-import { connect, mapProps, mapReadPretty, useField } from '@formily/vue'
-import { isVoidField } from '@formily/core'
+import { connect, mapProps, mapReadPretty } from '@formily/vue'
 import { ElDatePicker } from 'element-plus'
 import { PreviewText } from '../preview-text'
+import { transformComponent2 } from '../__builtins__/shared'
 import { getDefaultFormat } from './util'
+import type { DatePickerProps } from './util'
 
 /**
  * 为什么不通过 transformComponent方法 转换 'update:modelValue' => change ？
@@ -14,27 +14,7 @@ import { getDefaultFormat } from './util'
  *    所以会出现change回调被执行2次的现象
  * 3. 解决方法: 把 ElDatePicker组件包一下，且手动处理 'onUpdate:modelValue' 更新field字段值，触发更新即可
  */
-const TransformElDatePicker = defineComponent({
-  name: 'TransformElDatePicker',
-  setup(props, { attrs, slots }) {
-    const fieldRef = useField()
-    return () => {
-      const field = fieldRef.value
-      const originUpdateModelValue: any = attrs['onUpdate:modelValue']
-      return h(
-        ElDatePicker,
-        {
-          ...attrs,
-          'onUpdate:modelValue': function (...args: any[]) {
-            if (!isVoidField(field)) field.onInput(...args)
-            originUpdateModelValue && originUpdateModelValue(...args)
-          },
-        },
-        slots
-      )
-    }
-  },
-})
+const TransformElDatePicker = transformComponent2<DatePickerProps>(ElDatePicker)
 
 export const DatePicker = connect(
   TransformElDatePicker,
