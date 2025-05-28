@@ -44,6 +44,7 @@ import { ElQrCode } from '@element-plus/components/qr-code'
 import { ElConfigProviderV2 } from '@element-plus/components/config-provider-v2'
 import { ElVideo } from '@element-plus/components/video'
 import { ElVideoViewer } from '@element-plus/components/video-viewer'
+import { ElPlainTabs } from '@element-plus/components/plain-tabs'
 
 import type { Plugin } from 'vue'
 
@@ -90,4 +91,5 @@ export default [
   ElConfigProviderV2,
   ElVideo,
   ElVideoViewer,
+  ElPlainTabs,
 ] as Plugin[]
