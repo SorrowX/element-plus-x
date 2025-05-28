@@ -1,5 +1,5 @@
 <template>
-  <el-plain-tabs v-model="currentTab" :options="tabs">
+  <el-plain-tabs v-model="currentTab" :options="tabs" type="card">
     <transition mode="out-in" name="el-fade-in-linear">
       <keep-alive>
         <component :is="currentComp" />

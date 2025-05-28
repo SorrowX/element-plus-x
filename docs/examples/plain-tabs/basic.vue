@@ -1,40 +1,36 @@
 <template>
   <el-plain-tabs v-model="currentTab" :options="tabs">
     <transition mode="out-in" name="el-fade-in-linear">
-      <component :is="currentComp" />
+      <template v-if="currentTab === 'tab1'">
+        <div>我是内容A</div>
+      </template>
+      <template v-else-if="currentTab === 'tab2'">
+        <div>我是内容B</div>
+      </template>
+      <template v-else>
+        <div>我是内容C</div>
+      </template>
     </transition>
   </el-plain-tabs>
 </template>
 
 <script lang="ts" setup>
-import { computed, h, ref } from 'vue'
-
-const CompA = () => h('div', {}, '我是组件A')
-const CompB = () => h('div', {}, '我是组件B')
-const CompC = () => h('div', {}, '我是组件C')
+import { ref } from 'vue'
 
 const currentTab = ref('tab1')
 
 const tabs = ref([
   {
-    label: '商品/营销素材',
+    label: '企业素材',
     value: 'tab1',
   },
   {
-    label: '快捷回复素材',
+    label: '个人素材',
     value: 'tab2',
   },
   {
-    label: '测试啊',
+    label: '免费素材',
     value: 'tab3',
   },
 ])
-
-const currentComp = computed(() =>
-  currentTab.value === 'tab1'
-    ? CompA
-    : currentTab.value === 'tab2'
-    ? CompB
-    : CompC
-)
 </script>

@@ -13,7 +13,7 @@
               ns.e('item'),
               item.value === modelValue ? ns.em('item', 'active') : '',
             ]"
-            @click="handleClick(item)"
+            @click="handleClick(item, index)"
           >
             <slot name="label">
               <div v-if="index !== 0" :class="ns.e('placeholder')" />
@@ -36,7 +36,7 @@
               ns.e('nav-list-item'),
               item.value === modelValue ? ns.em('nav-list-item', 'active') : '',
             ]"
-            @click="handleClick(item)"
+            @click="handleClick(item, index)"
           >
             <slot name="label">
               <el-text :type="item.value === modelValue ? 'primary' : ''">
@@ -49,13 +49,13 @@
       </template>
     </div>
     <div :class="ns.e('conent')">
-      <slot />
+      <slot v-bind="{ action: action, transitionName }" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { ElDivider, ElText, useNamespace } from 'element-plus'
 import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@element-plus/constants'
 import { plainTabsEmits, plainTabsProps } from './plain-tabs'
@@ -69,9 +69,27 @@ const props = defineProps(plainTabsProps)
 const emit = defineEmits(plainTabsEmits)
 const ns = useNamespace('plain-tabs')
 
+const action = ref<'next' | 'prev' | ''>('')
 const len = computed(() => (props.options ? props.options.length - 1 : 0))
+const transitionName = computed(() =>
+  action.value === 'next'
+    ? 'next-transition'
+    : action.value === 'prev'
+    ? 'prev-transition'
+    : ''
+)
 
-const handleClick = (item: PlainTabsOption) => {
+const handleClick = (item: PlainTabsOption, index: number) => {
+  if (item.disabled) {
+    return
+  }
+  const preIndex = (props.options ?? [])?.findIndex(
+    (_: PlainTabsOption) => _.value === props.modelValue
+  )
+  const currentIndex = index
+  if (preIndex !== currentIndex) {
+    action.value = currentIndex > preIndex ? 'next' : 'prev'
+  }
   emit(UPDATE_MODEL_EVENT, item.value)
   emit(CHANGE_EVENT, item.value)
 }

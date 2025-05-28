@@ -278,6 +278,11 @@
       {
         "link": "/preview-file",
         "text": "PreviewFile 文件预览"
+      },
+      {
+        "link": "/plain-tabs",
+        "text": "PlainTabs 标签页",
+        "promotion": "1.1.9"
       }
     ]
   }
