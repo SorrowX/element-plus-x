@@ -189,7 +189,7 @@ const schema = {
       'x-decorator': 'FormItem',
       'x-component': 'Select',
       'x-component-props': {
-        multiple: false,
+        multiple: true,
         clearable: true,
         displayType: 'text',
         separator: '、',
