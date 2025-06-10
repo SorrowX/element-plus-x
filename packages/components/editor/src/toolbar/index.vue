@@ -1,5 +1,6 @@
 <template>
   <div v-if="editor" :class="ns.b()">
+    <slot name="prepend" />
     <template v-for="key in toolbarList" :key="key">
       <template v-if="key === 'emoji'">
         <ElEmoji @change="insertImage">
@@ -20,6 +21,15 @@
       <template v-else-if="key === 'link'">
         <Link />
       </template>
+      <template v-else-if="key === 'divider'">
+        <ElDivider :class="ns.e('divider')" direction="vertical" />
+      </template>
+      <template v-else-if="key === 'heading'">
+        <Heading />
+      </template>
+      <template v-else-if="key === 'font-size'">
+        <FontSize />
+      </template>
       <template v-else>
         <Icon
           :active="isActive(key)"
@@ -29,12 +39,13 @@
         />
       </template>
     </template>
+    <slot name="append" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { useNamespace } from 'element-plus'
+import { ElDivider, useNamespace } from 'element-plus'
 import { definePropType, isFunction } from '@element-plus/utils'
 import { ElEmoji } from '@element-plus/components/emoji'
 import * as IconsVue from '@element-plus/components/icons-vue/index'
@@ -43,6 +54,8 @@ import Icon from './icon.vue'
 import Image from './image/index.vue'
 import Video from './video/index.vue'
 import Link from './link/index.vue'
+import Heading from './heading/index.vue'
+import FontSize from './font-size/index.vue'
 import type { IEditor, IToolbarConfigure, IToolbarList } from '../types'
 
 const {
@@ -69,7 +82,7 @@ const ns = useNamespace('editor-toolbar')
 
 defineOptions({
   name: 'ElEditorToolbar',
-  inheritAttrs: false,
+  // inheritAttrs: false,
 })
 
 const props = defineProps({
@@ -99,6 +112,7 @@ const props = defineProps({
       'video', // 视频
       'undo', // 撤销
       'redo', // 重做
+      'heading', // 字体大小
     ],
   },
   configure: {

@@ -64,6 +64,9 @@ importers:
       '@tiptap/extension-document':
         specifier: ^2.10.4
         version: 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
+      '@tiptap/extension-heading':
+        specifier: ^2.10.4
+        version: 2.10.4(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))
       '@tiptap/extension-image':
         specifier: ^2.10.4
         version: 2.11.2(@tiptap/core@2.10.4(@tiptap/pm@2.10.4))

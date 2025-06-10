@@ -37,10 +37,12 @@ import Underline from '@tiptap/extension-underline'
 import Image from '@tiptap/extension-image'
 import TextAlign from '@tiptap/extension-text-align'
 import Link from '@tiptap/extension-link'
+import TextStyle from '@tiptap/extension-text-style'
 import { UPDATE_MODEL_EVENT } from '@element-plus/constants'
 import Tag from './plugins/tag/index'
 import Video from './plugins/video/index'
 import Component from './plugins/component/index'
+import FontSize from './plugins/font-size/index'
 import { useSuggestion } from './mention/suggestion'
 import { editorEmits, editorProps } from './editor'
 import type { EditorOptions } from '@tiptap/core'
@@ -175,6 +177,8 @@ const options: Partial<EditorOptions> = {
       emptyEditorClass: 'tiptap-placeholder',
       placeholder: props.placeholder,
     }),
+    FontSize,
+    TextStyle,
     ...props.extensions,
   ],
   content: props.modelValue,

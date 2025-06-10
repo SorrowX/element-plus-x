@@ -2,10 +2,14 @@
 @use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
 @use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
 
+$font-color: '#656e82';
+$hover-bg-color: '#e1e3e6';
+$hover-color: getCssVar('color', 'primary');
+
 @include b(editor) {
   position: relative;
   min-height: 30px;
-  caret-color: getCssVar('color', 'primary');
+  caret-color: #{$hover-color};
 
   &--border {
     // border: 1px solid getCssVar('border-color');
@@ -101,6 +105,133 @@
   display: flex;
   flex-wrap: wrap;
   margin: 6px;
+  &__divider {
+    align-self: center;
+  }
+}
+
+@include b(editor-heading) {
+  .#{$namespace}-dropdown {
+    height: 100%;
+  }
+
+  &__item1,
+  &__item2,
+  &__item3,
+  &__item4,
+  &__item5,
+  &__item6 {
+    padding: 4px !important;
+    &:hover,
+    &:focus {
+      background-color: transparent !important;
+    }
+  }
+  &__item1 {
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 800;
+  }
+  &__item2 {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+  }
+  &__item3 {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 600;
+  }
+  &__item4 {
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 600;
+  }
+  &__item5 {
+    font-size: 14px;
+    line-height: 28px;
+    font-weight: 400;
+  }
+  &__item6 {
+    font-size: 14px;
+    line-height: 28px;
+    font-weight: 400;
+  }
+
+  &__trigger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #{$font-color};
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 5px;
+    border-radius: 4px;
+    padding: 0 8px;
+    &.active,
+    &:hover {
+      color: #{$hover-color};
+      background-color: #{$hover-bg-color};
+    }
+  }
+  &__item {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: 4px;
+    &:hover,
+    &.active {
+      background-color: getCssVar('dropdown-menuItem-hover-fill');
+    }
+  }
+}
+
+@include b(editor-fontsize) {
+  .#{$namespace}-dropdown {
+    height: 100%;
+  }
+
+  &__item-small,
+  &__item-middel,
+  &__item-large {
+    padding: 4px !important;
+    &:hover,
+    &:focus {
+      background-color: transparent !important;
+    }
+  }
+
+  &__trigger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #{$font-color};
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 5px;
+    border-radius: 4px;
+    padding: 0 8px;
+    &.active,
+    &:hover {
+      color: #{$hover-color};
+      background-color: #{$hover-bg-color};
+    }
+  }
+  &__item {
+    width: 110px;
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: 4px;
+    &:hover,
+    &.active {
+      color: #{$hover-color};
+      background-color: getCssVar('dropdown-menuItem-hover-fill');
+    }
+  }
 }
 
 @include b(editor-icon) {
@@ -111,10 +242,14 @@
   cursor: pointer;
   border-radius: 4px;
   margin-right: 5px;
-  &.active {
-    background-color: rgba(76, 136, 255, 0.15);
+  i {
+    color: #{$font-color};
+  }
+  &.active,
+  &:hover {
+    background-color: #{$hover-bg-color};
     i {
-      color: rgb(76, 136, 255);
+      color: #{$hover-color};
     }
   }
 }
