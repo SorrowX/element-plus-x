@@ -5,10 +5,17 @@
       <template v-if="key === 'emoji'">
         <ElEmoji @change="insertImage">
           <template #trigger>
-            <Icon
-              :icon="getValueByKey(key, 'icon')"
-              :size="getValueByKey(key, 'size')"
-            />
+            <el-tooltip
+              effect="light"
+              placement="top"
+              :disabled="!showTip"
+              :content="getCommandItem(key).tip"
+            >
+              <Icon
+                :icon="getValueByKey(key, 'icon')"
+                :size="getValueByKey(key, 'size')"
+              />
+            </el-tooltip>
           </template>
         </ElEmoji>
       </template>
@@ -31,12 +38,19 @@
         <FontSize />
       </template>
       <template v-else>
-        <Icon
-          :active="isActive(key)"
-          :icon="getValueByKey(key, 'icon')"
-          :size="getValueByKey(key, 'size')"
-          @click="handleClick(key)"
-        />
+        <el-tooltip
+          effect="light"
+          placement="top"
+          :disabled="!showTip"
+          :content="getCommandItem(key).tip"
+        >
+          <Icon
+            :active="isActive(key)"
+            :icon="getValueByKey(key, 'icon')"
+            :size="getValueByKey(key, 'size')"
+            @click="handleClick(key)"
+          />
+        </el-tooltip>
       </template>
     </template>
     <slot name="append" />
@@ -45,7 +59,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { ElDivider, useNamespace } from 'element-plus'
+import { ElDivider, ElTooltip, useLocale, useNamespace } from 'element-plus'
 import { definePropType, isFunction } from '@element-plus/utils'
 import { ElEmoji } from '@element-plus/components/emoji'
 import * as IconsVue from '@element-plus/components/icons-vue/index'
@@ -56,6 +70,7 @@ import Video from './video/index.vue'
 import Link from './link/index.vue'
 import Heading from './heading/index.vue'
 import FontSize from './font-size/index.vue'
+import type { Component, ComputedRef } from 'vue'
 import type { IEditor, IToolbarConfigure, IToolbarList } from '../types'
 
 const {
@@ -75,14 +90,13 @@ const {
   AlignRight,
   AlignCenter,
   AlignJustify,
-  Image: ImageIcon,
 } = IconsVue
 
 const ns = useNamespace('editor-toolbar')
+const { t } = useLocale()
 
 defineOptions({
   name: 'ElEditorToolbar',
-  // inheritAttrs: false,
 })
 
 const props = defineProps({
@@ -105,7 +119,7 @@ const props = defineProps({
       'horizontal', // 分割线
       'alignLeft', // 左对齐
       'alignRight', // 右对齐
-      'alignCenter', // 居中对象
+      'alignCenter', // 居中对齐
       'alignJustify', // 两端对齐
       'emoji', // 表情
       'image', // 图片
@@ -129,19 +143,36 @@ const toolBarContext = computed(() => {
   }
 })
 
+const showTip = computed(() => toolBarContext.value.configure.showTip)
+
 provideToolBarContext(toolBarContext)
 
 const getEditor = () => {
   return props.editor as any
 }
 
-const commands: any = {
+type ICommandOption = {
+  type: string
+  icon: Component
+  command: () => void
+  isActive: () => boolean
+  size: number
+  tip: string
+  [key: string]: any
+}
+
+type ICommands = {
+  [key: string]: ICommandOption
+}
+
+const commands: ComputedRef<ICommands> = computed(() => ({
   bold: {
     type: 'bold',
     icon: Bold,
     command: () => getEditor().chain().focus().toggleBold().run(),
     isActive: () => getEditor().isActive('bold'),
     size: 18,
+    tip: t('epx.editor.boldTip'),
   },
   italic: {
     type: 'italic',
@@ -149,6 +180,7 @@ const commands: any = {
     command: () => getEditor().chain().focus().toggleItalic().run(),
     isActive: () => getEditor().isActive('italic'),
     size: 18,
+    tip: t('epx.editor.italicTip'),
   },
   bullet: {
     type: 'bulletList',
@@ -156,6 +188,7 @@ const commands: any = {
     command: () => getEditor().chain().focus().toggleBulletList().run(),
     isActive: () => getEditor().isActive('bulletList'),
     size: 21,
+    tip: t('epx.editor.bulletTip'),
   },
   ordered: {
     type: 'orderedList',
@@ -163,6 +196,7 @@ const commands: any = {
     command: () => getEditor().chain().focus().toggleOrderedList().run(),
     isActive: () => getEditor().isActive('orderedList'),
     size: 21,
+    tip: t('epx.editor.orderedTip'),
   },
   blockquote: {
     type: 'blockquote',
@@ -170,6 +204,7 @@ const commands: any = {
     command: () => getEditor().chain().focus().toggleBlockquote().run(),
     isActive: () => getEditor().isActive('blockquote'),
     size: 18,
+    tip: t('epx.editor.blockquoteTip'),
   },
   code: {
     type: 'codeBlock',
@@ -177,6 +212,7 @@ const commands: any = {
     command: () => getEditor().chain().focus().toggleCodeBlock().run(),
     isActive: () => getEditor().isActive('codeBlock'),
     size: 21,
+    tip: t('epx.editor.codeTip'),
   },
   strike: {
     type: 'strike',
@@ -184,6 +220,7 @@ const commands: any = {
     command: () => getEditor().chain().focus().toggleStrike().run(),
     isActive: () => getEditor().isActive('strike'),
     size: 18,
+    tip: t('epx.editor.strikeTip'),
   },
   undo: {
     type: 'undo',
@@ -191,6 +228,7 @@ const commands: any = {
     command: () => getEditor().chain().focus().undo().run(),
     isActive: () => false,
     size: 18,
+    tip: t('epx.editor.undoTip'),
   },
   redo: {
     type: 'redo',
@@ -198,13 +236,15 @@ const commands: any = {
     command: () => getEditor().chain().focus().redo().run(),
     isActive: () => false,
     size: 18,
+    tip: t('epx.editor.redoTip'),
   },
   emoji: {
     type: 'emoji',
     icon: Emoji,
-    command: () => getEditor().chain().focus().redo().run(),
+    command: () => {},
     isActive: () => false,
     size: 21,
+    tip: t('epx.editor.emojiTip'),
   },
   underline: {
     type: 'underline',
@@ -212,6 +252,7 @@ const commands: any = {
     command: () => getEditor().chain().focus().toggleUnderline().run(),
     isActive: () => getEditor().isActive('underline'),
     size: 17,
+    tip: t('epx.editor.underlineTip'),
   },
   horizontal: {
     type: 'horizontal',
@@ -219,12 +260,13 @@ const commands: any = {
     command: () => getEditor().chain().focus().setHorizontalRule().run(),
     isActive: () => false,
     size: 21,
+    tip: t('epx.editor.horizontalTip'),
   },
   alignLeft: {
     type: 'alignLeft',
     icon: AlignLeft,
     command: () => {
-      if (commands.alignLeft.isActive()) {
+      if (commands.value.alignLeft.isActive()) {
         getEditor().chain().focus().unsetTextAlign().run()
       } else {
         getEditor().chain().focus().setTextAlign('left').run()
@@ -232,12 +274,13 @@ const commands: any = {
     },
     isActive: () => getEditor().isActive({ textAlign: 'left' }),
     size: 21,
+    tip: t('epx.editor.alignLeftTip'),
   },
   alignRight: {
     type: 'alignRight',
     icon: AlignRight,
     command: () => {
-      if (commands.alignRight.isActive()) {
+      if (commands.value.alignRight.isActive()) {
         getEditor().chain().focus().unsetTextAlign().run()
       } else {
         getEditor().chain().focus().setTextAlign('right').run()
@@ -245,12 +288,13 @@ const commands: any = {
     },
     isActive: () => getEditor().isActive({ textAlign: 'right' }),
     size: 21,
+    tip: t('epx.editor.alignRightTip'),
   },
   alignCenter: {
     type: 'alignCenter',
     icon: AlignCenter,
     command: () => {
-      if (commands.alignCenter.isActive()) {
+      if (commands.value.alignCenter.isActive()) {
         getEditor().chain().focus().unsetTextAlign().run()
       } else {
         getEditor().chain().focus().setTextAlign('center').run()
@@ -258,12 +302,13 @@ const commands: any = {
     },
     isActive: () => getEditor().isActive({ textAlign: 'center' }),
     size: 21,
+    tip: t('epx.editor.alignCenterTip'),
   },
   alignJustify: {
     type: 'alignJustify',
     icon: AlignJustify,
     command: () => {
-      if (commands.alignJustify.isActive()) {
+      if (commands.value.alignJustify.isActive()) {
         getEditor().chain().focus().unsetTextAlign().run()
       } else {
         getEditor().chain().focus().setTextAlign('justify').run()
@@ -271,28 +316,24 @@ const commands: any = {
     },
     isActive: () => getEditor().isActive({ textAlign: 'justify' }),
     size: 21,
+    tip: t('epx.editor.alignJustifyTip'),
   },
-  image: {
-    type: 'image',
-    icon: ImageIcon,
-    command: () => getEditor().chain().focus().undo().run(),
-    isActive: () => false,
-    size: 21,
-  },
-}
+}))
+
+const getCommandItem = (key: string) => commands.value[key]
 
 const handleClick = (key: string) => {
-  const item = commands[key]
+  const item = commands.value[key]
   item.command()
 }
 
 const isActive = (key: string) => {
-  const item = commands[key]
+  const item = commands.value[key]
   return item.isActive()
 }
 
 const getValueByKey = (key: string, prop: string) => {
-  const item = commands[key]
+  const item = commands.value[key]
   return isFunction(item[prop]) ? item[prop]() : item[prop]
 }
 

@@ -1,5 +1,12 @@
 <template>
-  <Icon :icon="Link" size="18" @click="() => (visible = true)" />
+  <el-tooltip
+    effect="light"
+    placement="top"
+    :disabled="!showTip"
+    :content="t('epx.editor.linkTip')"
+  >
+    <Icon :icon="Link" size="18" @click="() => (visible = true)" />
+  </el-tooltip>
 
   <el-dialog
     v-model="visible"
@@ -44,7 +51,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import {
   ElButton,
   ElDialog,
@@ -64,6 +71,7 @@ const { t } = useLocale()
 const visible = ref(false)
 
 const toolBarContext = useToolBarContext()
+const showTip = computed(() => toolBarContext.value.configure.showTip)
 const getEditor = () => toolBarContext.value.editor
 
 interface RuleForm {

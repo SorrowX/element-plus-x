@@ -115,6 +115,13 @@ $hover-color: getCssVar('color', 'primary');
     height: 100%;
   }
 
+  &--title {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &__item1,
   &__item2,
   &__item3,
@@ -190,6 +197,13 @@ $hover-color: getCssVar('color', 'primary');
 @include b(editor-fontsize) {
   .#{$namespace}-dropdown {
     height: 100%;
+  }
+
+  &--title {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__item-small,

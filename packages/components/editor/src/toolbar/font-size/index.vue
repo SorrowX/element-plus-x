@@ -2,8 +2,18 @@
   <span :class="[ns.b()]">
     <el-dropdown trigger="click">
       <div :class="[ns.e('trigger'), active ? 'active' : '']">
-        {{ title }}
+        <el-tooltip
+          effect="light"
+          placement="top"
+          :disabled="!showTip"
+          :content="t('epx.editor.fontSizeTip')"
+        >
+          <span :class="ns.m('title')">
+            {{ title }}
+          </span>
+        </el-tooltip>
       </div>
+
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item
@@ -44,7 +54,7 @@ defineOptions({
 })
 
 const toolBarContext = useToolBarContext()
-
+const showTip = computed(() => toolBarContext.value.configure.showTip)
 const getEditor = () => toolBarContext.value.editor
 
 const createToggleFontSize = (fontsize: string) => {

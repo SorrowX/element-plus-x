@@ -33,6 +33,7 @@ const html = ref()
 const editorRef = ref()
 
 const configure = {
+  showTip: true,
   image: {
     onChange(
       uploadFile: UploadFile,

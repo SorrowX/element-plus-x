@@ -1,7 +1,17 @@
 <template>
   <span :class="[ns.b()]">
     <el-dropdown trigger="click">
-      <Icon :icon="Video" size="21" color="#000000" />
+      <div>
+        <el-tooltip
+          effect="light"
+          placement="top"
+          :disabled="!showTip"
+          :content="t('epx.editor.videoTip')"
+        >
+          <Icon :icon="Video" size="21" color="#000000" />
+        </el-tooltip>
+      </div>
+
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item>
@@ -20,6 +30,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import {
   ElDropdown,
   ElDropdownItem,
@@ -45,6 +56,7 @@ defineOptions({
 })
 
 const toolBarContext = useToolBarContext()
+const showTip = computed(() => toolBarContext.value.configure.showTip)
 
 const getEditor = () => toolBarContext.value.editor
 const getConfigure = () =>

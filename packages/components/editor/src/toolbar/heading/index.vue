@@ -2,8 +2,18 @@
   <span :class="[ns.b()]">
     <el-dropdown trigger="click">
       <div :class="[ns.e('trigger'), isActive() ? 'active' : '']">
-        H <el-icon style="margin-left: 4px"><ArrowDown /></el-icon>
+        <el-tooltip
+          effect="light"
+          placement="top"
+          :disabled="!showTip"
+          :content="t('epx.editor.headingTip')"
+        >
+          <span :class="ns.m('title')">
+            H <el-icon style="margin-left: 4px"><ArrowDown /></el-icon>
+          </span>
+        </el-tooltip>
       </div>
+
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item
@@ -23,11 +33,13 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import {
   ElDropdown,
   ElDropdownItem,
   ElDropdownMenu,
   ElIcon,
+  useLocale,
   useNamespace,
 } from 'element-plus'
 import { ArrowDown } from '@element-plus/icons-vue'
@@ -35,6 +47,7 @@ import { ArrowDown } from '@element-plus/icons-vue'
 import { useToolBarContext } from '../../hooks'
 
 const ns = useNamespace('editor-heading')
+const { t } = useLocale()
 
 defineOptions({
   name: 'EditorHeading',
@@ -42,6 +55,7 @@ defineOptions({
 })
 
 const toolBarContext = useToolBarContext()
+const showTip = computed(() => toolBarContext.value.configure.showTip)
 
 const getEditor = () => toolBarContext.value.editor
 
@@ -52,13 +66,7 @@ type ICommandOption = {
 }
 
 type ICommands = {
-  h1: ICommandOption
-  h2: ICommandOption
-  h3: ICommandOption
-  h4: ICommandOption
-  h5: ICommandOption
-  h6: ICommandOption
-  [key: string]: any
+  [key: string]: ICommandOption
 }
 
 const commands: ICommands = {

@@ -59,6 +59,7 @@ export interface IToolbarVideo {
 export interface IToolbarConfigure {
   image: IToolbarImage
   video: IToolbarVideo
+  showTip?: boolean
 }
 
 export interface IToolBarContext {
