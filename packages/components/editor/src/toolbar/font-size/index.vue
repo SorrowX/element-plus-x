@@ -1,7 +1,7 @@
 <template>
   <span :class="[ns.b()]">
     <el-dropdown trigger="click">
-      <div :class="[ns.e('trigger'), isActive() ? 'active' : '']">
+      <div :class="[ns.e('trigger'), active ? 'active' : '']">
         {{ title }}
       </div>
       <template #dropdown>
@@ -92,11 +92,12 @@ const commands: ComputedRef<ICommands> = computed(() => ({
   },
 }))
 
-const isActive = () =>
+const active = computed(() =>
   Object.keys(commands.value).some((key) => {
     const item = commands.value[key]
     return item['isActive']()
   })
+)
 
 const getActive = (key: string) => commands.value[key]['isActive']()
 
