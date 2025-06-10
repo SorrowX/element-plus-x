@@ -118,6 +118,16 @@ editor/toolbar
 
 :::
 
+## 工具栏自定义
+
+使用`prepend` `append`来设置一些前置或者后置的额外内容
+
+:::demo
+
+editor/toolbar-slot
+
+:::
+
 ## 转换为纯文本(html2text)
 
 Tiptap 支持自定义标签来渲染任意 ui,但是调用实例 getText 方法并不会返回文本，下面这个案例是把自定义标签解析成对应的值传给后端
@@ -177,8 +187,8 @@ editor/editor
 
 ### ElEditorToolbar 属性
 
-| 属性名       | 说明       | 类型                                                                                                                                                                                                                                   | 默认值 |
-| ------------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| editor       | 编辑器实例 | ^[Object]`IEditor`                                                                                                                                                                                                                     | -      |
-| toolbar-list | 工具栏列表 | ^[Array]`'bold' \| 'strike' \| 'italic' \| 'underline' \| 'ordered' \| 'bullet' \| 'blockquote' \| 'code' \| 'horizontal' \| 'alignLeft' \| 'alignRight' \| 'alignCenter' \| 'alignJustify' \| 'emoji' \| 'image' \| 'undo' \| 'redo'` | -      |
-| configure    | 工具栏配置 | ^[Object]`IToolbarConfigure`                                                                                                                                                                                                           | -      |
+| 属性名       | 说明       | 类型                                                                                                                                                                                                                                                                         | 默认值 |
+| ------------ | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| editor       | 编辑器实例 | ^[Object]`IEditor`                                                                                                                                                                                                                                                           | -      |
+| toolbar-list | 工具栏列表 | ^[Array]`'bold' \| 'strike' \| 'italic' \| 'underline' \| 'ordered' \| 'bullet' \| 'blockquote' \| 'code' \| 'horizontal' \| 'alignLeft' \| 'alignRight' \| 'alignCenter' \| 'alignJustify' \| 'emoji' \| 'image' \| 'undo' \| 'redo'\| 'divider'\| 'font-size'\| 'heading'` | -      |
+| configure    | 工具栏配置 | ^[Object]`IToolbarConfigure`                                                                                                                                                                                                                                                 | -      |
