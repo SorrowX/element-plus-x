@@ -7,18 +7,13 @@
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item
-            v-for="level in 6"
+            v-for="(item, level) in Object.values(commands)"
             :key="level"
-            :class="ns.e(`item${level}`)"
-            @click="handleClick(`heading${level}`)"
+            :class="ns.e(`item${level + 1}`)"
+            @click="handleClick(item.type)"
           >
-            <div
-              :class="[
-                ns.e('item'),
-                getActive(`heading${level}`) ? 'active' : '',
-              ]"
-            >
-              Heading{{ level }}
+            <div :class="[ns.e('item'), getActive(item.type) ? 'active' : '']">
+              Heading{{ level + 1 }}
             </div>
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -50,39 +45,55 @@ const toolBarContext = useToolBarContext()
 
 const getEditor = () => toolBarContext.value.editor
 
-const commands: any = {
-  heading1: {
-    type: 'heading1',
+type ICommandOption = {
+  type: string
+  command: () => void
+  isActive: () => boolean
+}
+
+type ICommands = {
+  h1: ICommandOption
+  h2: ICommandOption
+  h3: ICommandOption
+  h4: ICommandOption
+  h5: ICommandOption
+  h6: ICommandOption
+  [key: string]: any
+}
+
+const commands: ICommands = {
+  h1: {
+    type: 'h1',
     command: () =>
       getEditor().chain().focus().toggleHeading({ level: 1 }).run(),
     isActive: () => getEditor().isActive('heading', { level: 1 }),
   },
-  heading2: {
-    type: 'heading2',
+  h2: {
+    type: 'h2',
     command: () =>
       getEditor().chain().focus().toggleHeading({ level: 2 }).run(),
     isActive: () => getEditor().isActive('heading', { level: 2 }),
   },
-  heading3: {
-    type: 'heading3',
+  h3: {
+    type: 'h3',
     command: () =>
       getEditor().chain().focus().toggleHeading({ level: 3 }).run(),
     isActive: () => getEditor().isActive('heading', { level: 3 }),
   },
-  heading4: {
-    type: 'heading4',
+  h4: {
+    type: 'h4',
     command: () =>
       getEditor().chain().focus().toggleHeading({ level: 4 }).run(),
     isActive: () => getEditor().isActive('heading', { level: 4 }),
   },
-  heading5: {
-    type: 'heading5',
+  h5: {
+    type: 'h5',
     command: () =>
       getEditor().chain().focus().toggleHeading({ level: 5 }).run(),
     isActive: () => getEditor().isActive('heading', { level: 5 }),
   },
-  heading6: {
-    type: 'heading6',
+  h6: {
+    type: 'h6',
     command: () =>
       getEditor().chain().focus().toggleHeading({ level: 6 }).run(),
     isActive: () => getEditor().isActive('heading', { level: 6 }),
@@ -96,9 +107,7 @@ const isActive = () => {
   })
 }
 
-const getActive = (key: string) => {
-  return commands[key]['isActive']()
-}
+const getActive = (key: string) => commands[key]['isActive']()
 
 const handleClick = (key: string) => {
   const item = commands[key]

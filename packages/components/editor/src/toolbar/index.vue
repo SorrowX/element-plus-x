@@ -112,7 +112,8 @@ const props = defineProps({
       'video', // 视频
       'undo', // 撤销
       'redo', // 重做
-      'heading', // 字体大小
+      'heading', // head大小
+      'font-size', // 字体大小
     ],
   },
   configure: {
