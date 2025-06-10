@@ -128,7 +128,7 @@ const configure = {
 
 <style lang="scss" scoped>
 .editor {
-  max-width: 550px;
+  max-width: 580px;
   &-wrapper {
     min-height: 200px;
     img {

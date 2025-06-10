@@ -34,6 +34,9 @@ export default {
       onlineVideo: 'online video',
       videoAddress: 'video URL',
       videoWidth: 'video width',
+      small: 'small',
+      middel: 'middle',
+      large: 'large',
     },
     virtualList: {
       loadingText: 'Loading...',

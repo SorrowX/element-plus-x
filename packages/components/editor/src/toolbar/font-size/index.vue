@@ -2,7 +2,7 @@
   <span :class="[ns.b()]">
     <el-dropdown trigger="click">
       <div :class="[ns.e('trigger'), isActive() ? 'active' : '']">
-        {{ getText() }}
+        {{ title }}
       </div>
       <template #dropdown>
         <el-dropdown-menu>
@@ -23,15 +23,19 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import {
   ElDropdown,
   ElDropdownItem,
   ElDropdownMenu,
+  useLocale,
   useNamespace,
 } from 'element-plus'
 
 import { useToolBarContext } from '../../hooks'
+import type { ComputedRef } from 'vue'
 
+const { t } = useLocale()
 const ns = useNamespace('editor-fontsize')
 
 defineOptions({
@@ -53,43 +57,57 @@ const createToggleFontSize = (fontsize: string) => {
   }
 }
 
-const commands: any = {
+type ICommandOption = {
+  type: string
+  text: string
+  command: () => void
+  isActive: () => boolean
+}
+
+type ICommands = {
+  small: ICommandOption
+  middel: ICommandOption
+  large: ICommandOption
+  [key: string]: any
+}
+
+const commands: ComputedRef<ICommands> = computed(() => ({
   small: {
     type: 'small',
-    text: '小',
+    text: t('epx.editor.small'),
     command: createToggleFontSize('12px'),
     isActive: () => getEditor().isActive('textStyle', { fontSize: '12px' }),
   },
   middel: {
     type: 'middel',
-    text: '中',
+    text: t('epx.editor.middel'),
     command: createToggleFontSize('14px'),
     isActive: () => getEditor().isActive('textStyle', { fontSize: '14px' }),
   },
   large: {
     type: 'large',
-    text: '大',
+    text: t('epx.editor.large'),
     command: createToggleFontSize('16px'),
     isActive: () => getEditor().isActive('textStyle', { fontSize: '16px' }),
   },
-}
+}))
 
 const isActive = () =>
-  Object.keys(commands).some((key) => {
-    const item = commands[key]
+  Object.keys(commands.value).some((key) => {
+    const item = commands.value[key]
     return item['isActive']()
   })
 
-const getActive = (key: string) => commands[key]['isActive']()
+const getActive = (key: string) => commands.value[key]['isActive']()
 
-const getText = () => {
-  const list = Object.values(commands)
-  const item = list.find((item: any) => item.isActive()) as any
+const title = computed(() => {
+  const list = Object.values(commands.value)
+  const item = list.find((item: ICommandOption) => item.isActive())
   return item ? `Aa ${item.text}` : 'Aa'
-}
+})
 
 const handleClick = (key: any) => {
-  const item = commands[key]
+  const item = commands.value[key]
   item.command()
 }
 </script>

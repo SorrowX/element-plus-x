@@ -34,6 +34,9 @@ export default {
       onlineVideo: '网络视频',
       videoAddress: '视频地址',
       videoWidth: '视频宽度',
+      small: '小',
+      middel: '中',
+      large: '大',
     },
     virtualList: {
       loadingText: '加载中...',
