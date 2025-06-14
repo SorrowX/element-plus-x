@@ -15,7 +15,7 @@
             ]"
             @click="handleClick(item, index)"
           >
-            <slot name="label">
+            <slot name="label" v-bind="{ ...item }">
               <div v-if="index !== 0" :class="ns.e('placeholder')" />
               <div :class="[ns.e('label')]">
                 {{ item.label }}
@@ -38,7 +38,7 @@
             ]"
             @click="handleClick(item, index)"
           >
-            <slot name="label">
+            <slot name="label" v-bind="{ ...item }">
               <el-text :type="item.value === modelValue ? 'primary' : ''">
                 {{ item.label }}
               </el-text>
