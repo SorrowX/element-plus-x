@@ -45,6 +45,7 @@ import { ElConfigProviderV2 } from '@element-plus/components/config-provider-v2'
 import { ElVideo } from '@element-plus/components/video'
 import { ElVideoViewer } from '@element-plus/components/video-viewer'
 import { ElPlainTabs } from '@element-plus/components/plain-tabs'
+import { ElLineTree } from '@element-plus/components/line-tree'
 
 import type { Plugin } from 'vue'
 
@@ -92,4 +93,5 @@ export default [
   ElVideo,
   ElVideoViewer,
   ElPlainTabs,
+  ElLineTree,
 ] as Plugin[]

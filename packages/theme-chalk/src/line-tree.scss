@@ -1,0 +1,90 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(line-tree) {
+  .#{$namespace}-tree-node__content {
+    height: 32px;
+  }
+  .#{$namespace}-tree-node__expand-icon {
+    display: none;
+  }
+  .#{$namespace}-tree-node__children {
+    position: relative;
+    margin-left: 26px;
+  }
+}
+
+@include b(line-tree-node) {
+  &__custom {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    padding: 0px 16px;
+    &-collapse {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 4px;
+    }
+    & .is-leaf {
+      color: transparent;
+      cursor: default;
+      visibility: hidden;
+    }
+    &-content {
+      margin-right: 4px;
+    }
+  }
+}
+
+:root {
+  --tv-Tree-node-padding-x: 16px; // padding间距值
+  --tv-Tree-node-showline-icon-size: 16px; // el-line-tree-node__custom-collapse的宽度
+  --tv-Tree-node-guide-line-width: 8px; // el-line-tree-node__custom-collapse宽度的一半
+  --tv-Tree-node-content-height: 32px; // el-line-tree-node__content的高度
+  --tv-Tree-node-guide-line-border-color: #f0f0f0;
+  --tv-Tree-node-guide-line-border-color: #f0f0f0;
+}
+.tree-node__content-indent {
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    left: calc(
+      var(--tv-Tree-node-padding-x) + var(--tv-Tree-node-showline-icon-size) / 2
+    );
+    top: 0;
+    width: var(--tv-Tree-node-guide-line-width);
+    height: calc(var(--tv-Tree-node-content-height) / 2);
+    border-left: 1px solid var(--tv-Tree-node-guide-line-border-color);
+    border-bottom: 1px solid var(--tv-Tree-node-guide-line-border-color);
+  }
+}
+
+.el-tree-node__children {
+  .el-tree-node:not(:first-of-type) {
+    .tree-node__content-indent {
+      &:before {
+        height: calc(var(--tv-Tree-node-content-height));
+        top: -50%;
+      }
+    }
+  }
+}
+
+.tree-node__child-indent {
+  position: absolute;
+  left: -26px;
+  &:before {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--tv-Tree-node-content-height) / 2);
+    left: calc(
+      var(--tv-Tree-node-padding-x) + var(--tv-Tree-node-showline-icon-size) / 2
+    );
+    height: 100%;
+    // border-left: 1px solid var(--tv-Tree-node-guide-line-border-color);
+    border-left: 1px solid red;
+  }
+}
