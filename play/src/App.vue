@@ -33,7 +33,7 @@ import { ElCase } from 'element-plus-x'
 // import Test from '../../docs/examples/video/list.vue'
 // import Test from '../../docs/examples/video-viewer/basic.vue'
 // import Test from '../../docs/examples/table-page/boundary-value.vue'
-import Test from '../../docs/examples/editor/editor.vue'
+import Test from '../../docs/examples/icons-vue/list.vue'
 
 import { computed, ref } from 'vue'
 import ElZhCn from 'element-plus/dist/locale/zh-cn.mjs'
