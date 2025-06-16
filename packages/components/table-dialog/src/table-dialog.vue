@@ -156,9 +156,9 @@ const pagination = computed(() => {
   const pagination = props.pagination
   return {
     showRecord: false,
-    showTotal: false,
+    showTotal: true,
     background: false,
-    layout: 'prev, pager, next, jumper',
+    layout: 'sizes, prev, pager, next',
     // size: 'small',
     ...(pagination as any),
   }

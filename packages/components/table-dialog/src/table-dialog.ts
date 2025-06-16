@@ -21,11 +21,11 @@ export const tableDialogProps = buildProps({
   },
   width: {
     type: Number,
-    default: 900,
+    default: 1000,
   },
   height: {
     type: Number,
-    default: 500,
+    default: 520,
   },
   type: {
     type: String,
