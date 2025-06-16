@@ -1,9 +1,17 @@
 <template>
   <el-line-tree
     style="max-width: 600px"
-    :data="data"
+    :data="options"
     @node-click="handleNodeClick"
-  />
+  >
+    <template #default="{ data }">
+      <!-- <div>
+        <p>{{ data.label }}</p>
+        <div>hi</div>
+      </div> -->
+      <el-input v-model="data.value" style="margin: 4px 0" />
+    </template>
+  </el-line-tree>
 </template>
 
 <script lang="ts" setup>
@@ -16,7 +24,7 @@ const handleNodeClick = (data: Tree) => {
   console.log(data)
 }
 
-const data: Tree[] = [
+const options: Tree[] = [
   {
     label: 'Level one 1',
     children: [

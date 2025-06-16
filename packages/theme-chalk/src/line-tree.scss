@@ -3,19 +3,58 @@
 @use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
 
 @include b(line-tree) {
-  .#{$namespace}-tree-node__content {
-    height: 32px;
+  .#{$namespace}-tree-node {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      bottom: 0;
+      width: 2px;
+      right: auto;
+      left: -9px;
+      border-left: 1px solid green;
+    }
   }
+  .#{$namespace}-tree-node:has([level='1']) {
+    & > .#{$namespace}-tree-node__content {
+      &::before {
+        content: none;
+      }
+    }
+    &::after {
+      content: none;
+    }
+  }
+
+  .#{$namespace}-tree-node__content {
+    min-height: 32px;
+    height: auto;
+    position: relative;
+    padding-left: 0px !important;
+    &::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      bottom: 50%;
+      width: 8px;
+      left: -9px;
+      border-left: 1px solid red;
+      border-bottom: 1px solid red;
+      // border-bottom-left-radius: 6px;
+    }
+  }
+
   .#{$namespace}-tree-node__expand-icon {
     display: none;
   }
   .#{$namespace}-tree-node__children {
     position: relative;
-    margin-left: 16px;
-  }
-  .#{$namespace}-tree-node[data-key='1'] {
-    & > .#{$namespace}-tree-node__children {
-      margin-left: 0px;
+    padding-left: 16px;
+    .#{$namespace}-tree-node:last-child {
+      &::after {
+        content: none;
+      }
     }
   }
 }
@@ -34,44 +73,10 @@
     & .is-leaf {
       color: transparent;
       cursor: default;
-      visibility: hidden;
+      display: none;
     }
     &-content {
       margin-right: 4px;
     }
-  }
-}
-
-:root {
-  --tv-Tree-node-padding-x: 16px; // padding间距值
-  --tv-Tree-node-showline-icon-size: 16px; // el-line-tree-node__custom-collapse的宽度
-  --tv-Tree-node-guide-line-width: 8px; // el-line-tree-node__custom-collapse宽度的一半
-  --tv-Tree-node-content-height: 32px; // el-line-tree-node__content的高度
-  --tv-Tree-node-guide-line-border-color: #f0f0f0;
-  --tv-Tree-node-guide-line-border-color: #f0f0f0;
-}
-.tree-node__content-indent {
-  position: relative;
-  &:before {
-    content: '';
-    position: absolute;
-    width: 50%;
-    height: calc(50% - 1px);
-    left: 50%;
-    border-left: 1px solid red;
-    border-bottom: 1px solid red;
-  }
-}
-
-.tree-node__child-indent {
-  position: absolute;
-  &:before {
-    content: '';
-    position: absolute;
-    width: 50%;
-    height: calc(100% - 32px);
-    left: 50%;
-    border-left: 1px solid green;
-    // border-bottom: 1px solid green;
   }
 }
