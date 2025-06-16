@@ -1,7 +1,7 @@
 <template>
   <el-tree-v2 :class="ns.b()" :data="data" :props="defaultProps">
     <template #default="{ node, data }">
-      <div :class="nodeNs.e('custom')">
+      <div :class="nodeNs.e('custom')" :level="node.level">
         <div :class="nodeNs.e('custom-collapse')">
           <el-icon
             :class="[
@@ -28,10 +28,10 @@
 
 <script lang="ts" setup>
 import { useNamespace } from 'element-plus'
-import { lineTreeEmits, lineTreeProps } from './line-tree'
 import * as IconsVue from '@element-plus/components/icons-vue'
-const { Expand, PutAway } = IconsVue
+import { lineTreeEmits, lineTreeProps } from './line-tree'
 import { ElTreeV2 } from './tree'
+const { Expand, PutAway } = IconsVue
 
 defineOptions({
   name: 'ElLineTree',
@@ -40,7 +40,7 @@ const ns = useNamespace('line-tree')
 const nodeNs = useNamespace('line-tree-node')
 
 defineProps(lineTreeProps)
-const emit = defineEmits(lineTreeEmits)
+defineEmits(lineTreeEmits)
 
 const handleExpandIconClick = (node: any) => {
   if (node.isLeaf) return
