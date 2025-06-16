@@ -5,7 +5,6 @@ import {
   reactive,
   ref,
   vShow,
-  watch,
   withDirectives,
 } from 'vue'
 import { ElEmpty, useNamespace, vLoading } from 'element-plus'
@@ -112,18 +111,7 @@ export default defineComponent({
       // query()
     }
 
-    // 解决EpPagination组件，阶梯选择比较大的值时会触发handleSizeChange和handleCurrentChange回调，所以会调用2次的问题
-    let tick: any = null
-    watch(
-      () => [state[currentPageKey.value], state[pageSizeKey.value]],
-      () => {
-        if (tick) clearTimeout(tick)
-        tick = setTimeout(() => {
-          query()
-          tick = null
-        }, 0)
-      }
-    )
+    const handleChange = () => query()
 
     // public api
     const request = ({ ...args }) => {
@@ -233,13 +221,14 @@ export default defineComponent({
       const paginationVnode = h(
         EpPagination,
         {
+          onSizeChange: handleSizeChange,
+          onCurrentChange: handleCurrentChange,
+          onChange: handleChange,
           ...pagination.value,
           ref: footerWrapperRef,
           currentPage: state[currentPageKey.value],
           pageSize: state[pageSizeKey.value],
           total: state[totalKey.value],
-          onSizeChange: handleSizeChange,
-          onCurrentChange: handleCurrentChange,
         },
         slots
       )
