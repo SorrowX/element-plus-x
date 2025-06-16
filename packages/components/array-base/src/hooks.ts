@@ -39,7 +39,8 @@ export const useKey = () => {
       if (!keyMap[index]) {
         keyMap[index] = uid()
       }
-      return `${keyMap[index]}-${index}`
+      // return `${keyMap[index]}-${index}`
+      return `${keyMap[index]}`
     },
   }
 }
