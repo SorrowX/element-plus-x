@@ -5,6 +5,7 @@ import {
   reactive,
   ref,
   vShow,
+  watch,
   withDirectives,
 } from 'vue'
 import { ElEmpty, useNamespace, vLoading } from 'element-plus'
@@ -104,12 +105,25 @@ export default defineComponent({
 
     const handleSizeChange = (pageSize: number) => {
       state[pageSizeKey.value] = pageSize
-      query()
+      // query()
     }
     const handleCurrentChange = (currentPage: number) => {
       state[currentPageKey.value] = currentPage
-      query()
+      // query()
     }
+
+    // 解决EpPagination组件，阶梯选择比较大的值时会触发handleSizeChange和handleCurrentChange回调，所以会调用2次的问题
+    let tick: any = null
+    watch(
+      () => [state[currentPageKey.value], state[pageSizeKey.value]],
+      () => {
+        if (tick) clearTimeout(tick)
+        tick = setTimeout(() => {
+          query()
+          tick = null
+        }, 0)
+      }
+    )
 
     // public api
     const request = ({ ...args }) => {
