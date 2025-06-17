@@ -1,74 +1,85 @@
 @use 'element-plus/theme-chalk/src/common/var.scss' as *;
 @use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
 @use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+@use './common/var.scss' as *;
 
 @include b(line-tree) {
+  @include set-component-css-var('line-tree', $line-tree);
+
   .#{$namespace}-tree-node {
     position: relative;
-    &::after {
+    // 竖线
+    &:after {
       content: '';
       position: absolute;
-      top: -3px;
+      top: 0;
       bottom: 0;
-      width: 2px;
-      right: auto;
-      left: -9px;
-      border-left: 1px solid green;
+      left: calc(getCssVar('line-tree-collapse-width') / -2 - 1px);
+      border-left: 1px solid getCssVar('line-tree-line-color');
     }
   }
-  .#{$namespace}-tree-node:has([level='1']) {
-    & > .#{$namespace}-tree-node__content {
-      &::before {
-        content: none;
-      }
-    }
-    &::after {
-      content: none;
-    }
-  }
-
+  // 折线
   .#{$namespace}-tree-node__content {
     min-height: 32px;
     height: auto;
     position: relative;
     padding-left: 0px !important;
-    &::before {
+    &:before {
       content: '';
       position: absolute;
-      top: -3px;
-      bottom: 50%;
-      width: 8px;
-      left: -9px;
-      border-left: 1px solid red;
-      border-bottom: 1px solid red;
-      // border-bottom-left-radius: 6px;
+      top: 0px;
+      // bottom: 50%;
+      bottom: calc(100% - getCssVar('line-tree-collapse-height'));
+      width: calc(getCssVar('line-tree-collapse-width') / 2);
+      left: calc(getCssVar('line-tree-collapse-width') / -2 - 1px);
+      border-left: 1px solid getCssVar('line-tree-line-color');
+      border-bottom: 1px solid getCssVar('line-tree-line-color');
+      border-bottom-left-radius: getCssVar('line-tree-line-radius');
     }
   }
-
-  .#{$namespace}-tree-node__expand-icon {
-    display: none;
+  .#{$namespace}-tree-node:has([level='1']) {
+    & > .#{$namespace}-tree-node__content {
+      &:before {
+        content: none;
+      }
+    }
+    &:after {
+      content: none;
+    }
   }
   .#{$namespace}-tree-node__children {
     position: relative;
-    padding-left: 16px;
+    padding-left: getCssVar('line-tree-collapse-width');
     .#{$namespace}-tree-node:last-child {
-      &::after {
+      &:after {
         content: none;
       }
     }
   }
-}
+  .#{$namespace}-tree-node__expand-icon {
+    display: none;
+  }
 
-@include b(line-tree-node) {
+  // node 移入或聚焦背景色去掉
+  .#{$namespace}-tree-node:focus > .#{$namespace}-tree-node__content,
+  .#{$namespace}-tree-node__content:hover,
+  .#{$namespace}-tree-node:focus {
+    background-color: transparent;
+  }
+
   &__custom {
     user-select: none;
     display: flex;
-    align-items: center;
+    // align-items: center;
+    align-items: flex-start;
+    width: 100%;
+    margin: 6px 0;
     &-collapse {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 4px;
+      position: relative;
+      flex: none;
     }
     & .is-leaf {
       color: transparent;
@@ -76,7 +87,27 @@
       display: none;
     }
     &-content {
-      margin-right: 4px;
+      margin: 0px 6px;
+      width: 100%;
+      flex: 1;
+      line-height: 16px;
+    }
+  }
+  &--content-line {
+    &:before {
+      content: '';
+      position: absolute;
+      top: calc(getCssVar('line-tree-collapse-height'));
+      bottom: 0px;
+      left: calc(getCssVar('line-tree-collapse-width') / 2 - 1px);
+      border-left: 1px solid getCssVar('line-tree-line-color');
+    }
+  }
+  .#{$namespace}-tree-node__content:has(.is-leaf) {
+    & > .#{$namespace}-line-tree--content-line {
+      &::before {
+        content: none;
+      }
     }
   }
 }

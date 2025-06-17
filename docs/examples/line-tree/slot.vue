@@ -1,105 +1,124 @@
 <template>
   <el-line-tree
-    style="max-width: 600px"
     :data="options"
-    @node-click="handleNodeClick"
+    line-radius="4px"
+    collapse-width="20px"
+    default-expand-all
+    show-content-line
+    style="max-width: 600px"
   >
+    <template #collapse="{ data }">
+      <el-image
+        :src="data.img"
+        style="width: 20px; height: 20px; border-radius: 6px"
+      />
+    </template>
     <template #default="{ data }">
-      <!-- <div>
-        <p>{{ data.label }}</p>
-        <div>hi</div>
-      </div> -->
-      <el-input v-model="data.value" style="margin: 4px 0" />
+      <div class="line-tree__node-header">
+        <div>
+          {{ data.label }}: <span> {{ data.time }}s</span>
+        </div>
+        <el-icon style="margin-left: 6px" @click="data.visible = !data.visible">
+          <component :is="data.visible ? CaretTop : CaretBottom" />
+        </el-icon>
+      </div>
+      <el-collapse-transition>
+        <div
+          v-if="data.visible"
+          style="height: 80px"
+          class="line-tree__node-content"
+        >
+          {{ data.content }}
+        </div>
+      </el-collapse-transition>
     </template>
   </el-line-tree>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
+import { CaretBottom, CaretTop } from '@element-plus/icons-vue'
+import type { Ref } from 'vue'
+
 interface Tree {
   label: string
   children?: Tree[]
+  [prop: string]: any
 }
 
-const handleNodeClick = (data: Tree) => {
-  console.log(data)
-}
-
-const options: Tree[] = [
+const options: Ref<Tree[]> = ref([
   {
-    label: 'Level one 1',
+    label: '接收消息',
+    img: 'https://oss.real-bot.cn/web/om/workflow/receiving_message.png',
+    time: 0,
+    content: '接收消息-1',
+    visible: false,
+  },
+  {
+    label: '工作流调用',
+    time: 5,
+    img: 'https://oss.real-bot.cn/web/om/workflow/workflow_call.png',
+    content: '工作流调用-1',
+    visible: false,
     children: [
       {
-        label: 'Level two 1-1',
+        label: '开始',
+        img: 'https://oss.real-bot.cn/web/om/workflow/logic-start.png',
+        time: 0,
+        content: '开始-1',
+        visible: false,
         children: [
           {
-            label: 'Level three 1-1-1',
+            label: '意图识别',
+            img: 'https://oss.real-bot.cn/web/om/workflow/sop_intent_recognition.png',
+            time: 1,
+            content: '意图识别-1',
+            visible: false,
             children: [
               {
-                label: 'aaaa',
-                children: [
-                  {
-                    label: 'bbbb',
-                  },
-                ],
-              },
-              {
-                label: 'ccccc',
-                children: [
-                  {
-                    label: 'dddd',
-                  },
-                ],
+                label: '输出',
+                img: 'https://oss.real-bot.cn/web/om/workflow/output.png',
+                time: 0,
+                content: '输出-1',
+                visible: false,
               },
             ],
           },
         ],
       },
-      {
-        label: 'Level two 1-2',
-      },
     ],
   },
   {
-    label: 'Level one 2',
+    label: '汇总响应',
+    img: 'https://oss.real-bot.cn/web/om/workflow/response_summary.png',
+    time: 0,
+    content: '汇总响应-1',
+    visible: false,
     children: [
       {
-        label: 'Level two 2-1',
-        children: [
-          {
-            label: 'Level three 2-1-1',
-          },
-        ],
-      },
-      {
-        label: 'Level two 2-2',
-        children: [
-          {
-            label: 'Level three 2-2-1',
-          },
-        ],
+        label: '输出',
+        img: 'https://oss.real-bot.cn/web/om/workflow/output.png',
+        time: 0,
+        content: '输出-2',
+        visible: false,
       },
     ],
   },
-  {
-    label: 'Level one 3',
-    children: [
-      {
-        label: 'Level two 3-1',
-        children: [
-          {
-            label: 'Level three 3-1-1',
-          },
-        ],
-      },
-      {
-        label: 'Level two 3-2',
-        children: [
-          {
-            label: 'Level three 3-2-1',
-          },
-        ],
-      },
-    ],
-  },
-]
+])
 </script>
+
+<style lang="scss" scoped>
+.line-tree__node-header {
+  display: flex;
+  align-items: center;
+}
+.line-tree__node-content {
+  padding: 12px;
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 6px;
+  cursor: auto;
+  background-color: var(--el-color-primary-light-9);
+  color: var(--el-text-color-primary);
+}
+</style>

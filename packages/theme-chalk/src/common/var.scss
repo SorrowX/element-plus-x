@@ -78,3 +78,16 @@ $split: map.merge(
   ),
   $split
 );
+
+// line-tree
+// css3 var in packages/theme-chalk/src/line-tree.scss
+$line-tree: () !default;
+$line-tree: map.merge(
+  (
+    'collapse-width': 16px,
+    'collapse-height': 16px,
+    'line-color': rgba(158, 158, 158, 1),
+    'line-radius': 0px,
+  ),
+  $line-tree
+);
