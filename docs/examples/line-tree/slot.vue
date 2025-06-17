@@ -5,12 +5,13 @@
     collapse-width="20px"
     default-expand-all
     show-content-line
+    :expand-on-click-node="false"
     style="max-width: 600px"
   >
     <template #collapse="{ data }">
       <el-image
         :src="data.img"
-        style="width: 20px; height: 20px; border-radius: 6px"
+        style="width: 20px; height: 20px; border-radius: 6px; z-index: 1"
       />
     </template>
     <template #default="{ data }">
@@ -18,7 +19,10 @@
         <div>
           {{ data.label }}: <span> {{ data.time }}s</span>
         </div>
-        <el-icon style="margin-left: 6px" @click="data.visible = !data.visible">
+        <el-icon
+          style="margin-left: 6px"
+          @click.stop="data.visible = !data.visible"
+        >
           <component :is="data.visible ? CaretTop : CaretBottom" />
         </el-icon>
       </div>
@@ -111,11 +115,13 @@ const options: Ref<Tree[]> = ref([
 .line-tree__node-header {
   display: flex;
   align-items: center;
+  line-height: 20px;
+  margin: 6px;
 }
 .line-tree__node-content {
   padding: 12px;
   width: 100%;
-  margin-top: 12px;
+  margin: 12px 0;
   border-radius: 6px;
   cursor: auto;
   background-color: var(--el-color-primary-light-9);

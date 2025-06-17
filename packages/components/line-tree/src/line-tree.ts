@@ -23,6 +23,10 @@ export const lineTreeProps = buildProps({
     type: definePropType<boolean>(Boolean),
     default: false,
   },
+  expandOnClickNode: {
+    type: definePropType<boolean>(Boolean),
+    default: true,
+  },
 } as const)
 export type LineTreeProps = ExtractPropTypes<typeof lineTreeProps>
 

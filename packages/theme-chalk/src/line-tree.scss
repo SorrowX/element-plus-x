@@ -24,17 +24,18 @@
     height: auto;
     position: relative;
     padding-left: 0px !important;
+    align-items: center;
     &:before {
       content: '';
       position: absolute;
       top: 0px;
-      // bottom: 50%;
       bottom: calc(100% - getCssVar('line-tree-collapse-height'));
       width: calc(getCssVar('line-tree-collapse-width') / 2);
       left: calc(getCssVar('line-tree-collapse-width') / -2 - 1px);
       border-left: 1px solid getCssVar('line-tree-line-color');
       border-bottom: 1px solid getCssVar('line-tree-line-color');
       border-bottom-left-radius: getCssVar('line-tree-line-radius');
+      pointer-events: none;
     }
   }
   .#{$namespace}-tree-node:has([level='1']) {
@@ -56,8 +57,26 @@
       }
     }
   }
-  .#{$namespace}-tree-node__expand-icon {
-    display: none;
+
+  // el-tree-node__content下的子内容(箭头展开收起，复选，loading)
+  .#{$namespace}-tree-node__content {
+    // 箭头展开收起
+    & > .#{$namespace}-tree-node__expand-icon {
+      display: none;
+      order: 5;
+    }
+    // 复选
+    & > label {
+      order: 2;
+      margin-left: 8px;
+      margin-right: 0px;
+    }
+    // 加载
+    & > .#{$namespace}-tree-node__loading-icon {
+      order: 3;
+      margin-left: 8px;
+      margin-right: 0px;
+    }
   }
 
   // node 移入或聚焦背景色去掉
@@ -67,33 +86,32 @@
     background-color: transparent;
   }
 
-  &__custom {
-    user-select: none;
+  // 折叠
+  &-node__collapse {
+    order: 1;
     display: flex;
-    // align-items: center;
-    align-items: flex-start;
-    width: 100%;
-    margin: 6px 0;
-    &-collapse {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      flex: none;
-    }
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex: none;
+    margin: 6px 0; // todo
+    cursor: pointer;
     & .is-leaf {
       color: transparent;
       cursor: default;
       display: none;
     }
-    &-content {
-      margin: 0px 6px;
-      width: 100%;
-      flex: 1;
-      line-height: 16px;
-    }
   }
-  &--content-line {
+
+  // 自定义内容
+  &-node__content {
+    order: 4;
+    margin: 0px 8px;
+    width: 100%;
+    flex: 1;
+    line-height: 16px;
+  }
+  &-node--content-line {
     &:before {
       content: '';
       position: absolute;
@@ -101,13 +119,19 @@
       bottom: 0px;
       left: calc(getCssVar('line-tree-collapse-width') / 2 - 1px);
       border-left: 1px solid getCssVar('line-tree-line-color');
+      pointer-events: none;
     }
   }
   .#{$namespace}-tree-node__content:has(.is-leaf) {
-    & > .#{$namespace}-line-tree--content-line {
+    & > .#{$namespace}-line-tree-node--content-line {
       &::before {
         content: none;
       }
     }
+  }
+  .#{$namespace}-tree-node__content:has(
+      .#{$namespace}-line-tree-node--content-line
+    ) {
+    align-items: flex-start;
   }
 }

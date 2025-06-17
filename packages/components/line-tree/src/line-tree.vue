@@ -1,33 +1,41 @@
 <template>
-  <el-tree :class="ns.b()" :style="treeStyle" v-bind="$attrs">
+  <el-tree
+    :class="ns.b()"
+    :style="treeStyle"
+    v-bind="$attrs"
+    :expand-on-click-node="expandOnClickNode"
+  >
     <template #default="{ node, data }">
       <div
-        :class="[ns.e('custom'), showContentLine ? ns.m('content-line') : '']"
-        :level="node.level"
+        :class="nsNode.e('collapse')"
+        @click.stop="handleExpandIconClick(node)"
       >
-        <div
-          :class="ns.e('custom-collapse')"
-          @click.stop="handleExpandIconClick(node)"
-        >
-          <slot name="collapse" v-bind="{ node, data }">
-            <el-icon
-              :class="[
-                ns.is('leaf', node.isLeaf),
-                {
-                  expanded: !node.isLeaf,
-                },
-              ]"
-              size="16"
-            >
-              <component :is="node.expanded ? Expand : PutAway" />
-            </el-icon>
-          </slot>
-        </div>
-        <div :class="ns.e('custom-content')">
-          <slot v-bind="{ node, data }">
-            <span>{{ data.label }}</span>
-          </slot>
-        </div>
+        <slot name="collapse" v-bind="{ node, data }">
+          <el-icon
+            :class="[
+              nsNode.is('leaf', node.isLeaf),
+              {
+                expanded: !node.isLeaf,
+              },
+            ]"
+            size="16"
+          >
+            <component :is="node.expanded ? Expand : PutAway" />
+          </el-icon>
+        </slot>
+      </div>
+
+      <div
+        :class="[
+          nsNode.e('content'),
+          showContentLine ? nsNode.m('content-line') : '',
+        ]"
+        :level="node.level"
+        @click.stop
+      >
+        <slot v-bind="{ node, data }">
+          <span>{{ node.label }}</span>
+        </slot>
       </div>
     </template>
     <template #empty>
@@ -48,6 +56,7 @@ defineOptions({
   inheritAttrs: false,
 })
 const ns = useNamespace('line-tree')
+const nsNode = useNamespace('line-tree-node')
 
 const props = defineProps(lineTreeProps)
 defineEmits(lineTreeEmits)
@@ -62,8 +71,7 @@ const treeStyle = computed(() => {
 })
 
 const handleExpandIconClick = (node: any) => {
-  console.log(111, node)
-  if (node.isLeaf) return
+  if (node.isLeaf || !props.expandOnClickNode) return
   node.expanded ? node.collapse() : node.expand()
 }
 </script>
