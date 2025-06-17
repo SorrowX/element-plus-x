@@ -1,6 +1,5 @@
 import { buildProps, definePropType } from '@element-plus/utils'
-
-import type { ExtractPropTypes } from 'vue'
+import type { Component, ExtractPropTypes } from 'vue'
 
 export const lineTreeProps = buildProps({
   // 设置线的弧度，默认直角
@@ -16,7 +15,7 @@ export const lineTreeProps = buildProps({
   // 当自定义collapse内容时，需要设置collapse的宽度值，为了调整连线的位置
   collapseWidth: {
     type: definePropType<string>(String),
-    default: '16px',
+    default: '15px',
   },
   // 自定义content后，子内容的高度可能变化，添加一条线会更好
   showContentLine: {
@@ -26,6 +25,12 @@ export const lineTreeProps = buildProps({
   expandOnClickNode: {
     type: definePropType<boolean>(Boolean),
     default: true,
+  },
+  icon: {
+    type: definePropType<string | Component>([String, Object]),
+  },
+  iconProps: {
+    type: definePropType<Record<string, any>>(Object),
   },
 } as const)
 export type LineTreeProps = ExtractPropTypes<typeof lineTreeProps>

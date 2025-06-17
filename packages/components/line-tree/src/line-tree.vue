@@ -18,9 +18,10 @@
                 expanded: !node.isLeaf,
               },
             ]"
-            size="16"
+            size="15"
+            v-bind="iconProps"
           >
-            <component :is="node.expanded ? Expand : PutAway" />
+            <component :is="icon ? icon : node.expanded ? Expand : PutAway" />
           </el-icon>
         </slot>
       </div>
@@ -31,7 +32,6 @@
           showContentLine ? nsNode.m('content-line') : '',
         ]"
         :level="node.level"
-        @click.stop
       >
         <slot v-bind="{ node, data }">
           <span>{{ node.label }}</span>

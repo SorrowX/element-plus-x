@@ -35,7 +35,6 @@
       border-left: 1px solid getCssVar('line-tree-line-color');
       border-bottom: 1px solid getCssVar('line-tree-line-color');
       border-bottom-left-radius: getCssVar('line-tree-line-radius');
-      pointer-events: none;
     }
   }
   .#{$namespace}-tree-node:has([level='1']) {
@@ -94,8 +93,9 @@
     justify-content: center;
     position: relative;
     flex: none;
-    margin: 6px 0; // todo
+    margin: 6px 0;
     cursor: pointer;
+    user-select: none;
     & .is-leaf {
       color: transparent;
       cursor: default;
@@ -110,6 +110,7 @@
     width: 100%;
     flex: 1;
     line-height: 16px;
+    user-select: none;
   }
   &-node--content-line {
     &:before {
@@ -119,7 +120,6 @@
       bottom: 0px;
       left: calc(getCssVar('line-tree-collapse-width') / 2 - 1px);
       border-left: 1px solid getCssVar('line-tree-line-color');
-      pointer-events: none;
     }
   }
   .#{$namespace}-tree-node__content:has(.is-leaf) {

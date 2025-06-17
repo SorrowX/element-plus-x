@@ -3,11 +3,16 @@
     style="max-width: 600px"
     :data="data"
     :show-checkbox="false"
+    line-radius="4px"
+    line-color="red"
+    :icon="Edit"
+    :icon-props="{ color: 'red' }"
     @node-click="handleNodeClick"
   />
 </template>
 
 <script lang="ts" setup>
+import { Edit } from '@element-plus/icons-vue'
 interface Tree {
   label: string
   children?: Tree[]

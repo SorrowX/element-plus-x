@@ -1,13 +1,26 @@
 <template>
   <el-line-tree
     style="max-width: 600px"
-    :data="data"
-    :show-checkbox="false"
+    :data="options"
+    line-radius="4px"
+    collapse-width="14px"
     @node-click="handleNodeClick"
-  />
+  >
+    <template #collapse="{ node }">
+      <el-icon
+        size="14"
+        :class="node.isLeaf ? 'is-leaf' : ''"
+        color="var(--el-tree-expand-icon-color)"
+      >
+        <component :is="node.expanded ? CaretBottom : CaretRight" />
+      </el-icon>
+    </template>
+  </el-line-tree>
 </template>
 
 <script lang="ts" setup>
+import { CaretBottom, CaretRight } from '@element-plus/icons-vue'
+
 interface Tree {
   label: string
   children?: Tree[]
@@ -17,7 +30,7 @@ const handleNodeClick = (data: Tree) => {
   console.log(data)
 }
 
-const data: Tree[] = [
+const options: Tree[] = [
   {
     label: 'Level one 1',
     children: [
