@@ -34,7 +34,7 @@ import { ElCase } from 'element-plus-x'
 // import Test from '../../docs/examples/video-viewer/basic.vue'
 // import Test from '../../docs/examples/table-page/boundary-value.vue'
 // import Test from '../../docs/examples/icons-vue/list.vue'
-import Test from '../../docs/examples/line-tree/collapse.vue'
+import Test from '../../docs/examples/line-tree/load.vue'
 // import Test from '../../docs/examples/line-tree/basic.vue'
 // import Test from '../../docs/examples/array-items/render.vue'
 

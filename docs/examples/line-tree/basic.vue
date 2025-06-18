@@ -2,7 +2,6 @@
   <el-line-tree
     style="max-width: 600px"
     :data="data"
-    :show-checkbox="false"
     @node-click="handleNodeClick"
   />
 </template>

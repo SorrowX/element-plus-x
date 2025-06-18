@@ -5,6 +5,8 @@
     :load="loadNode"
     lazy
     show-checkbox
+    line-color="var(--el-border-color)"
+    :icon-props="{ color: 'var(--el-border-color)' }"
     @check-change="handleCheckChange"
   />
 </template>

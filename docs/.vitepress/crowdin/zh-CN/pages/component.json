@@ -198,6 +198,11 @@
       {
         "link": "/draggable-table",
         "text": "DraggableTable 可拖拽表格"
+      },
+      {
+        "link": "/line-tree",
+        "text": "LineTree 带线的树",
+        "promotion": "1.1.10"
       }
     ]
   },
