@@ -48,7 +48,7 @@ const openText = computed(() => props.openText ?? t('epx.collapse.openText'))
 const closeText = computed(() => props.closeText ?? t('epx.collapse.closeText'))
 
 const warpperClass = computed(() =>
-  !props.modelValue ? 'expanded' : 'collapse'
+  !props.modelValue ? 'is-expanded' : 'is-collapse'
 )
 
 const warpperStyle = computed(() => {

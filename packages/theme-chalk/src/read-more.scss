@@ -10,10 +10,10 @@
   }
   &__wrapper {
     position: relative;
-    &.collapse {
+    &.is-collapse {
       overflow: hidden;
     }
-    &.expanded {
+    &.is-expanded {
       overflow: hidden;
     }
   }
