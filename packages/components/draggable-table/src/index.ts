@@ -18,7 +18,7 @@ const TableBody = {
     const data = store.states.data.value || []
 
     const tableIns = this.context
-    const { draggableProps } = tableIns.props
+    const { draggableProps, disabled } = tableIns.props
 
     const options = {
       animation: 300,
@@ -37,16 +37,21 @@ const TableBody = {
       },
     }
 
-    return h(
-      UseSortable,
-      { options, tag: 'tbody', tabIndex: -1, modelValue: [] },
-      {
-        default: () =>
-          data.reduce((acc: VNode[], row: any) => {
-            return acc.concat(wrappedRowRender(row, acc.length))
-          }, []),
-      }
-    )
+    const renderChildren = () =>
+      data.reduce((acc: VNode[], row: any) => {
+        return acc.concat(wrappedRowRender(row, acc.length))
+      }, [])
+
+    // disabled如果用于options选项中，只会在初始化中生效
+    return disabled
+      ? h('tbody', { tabIndex: -1 }, [renderChildren()])
+      : h(
+          UseSortable,
+          { options, tag: 'tbody', tabIndex: -1, modelValue: [] },
+          {
+            default: () => renderChildren(),
+          }
+        )
   },
 }
 

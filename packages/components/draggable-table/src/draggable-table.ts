@@ -7,6 +7,10 @@ export const draggableTableProps = buildProps({
     type: Object,
     default: () => ({}),
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 } as const)
 export type DraggableTableProps = ExtractPropTypes<typeof draggableTableProps>
 

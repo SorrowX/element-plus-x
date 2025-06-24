@@ -27,13 +27,23 @@ draggable-table/item
 
 :::
 
+## 禁用
+
+使用`disabled`属性来控制 table 是否可以拖动
+:::demo
+
+draggable-table/disabled
+
+:::
+
 ## API
 
 ### DraggableTable Props
 
-| 属性名          | 说明                                                               | 类型   | 默认值 |
-| --------------- | ------------------------------------------------------------------ | ------ | ------ |
-| draggable-props | [Sortable.options](https://github.com/SortableJS/Sortable#options) | object | -      |
+| 属性名          | 说明                                                               | 类型    | 默认值 |
+| --------------- | ------------------------------------------------------------------ | ------- | ------ |
+| draggable-props | [Sortable.options](https://github.com/SortableJS/Sortable#options) | object  | -      |
+| disabled        | table 是否禁用拖动                                                 | boolean | false  |
 
 ### DraggableTable Events
 
