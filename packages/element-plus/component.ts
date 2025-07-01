@@ -46,6 +46,7 @@ import { ElVideo } from '@element-plus/components/video'
 import { ElVideoViewer } from '@element-plus/components/video-viewer'
 import { ElPlainTabs } from '@element-plus/components/plain-tabs'
 import { ElLineTree } from '@element-plus/components/line-tree'
+import { ElResizable } from '@element-plus/components/resizable'
 
 import type { Plugin } from 'vue'
 
@@ -94,4 +95,5 @@ export default [
   ElVideoViewer,
   ElPlainTabs,
   ElLineTree,
+  ElResizable,
 ] as Plugin[]
