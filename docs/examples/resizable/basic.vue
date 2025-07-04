@@ -9,12 +9,13 @@
   >
     <ElResizable
       :is-active="true"
-      :w="200"
+      :w="w"
       :h="200"
       :parent-w="500"
       :parent-h="500"
       :is-draggable="true"
       parent-limitation
+      content-class="contentClass"
       @resizing="resize"
       @dragging="resize"
     >
@@ -33,8 +34,11 @@ export default {
       height: 0,
       top: 0,
       left: 0,
+      w: 200,
     }
   },
+
+  mounted() {},
 
   methods: {
     resize(newRect) {
@@ -46,3 +50,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.contentClass {
+  display: flex;
+}
+</style>

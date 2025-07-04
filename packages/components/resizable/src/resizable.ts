@@ -1,5 +1,4 @@
 import { buildProps, definePropType } from '@element-plus/utils'
-
 import type { ExtractPropTypes } from 'vue'
 
 export const resizableProps = buildProps({
