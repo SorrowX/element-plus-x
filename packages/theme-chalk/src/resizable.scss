@@ -3,7 +3,40 @@
 @use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
 
 @include b(resizable) {
-  // code here
+  position: absolute;
+  box-sizing: border-box;
+  &__content {
+    position: relative;
+  }
+  &__stick {
+    box-sizing: border-box;
+    position: absolute;
+    font-size: 1px;
+    background: #ffffff;
+    border: 1px solid #6c6c6c;
+    box-shadow: 0 0 2px #bbb;
+    &-tl,
+    &-br {
+      cursor: nwse-resize;
+    }
+    &-tm,
+    &-bm {
+      left: 50%;
+      cursor: ns-resize;
+    }
+    &-tr,
+    &-bl {
+      cursor: nesw-resize;
+    }
+    &-ml,
+    &-mr {
+      top: 50%;
+      cursor: ew-resize;
+    }
+    &.not-resizable {
+      display: none;
+    }
+  }
 }
 
 .vdr {

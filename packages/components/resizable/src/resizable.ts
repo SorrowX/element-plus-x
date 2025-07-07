@@ -184,5 +184,9 @@ export type ResizableProps = ExtractPropTypes<typeof resizableProps>
 
 export const resizableEmits = {
   clicked: (evt: MouseEvent) => !!evt,
+  resizing: (rect: any) => !!rect,
+  dragging: (rect: any) => !!rect,
+  dragstop: (rect: any) => !!rect,
+  resizestop: (rect: any) => !!rect,
 }
 export type ResizableEmits = typeof resizableEmits

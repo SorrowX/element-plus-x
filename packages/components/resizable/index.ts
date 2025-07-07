@@ -1,6 +1,6 @@
 import { withInstall } from '@element-plus/utils'
-import Resizable from './src/resizable.vue'
-// import Resizable from './src/index.vue'
+// import Resizable from './src/resizable.vue'
+import Resizable from './src/index.vue'
 import type { SFCWithInstall } from '@element-plus/utils'
 
 export const ElResizable: SFCWithInstall<typeof Resizable> =
