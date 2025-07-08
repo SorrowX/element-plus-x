@@ -14,7 +14,7 @@
       :parent-w="500"
       :parent-h="500"
       :is-draggable="true"
-      parent-limitation
+      :parent-limitation="true"
       content-class="contentClass"
       @resizing="resize"
       @dragging="resize"

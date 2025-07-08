@@ -1,5 +1,16 @@
 import { computed, onMounted, reactive, ref } from 'vue'
 import { ResizableProps } from './resizable'
+import { styleMapping } from './types'
+import type {
+  IBeforeMoveState,
+  IDelta,
+  ILimits,
+  IMoveType,
+  IState,
+  IStick,
+  IXKey,
+  IYKey,
+} from './types'
 import type { Ref } from 'vue'
 
 export const useResizable = (
@@ -8,46 +19,33 @@ export const useResizable = (
   props: ResizableProps,
   emit: any
 ) => {
-  const styleMapping: any = {
-    x: {
-      l: 'left',
-      m: 'marginLeft',
-      r: 'right',
-    },
-    y: {
-      t: 'top',
-      m: 'marginTop',
-      b: 'bottom',
-    },
-  }
-
   const active = ref(false)
   const bodyDrag = ref(false)
   const stickDrag = ref(false)
 
-  const data: any = reactive({
-    fixAspectRatio: null,
-    active: null,
-    zIndex: null,
-    parentWidth: null, //  target父元素的宽度
-    parentHeight: null, //  target父元素的高度
-    left: null, // target元素的left值
-    top: null, // target元素的top值
-    right: null, // target元素的right值
-    bottom: null, // target元素的bottom值
+  const state = reactive<IState>({
+    parentWidth: 0, //  target父元素的宽度
+    parentHeight: 0, //  target父元素的高度
+    zIndex: 1, // target元素的层级
+    left: 0, // target元素的left值
+    top: 0, // target元素的top值
+    right: 0, // target元素的right值
+    bottom: 0, // target元素的bottom值
     aspectFactor: 1,
   })
 
-  const dimensionsBeforeMove: any = reactive({
-    pointerX: 0,
-    pointerY: 0,
-    x: 0,
-    y: 0,
-    w: 0,
-    h: 0,
+  const beforeMoveState = reactive<IBeforeMoveState>({
+    pointerX: 0, // 鼠标按下的x坐标
+    pointerY: 0, // 鼠标按下的y坐标
+    left: 0, // 同state.left
+    right: 0, // 同state.right
+    top: 0, // 同state.top
+    bottom: 0, // 同state.bottom
+    width: 0, // container元素的宽度
+    height: 0, // container元素的高度
   })
 
-  const limits = reactive({
+  const limits = reactive<ILimits>({
     left: { min: null, max: null },
     right: { min: null, max: null },
     top: { min: null, max: null },
@@ -55,10 +53,10 @@ export const useResizable = (
   })
 
   // container元素的宽度
-  const width = computed(() => data.parentWidth - data.left - data.right)
+  const width = computed(() => state.parentWidth - state.left - state.right)
 
   // container元素的高度
-  const height = computed(() => data.parentHeight - data.top - data.bottom)
+  const height = computed(() => state.parentHeight - state.top - state.bottom)
 
   // container元素的尺寸样式
   const sizeStyle = computed(() => {
@@ -71,52 +69,58 @@ export const useResizable = (
   // target元素的位置
   const positionStyle = computed(() => {
     return {
-      top: `${data.top}px`,
-      left: `${data.left}px`,
-      zIndex: data.zIndex,
+      top: `${state.top}px`,
+      left: `${state.left}px`,
+      zIndex: state.zIndex,
     }
   })
 
   // target元素的位置信息及container元素的尺寸大小
   const rect = computed(() => {
     return {
-      left: Math.round(data.left),
-      top: Math.round(data.top),
+      left: Math.round(state.left),
+      top: Math.round(state.top),
       width: Math.round(width.value),
       height: Math.round(height.value),
     }
   })
 
   const vdrStick = computed(() => {
-    return (stick: string) => {
+    return (stick: IStick) => {
       const { stickSize, parentScaleX, parentScaleY } = props
       const stickStyle: any = {
         width: `${stickSize / parentScaleX}px`,
         height: `${stickSize / parentScaleY}px`,
       }
-      stickStyle[styleMapping.y[stick[0]]] = `${
+      stickStyle[styleMapping.y[stick[0] as IYKey]] = `${
         stickSize / parentScaleX / -2
       }px`
-      stickStyle[styleMapping.x[stick[1]]] = `${
+      stickStyle[styleMapping.x[stick[1] as IXKey]] = `${
         stickSize / parentScaleX / -2
       }px`
       return stickStyle
     }
   })
 
-  const saveDimensionsBeforeMove = ({ pointerX, pointerY }: any) => {
-    dimensionsBeforeMove.pointerX = pointerX
-    dimensionsBeforeMove.pointerY = pointerY
+  const saveBeforeMoveState = ({
+    pointerX,
+    pointerY,
+  }: {
+    pointerX: number
+    pointerY: number
+  }) => {
+    beforeMoveState.pointerX = pointerX
+    beforeMoveState.pointerY = pointerY
 
-    dimensionsBeforeMove.left = data.left
-    dimensionsBeforeMove.right = data.right
-    dimensionsBeforeMove.top = data.top
-    dimensionsBeforeMove.bottom = data.bottom
+    beforeMoveState.left = state.left
+    beforeMoveState.right = state.right
+    beforeMoveState.top = state.top
+    beforeMoveState.bottom = state.bottom
 
-    dimensionsBeforeMove.width = width.value
-    dimensionsBeforeMove.height = height.value
+    beforeMoveState.width = width.value
+    beforeMoveState.height = height.value
 
-    data.aspectFactor = width.value / height.value
+    state.aspectFactor = width.value / height.value
   }
 
   const sideCorrectionByLimit = (limit: any, current: string) => {
@@ -149,18 +153,18 @@ export const useResizable = (
 
   const rectCorrectionByAspectRatio = (rect: any, currentStick: string) => {
     let { newLeft, newRight, newTop, newBottom } = rect
-    const { parentWidth, parentHeight, aspectFactor } = data
+    const { parentWidth, parentHeight, aspectFactor } = state
 
     let newWidth = parentWidth - newLeft - newRight
     let newHeight = parentHeight - newTop - newBottom
 
     if (currentStick[1] === 'm') {
-      const deltaHeight = newHeight - dimensionsBeforeMove.height
+      const deltaHeight = newHeight - beforeMoveState.height
 
       newLeft -= (deltaHeight * aspectFactor) / 2
       newRight -= (deltaHeight * aspectFactor) / 2
     } else if (currentStick[0] === 'm') {
-      const deltaWidth = newWidth - dimensionsBeforeMove.width
+      const deltaWidth = newWidth - beforeMoveState.width
 
       newTop -= deltaWidth / aspectFactor / 2
       newBottom -= deltaWidth / aspectFactor / 2
@@ -185,17 +189,17 @@ export const useResizable = (
     return { newLeft, newRight, newTop, newBottom }
   }
 
-  const stickMove = (delta: any, currentStick: string) => {
+  const stickMove = (delta: IDelta, currentStick: IStick) => {
     const { gridY, gridX, snapToGrid } = props
-    const { parentHeight, parentWidth } = data
+    const { parentHeight, parentWidth } = state
 
-    let newTop = dimensionsBeforeMove.top
-    let newBottom = dimensionsBeforeMove.bottom
-    let newLeft = dimensionsBeforeMove.left
-    let newRight = dimensionsBeforeMove.right
+    let newTop = beforeMoveState.top
+    let newBottom = beforeMoveState.bottom
+    let newLeft = beforeMoveState.left
+    let newRight = beforeMoveState.right
     switch (currentStick[0]) {
       case 'b':
-        newBottom = dimensionsBeforeMove.bottom + delta.y
+        newBottom = beforeMoveState.bottom + delta.y
         if (snapToGrid) {
           newBottom =
             parentHeight -
@@ -203,7 +207,7 @@ export const useResizable = (
         }
         break
       case 't':
-        newTop = dimensionsBeforeMove.top - delta.y
+        newTop = beforeMoveState.top - delta.y
         if (snapToGrid) {
           newTop = Math.round(newTop / gridY) * gridY
         }
@@ -214,14 +218,14 @@ export const useResizable = (
 
     switch (currentStick[1]) {
       case 'r':
-        newRight = dimensionsBeforeMove.right + delta.x
+        newRight = beforeMoveState.right + delta.x
         if (snapToGrid) {
           newRight =
             parentWidth - Math.round((parentWidth - newRight) / gridX) * gridX
         }
         break
       case 'l':
-        newLeft = dimensionsBeforeMove.left - delta.x
+        newLeft = beforeMoveState.left - delta.x
         if (snapToGrid) {
           newLeft = Math.round(newLeft / gridX) * gridX
         }
@@ -249,16 +253,16 @@ export const useResizable = (
       ))
     }
 
-    data.left = newLeft
-    data.right = newRight
-    data.top = newTop
-    data.bottom = newBottom
+    state.left = newLeft
+    state.right = newRight
+    state.top = newTop
+    state.bottom = newBottom
 
     emit('resizing', rect.value)
   }
 
   const calcDragLimitation = () => {
-    const { parentWidth, parentHeight } = data
+    const { parentWidth, parentHeight } = state
 
     return {
       left: { min: 0, max: parentWidth - width.value },
@@ -268,55 +272,38 @@ export const useResizable = (
     }
   }
 
-  const bodyDown = (ev: any) => {
-    const { button } = ev
+  const targetDown = (evt: PointerEvent) => {
+    const { button } = evt
 
-    if (!props.preventActiveBehavior) {
-      active.value = true
-    }
-
-    if (button && button !== 0) {
+    if (!props.isDraggable || (button && button !== 0)) {
       return
     }
 
-    emit('clicked', ev)
+    evt.stopPropagation?.()
+    evt.preventDefault?.()
 
-    if (!active.value) {
-      return
-    }
+    bodyDrag.value = true
 
-    if (typeof ev.stopPropagation !== 'undefined') {
-      ev.stopPropagation()
-    }
+    const pointerX = evt.pageX
+    const pointerY = evt.pageY
 
-    if (typeof ev.preventDefault !== 'undefined') {
-      ev.preventDefault()
-    }
-
-    if (props.isDraggable) {
-      bodyDrag.value = true
-    }
-
-    const pointerX =
-      typeof ev.pageX !== 'undefined' ? ev.pageX : ev.touches[0].pageX
-    const pointerY =
-      typeof ev.pageY !== 'undefined' ? ev.pageY : ev.touches[0].pageY
-
-    saveDimensionsBeforeMove({ pointerX, pointerY })
+    saveBeforeMoveState({ pointerX, pointerY })
 
     if (props.parentLimitation) {
       Object.assign(limits, calcDragLimitation())
     }
+
+    emit('clicked', evt)
   }
 
-  const bodyMove = (delta: any) => {
-    const { parentWidth, parentHeight } = data
+  const targetMove = (delta: IDelta) => {
+    const { parentWidth, parentHeight } = state
     const { gridX, gridY } = props
 
-    let newTop = dimensionsBeforeMove.top - delta.y
-    let newBottom = dimensionsBeforeMove.bottom + delta.y
-    let newLeft = dimensionsBeforeMove.left - delta.x
-    let newRight = dimensionsBeforeMove.right + delta.x
+    let newTop = beforeMoveState.top - delta.y
+    let newBottom = beforeMoveState.bottom + delta.y
+    let newLeft = beforeMoveState.left - delta.x
+    let newRight = beforeMoveState.right + delta.x
 
     if (props.snapToGrid) {
       let alignTop = true
@@ -360,27 +347,21 @@ export const useResizable = (
     }
 
     ;({
-      newLeft: data.left,
-      newRight: data.right,
-      newTop: data.top,
-      newBottom: data.bottom,
+      newLeft: state.left,
+      newRight: state.right,
+      newTop: state.top,
+      newBottom: state.bottom,
     } = rectCorrectionByLimit({ newLeft, newRight, newTop, newBottom }))
 
     emit('dragging', rect.value)
   }
 
-  const bodyUp = () => {
+  const targetUp = () => {
     bodyDrag.value = false
-    emit('dragging', rect.value)
-    emit('dragstop', rect.value)
 
-    Object.assign(dimensionsBeforeMove, {
+    Object.assign(beforeMoveState, {
       pointerX: 0,
       pointerY: 0,
-      x: 0,
-      y: 0,
-      w: 0,
-      h: 0,
     })
 
     Object.assign(limits, {
@@ -389,26 +370,26 @@ export const useResizable = (
       top: { min: null, max: null },
       bottom: { min: null, max: null },
     })
+
+    emit('dragstop', rect.value)
   }
 
-  const move = (ev: any, type: string = 'stickDrag', currentStick?: string) => {
-    ev.stopPropagation()
+  const move = (evt: PointerEvent, type: IMoveType, currentStick?: IStick) => {
+    evt.stopPropagation?.()
 
-    const pageX =
-      typeof ev.pageX !== 'undefined' ? ev.pageX : ev.touches[0].pageX
-    const pageY =
-      typeof ev.pageY !== 'undefined' ? ev.pageY : ev.touches[0].pageY
+    const pageX = evt.pageX
+    const pageY = evt.pageY
 
-    const delta = {
-      x: (dimensionsBeforeMove.pointerX - pageX) / props.parentScaleX,
-      y: (dimensionsBeforeMove.pointerY - pageY) / props.parentScaleY,
+    const delta: IDelta = {
+      x: (beforeMoveState.pointerX - pageX) / props.parentScaleX,
+      y: (beforeMoveState.pointerY - pageY) / props.parentScaleY,
     }
 
-    if (type === 'stickDrag') {
-      stickMove(delta, currentStick as string)
+    if (type === 'stickMove') {
+      stickMove(delta, currentStick as IStick)
     }
 
-    if (type === 'bodyDrag') {
+    if (type === 'targetMove') {
       if (props.axis === 'x') {
         delta.y = 0
       } else if (props.axis === 'y') {
@@ -416,12 +397,12 @@ export const useResizable = (
       } else if (props.axis === 'none') {
         return
       }
-      bodyMove(delta)
+      targetMove(delta)
     }
   }
 
-  const calcResizeLimits = () => {
-    const { aspectFactor, bottom, top, left, right } = data
+  const calcResizeLimits = (stick: IStick) => {
+    const { aspectFactor, bottom, top, left, right } = state
     let { minh: minHeight, minw: minWidth } = props
 
     const parentLim = props.parentLimitation ? 0 : null
@@ -434,7 +415,7 @@ export const useResizable = (
       }
     }
 
-    const limits = {
+    const limits: any = {
       left: { min: parentLim, max: left + (width.value - minWidth) },
       right: { min: parentLim, max: right + (width.value - minWidth) },
       top: { min: parentLim, max: top + (height.value - minHeight) },
@@ -461,7 +442,7 @@ export const useResizable = (
         },
       }
 
-      if (this.currentStick[0] === 'm') {
+      if (stick[0] === 'm') {
         limits.left = {
           min: Math.max(limits.left.min, aspectLimits.left.min),
           max: Math.min(limits.left.max, aspectLimits.left.max),
@@ -470,7 +451,7 @@ export const useResizable = (
           min: Math.max(limits.right.min, aspectLimits.right.min),
           max: Math.min(limits.right.max, aspectLimits.right.max),
         }
-      } else if (this.currentStick[1] === 'm') {
+      } else if (stick[1] === 'm') {
         limits.top = {
           min: Math.max(limits.top.min, aspectLimits.top.min),
           max: Math.min(limits.top.max, aspectLimits.top.max),
@@ -485,32 +466,27 @@ export const useResizable = (
     return limits
   }
 
-  const stickDown = (stick: string, ev: any, force = false) => {
+  const stickDown = (evt: PointerEvent, stick: IStick, force = false) => {
     if (!props.isResizable && !force) {
       return
     }
 
     stickDrag.value = true
 
-    const pointerX =
-      typeof ev.pageX !== 'undefined' ? ev.pageX : ev.touches[0].pageX
-    const pointerY =
-      typeof ev.pageY !== 'undefined' ? ev.pageY : ev.touches[0].pageY
+    const pointerX = evt.pageX
+    const pointerY = evt.pageY
 
-    saveDimensionsBeforeMove({ pointerX, pointerY })
+    saveBeforeMoveState({ pointerX, pointerY })
 
-    Object.assign(limits, calcResizeLimits())
+    Object.assign(limits, calcResizeLimits(stick))
   }
 
   const stickUp = () => {
     stickDrag.value = false
-    Object.assign(dimensionsBeforeMove, {
+
+    Object.assign(beforeMoveState, {
       pointerX: 0,
       pointerY: 0,
-      x: 0,
-      y: 0,
-      w: 0,
-      h: 0,
     })
 
     Object.assign(limits, {
@@ -520,32 +496,33 @@ export const useResizable = (
       bottom: { min: null, max: null },
     })
 
-    emit('resizing', rect.value)
     emit('resizestop', rect.value)
   }
 
   onMounted(() => {
     const parentElement = target.value?.parentNode as HTMLElement
     const containerElement = container.value as HTMLElement
-    data.parentWidth = props.parentW ? props.parentW : parentElement.clientWidth
-    data.parentHeight = props.parentH
+    state.parentWidth = props.parentW
+      ? props.parentW
+      : parentElement.clientWidth
+    state.parentHeight = props.parentH
       ? props.parentH
       : parentElement.clientHeight
 
-    data.left = props.x
-    data.top = props.y
-    data.right =
-      data.parentWidth -
+    state.left = props.x
+    state.top = props.y
+    state.right =
+      state.parentWidth -
       ((props.w === 'auto'
         ? containerElement.scrollWidth
         : props.w) as number) -
-      data.left
-    data.bottom =
-      data.parentHeight -
+      state.left
+    state.bottom =
+      state.parentHeight -
       ((props.h === 'auto'
         ? containerElement.scrollHeight
         : props.h) as number) -
-      data.top
+      state.top
   })
 
   return {
@@ -557,7 +534,7 @@ export const useResizable = (
     move,
     stickDown,
     stickUp,
-    bodyDown,
-    bodyUp,
+    targetDown,
+    targetUp,
   }
 }

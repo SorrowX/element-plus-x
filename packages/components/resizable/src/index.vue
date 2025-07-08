@@ -3,7 +3,7 @@
     ref="targetRef"
     :class="[ns.b(), contentClass]"
     :style="positionStyle"
-    @pointerdown="handleBodyDown($event)"
+    @pointerdown="handleTargetDown($event)"
   >
     <div ref="containerRef" :class="ns.e('content')" :style="sizeStyle">
       <slot />
@@ -27,6 +27,7 @@ import { ref } from 'vue'
 import { useNamespace } from 'element-plus'
 import { resizableEmits, resizableProps } from './resizable'
 import { useResizable } from './hooks'
+import type { IStick } from './types'
 
 defineOptions({
   name: 'ElResizable',
@@ -46,25 +47,25 @@ const {
   move,
   stickDown,
   stickUp,
-  bodyDown,
-  bodyUp,
+  targetDown,
+  targetUp,
 } = useResizable(targetRef, containerRef, props, emit)
 
-const createStickMove = (stick: string) => {
-  return (ev: any) => {
-    console.log('stick-move')
-    move(ev, 'stickDrag', stick)
+const createStickMove = (stick: IStick) => {
+  return (evt: PointerEvent) => {
+    // console.log('stick-move')
+    move(evt, 'stickMove', stick)
   }
 }
 
-const handleStickDown = (ev: any, stick: string) => {
-  console.log('stick-start')
-  stickDown(stick, ev)
+const handleStickDown = (evt: PointerEvent, stick: IStick) => {
+  // console.log('stick-start')
+  stickDown(evt, stick)
 
   const handleStickMove = createStickMove(stick)
 
   const handleStickUp = () => {
-    console.log('stick-end')
+    // console.log('stick-end')
     document.removeEventListener('pointermove', handleStickMove)
     document.removeEventListener('pointerup', handleStickUp)
     stickUp()
@@ -74,23 +75,23 @@ const handleStickDown = (ev: any, stick: string) => {
   document.addEventListener('pointerup', handleStickUp)
 }
 
-const handleBodyDown = (ev: any) => {
-  console.log('start1')
-  bodyDown(ev)
+const handleTargetDown = (evt: PointerEvent) => {
+  // console.log('start1')
+  targetDown(evt)
 
-  const handleBodyMove = (ev: any) => {
-    console.log('move1')
-    move(ev, 'bodyDrag')
+  const handleTargetMove = (evt: PointerEvent) => {
+    // console.log('move1')
+    move(evt, 'targetMove')
   }
 
-  const handleBodyUp = () => {
-    console.log('end1')
-    document.removeEventListener('pointermove', handleBodyMove)
-    document.removeEventListener('pointerup', handleBodyUp)
-    bodyUp()
+  const handleTargetUp = () => {
+    // console.log('end1')
+    document.removeEventListener('pointermove', handleTargetMove)
+    document.removeEventListener('pointerup', handleTargetUp)
+    targetUp()
   }
 
-  document.addEventListener('pointermove', handleBodyMove)
-  document.addEventListener('pointerup', handleBodyUp)
+  document.addEventListener('pointermove', handleTargetMove)
+  document.addEventListener('pointerup', handleTargetUp)
 }
 </script>

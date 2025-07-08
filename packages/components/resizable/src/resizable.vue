@@ -25,6 +25,7 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import { resizableProps } from './resizable'
 
 const styleMapping = {

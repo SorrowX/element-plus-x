@@ -1,5 +1,7 @@
 import { buildProps, definePropType } from '@element-plus/utils'
+import { sticks } from './types'
 import type { ExtractPropTypes } from 'vue'
+import type { IStick } from './types'
 
 export const resizableProps = buildProps({
   // 定义sticks的大小
@@ -19,11 +21,6 @@ export const resizableProps = buildProps({
   },
   // 确定组件是否应处于活动状态
   isActive: {
-    type: definePropType<boolean>(Boolean),
-    default: false,
-  },
-  // 通过单击组件并单击组件区域外部来禁用组件的行为（isActive：true / false）。如果启用了prop，则组件仅面向指定的。
-  preventActiveBehavior: {
     type: definePropType<boolean>(Boolean),
     default: false,
   },
@@ -160,9 +157,9 @@ export const resizableProps = buildProps({
       ml - Middle left
    */
   sticks: {
-    type: definePropType<string[]>(Array),
+    type: definePropType<IStick[]>(Array),
     default() {
-      return ['tl', 'tm', 'tr', 'mr', 'br', 'bm', 'bl', 'ml']
+      return sticks
     },
   },
   // 定义元素可拖动的轴。 可用值为x，y，both或none。
@@ -183,7 +180,7 @@ export const resizableProps = buildProps({
 export type ResizableProps = ExtractPropTypes<typeof resizableProps>
 
 export const resizableEmits = {
-  clicked: (evt: MouseEvent) => !!evt,
+  clicked: (evt: PointerEvent) => !!evt,
   resizing: (rect: any) => !!rect,
   dragging: (rect: any) => !!rect,
   dragstop: (rect: any) => !!rect,
