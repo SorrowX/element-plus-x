@@ -14,11 +14,6 @@ export const resizableProps = buildProps({
     type: definePropType<number>(Number),
     default: 1,
   },
-  // 确定组件是否应处于活动状态
-  isActive: {
-    type: definePropType<boolean>(Boolean),
-    default: false,
-  },
   // 确定组件是否应可拖动
   isDraggable: {
     type: definePropType<boolean>(Boolean),
@@ -132,24 +127,16 @@ export const resizableProps = buildProps({
       return typeof val === 'string' ? val === 'auto' : val >= 0
     },
   },
-  // 定义应该用于拖动组件的选择器。
-  dragHandle: {
-    type: definePropType<string>(String),
-  },
-  // 定义应该用于防止拖动初始化的选择器。
-  dragCancel: {
-    type: definePropType<string>(String),
-  },
   /**
    * 定义句柄数组以限制元素大小调整
-      tl - Top left
-      tm - Top middle
-      tr - Top right
-      mr - Middle right
-      br - Bottom right
-      bm - Bottom middle
-      bl - Bottom left
-      ml - Middle left
+      tl - Top left 上左
+      tm - Top middle 上
+      tr - Top right 上右
+      mr - Middle right 右
+      br - Bottom right 下右
+      bm - Bottom middle 下
+      bl - Bottom left 下左
+      ml - Middle left 左
    */
   sticks: {
     type: definePropType<IStick[]>(Array),
