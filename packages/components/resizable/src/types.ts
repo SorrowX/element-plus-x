@@ -20,7 +20,7 @@ export interface IBeforeMoveState {
   height: number
 }
 
-type ILimitValue = number | null
+export type ILimitValue = number | null
 export interface ILimits {
   left: { min: ILimitValue; max: ILimitValue }
   right: { min: ILimitValue; max: ILimitValue }
@@ -47,4 +47,11 @@ export interface IStickStyle {
   top?: string
   marginTop?: string
   bottom?: string
+}
+
+export interface IRect {
+  left: number
+  top: number
+  width: number
+  height: number
 }

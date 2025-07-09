@@ -15,11 +15,11 @@
       :parent-h="500"
       :is-draggable="true"
       :parent-limitation="true"
-      content-class="contentClass"
+      class="contentClass"
       @resizing="resize"
       @dragging="resize"
     >
-      <h3>Hello World!</h3>
+      <h3>drag!</h3>
       <p>{{ top }} х {{ left }}</p>
       <p>{{ width }} х {{ height }}</p>
     </ElResizable>
@@ -54,5 +54,6 @@ export default {
 <style>
 .contentClass {
   display: flex;
+  background: #ccc;
 }
 </style>

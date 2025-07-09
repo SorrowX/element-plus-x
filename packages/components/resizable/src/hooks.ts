@@ -1,8 +1,9 @@
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { ResizableProps } from './resizable'
 import type {
   IBeforeMoveState,
   IDelta,
+  ILimitValue,
   ILimits,
   IMoveType,
   IState,
@@ -102,7 +103,10 @@ export const useResizable = (
     state.aspectFactor = width.value / height.value
   }
 
-  const sideCorrectionByLimit = (limit: any, current: string) => {
+  const sideCorrectionByLimit = (
+    limit: { min: ILimitValue; max: ILimitValue },
+    current: number
+  ) => {
     let value = current
 
     if (limit.min !== null && current < limit.min) {
@@ -114,7 +118,12 @@ export const useResizable = (
     return value
   }
 
-  const rectCorrectionByLimit = (rect: any) => {
+  const rectCorrectionByLimit = (rect: {
+    newRight: number
+    newLeft: number
+    newBottom: number
+    newTop: number
+  }) => {
     let { newRight, newLeft, newBottom, newTop } = rect
 
     newLeft = sideCorrectionByLimit(limits.left, newLeft)
@@ -479,6 +488,21 @@ export const useResizable = (
 
     emit('resize-end', rect.value)
   }
+
+  watch(
+    () => props.parentW,
+    (val) => {
+      state.right = val - width.value - state.left
+      state.parentWidth = val
+    }
+  )
+  watch(
+    () => props.parentH,
+    (val) => {
+      state.bottom = val - height.value - state.top
+      state.parentHeight = val
+    }
+  )
 
   onMounted(() => {
     const parentElement = target.value?.parentNode as HTMLElement
