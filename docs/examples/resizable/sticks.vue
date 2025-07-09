@@ -4,6 +4,7 @@
     :h="200"
     :minw="150"
     :minh="150"
+    :sticks="['mr', 'br']"
     class="resizable-wrapper"
     @resize="handleResize"
   >

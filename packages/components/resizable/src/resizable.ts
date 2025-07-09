@@ -4,11 +4,6 @@ import type { ExtractPropTypes } from 'vue'
 import type { IStick } from './types'
 
 export const resizableProps = buildProps({
-  // 定义sticks的大小
-  stickSize: {
-    type: definePropType<number>(Number),
-    default: 8,
-  },
   // 定义初始水平比例或父元素。父级的transform:scale（）css定义中的值相同。 拖动/调整大小和杆的大小将使用该值计算。
   parentScaleX: {
     type: definePropType<number>(Number),
@@ -170,20 +165,16 @@ export const resizableProps = buildProps({
       return ['x', 'y', 'both', 'none'].includes(val)
     },
   },
-  // 定义容器的class类名
-  contentClass: {
-    type: definePropType<string>(String),
-    required: false,
-    default: '',
-  },
 } as const)
 export type ResizableProps = ExtractPropTypes<typeof resizableProps>
 
 export const resizableEmits = {
   clicked: (evt: PointerEvent) => !!evt,
-  resizing: (rect: any) => !!rect,
   dragging: (rect: any) => !!rect,
   dragstop: (rect: any) => !!rect,
-  resizestop: (rect: any) => !!rect,
+
+  'resize-start': (rect: any) => !!rect,
+  resize: (rect: any) => !!rect,
+  'resize-end': (rect: any) => !!rect,
 }
 export type ResizableEmits = typeof resizableEmits

@@ -1,6 +1,5 @@
 import { computed, onMounted, reactive, ref } from 'vue'
 import { ResizableProps } from './resizable'
-import { styleMapping } from './types'
 import type {
   IBeforeMoveState,
   IDelta,
@@ -8,8 +7,6 @@ import type {
   IMoveType,
   IState,
   IStick,
-  IXKey,
-  IYKey,
 } from './types'
 import type { Ref } from 'vue'
 
@@ -82,23 +79,6 @@ export const useResizable = (
       top: Math.round(state.top),
       width: Math.round(width.value),
       height: Math.round(height.value),
-    }
-  })
-
-  const vdrStick = computed(() => {
-    return (stick: IStick) => {
-      const { stickSize, parentScaleX, parentScaleY } = props
-      const stickStyle: any = {
-        width: `${stickSize / parentScaleX}px`,
-        height: `${stickSize / parentScaleY}px`,
-      }
-      stickStyle[styleMapping.y[stick[0] as IYKey]] = `${
-        stickSize / parentScaleX / -2
-      }px`
-      stickStyle[styleMapping.x[stick[1] as IXKey]] = `${
-        stickSize / parentScaleX / -2
-      }px`
-      return stickStyle
     }
   })
 
@@ -258,7 +238,7 @@ export const useResizable = (
     state.top = newTop
     state.bottom = newBottom
 
-    emit('resizing', rect.value)
+    emit('resize', rect.value)
   }
 
   const calcDragLimitation = () => {
@@ -479,6 +459,8 @@ export const useResizable = (
     saveBeforeMoveState({ pointerX, pointerY })
 
     Object.assign(limits, calcResizeLimits(stick))
+
+    emit('resize-start', rect.value)
   }
 
   const stickUp = () => {
@@ -496,7 +478,7 @@ export const useResizable = (
       bottom: { min: null, max: null },
     })
 
-    emit('resizestop', rect.value)
+    emit('resize-end', rect.value)
   }
 
   onMounted(() => {
@@ -529,7 +511,6 @@ export const useResizable = (
     active,
     rect,
     sizeStyle,
-    vdrStick,
     positionStyle,
     move,
     stickDown,

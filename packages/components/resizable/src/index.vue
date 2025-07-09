@@ -1,8 +1,8 @@
 <template>
   <div
     ref="targetRef"
-    :class="[ns.b(), contentClass]"
-    :style="positionStyle"
+    :class="[ns.b(), $attrs.class]"
+    :style="[positionStyle]"
     @pointerdown="handleTargetDown($event)"
   >
     <div ref="containerRef" :class="ns.e('content')" :style="sizeStyle">
@@ -13,18 +13,20 @@
       :key="index"
       :class="[
         ns.e('stick'),
-        ns.e('stick') + '-' + stick,
+        ns.m(`stick-${stick}`),
         isResizable ? '' : 'not-resizable',
       ]"
-      :style="vdrStick(stick)"
       @pointerdown.stop.prevent="(ev) => handleStickDown(ev, stick)"
-    />
+    >
+      <el-renderer :renderer="() => renderStick(stick)" />
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, useSlots } from 'vue'
 import { useNamespace } from 'element-plus'
+import { ElRenderer } from '@element-plus/components/renderer/index'
 import { resizableEmits, resizableProps } from './resizable'
 import { useResizable } from './hooks'
 import type { IStick } from './types'
@@ -35,6 +37,7 @@ defineOptions({
 })
 const props = defineProps(resizableProps)
 const emit = defineEmits(resizableEmits)
+const slots = useSlots()
 const ns = useNamespace('resizable')
 
 const targetRef = ref<HTMLElement | null>(null)
@@ -43,7 +46,6 @@ const containerRef = ref<HTMLElement | null>(null)
 const {
   positionStyle,
   sizeStyle,
-  vdrStick,
   move,
   stickDown,
   stickUp,
@@ -94,4 +96,6 @@ const handleTargetDown = (evt: PointerEvent) => {
   document.addEventListener('pointermove', handleTargetMove)
   document.addEventListener('pointerup', handleTargetUp)
 }
+
+const renderStick = (stick: IStick) => slots[stick]?.()
 </script>

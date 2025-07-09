@@ -1,23 +1,3 @@
-export const styleMapping = {
-  x: {
-    l: 'left',
-    m: 'marginLeft',
-    r: 'right',
-  },
-  y: {
-    t: 'top',
-    m: 'marginTop',
-    b: 'bottom',
-  },
-} as const
-
-export type IStyleMapping = typeof styleMapping
-export type IAxis = keyof IStyleMapping // 'x' | 'y'
-export type IXKey = keyof IStyleMapping['x'] // 'l' | 'm' | 'r'
-export type IYKey = keyof IStyleMapping['y'] // 't' | 'm' | 'b'
-export type IXValue = IStyleMapping['x'][IXKey] // 'left' | 'marginLeft' | 'right'
-export type IYValue = IStyleMapping['y'][IYKey] // 'top' | 'marginTop' | 'bottom'
-
 export interface IState {
   zIndex: number
   parentWidth: number
@@ -57,3 +37,14 @@ export const sticks = ['tl', 'tm', 'tr', 'mr', 'br', 'bm', 'bl', 'ml'] as const
 export type IStick = (typeof sticks)[number]
 
 export type IMoveType = 'stickMove' | 'targetMove'
+
+export interface IStickStyle {
+  width: string
+  height: string
+  left?: string
+  marginLeft?: string
+  right?: string
+  top?: string
+  marginTop?: string
+  bottom?: string
+}

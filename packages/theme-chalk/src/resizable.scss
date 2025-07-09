@@ -11,30 +11,80 @@
   &__stick {
     box-sizing: border-box;
     position: absolute;
-    font-size: 1px;
-    background: #ffffff;
-    border: 1px solid #6c6c6c;
-    box-shadow: 0 0 2px #bbb;
-    &-tl,
-    &-br {
-      cursor: nwse-resize;
-    }
-    &-tm,
-    &-bm {
-      left: 50%;
+    z-index: 1;
+  }
+  &--stick {
+    // 上
+    &-tm {
+      width: 100%;
+      height: 10px;
+      left: 0%;
+      top: -5px;
       cursor: ns-resize;
     }
-    &-tr,
-    &-bl {
-      cursor: nesw-resize;
-    }
-    &-ml,
+
+    // 右
     &-mr {
-      top: 50%;
+      width: 10px;
+      height: 100%;
+      top: 0;
+      right: -5px;
       cursor: ew-resize;
     }
-    &.not-resizable {
-      display: none;
+
+    // 下
+    &-bm {
+      width: 100%;
+      height: 10px;
+      left: 0;
+      bottom: -5px;
+      cursor: ns-resize;
+    }
+
+    // 左
+    &-ml {
+      width: 10px;
+      height: 100%;
+      left: -5px;
+      top: 0;
+      cursor: ew-resize;
+    }
+
+    &-tl,
+    &-tr,
+    &-br,
+    &-bl {
+      width: 20px;
+      height: 20px;
+      z-index: 2;
+    }
+
+    // 上左
+    &-tl {
+      top: -10px;
+      left: -10px;
+      cursor: nwse-resize;
+    }
+
+    // 上右
+    &-tr {
+      right: -10px;
+      top: -10px;
+      cursor: nesw-resize;
+    }
+
+    // 下右
+    &-br {
+      right: -10px;
+      bottom: -10px;
+      cursor: nwse-resize;
+    }
+
+    // 下左
+    &-bl {
+      left: -10px;
+      bottom: -10px;
+      cursor: nesw-resize;
     }
   }
 }
