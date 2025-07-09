@@ -2,10 +2,10 @@
   <div
     ref="targetRef"
     :class="[ns.b(), $attrs.class]"
-    :style="[positionStyle]"
+    :style="[targetStyle]"
     @pointerdown="handleTargetDown($event)"
   >
-    <div ref="containerRef" :class="ns.e('content')" :style="sizeStyle">
+    <div ref="containerRef" :class="ns.e('content')" :style="containerStyle">
       <slot />
     </div>
     <div
@@ -44,13 +44,13 @@ const targetRef = ref<HTMLElement | null>(null)
 const containerRef = ref<HTMLElement | null>(null)
 
 const {
-  positionStyle,
-  sizeStyle,
   move,
   stickDown,
   stickUp,
   targetDown,
   targetUp,
+  targetStyle,
+  containerStyle,
 } = useResizable(targetRef, containerRef, props, emit)
 
 const createStickMove = (stick: IStick) => {

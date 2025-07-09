@@ -16,7 +16,6 @@ export const useResizable = (
   props: ResizableProps,
   emit: any
 ) => {
-  const active = ref(false)
   const bodyDrag = ref(false)
   const stickDrag = ref(false)
 
@@ -56,7 +55,7 @@ export const useResizable = (
   const height = computed(() => state.parentHeight - state.top - state.bottom)
 
   // container元素的尺寸样式
-  const sizeStyle = computed(() => {
+  const containerStyle = computed(() => {
     return {
       width: props.w == 'auto' ? 'auto' : `${width.value}px`,
       height: props.h == 'auto' ? 'auto' : `${height.value}px`,
@@ -64,7 +63,7 @@ export const useResizable = (
   })
 
   // target元素的位置
-  const positionStyle = computed(() => {
+  const targetStyle = computed(() => {
     return {
       top: `${state.top}px`,
       left: `${state.left}px`,
@@ -508,14 +507,12 @@ export const useResizable = (
   })
 
   return {
-    active,
-    rect,
-    sizeStyle,
-    positionStyle,
     move,
     stickDown,
     stickUp,
     targetDown,
     targetUp,
+    targetStyle,
+    containerStyle,
   }
 }

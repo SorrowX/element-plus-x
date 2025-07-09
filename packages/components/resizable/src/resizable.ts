@@ -4,16 +4,6 @@ import type { ExtractPropTypes } from 'vue'
 import type { IStick } from './types'
 
 export const resizableProps = buildProps({
-  // 定义初始水平比例或父元素。父级的transform:scale（）css定义中的值相同。 拖动/调整大小和杆的大小将使用该值计算。
-  parentScaleX: {
-    type: definePropType<number>(Number),
-    default: 1,
-  },
-  // 定义初始垂直比例或父元素。父级的transform:scale（）css定义中的值相同。拖动/调整大小和杆的大小将使用该值计算。
-  parentScaleY: {
-    type: definePropType<number>(Number),
-    default: 1,
-  },
   // 确定组件是否应可拖动
   isDraggable: {
     type: definePropType<boolean>(Boolean),
@@ -151,6 +141,16 @@ export const resizableProps = buildProps({
     validator(val) {
       return ['x', 'y', 'both', 'none'].includes(val)
     },
+  },
+  // 定义初始水平比例或父元素。父级的transform:scale（）css定义中的值相同。 拖动/调整大小和杆的大小将使用该值计算。
+  parentScaleX: {
+    type: definePropType<number>(Number),
+    default: 1,
+  },
+  // 定义初始垂直比例或父元素。父级的transform:scale（）css定义中的值相同。拖动/调整大小和杆的大小将使用该值计算。
+  parentScaleY: {
+    type: definePropType<number>(Number),
+    default: 1,
   },
 } as const)
 export type ResizableProps = ExtractPropTypes<typeof resizableProps>
