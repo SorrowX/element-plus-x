@@ -1,4 +1,4 @@
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { ResizableProps } from './resizable'
 import type {
   IBeforeMoveState,
@@ -259,8 +259,8 @@ export const useResizable = (
       return
     }
 
-    evt.stopPropagation?.()
-    evt.preventDefault?.()
+    evt?.stopPropagation?.()
+    evt?.preventDefault?.()
 
     bodyDrag.value = true
 
@@ -276,7 +276,7 @@ export const useResizable = (
     emit('drag-start', evt, rect.value)
   }
 
-  const targetMove = (evt: PointerEvent, delta: IDelta) => {
+  const targetMove = (delta: IDelta) => {
     const { parentWidth, parentHeight } = state
     const { gridX, gridY } = props
 
@@ -332,11 +332,9 @@ export const useResizable = (
       newTop: state.top,
       newBottom: state.bottom,
     } = rectCorrectionByLimit({ newLeft, newRight, newTop, newBottom }))
-
-    emit('drag', evt, rect.value)
   }
 
-  const targetUp = (evt: PointerEvent) => {
+  const targetUp = (evt?: PointerEvent) => {
     bodyDrag.value = false
 
     Object.assign(beforeMoveState, {
@@ -366,7 +364,8 @@ export const useResizable = (
     }
 
     if (type === 'stickMove') {
-      stickMove(evt, delta, currentStick as IStick)
+      stickMove(delta, currentStick as IStick)
+      emit('resize', evt, rect.value)
     }
 
     if (type === 'targetMove') {
@@ -377,7 +376,8 @@ export const useResizable = (
       } else if (props.axis === 'none') {
         return
       }
-      targetMove(evt, delta)
+      targetMove(delta)
+      emit('drag', evt, rect.value)
     }
   }
 
@@ -398,11 +398,7 @@ export const useResizable = (
     emit('resize-start', evt, rect.value)
   }
 
-  const stickMove = (
-    evt: PointerEvent,
-    delta: IDelta,
-    currentStick: IStick
-  ) => {
+  const stickMove = (delta: IDelta, currentStick: IStick) => {
     const { gridY, gridX, snapToGrid } = props
     const { parentHeight, parentWidth } = state
 
@@ -470,8 +466,6 @@ export const useResizable = (
     state.right = newRight
     state.top = newTop
     state.bottom = newBottom
-
-    emit('resize', evt, rect.value)
   }
 
   const stickUp = (evt: PointerEvent) => {
@@ -504,6 +498,40 @@ export const useResizable = (
     (val) => {
       state.bottom = val - height.value - state.top
       state.parentHeight = val
+    }
+  )
+  watch(
+    () => props.x,
+    (newVal, oldVal) => {
+      if (newVal === state.left) {
+        return
+      }
+
+      const delta = oldVal - newVal
+
+      targetDown({ pageX: state.left, pageY: state.top } as PointerEvent)
+      targetMove({ x: delta, y: 0 })
+
+      nextTick(() => {
+        targetUp()
+      })
+    }
+  )
+  watch(
+    () => props.y,
+    (newVal, oldVal) => {
+      if (newVal === state.top) {
+        return
+      }
+
+      const delta = oldVal - newVal
+
+      targetDown({ pageX: state.left, pageY: state.top } as PointerEvent)
+      targetMove({ x: 0, y: delta })
+
+      nextTick(() => {
+        targetUp()
+      })
     }
   )
 
