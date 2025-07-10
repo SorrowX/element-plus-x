@@ -2,7 +2,7 @@
   <div
     ref="targetRef"
     :class="[ns.b(), $attrs.class]"
-    :style="[targetStyle, $attrs.style as CSSProperties]"
+    :style="calcTargetStyle"
     @pointerdown.stop.prevent="handleInnerTargetDown($event)"
   >
     <div ref="containerRef" :class="ns.e('content')" :style="containerStyle">
@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, useSlots } from 'vue'
+import { computed, ref, useAttrs, useSlots } from 'vue'
 import { useNamespace } from 'element-plus'
 import { ElRenderer } from '@element-plus/components/renderer/index'
 import { resizableEmits, resizableProps } from './resizable'
@@ -37,6 +37,7 @@ defineOptions({
 const props = defineProps(resizableProps)
 const emit = defineEmits(resizableEmits)
 const slots = useSlots()
+const attrs = useAttrs()
 const ns = useNamespace('resizable')
 
 const targetRef = ref<HTMLElement | null>(null)
@@ -51,6 +52,13 @@ const {
   targetStyle,
   containerStyle,
 } = useResizable(targetRef, containerRef, props, emit)
+
+const calcTargetStyle = computed(() => {
+  return {
+    ...targetStyle,
+    ...(attrs.style as CSSProperties),
+  }
+})
 
 const createStickMove = (stick: IStick) => {
   return (evt: PointerEvent) => {
