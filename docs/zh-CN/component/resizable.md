@@ -106,9 +106,9 @@ resizable/window
 
 | 事件名       | 说明     | 参数                             |
 | ------------ | -------- | -------------------------------- |
-| drag-start   | 拖拽开始 | (evt: PointerEvent, rect: IRect) |
-| drag         | 拖拽中   | (evt: PointerEvent, rect: IRect) |
-| drag-end     | 拖拽结束 | (evt: PointerEvent, rect: IRect) |
-| resize-start | 伸缩开始 | (evt: PointerEvent, rect: IRect) |
-| resize       | 伸缩中   | (evt: PointerEvent, rect: IRect) |
-| resize-end   | 伸缩结束 | (evt: PointerEvent, rect: IRect) |
+| drag-start   | 拖拽开始 | (rect: IRect, evt: PointerEvent) |
+| drag         | 拖拽中   | (rect: IRect, evt: PointerEvent) |
+| drag-end     | 拖拽结束 | (rect: IRect, evt: PointerEvent) |
+| resize-start | 伸缩开始 | (rect: IRect, evt: PointerEvent) |
+| resize       | 伸缩中   | (rect: IRect, evt: PointerEvent) |
+| resize-end   | 伸缩结束 | (rect: IRect, evt: PointerEvent) |
