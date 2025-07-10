@@ -161,12 +161,12 @@ export const resizableProps = buildProps({
 export type ResizableProps = ExtractPropTypes<typeof resizableProps>
 
 export const resizableEmits = {
-  'drag-start': (evt: PointerEvent, rect: IRect) => !!rect,
-  drag: (evt: PointerEvent, rect: IRect) => !!rect,
-  'drag-end': (evt: PointerEvent, rect: IRect) => !!rect,
+  'drag-start': (rect: IRect, evt: PointerEvent) => !!rect && !!evt,
+  drag: (rect: IRect, evt: PointerEvent) => !!rect && !!evt,
+  'drag-end': (rect: IRect, evt: PointerEvent) => !!rect && !!evt,
 
-  'resize-start': (evt: PointerEvent, rect: IRect) => !!rect,
-  resize: (evt: PointerEvent, rect: IRect) => !!rect,
-  'resize-end': (evt: PointerEvent, rect: IRect) => !!rect,
+  'resize-start': (rect: IRect, evt: PointerEvent) => !!rect && !!evt,
+  resize: (rect: IRect, evt: PointerEvent) => !!rect && !!evt,
+  'resize-end': (rect: IRect, evt: PointerEvent) => !!rect && !!evt,
 }
 export type ResizableEmits = typeof resizableEmits

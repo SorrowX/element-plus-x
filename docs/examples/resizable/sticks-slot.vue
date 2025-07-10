@@ -37,7 +37,7 @@ const left = ref(0)
 const width = ref(0)
 const height = ref(0)
 
-const handleChange = (evt, rect) => {
+const handleChange = (rect) => {
   top.value = rect.top
   left.value = rect.left
   width.value = rect.width

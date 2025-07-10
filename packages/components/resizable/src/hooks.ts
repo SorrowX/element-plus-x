@@ -273,7 +273,7 @@ export const useResizable = (
       Object.assign(limits, calcDragLimitation())
     }
 
-    emit('drag-start', evt, rect.value)
+    emit('drag-start', rect.value, evt)
   }
 
   const targetMove = (delta: IDelta) => {
@@ -349,7 +349,7 @@ export const useResizable = (
       bottom: { min: null, max: null },
     })
 
-    emit('drag-end', evt, rect.value)
+    emit('drag-end', rect.value, evt)
   }
 
   const move = (evt: PointerEvent, type: IMoveType, currentStick?: IStick) => {
@@ -365,7 +365,7 @@ export const useResizable = (
 
     if (type === 'stickMove') {
       stickMove(delta, currentStick as IStick)
-      emit('resize', evt, rect.value)
+      emit('resize', rect.value, evt)
     }
 
     if (type === 'targetMove') {
@@ -377,7 +377,7 @@ export const useResizable = (
         return
       }
       targetMove(delta)
-      emit('drag', evt, rect.value)
+      emit('drag', rect.value, evt)
     }
   }
 
@@ -395,7 +395,7 @@ export const useResizable = (
 
     Object.assign(limits, calcResizeLimits(stick))
 
-    emit('resize-start', evt, rect.value)
+    emit('resize-start', rect.value, evt)
   }
 
   const stickMove = (delta: IDelta, currentStick: IStick) => {
@@ -483,7 +483,7 @@ export const useResizable = (
       bottom: { min: null, max: null },
     })
 
-    emit('resize-end', evt, rect.value)
+    emit('resize-end', rect.value, evt)
   }
 
   watch(

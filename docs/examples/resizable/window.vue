@@ -42,7 +42,7 @@ const height = ref(0)
 const parentW = ref(0)
 const parentH = ref(0)
 
-const handleChange = (evt, rect) => {
+const handleChange = (rect) => {
   top.value = rect.top
   left.value = rect.left
   width.value = rect.width
