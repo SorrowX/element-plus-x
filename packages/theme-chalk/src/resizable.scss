@@ -1,0 +1,90 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(resizable) {
+  position: absolute;
+  box-sizing: border-box;
+  &__content {
+    position: relative;
+  }
+  &__stick {
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 1;
+  }
+  &--stick {
+    // 上
+    &-tm {
+      width: 100%;
+      height: 10px;
+      left: 0%;
+      top: -5px;
+      cursor: ns-resize;
+    }
+
+    // 右
+    &-mr {
+      width: 10px;
+      height: 100%;
+      top: 0;
+      right: -5px;
+      cursor: ew-resize;
+    }
+
+    // 下
+    &-bm {
+      width: 100%;
+      height: 10px;
+      left: 0;
+      bottom: -5px;
+      cursor: ns-resize;
+    }
+
+    // 左
+    &-ml {
+      width: 10px;
+      height: 100%;
+      left: -5px;
+      top: 0;
+      cursor: ew-resize;
+    }
+
+    &-tl,
+    &-tr,
+    &-br,
+    &-bl {
+      width: 20px;
+      height: 20px;
+      z-index: 2;
+    }
+
+    // 上左
+    &-tl {
+      top: -10px;
+      left: -10px;
+      cursor: nwse-resize;
+    }
+
+    // 上右
+    &-tr {
+      right: -10px;
+      top: -10px;
+      cursor: nesw-resize;
+    }
+
+    // 下右
+    &-br {
+      right: -10px;
+      bottom: -10px;
+      cursor: nwse-resize;
+    }
+
+    // 下左
+    &-bl {
+      left: -10px;
+      bottom: -10px;
+      cursor: nesw-resize;
+    }
+  }
+}

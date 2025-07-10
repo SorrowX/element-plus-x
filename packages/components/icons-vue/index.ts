@@ -1,3 +1,4 @@
+export { createIconComponent } from './helper'
 export { default as AudioFile } from './component/audio'
 export { default as ExcelFile } from './component/excel'
 export { default as ImageFile } from './component/image-file'

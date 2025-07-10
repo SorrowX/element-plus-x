@@ -150,6 +150,7 @@ declare module 'vue' {
     ElVideoViewer: typeof import('element-plus')['ElVideoViewer']
     ElPlainTabs: typeof import('element-plus')['ElPlainTabs']
     ElLineTree: typeof import('element-plus')['ElLineTree']
+    ElResizable: typeof import('element-plus')['ElResizable']
   }
 
   interface ComponentCustomProperties {
