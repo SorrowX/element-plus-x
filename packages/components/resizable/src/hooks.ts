@@ -67,7 +67,7 @@ export const useResizable = (
     return {
       top: `${state.top}px`,
       left: `${state.left}px`,
-      zIndex: props.zIndex,
+      zIndex: props.z,
     }
   })
 

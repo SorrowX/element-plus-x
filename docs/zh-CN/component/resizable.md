@@ -71,26 +71,44 @@ resizable/window
 
 ### 属性
 
-| 属性名        | 说明             | 类型                                                                     | 默认值 |
-| ------------- | ---------------- | ------------------------------------------------------------------------ | ------ |
-| trigger-props | 触发按钮属性设置 | ^[Object]`Partial<ButtonProps> & {triggerText?: string}`                 | -      |
-| cancel-props  | 取消按钮属性设置 | ^[Object]`Partial<ButtonProps> & {hidden?: boolean;cancelText?: string}` | -      |
-| sure-props    | 确定按钮属性设置 | ^[Object]`Partial<ButtonProps> & {hidden?: boolean;sureText?: string}`   | -      |
-| on-cancel     | 点击取消时的回调 | ^[Function]`{ close }: { close: () => void }) => void`                   | -      |
-| on-sure       | 点击确定时的回调 | ^[Function]`({ close }: { close: () => void }) => void \| Promise<any>`  | -      |
+| 属性名              | 说明                           | 类型               | 默认值 |
+| ------------------- | ------------------------------ | ------------------ | ------ |
+| is-draggable        | 组件是否应可拖动               | ^[Boolean]         | true   |
+| is-custom-draggable | 是否自定义组件局部元素可拖动   | ^[Boolean]         | false  |
+| is-resizable        | 组件是否应调整大小             | ^[Boolean]         | true   |
+| parent-limitation   | 将组件更改的范围限制为其父大小 | ^[Boolean]         | false  |
+| parent-w            | 定义父元素的初始宽度           | ^[Number]          | 0      |
+| parent-h            | 定义父元素的初始高度           | ^[Number]          | 0      |
+| w                   | 定义组件的初始宽度             | ^[Number]          | 200    |
+| h                   | 定义组件的初始高度             | ^[Number]          | 200    |
+| minw                | 定义组件的最小宽度             | ^[Number]          | 50     |
+| minh                | 定义组件的最小高度             | ^[Number]          | 50     |
+| x                   | 定义组件的初始 X 位置          | ^[Number]          | 0      |
+| y                   | 定义组件的初始 Y 位置          | ^[Number]          | 0      |
+| z                   | 定义组件的 zindex(层级)        | ^[Number]          | auto   |
+| sticks              | 定义句柄数组以限制元素大小调整 | ^[Array]`IStick[]` | -      |
 
 ### Slots
 
-| 事件名  | 说明             |
-| ------- | ---------------- |
-| default | 对话框的默认内容 |
-| header  | 对话框标题的内容 |
-| footer  | 对话框底部的内容 |
-| trigger | 触发器插槽内容   |
+| 事件名  | 说明          |
+| ------- | ------------- |
+| default | 默认内容      |
+| tl      | 上左-句柄内容 |
+| tm      | 上-句柄内容   |
+| tr      | 上右-句柄内容 |
+| mr      | 右-句柄内容   |
+| br      | 下右-句柄内容 |
+| bm      | 下-句柄内容   |
+| bl      | 下左-句柄内容 |
+| ml      | 左-句柄内容   |
 
-### Exposes
+### Event
 
-| 名称  | 详情     | 类型                    |
-| ----- | -------- | ----------------------- |
-| open  | 打开弹窗 | ^[Function]`() => void` |
-| close | 关闭弹窗 | ^[Function]`() => void` |
+| 事件名       | 说明     | 参数                             |
+| ------------ | -------- | -------------------------------- |
+| drag-start   | 拖拽开始 | (evt: PointerEvent, rect: IRect) |
+| drag         | 拖拽中   | (evt: PointerEvent, rect: IRect) |
+| drag-end     | 拖拽结束 | (evt: PointerEvent, rect: IRect) |
+| resize-start | 伸缩开始 | (evt: PointerEvent, rect: IRect) |
+| resize       | 伸缩中   | (evt: PointerEvent, rect: IRect) |
+| resize-end   | 伸缩结束 | (evt: PointerEvent, rect: IRect) |

@@ -15,7 +15,7 @@
     :parent-w="parentW"
     :parent-h="parentH"
     :parent-limitation="true"
-    :z-index="100"
+    :z="1000"
     style="position: fixed"
     class="ep-bg-purple-light"
     @resize="handleChange"
