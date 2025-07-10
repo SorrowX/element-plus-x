@@ -2,11 +2,11 @@
   <div
     ref="targetRef"
     :class="[ns.b(), $attrs.class]"
-    :style="[targetStyle]"
-    @pointerdown="handleTargetDown($event)"
+    :style="[targetStyle, $attrs.style as CSSProperties]"
+    @pointerdown.stop.prevent="handleInnerTargetDown($event)"
   >
     <div ref="containerRef" :class="ns.e('content')" :style="containerStyle">
-      <slot />
+      <slot v-bind="{ handleTargetDown }" />
     </div>
     <div
       v-for="(stick, index) in sticks"
@@ -29,6 +29,7 @@ import { useNamespace } from 'element-plus'
 import { ElRenderer } from '@element-plus/components/renderer/index'
 import { resizableEmits, resizableProps } from './resizable'
 import { useResizable } from './hooks'
+import type { CSSProperties } from 'vue'
 import type { IStick } from './types'
 
 defineOptions({
@@ -70,14 +71,14 @@ const handleStickDown = (evt: PointerEvent, stick: IStick) => {
     // console.log('stick-end')
     document.removeEventListener('pointermove', handleStickMove)
     document.removeEventListener('pointerup', handleStickUp)
-    stickUp()
+    stickUp(evt)
   }
 
   document.addEventListener('pointermove', handleStickMove)
   document.addEventListener('pointerup', handleStickUp)
 }
 
-const handleTargetDown = (evt: PointerEvent) => {
+const handleBaseTargetDown = (evt: PointerEvent) => {
   // console.log('start1')
   targetDown(evt)
 
@@ -86,16 +87,22 @@ const handleTargetDown = (evt: PointerEvent) => {
     move(evt, 'targetMove')
   }
 
-  const handleTargetUp = () => {
+  const handleTargetUp = (evt: PointerEvent) => {
     // console.log('end1')
     document.removeEventListener('pointermove', handleTargetMove)
     document.removeEventListener('pointerup', handleTargetUp)
-    targetUp()
+    targetUp(evt)
   }
 
   document.addEventListener('pointermove', handleTargetMove)
   document.addEventListener('pointerup', handleTargetUp)
 }
+
+const handleInnerTargetDown = (evt: PointerEvent) => {
+  if (props.isCustomDraggable) return
+  handleBaseTargetDown(evt)
+}
+const handleTargetDown = (evt: PointerEvent) => handleBaseTargetDown(evt)
 
 const renderStick = (stick: IStick) => slots[stick]?.()
 </script>

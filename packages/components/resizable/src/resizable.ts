@@ -1,13 +1,18 @@
 import { buildProps, definePropType } from '@element-plus/utils'
 import { sticks } from './types'
 import type { ExtractPropTypes } from 'vue'
-import type { IStick } from './types'
+import type { IRect, IStick } from './types'
 
 export const resizableProps = buildProps({
   // 确定组件是否应可拖动
   isDraggable: {
     type: definePropType<boolean>(Boolean),
     default: true,
+  },
+  // 自定义组件局部元素可拖动
+  isCustomDraggable: {
+    type: definePropType<boolean>(Boolean),
+    default: false,
   },
   // 确定组件是否应调整大小
   isResizable: {
@@ -156,12 +161,12 @@ export const resizableProps = buildProps({
 export type ResizableProps = ExtractPropTypes<typeof resizableProps>
 
 export const resizableEmits = {
-  clicked: (evt: PointerEvent) => !!evt,
-  dragging: (rect: any) => !!rect,
-  dragstop: (rect: any) => !!rect,
+  'drag-start': (evt: PointerEvent, rect: IRect) => !!rect,
+  drag: (evt: PointerEvent, rect: IRect) => !!rect,
+  'drag-end': (evt: PointerEvent, rect: IRect) => !!rect,
 
-  'resize-start': (rect: any) => !!rect,
-  resize: (rect: any) => !!rect,
-  'resize-end': (rect: any) => !!rect,
+  'resize-start': (evt: PointerEvent, rect: IRect) => !!rect,
+  resize: (evt: PointerEvent, rect: IRect) => !!rect,
+  'resize-end': (evt: PointerEvent, rect: IRect) => !!rect,
 }
 export type ResizableEmits = typeof resizableEmits

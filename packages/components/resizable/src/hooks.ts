@@ -177,7 +177,11 @@ export const useResizable = (
     return { newLeft, newRight, newTop, newBottom }
   }
 
-  const stickMove = (delta: IDelta, currentStick: IStick) => {
+  const stickMove = (
+    evt: PointerEvent,
+    delta: IDelta,
+    currentStick: IStick
+  ) => {
     const { gridY, gridX, snapToGrid } = props
     const { parentHeight, parentWidth } = state
 
@@ -246,7 +250,7 @@ export const useResizable = (
     state.top = newTop
     state.bottom = newBottom
 
-    emit('resize', rect.value)
+    emit('resize', evt, rect.value)
   }
 
   const calcDragLimitation = () => {
@@ -281,10 +285,10 @@ export const useResizable = (
       Object.assign(limits, calcDragLimitation())
     }
 
-    emit('clicked', evt)
+    emit('drag-start', evt, rect.value)
   }
 
-  const targetMove = (delta: IDelta) => {
+  const targetMove = (evt: PointerEvent, delta: IDelta) => {
     const { parentWidth, parentHeight } = state
     const { gridX, gridY } = props
 
@@ -341,10 +345,10 @@ export const useResizable = (
       newBottom: state.bottom,
     } = rectCorrectionByLimit({ newLeft, newRight, newTop, newBottom }))
 
-    emit('dragging', rect.value)
+    emit('drag', evt, rect.value)
   }
 
-  const targetUp = () => {
+  const targetUp = (evt: PointerEvent) => {
     bodyDrag.value = false
 
     Object.assign(beforeMoveState, {
@@ -359,7 +363,7 @@ export const useResizable = (
       bottom: { min: null, max: null },
     })
 
-    emit('dragstop', rect.value)
+    emit('drag-end', evt, rect.value)
   }
 
   const move = (evt: PointerEvent, type: IMoveType, currentStick?: IStick) => {
@@ -374,7 +378,7 @@ export const useResizable = (
     }
 
     if (type === 'stickMove') {
-      stickMove(delta, currentStick as IStick)
+      stickMove(evt, delta, currentStick as IStick)
     }
 
     if (type === 'targetMove') {
@@ -385,7 +389,7 @@ export const useResizable = (
       } else if (props.axis === 'none') {
         return
       }
-      targetMove(delta)
+      targetMove(evt, delta)
     }
   }
 
@@ -468,10 +472,10 @@ export const useResizable = (
 
     Object.assign(limits, calcResizeLimits(stick))
 
-    emit('resize-start', rect.value)
+    emit('resize-start', evt, rect.value)
   }
 
-  const stickUp = () => {
+  const stickUp = (evt: PointerEvent) => {
     stickDrag.value = false
 
     Object.assign(beforeMoveState, {
@@ -486,7 +490,7 @@ export const useResizable = (
       bottom: { min: null, max: null },
     })
 
-    emit('resize-end', rect.value)
+    emit('resize-end', evt, rect.value)
   }
 
   watch(
