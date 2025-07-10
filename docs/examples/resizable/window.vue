@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const value = ref(false)
 
@@ -39,8 +39,8 @@ const left = ref(0)
 const width = ref(0)
 const height = ref(0)
 
-const parentW = ref(window.innerWidth)
-const parentH = ref(window.innerHeight)
+const parentW = ref(0)
+const parentH = ref(0)
 
 const handleChange = (evt, rect) => {
   top.value = rect.top
@@ -48,4 +48,9 @@ const handleChange = (evt, rect) => {
   width.value = rect.width
   height.value = rect.height
 }
+
+onMounted(() => {
+  parentW.value = window.innerWidth
+  parentH.value = window.innerHeight
+})
 </script>

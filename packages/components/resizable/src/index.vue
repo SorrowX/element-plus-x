@@ -27,7 +27,6 @@ import { useNamespace } from 'element-plus'
 import { ElRenderer } from '@element-plus/components/renderer/index'
 import { resizableEmits, resizableProps } from './resizable'
 import { useResizable } from './hooks'
-import type { CSSProperties } from 'vue'
 import type { IStick } from './types'
 
 defineOptions({
@@ -55,8 +54,8 @@ const {
 
 const calcTargetStyle = computed(() => {
   return {
-    ...targetStyle,
-    ...(attrs.style as CSSProperties),
+    ...targetStyle.value,
+    ...(attrs.style as any),
   }
 })
 
