@@ -177,82 +177,6 @@ export const useResizable = (
     return { newLeft, newRight, newTop, newBottom }
   }
 
-  const stickMove = (
-    evt: PointerEvent,
-    delta: IDelta,
-    currentStick: IStick
-  ) => {
-    const { gridY, gridX, snapToGrid } = props
-    const { parentHeight, parentWidth } = state
-
-    let newTop = beforeMoveState.top
-    let newBottom = beforeMoveState.bottom
-    let newLeft = beforeMoveState.left
-    let newRight = beforeMoveState.right
-    switch (currentStick[0]) {
-      case 'b':
-        newBottom = beforeMoveState.bottom + delta.y
-        if (snapToGrid) {
-          newBottom =
-            parentHeight -
-            Math.round((parentHeight - newBottom) / gridY) * gridY
-        }
-        break
-      case 't':
-        newTop = beforeMoveState.top - delta.y
-        if (snapToGrid) {
-          newTop = Math.round(newTop / gridY) * gridY
-        }
-        break
-      default:
-        break
-    }
-
-    switch (currentStick[1]) {
-      case 'r':
-        newRight = beforeMoveState.right + delta.x
-        if (snapToGrid) {
-          newRight =
-            parentWidth - Math.round((parentWidth - newRight) / gridX) * gridX
-        }
-        break
-      case 'l':
-        newLeft = beforeMoveState.left - delta.x
-        if (snapToGrid) {
-          newLeft = Math.round(newLeft / gridX) * gridX
-        }
-        break
-      default:
-        break
-    }
-
-    ;({ newLeft, newRight, newTop, newBottom } = rectCorrectionByLimit({
-      newLeft,
-      newRight,
-      newTop,
-      newBottom,
-    }))
-
-    if (props.aspectRatio) {
-      ;({ newLeft, newRight, newTop, newBottom } = rectCorrectionByAspectRatio(
-        {
-          newLeft,
-          newRight,
-          newTop,
-          newBottom,
-        },
-        currentStick
-      ))
-    }
-
-    state.left = newLeft
-    state.right = newRight
-    state.top = newTop
-    state.bottom = newBottom
-
-    emit('resize', evt, rect.value)
-  }
-
   const calcDragLimitation = () => {
     const { parentWidth, parentHeight } = state
 
@@ -262,6 +186,71 @@ export const useResizable = (
       top: { min: 0, max: parentHeight - height.value },
       bottom: { min: 0, max: parentHeight - height.value },
     }
+  }
+
+  const calcResizeLimits = (stick: IStick) => {
+    const { aspectFactor, bottom, top, left, right } = state
+    let { minh: minHeight, minw: minWidth } = props
+
+    const parentLim = props.parentLimitation ? 0 : null
+
+    if (props.aspectRatio) {
+      if (minWidth / minHeight > aspectFactor) {
+        minHeight = minWidth / aspectFactor
+      } else {
+        minWidth = aspectFactor * minHeight
+      }
+    }
+
+    const limits: any = {
+      left: { min: parentLim, max: left + (width.value - minWidth) },
+      right: { min: parentLim, max: right + (width.value - minWidth) },
+      top: { min: parentLim, max: top + (height.value - minHeight) },
+      bottom: { min: parentLim, max: bottom + (height.value - minHeight) },
+    }
+
+    if (props.aspectRatio) {
+      const aspectLimits = {
+        left: {
+          min: left - Math.min(top, bottom) * aspectFactor * 2,
+          max: left + ((height.value - minHeight) / 2) * aspectFactor * 2,
+        },
+        right: {
+          min: right - Math.min(top, bottom) * aspectFactor * 2,
+          max: right + ((height.value - minHeight) / 2) * aspectFactor * 2,
+        },
+        top: {
+          min: top - (Math.min(left, right) / aspectFactor) * 2,
+          max: top + ((width.value - minWidth) / 2 / aspectFactor) * 2,
+        },
+        bottom: {
+          min: bottom - (Math.min(left, right) / aspectFactor) * 2,
+          max: bottom + ((width.value - minWidth) / 2 / aspectFactor) * 2,
+        },
+      }
+
+      if (stick[0] === 'm') {
+        limits.left = {
+          min: Math.max(limits.left.min, aspectLimits.left.min),
+          max: Math.min(limits.left.max, aspectLimits.left.max),
+        }
+        limits.right = {
+          min: Math.max(limits.right.min, aspectLimits.right.min),
+          max: Math.min(limits.right.max, aspectLimits.right.max),
+        }
+      } else if (stick[1] === 'm') {
+        limits.top = {
+          min: Math.max(limits.top.min, aspectLimits.top.min),
+          max: Math.min(limits.top.max, aspectLimits.top.max),
+        }
+        limits.bottom = {
+          min: Math.max(limits.bottom.min, aspectLimits.bottom.min),
+          max: Math.min(limits.bottom.max, aspectLimits.bottom.max),
+        }
+      }
+    }
+
+    return limits
   }
 
   const targetDown = (evt: PointerEvent) => {
@@ -393,71 +382,6 @@ export const useResizable = (
     }
   }
 
-  const calcResizeLimits = (stick: IStick) => {
-    const { aspectFactor, bottom, top, left, right } = state
-    let { minh: minHeight, minw: minWidth } = props
-
-    const parentLim = props.parentLimitation ? 0 : null
-
-    if (props.aspectRatio) {
-      if (minWidth / minHeight > aspectFactor) {
-        minHeight = minWidth / aspectFactor
-      } else {
-        minWidth = aspectFactor * minHeight
-      }
-    }
-
-    const limits: any = {
-      left: { min: parentLim, max: left + (width.value - minWidth) },
-      right: { min: parentLim, max: right + (width.value - minWidth) },
-      top: { min: parentLim, max: top + (height.value - minHeight) },
-      bottom: { min: parentLim, max: bottom + (height.value - minHeight) },
-    }
-
-    if (props.aspectRatio) {
-      const aspectLimits = {
-        left: {
-          min: left - Math.min(top, bottom) * aspectFactor * 2,
-          max: left + ((height.value - minHeight) / 2) * aspectFactor * 2,
-        },
-        right: {
-          min: right - Math.min(top, bottom) * aspectFactor * 2,
-          max: right + ((height.value - minHeight) / 2) * aspectFactor * 2,
-        },
-        top: {
-          min: top - (Math.min(left, right) / aspectFactor) * 2,
-          max: top + ((width.value - minWidth) / 2 / aspectFactor) * 2,
-        },
-        bottom: {
-          min: bottom - (Math.min(left, right) / aspectFactor) * 2,
-          max: bottom + ((width.value - minWidth) / 2 / aspectFactor) * 2,
-        },
-      }
-
-      if (stick[0] === 'm') {
-        limits.left = {
-          min: Math.max(limits.left.min, aspectLimits.left.min),
-          max: Math.min(limits.left.max, aspectLimits.left.max),
-        }
-        limits.right = {
-          min: Math.max(limits.right.min, aspectLimits.right.min),
-          max: Math.min(limits.right.max, aspectLimits.right.max),
-        }
-      } else if (stick[1] === 'm') {
-        limits.top = {
-          min: Math.max(limits.top.min, aspectLimits.top.min),
-          max: Math.min(limits.top.max, aspectLimits.top.max),
-        }
-        limits.bottom = {
-          min: Math.max(limits.bottom.min, aspectLimits.bottom.min),
-          max: Math.min(limits.bottom.max, aspectLimits.bottom.max),
-        }
-      }
-    }
-
-    return limits
-  }
-
   const stickDown = (evt: PointerEvent, stick: IStick, force = false) => {
     if (!props.isResizable && !force) {
       return
@@ -473,6 +397,82 @@ export const useResizable = (
     Object.assign(limits, calcResizeLimits(stick))
 
     emit('resize-start', evt, rect.value)
+  }
+
+  const stickMove = (
+    evt: PointerEvent,
+    delta: IDelta,
+    currentStick: IStick
+  ) => {
+    const { gridY, gridX, snapToGrid } = props
+    const { parentHeight, parentWidth } = state
+
+    let newTop = beforeMoveState.top
+    let newBottom = beforeMoveState.bottom
+    let newLeft = beforeMoveState.left
+    let newRight = beforeMoveState.right
+    switch (currentStick[0]) {
+      case 'b':
+        newBottom = beforeMoveState.bottom + delta.y
+        if (snapToGrid) {
+          newBottom =
+            parentHeight -
+            Math.round((parentHeight - newBottom) / gridY) * gridY
+        }
+        break
+      case 't':
+        newTop = beforeMoveState.top - delta.y
+        if (snapToGrid) {
+          newTop = Math.round(newTop / gridY) * gridY
+        }
+        break
+      default:
+        break
+    }
+
+    switch (currentStick[1]) {
+      case 'r':
+        newRight = beforeMoveState.right + delta.x
+        if (snapToGrid) {
+          newRight =
+            parentWidth - Math.round((parentWidth - newRight) / gridX) * gridX
+        }
+        break
+      case 'l':
+        newLeft = beforeMoveState.left - delta.x
+        if (snapToGrid) {
+          newLeft = Math.round(newLeft / gridX) * gridX
+        }
+        break
+      default:
+        break
+    }
+
+    ;({ newLeft, newRight, newTop, newBottom } = rectCorrectionByLimit({
+      newLeft,
+      newRight,
+      newTop,
+      newBottom,
+    }))
+
+    if (props.aspectRatio) {
+      ;({ newLeft, newRight, newTop, newBottom } = rectCorrectionByAspectRatio(
+        {
+          newLeft,
+          newRight,
+          newTop,
+          newBottom,
+        },
+        currentStick
+      ))
+    }
+
+    state.left = newLeft
+    state.right = newRight
+    state.top = newTop
+    state.bottom = newBottom
+
+    emit('resize', evt, rect.value)
   }
 
   const stickUp = (evt: PointerEvent) => {

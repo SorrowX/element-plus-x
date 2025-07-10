@@ -56,19 +56,16 @@ const {
 
 const createStickMove = (stick: IStick) => {
   return (evt: PointerEvent) => {
-    // console.log('stick-move')
     move(evt, 'stickMove', stick)
   }
 }
 
 const handleStickDown = (evt: PointerEvent, stick: IStick) => {
-  // console.log('stick-start')
   stickDown(evt, stick)
 
   const handleStickMove = createStickMove(stick)
 
   const handleStickUp = () => {
-    // console.log('stick-end')
     document.removeEventListener('pointermove', handleStickMove)
     document.removeEventListener('pointerup', handleStickUp)
     stickUp(evt)
@@ -79,16 +76,13 @@ const handleStickDown = (evt: PointerEvent, stick: IStick) => {
 }
 
 const handleBaseTargetDown = (evt: PointerEvent) => {
-  // console.log('start1')
   targetDown(evt)
 
   const handleTargetMove = (evt: PointerEvent) => {
-    // console.log('move1')
     move(evt, 'targetMove')
   }
 
   const handleTargetUp = (evt: PointerEvent) => {
-    // console.log('end1')
     document.removeEventListener('pointermove', handleTargetMove)
     document.removeEventListener('pointerup', handleTargetUp)
     targetUp(evt)

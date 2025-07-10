@@ -1,3 +1,3 @@
-import type Resizable from './resizable.vue'
+import type Resizable from './index.vue'
 
 export type ResizableInstance = InstanceType<typeof Resizable>
