@@ -4,56 +4,40 @@
       width: 500px;
       height: 500px;
       position: relative;
-      border: 1px solid red;
+      border: 1px solid #ccc;
     "
   >
     <ElResizable
-      :is-active="true"
-      :w="w"
+      :w="200"
       :h="200"
-      :parent-w="500"
-      :parent-h="500"
-      :is-draggable="true"
+      :minw="150"
+      :minh="150"
       :parent-limitation="true"
-      class="contentClass"
-      @resizing="resize"
-      @dragging="resize"
+      class="ep-bg-purple-light"
+      @resize="handleChange"
+      @drag="handleChange"
     >
-      <h3>drag!</h3>
-      <p>{{ top }} х {{ left }}</p>
-      <p>{{ width }} х {{ height }}</p>
+      <el-flex vertical justify="center" style="height: 100%">
+        <el-text>{{ top }} х {{ left }}</el-text>
+        <el-text>{{ width }} х {{ height }}</el-text>
+        <el-text>Drag edge to resize</el-text>
+      </el-flex>
     </ElResizable>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      width: 0,
-      height: 0,
-      top: 0,
-      left: 0,
-      w: 200,
-    }
-  },
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-  mounted() {},
+const top = ref(0)
+const left = ref(0)
+const width = ref(0)
+const height = ref(0)
 
-  methods: {
-    resize(newRect) {
-      this.width = newRect.width
-      this.height = newRect.height
-      this.top = newRect.top
-      this.left = newRect.left
-    },
-  },
+const handleChange = (evt, rect) => {
+  top.value = rect.top
+  left.value = rect.left
+  width.value = rect.width
+  height.value = rect.height
 }
 </script>
-
-<style>
-.contentClass {
-  display: flex;
-  background: #ccc;
-}
-</style>

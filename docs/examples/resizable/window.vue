@@ -1,5 +1,13 @@
 <template>
+  <el-switch
+    v-model="value"
+    size="large"
+    active-text="点我渲染"
+    inactive-text="窗口隐藏"
+  />
+  <br />
   <el-resizable
+    v-show="value"
     :w="200"
     :h="200"
     :minw="150"
@@ -7,8 +15,11 @@
     :parent-w="parentW"
     :parent-h="parentH"
     :parent-limitation="true"
-    class="resizable-wrapper"
-    @resize="handleResize"
+    :z-index="100"
+    style="position: fixed"
+    class="ep-bg-purple-light"
+    @resize="handleChange"
+    @drag="handleChange"
   >
     <el-flex vertical justify="center" style="height: 100%">
       <el-text>{{ top }} х {{ left }}</el-text>
@@ -21,6 +32,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+const value = ref(false)
+
 const top = ref(0)
 const left = ref(0)
 const width = ref(0)
@@ -29,16 +42,10 @@ const height = ref(0)
 const parentW = ref(window.innerWidth)
 const parentH = ref(window.innerHeight)
 
-const handleResize = (rect: any) => {
+const handleChange = (evt, rect) => {
   top.value = rect.top
   left.value = rect.left
   width.value = rect.width
   height.value = rect.height
 }
 </script>
-
-<style lang="scss">
-.resizable-wrapper {
-  background: rgba(230, 232, 234, 1);
-}
-</style>

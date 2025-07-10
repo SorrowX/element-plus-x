@@ -8,18 +8,16 @@
     <div ref="containerRef" :class="ns.e('content')" :style="containerStyle">
       <slot v-bind="{ handleTargetDown }" />
     </div>
-    <div
-      v-for="(stick, index) in sticks"
-      :key="index"
-      :class="[
-        ns.e('stick'),
-        ns.m(`stick-${stick}`),
-        isResizable ? '' : 'not-resizable',
-      ]"
-      @pointerdown.stop.prevent="(ev) => handleStickDown(ev, stick)"
-    >
-      <el-renderer :renderer="() => renderStick(stick)" />
-    </div>
+    <template v-if="isResizable">
+      <div
+        v-for="(stick, index) in sticks"
+        :key="index"
+        :class="[ns.e('stick'), ns.m(`stick-${stick}`)]"
+        @pointerdown.stop.prevent="(evt) => handleStickDown(evt, stick)"
+      >
+        <el-renderer :renderer="() => renderStick(stick)" />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -61,6 +59,8 @@ const createStickMove = (stick: IStick) => {
 }
 
 const handleStickDown = (evt: PointerEvent, stick: IStick) => {
+  if (!props.isResizable) return
+
   stickDown(evt, stick)
 
   const handleStickMove = createStickMove(stick)
@@ -76,6 +76,8 @@ const handleStickDown = (evt: PointerEvent, stick: IStick) => {
 }
 
 const handleBaseTargetDown = (evt: PointerEvent) => {
+  if (!props.isDraggable) return
+
   targetDown(evt)
 
   const handleTargetMove = (evt: PointerEvent) => {

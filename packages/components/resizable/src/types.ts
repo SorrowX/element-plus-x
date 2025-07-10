@@ -1,5 +1,4 @@
 export interface IState {
-  zIndex: number
   parentWidth: number
   parentHeight: number
   left: number

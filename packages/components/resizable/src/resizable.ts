@@ -157,6 +157,10 @@ export const resizableProps = buildProps({
     type: definePropType<number>(Number),
     default: 1,
   },
+  zIndex: {
+    type: definePropType<number>(Number),
+    default: 1,
+  },
 } as const)
 export type ResizableProps = ExtractPropTypes<typeof resizableProps>
 

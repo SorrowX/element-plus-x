@@ -1,19 +1,22 @@
 <template>
-  <el-resizable
-    :w="200"
-    :h="200"
-    :minw="150"
-    :minh="150"
-    :sticks="['mr', 'br']"
-    class="resizable-wrapper"
-    @resize="handleResize"
-  >
-    <el-flex vertical justify="center" style="height: 100%">
-      <el-text>{{ top }} х {{ left }}</el-text>
-      <el-text>{{ width }} х {{ height }}</el-text>
-      <el-text>Drag edge to resize</el-text>
-    </el-flex>
-  </el-resizable>
+  <div class="resizable">
+    <el-resizable
+      :w="200"
+      :h="200"
+      :minw="150"
+      :minh="150"
+      :sticks="['mr', 'br']"
+      class="ep-bg-purple-light"
+      @resize="handleChange"
+      @drag="handleChange"
+    >
+      <el-flex vertical justify="center" style="height: 100%">
+        <el-text>{{ top }} х {{ left }}</el-text>
+        <el-text>{{ width }} х {{ height }}</el-text>
+        <el-text>Drag edge to resize</el-text>
+      </el-flex>
+    </el-resizable>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -24,7 +27,7 @@ const left = ref(0)
 const width = ref(0)
 const height = ref(0)
 
-const handleResize = (rect) => {
+const handleChange = (evt, rect) => {
   top.value = rect.top
   left.value = rect.left
   width.value = rect.width
@@ -32,8 +35,9 @@ const handleResize = (rect) => {
 }
 </script>
 
-<style lang="scss">
-.resizable-wrapper {
-  background: rgba(230, 232, 234, 1);
+<style lang="scss" scoped>
+.resizable {
+  position: relative;
+  height: 200px;
 }
 </style>

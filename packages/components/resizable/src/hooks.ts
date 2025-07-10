@@ -23,7 +23,6 @@ export const useResizable = (
   const state = reactive<IState>({
     parentWidth: 0, //  target父元素的宽度
     parentHeight: 0, //  target父元素的高度
-    zIndex: 1, // target元素的层级
     left: 0, // target元素的left值
     top: 0, // target元素的top值
     right: 0, // target元素的right值
@@ -68,7 +67,7 @@ export const useResizable = (
     return {
       top: `${state.top}px`,
       left: `${state.left}px`,
-      zIndex: state.zIndex,
+      zIndex: props.zIndex,
     }
   })
 
