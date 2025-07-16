@@ -44,7 +44,10 @@ export const ArrayBaseAddition = defineComponent<IArrayBaseAdditionProps>({
             }
             if (form?.disabled) return
             evt.stopPropagation()
-            const defaultValue = props.defaultValue
+            const defaultValue =
+              typeof props.defaultValue === 'function'
+                ? props.defaultValue()
+                : props.defaultValue
             if (props.method === 'unshift') {
               field?.fieldValue.unshift(defaultValue)
             } else {
