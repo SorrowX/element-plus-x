@@ -1,0 +1,72 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(collapse-panel) {
+  border-radius: 4px;
+  box-sizing: border-box;
+  background: #f9fafd;
+  border: 1px solid #f0f2f9;
+
+  $header: #{&}__header;
+  $trigger: #{&}__trigger;
+  $title: #{&}__title;
+  $arrow: #{&}__arrow;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: 0px 12px;
+    padding: 12px 0px;
+    user-select: none;
+    border-bottom: 1.5px solid transparent;
+  }
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__arrow {
+    margin-right: 6px;
+    transition: transform 0.3s;
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #1d2129;
+  }
+
+  &__content {
+    // padding: 0px 12px 12px 12px;
+    padding: 12px;
+  }
+
+  &--disabled {
+    #{$trigger} {
+      cursor: auto;
+    }
+  }
+
+  &--dashed {
+    #{$header} {
+      border-image: repeating-linear-gradient(
+          to right,
+          #dde3ea 0 4px,
+          transparent 2px 8px
+        )
+        1;
+    }
+  }
+
+  &--active {
+    #{$arrow} {
+      transform: rotate(90deg);
+    }
+  }
+}
