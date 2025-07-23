@@ -42,10 +42,9 @@
     color: #1d2129;
   }
 
-  &__content {
-    // padding: 0px 12px 12px 12px;
-    padding: 12px;
-  }
+  // &__content {
+  //   padding: 12px;
+  // }
 
   &--disabled {
     #{$trigger} {

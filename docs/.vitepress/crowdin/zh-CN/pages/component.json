@@ -293,6 +293,11 @@
         "link": "/plain-tabs",
         "text": "PlainTabs 标签页",
         "promotion": "1.1.9"
+      },
+      {
+        "link": "/collapse-panel",
+        "text": "CollapsePanel 折叠面板",
+        "promotion": "1.1.10"
       }
     ]
   }

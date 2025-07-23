@@ -22,10 +22,15 @@ export const collapsePanelProps = buildProps({
     type: definePropType<boolean>(Boolean),
     default: false,
   },
+  // 是否展开渲染
+  lazy: {
+    type: definePropType<boolean>(Boolean),
+    default: false,
+  },
 } as const)
 export type CollapsePanelProps = ExtractPropTypes<typeof collapsePanelProps>
 
 export const collapsePanelEmits = {
-  change: (visible: boolean) => typeof visible === 'boolean',
+  change: (collapse: boolean) => typeof collapse === 'boolean',
 }
 export type CollapsePanelEmits = typeof collapsePanelEmits

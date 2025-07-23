@@ -25,9 +25,16 @@
       </div>
     </div>
     <component :is="ElCollapseTransition">
-      <div v-show="visible" :class="ns.e('content')">
-        <slot />
-      </div>
+      <template v-if="lazy">
+        <div v-if="visible" :class="ns.e('content')">
+          <slot />
+        </div>
+      </template>
+      <template v-else>
+        <div v-show="visible" :class="ns.e('content')">
+          <slot />
+        </div>
+      </template>
     </component>
   </div>
 </template>

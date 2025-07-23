@@ -1,9 +1,9 @@
 <template>
-  <el-collapse-panel title="我是标题" :collapse="false" dashed>
+  <el-collapse-panel title="我是标题" dashed>
     <template #action>
       <el-switch v-model="bool" />
     </template>
-    <div>子内容</div>
+    <div style="padding: 12px">hi, Summer</div>
   </el-collapse-panel>
 </template>
 
