@@ -1,7 +1,11 @@
 <template>
   <div :class="[ns.b(), border ? ns.m('border') : '']">
     <div :class="ns.e('tabs')">
-      <el-tabs v-model="currentTab" v-bind="tabsProps">
+      <el-tabs
+        v-model="currentTab"
+        v-bind="tabsProps"
+        @tab-click="handleTabClick"
+      >
         <el-tab-pane
           v-for="(item, index) in tabs"
           :key="index"
@@ -286,6 +290,10 @@ const handleNodeClick = (data: ITreeOption) => {
     bindValue.value = data.value
   }
   emit('change', bindValue.value, data)
+}
+
+const handleTabClick = () => {
+  searchKey.value = ''
 }
 
 defineExpose({

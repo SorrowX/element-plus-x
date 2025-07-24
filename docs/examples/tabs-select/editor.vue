@@ -1,22 +1,31 @@
 <template>
-  <!-- {{ value }} -->
-  <el-tabs-select
-    v-model="value"
-    :tabs="tabs"
-    :multiple="true"
-    collapse-tags
-    collapse-tags-tooltip
-    :max-collapse-tags="2"
-    style="max-width: 260px"
-    :tabs-props="{ stretch: true }"
-  />
+  <el-editor
+    v-model="html"
+    class="editor"
+    resize
+    placeholder="Please input"
+    :options="[{ label: '标签', value: 'tag' }]"
+  >
+    <template #content>
+      <el-tabs-select-panel
+        v-model="value"
+        v-model:tab="tab"
+        :tabs="tabs"
+        :border="false"
+        style="max-width: 340px"
+      />
+    </template>
+  </el-editor>
+  <pre>{{ value }}</pre>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue'
 
-const value = ref(['Output1', '11', 'tag1'])
-// const value = ref('tag2')
+const html = ref()
+
+const tab = ref('1')
+const value = ref('tag2')
 
 const tabs = ref([
   {
@@ -53,12 +62,6 @@ const tabs = ref([
               {
                 label: 'model1-1',
                 value: 'model1-1',
-                children: [
-                  {
-                    label: 'model1-1-1',
-                    value: 'model1-1-1',
-                  },
-                ],
               },
             ],
           },
@@ -91,7 +94,7 @@ const tabs = ref([
     type: 'option',
     options: [
       {
-        label: '客户信息11',
+        label: '11',
         value: '11',
       },
     ],
@@ -117,3 +120,11 @@ setTimeout(() => {
   ]
 }, 2000)
 </script>
+
+<style lang="scss" scoped>
+.editor {
+  max-width: 450px;
+  min-height: 80px;
+  max-height: 250px;
+}
+</style>
