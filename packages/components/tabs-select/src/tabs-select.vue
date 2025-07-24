@@ -1,9 +1,10 @@
 <template>
   <el-select
+    v-bind="$attrs"
+    ref="selectRef"
     v-model="bindValue"
     :class="ns.b()"
     :multiple="multiple"
-    v-bind="$attrs"
     :popper-class="ns.m('popper')"
   >
     <template #header>
@@ -17,6 +18,7 @@
         :tabs-props="tabsProps"
         :tree-props="treeProps"
         @selected-options-change="handleSelectedChange"
+        @change="handleChange"
       />
     </template>
     <template #default>
@@ -49,6 +51,7 @@ const emit = defineEmits(tabsSelectEmits)
 
 const ns = useNamespace('tabs-select')
 const options = ref<ITreeOption[]>([])
+const selectRef = ref()
 
 const bindValue = computed({
   get() {
@@ -63,5 +66,15 @@ const curTab = ref(props['tabs'][0]?.id || '')
 
 const handleSelectedChange = (selectedOptions: ITreeOption[]) => {
   options.value = selectedOptions
+}
+
+const handleChange = (
+  val: string | number | string[] | number[],
+  data: ITreeOption
+) => {
+  if (!props.multiple) {
+    selectRef.value.handleClickOutside()
+  }
+  emit('change', val, data)
 }
 </script>

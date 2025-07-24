@@ -11,6 +11,9 @@
     .#{$namespace}-select-dropdown__list {
       padding: 0;
     }
+    .#{$namespace}-select-dropdown__empty {
+      display: none;
+    }
   }
 }
 
