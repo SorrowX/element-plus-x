@@ -5,6 +5,7 @@ export default {
       sure: 'sure',
       cancel: 'cancel',
       selectPlaceholder: 'Please search or select',
+      noData: 'No Data',
     },
     tablePage: {
       totalPageSize: '{totalPageSize} pages in total',
@@ -73,6 +74,9 @@ export default {
       loadingText: 'Loading...',
       errorText: 'Request failed',
       noMoreText: 'No more',
+    },
+    tabsSelect: {
+      searchPlaceholder: 'Search by keyword',
     },
   },
 }

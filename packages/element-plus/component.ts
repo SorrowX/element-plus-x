@@ -48,6 +48,10 @@ import { ElPlainTabs } from '@element-plus/components/plain-tabs'
 import { ElLineTree } from '@element-plus/components/line-tree'
 import { ElResizable } from '@element-plus/components/resizable'
 import { ElCollapsePanel } from '@element-plus/components/collapse-panel'
+import {
+  ElTabsSelect,
+  ElTabsSelectPanel,
+} from '@element-plus/components/tabs-select'
 
 import type { Plugin } from 'vue'
 
@@ -98,4 +102,6 @@ export default [
   ElLineTree,
   ElResizable,
   ElCollapsePanel,
+  ElTabsSelect,
+  ElTabsSelectPanel,
 ] as Plugin[]

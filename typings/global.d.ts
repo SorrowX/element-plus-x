@@ -152,6 +152,7 @@ declare module 'vue' {
     ElLineTree: typeof import('element-plus')['ElLineTree']
     ElResizable: typeof import('element-plus')['ElResizable']
     ElCollapsePanel: typeof import('element-plus')['ElCollapsePanel']
+    ElTabsSelect: typeof import('element-plus')['ElTabsSelect']
   }
 
   interface ComponentCustomProperties {

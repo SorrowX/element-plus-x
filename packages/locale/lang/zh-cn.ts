@@ -5,6 +5,7 @@ export default {
       sure: '确定',
       cancel: '取消',
       selectPlaceholder: '请选择或搜索',
+      noData: '暂无数据',
     },
     tablePage: {
       totalPageSize: '共 {totalPageSize} 页',
@@ -73,6 +74,9 @@ export default {
       loadingText: '加载中...',
       errorText: '请求失败，点击重新加载',
       noMoreText: '没有更多了',
+    },
+    tabsSelect: {
+      searchPlaceholder: '请输入关键词以搜索',
     },
   },
 }
