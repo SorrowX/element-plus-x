@@ -7,7 +7,7 @@
     collapse-tags
     collapse-tags-tooltip
     :max-collapse-tags="2"
-    style="max-width: 340px"
+    style="max-width: 260px"
     :tabs-props="{ stretch: true }"
   />
 </template>

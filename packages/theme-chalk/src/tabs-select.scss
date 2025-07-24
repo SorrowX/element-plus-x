@@ -48,6 +48,7 @@
   }
 
   &__content {
+    overflow: auto;
     .#{$namespace}-collapse-panel {
       border-radius: 0;
       border: none;

@@ -18,7 +18,7 @@
         :placeholder="t('epx.tabsSelect.searchPlaceholder')"
       />
     </div>
-    <div :class="ns.e('content')">
+    <el-scrollbar :max-height="maxHeight" :class="ns.e('content')">
       <template v-if="currentTabInfo.type === 'group'">
         <el-collapse-panel
           v-for="(option, index) in currentOptions"
@@ -76,7 +76,7 @@
             !hasChildren(currentOptions) ? ns.em('tree', 'has-no-subchild') : ''
           "
           :filter-node-method="filterNode"
-          style="margin-top: 16px"
+          style="margin-top: 6px"
           @node-click="handleNodeClick"
         >
           <template #default="{ data, node }">
@@ -98,13 +98,14 @@
           </template>
         </el-tree>
       </template>
-    </div>
+    </el-scrollbar>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, provide, ref, watch } from 'vue'
 import {
+  ElScrollbar,
   ElTabPane,
   ElTabs,
   ElTree,

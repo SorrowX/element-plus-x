@@ -55,6 +55,10 @@ export const panelProps = buildProps({
     type: definePropType<boolean>(Boolean),
     default: true,
   },
+  maxHeight: {
+    type: definePropType<string>(String),
+    default: '260px',
+  },
 } as const)
 
 export const panelEmits = {
