@@ -1,6 +1,11 @@
 <template>
   <!-- {{ value }} -->
-  <el-tabs-select v-model="value" :tabs="tabs" style="width: 320px" />
+  <el-tabs-select
+    v-model="value"
+    :tabs="tabs"
+    style="width: 320px"
+    @change="handleChange"
+  />
 </template>
 
 <script setup lang="ts">
@@ -117,6 +122,10 @@ const tabs = ref([
     options: [],
   },
 ])
+
+const handleChange = (value, data) => {
+  console.log(value, data)
+}
 
 // 模拟异步接口请求，更新数据源
 setTimeout(() => {

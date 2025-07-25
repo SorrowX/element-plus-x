@@ -289,7 +289,7 @@ const handleNodeClick = (data: ITreeOption) => {
   } else {
     bindValue.value = data.value
   }
-  emit('change', bindValue.value, data)
+  emit('change', data.value, data)
 }
 
 const handleTabClick = () => {
