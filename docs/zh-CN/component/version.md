@@ -2,13 +2,15 @@
 
 每个版本更新的内容会在此记录。
 
-## V1.1.10 (更新时间: 2025-06-18 09:32) - 未发布
+## V1.1.10 (更新时间: 2025-06-18 09:32)
 
 1. 新增 LineTree 组件
 2. ReadMore 组件类名修改，防止 tailwind.css 对其污染
 3. DraggableTable 组件新增 disabled 功能
 4. 新增 Resizable 组件
 5. Addition 组件 defaultValue 属性支持函数
+6. 新增 CollapsePanel 折叠面板
+7. 新增 TabsSelect 标签页选择器
 
 ## V1.1.9 (更新时间: 2025-06-16 15:27)
 
