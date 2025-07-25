@@ -1,6 +1,6 @@
 <template>
   <div :class="[ns.b(), border ? ns.m('border') : '']" :style="panelStyle">
-    <div :class="ns.e('tabs')">
+    <div v-show="showTabs" :class="ns.e('tabs')">
       <el-tabs
         v-model="currentTab"
         v-bind="tabsProps"
@@ -261,6 +261,8 @@ const showPanel = (index: number) => {
   if (!treeInstance) return true
   return !treeInstance.isEmpty
 }
+
+const showTabs = computed(() => props.tabs.length > 1)
 
 const isEmpty = computed(() => {
   const treeInstances = Object.values(treeRefs.value)
