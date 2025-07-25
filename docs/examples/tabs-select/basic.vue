@@ -1,11 +1,6 @@
 <template>
   <!-- {{ value }} -->
-  <el-tabs-select
-    v-model="value"
-    :tabs="tabs"
-    style="max-width: 260px"
-    :tabs-props="{ stretch: true }"
-  />
+  <el-tabs-select v-model="value" :tabs="tabs" style="width: 320px" />
 </template>
 
 <script setup lang="ts">
@@ -15,7 +10,7 @@ const value = ref('tag2')
 
 const tabs = ref([
   {
-    title: '节点',
+    title: '分组展示',
     id: '1',
     type: 'group',
     options: [
@@ -66,7 +61,7 @@ const tabs = ref([
     ],
   },
   {
-    title: '通用',
+    title: '列表展示',
     id: '2',
     type: 'option',
     options: [
@@ -81,7 +76,7 @@ const tabs = ref([
     ],
   },
   {
-    title: '客户信息',
+    title: '树形展示',
     id: '3',
     type: 'option',
     options: [
@@ -116,14 +111,14 @@ const tabs = ref([
     ],
   },
   {
-    title: '客户标签',
+    title: '异步数据',
     id: '4',
     type: 'option',
     options: [],
   },
 ])
 
-// 模拟异步接口请求数据更新数据源
+// 模拟异步接口请求，更新数据源
 setTimeout(() => {
   tabs.value[3].options = [
     {
@@ -135,5 +130,5 @@ setTimeout(() => {
       value: 'tag2',
     },
   ]
-}, 2000)
+}, 1000)
 </script>

@@ -1,24 +1,25 @@
 <template>
-  {{ value }}
+  <pre>{{ value }}</pre>
   <el-tabs-select-panel
     v-model="value"
     v-model:tab="tab"
+    multiple
     :tabs="tabs"
-    :multiple="false"
-    style="max-width: 340px"
+    prefix-label=""
+    style="max-width: 380px"
+    :tabs-props="{ stretch: true }"
   />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-const tab = ref('2')
+const tab = ref('4')
 
-// const value = ref(['Output1', '11', 'tag1'])
-const value = ref('tag2')
+const value = ref(['Output1', 'time'])
 
 const tabs = ref([
   {
-    title: '节点',
+    title: '分组展示',
     id: '1',
     type: 'group',
     options: [
@@ -51,6 +52,12 @@ const tabs = ref([
               {
                 label: 'model1-1',
                 value: 'model1-1',
+                children: [
+                  {
+                    label: 'model1-1-1',
+                    value: 'model1-1-1',
+                  },
+                ],
               },
             ],
           },
@@ -63,12 +70,12 @@ const tabs = ref([
     ],
   },
   {
-    title: '通用',
+    title: '列表展示',
     id: '2',
     type: 'option',
     options: [
       {
-        label: '当前北京时间1',
+        label: '当前北京时间',
         value: 'time',
       },
       {
@@ -78,24 +85,49 @@ const tabs = ref([
     ],
   },
   {
-    title: '客户信息',
+    title: '树形展示',
     id: '3',
     type: 'option',
     options: [
       {
-        label: '11',
-        value: '11',
+        label: 'Vip客户',
+        value: 'vip',
+        children: [
+          {
+            label: '客户1',
+            value: 'vip-customer1',
+          },
+          {
+            label: '客户2',
+            value: 'vip-customer2',
+          },
+        ],
+      },
+      {
+        label: '普通客户',
+        value: 'general',
+        children: [
+          {
+            label: '普通-客户1',
+            value: 'general-customer1',
+          },
+          {
+            label: '普通-客户2',
+            value: 'general-customer2',
+          },
+        ],
       },
     ],
   },
   {
-    title: '客户标签',
+    title: '异步数据',
     id: '4',
     type: 'option',
     options: [],
   },
 ])
 
+// 模拟异步接口请求，更新数据源
 setTimeout(() => {
   tabs.value[3].options = [
     {
@@ -107,5 +139,5 @@ setTimeout(() => {
       value: 'tag2',
     },
   ]
-}, 2000)
+}, 1000)
 </script>

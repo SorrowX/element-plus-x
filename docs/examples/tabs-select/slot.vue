@@ -1,67 +1,21 @@
 <template>
-  <el-editor
-    ref="editor"
-    v-model="html"
-    class="editor"
-    resize
-    disable-enter-emit
-    placeholder="输入点什么"
-    style="margin-bottom: 12px"
-  />
-
-  <el-popover
-    placement="right"
-    :visible="visible"
-    :width="320"
-    :popper-style="{ padding: '0px' }"
+  <!-- {{ value }} -->
+  <el-tabs-select
+    v-model="select"
+    :tabs="tabs"
+    style="width: 300px"
+    :show-search="false"
   >
-    <template #reference>
-      <el-button style="margin-right: 16px" @click="visible = !visible">
-        插入内容
-      </el-button>
+    <template #option="{ data }">
+      <span style="color: #f60">{{ data.label }}-{{ data.value }}</span>
     </template>
-    <el-tabs-select-panel
-      v-model="select"
-      v-model:tab="tab"
-      :tabs="tabs"
-      :border="false"
-      @change="handleChange"
-    />
-  </el-popover>
-
-  <el-button @click="getText"> 获取纯文本内容 </el-button>
-
-  <pre>{{ text }}</pre>
+  </el-tabs-select>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getTextContent } from 'element-plus-x'
 
-const html = ref()
-const visible = ref(false)
-const tab = ref('1')
 const select = ref()
-const editor = ref()
-const text = ref()
-
-const handleChange = (value, data) => {
-  visible.value = false
-  select.value = ''
-
-  editor.value.insertHtml(
-    ` <tag disable-transitions id="${data.value}" class="tag" text="{{ ${data.label} }}"></tag> `
-  )
-}
-
-function getText() {
-  text.value = getTextContent(editor.value.getHtml(), [
-    {
-      tag: 'tag',
-      attr: 'id',
-    },
-  ])
-}
 
 const tabs = ref([
   {
@@ -165,34 +119,5 @@ const tabs = ref([
       },
     ],
   },
-  {
-    title: '异步数据',
-    id: '4',
-    type: 'option',
-    options: [],
-  },
 ])
-
-// 模拟异步接口请求，更新数据源
-setTimeout(() => {
-  tabs.value[3].options = [
-    {
-      label: '标签1',
-      value: 'tag1',
-    },
-    {
-      label: '标签2',
-      value: 'tag2',
-    },
-  ]
-}, 1000)
 </script>
-
-<style lang="scss" scoped>
-.editor {
-  max-width: 450px;
-  min-height: 80px;
-  max-height: 250px;
-  line-height: 26px;
-}
-</style>

@@ -17,9 +17,16 @@
         :prefix-label="prefixLabel"
         :tabs-props="tabsProps"
         :tree-props="treeProps"
+        :panel-style="panelStyle"
+        :max-height="maxHeight"
+        :show-search="showSearch"
         @selected-options-change="handleSelectedChange"
         @change="handleChange"
-      />
+      >
+        <template #option="scoped">
+          <slot v-bind="scoped" name="option" />
+        </template>
+      </Panel>
     </template>
     <template #default>
       <div style="display: none">

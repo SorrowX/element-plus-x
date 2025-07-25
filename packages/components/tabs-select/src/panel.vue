@@ -1,5 +1,5 @@
 <template>
-  <div :class="[ns.b(), border ? ns.m('border') : '']">
+  <div :class="[ns.b(), border ? ns.m('border') : '']" :style="panelStyle">
     <div :class="ns.e('tabs')">
       <el-tabs
         v-model="currentTab"
@@ -14,7 +14,7 @@
         />
       </el-tabs>
     </div>
-    <div :class="ns.e('search')">
+    <div v-if="showSearch" :class="ns.e('search')">
       <el-input
         v-model="searchKey"
         clearable

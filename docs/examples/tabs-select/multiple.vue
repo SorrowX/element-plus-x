@@ -1,67 +1,21 @@
 <template>
-  <el-editor
-    ref="editor"
-    v-model="html"
-    class="editor"
-    resize
-    disable-enter-emit
-    placeholder="输入点什么"
-    style="margin-bottom: 12px"
+  <!-- {{ value }} -->
+  <el-tabs-select
+    v-model="value"
+    multiple
+    fit-input-width
+    collapse-tags
+    collapse-tags-tooltip
+    :max-collapse-tags="2"
+    :tabs="tabs"
+    style="width: 320px"
   />
-
-  <el-popover
-    placement="right"
-    :visible="visible"
-    :width="320"
-    :popper-style="{ padding: '0px' }"
-  >
-    <template #reference>
-      <el-button style="margin-right: 16px" @click="visible = !visible">
-        插入内容
-      </el-button>
-    </template>
-    <el-tabs-select-panel
-      v-model="select"
-      v-model:tab="tab"
-      :tabs="tabs"
-      :border="false"
-      @change="handleChange"
-    />
-  </el-popover>
-
-  <el-button @click="getText"> 获取纯文本内容 </el-button>
-
-  <pre>{{ text }}</pre>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getTextContent } from 'element-plus-x'
 
-const html = ref()
-const visible = ref(false)
-const tab = ref('1')
-const select = ref()
-const editor = ref()
-const text = ref()
-
-const handleChange = (value, data) => {
-  visible.value = false
-  select.value = ''
-
-  editor.value.insertHtml(
-    ` <tag disable-transitions id="${data.value}" class="tag" text="{{ ${data.label} }}"></tag> `
-  )
-}
-
-function getText() {
-  text.value = getTextContent(editor.value.getHtml(), [
-    {
-      tag: 'tag',
-      attr: 'id',
-    },
-  ])
-}
+const value = ref(['Output1', 'time'])
 
 const tabs = ref([
   {
@@ -187,12 +141,3 @@ setTimeout(() => {
   ]
 }, 1000)
 </script>
-
-<style lang="scss" scoped>
-.editor {
-  max-width: 450px;
-  min-height: 80px;
-  max-height: 250px;
-  line-height: 26px;
-}
-</style>

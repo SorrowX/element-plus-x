@@ -22,12 +22,12 @@
   $option: #{&}__option;
   $label: #{&}__option-label;
 
+  box-sizing: border-box;
   padding: 8px 12px 12px 12px;
 
   &--border {
-    border-radius: 4px;
-    border: 1px solid #f0f2f9;
-    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.16);
+    border-radius: getCssVar('border-radius-base');
+    box-shadow: getCssVar('box-shadow-light');
   }
 
   .#{$namespace}-tabs__header {

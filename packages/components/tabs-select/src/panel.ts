@@ -7,6 +7,8 @@ import {
   isString,
 } from '@element-plus/utils'
 
+import type { CSSProperties } from 'vue'
+
 export interface ITreeOption {
   label: string
   value: string
@@ -58,6 +60,13 @@ export const panelProps = buildProps({
   maxHeight: {
     type: definePropType<string>(String),
     default: '260px',
+  },
+  panelStyle: {
+    type: definePropType<CSSProperties>(Object),
+  },
+  showSearch: {
+    type: definePropType<boolean>(Boolean),
+    default: true,
   },
 } as const)
 
