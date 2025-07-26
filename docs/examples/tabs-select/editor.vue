@@ -25,6 +25,7 @@
       v-model:tab="tab"
       :tabs="tabs"
       :border="false"
+      value-key="value"
       @change="handleChange"
     />
   </el-popover>
@@ -45,7 +46,7 @@ const select = ref()
 const editor = ref()
 const text = ref()
 
-const handleChange = (value, data) => {
+const handleChange = (data) => {
   visible.value = false
   select.value = ''
 

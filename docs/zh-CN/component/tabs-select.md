@@ -28,6 +28,16 @@ tabs-select/multiple
 
 :::
 
+## 支持绑定对象和对象数组
+
+使用`value-key`属性来绑定对象和对象数组，和 ElSelect`功能一致
+
+:::demo
+
+tabs-select/basic2
+
+:::
+
 ## 自定义 Option
 
 使用`option`插槽来自定义每一项内容,参数值同`ElTree`默认插槽的`node`和`data`
@@ -45,6 +55,14 @@ tabs-select/slot
 :::demo 使用姿势和`tabs-select`一致
 
 tabs-select/panel
+
+:::
+
+## 面板绑定也支持对象和对象数组
+
+:::demo
+
+tabs-select/panel2
 
 :::
 
