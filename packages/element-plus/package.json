@@ -1,6 +1,6 @@
 {
   "name": "element-plus-x",
-  "version": "1.1.11-beta1",
+  "version": "1.1.11-beta2",
   "description": "A Component Library for Vue 3",
   "keywords": [
     "element-plus-x",
@@ -12,9 +12,9 @@
     "vue",
     "vue3"
   ],
-  "homepage": "https://element-plus.org/",
+  "homepage": "https://sorrowx.github.io/epx/zh-CN/component/overview.html",
   "bugs": {
-    "url": "https://github.com/element-plus/element-plus/issues"
+    "url": "https://github.com/SorrowX/element-plus-x/issues"
   },
   "license": "MIT",
   "main": "lib/index.js",
@@ -65,7 +65,7 @@
   "jsdelivr": "dist/index.full.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/element-plus/element-plus.git"
+    "url": "git+https://github.com/SorrowX/element-plus-x.git"
   },
   "publishConfig": {
     "access": "public"
