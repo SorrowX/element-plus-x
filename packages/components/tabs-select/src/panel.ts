@@ -14,6 +14,7 @@ export interface ITreeOption {
   value: string
   disabled?: boolean
   children?: ITreeOption[]
+  [key: string]: any
 }
 
 export interface ITabItem {
@@ -22,15 +23,22 @@ export interface ITabItem {
   id: string
   options: ITreeOption[]
 }
+export type IPanelModelValue =
+  | string
+  | number
+  | string[]
+  | number[]
+  | Record<string, any>
+  | Record<string, any>[]
 
 export const panelProps = buildProps({
   modelValue: {
-    type: definePropType<string | number | string[] | number[]>([
-      String,
-      Number,
+    type: definePropType<Array<IPanelModelValue>>([
       Array,
+      Number,
+      String,
+      Object,
     ]),
-    default: () => '',
   },
   tabs: {
     type: definePropType<Array<ITabItem>>(Array),
@@ -68,13 +76,16 @@ export const panelProps = buildProps({
     type: definePropType<boolean>(Boolean),
     default: true,
   },
+  valueKey: {
+    type: definePropType<string>(String),
+  },
 } as const)
 
 export const panelEmits = {
   'update:tab': (val: string | number) => isString(val) || isNumber(val),
-  'update:modelValue': (val: string | number | string[] | number[]) =>
-    isString(val) || isNumber(val) || isArray(val),
-  change: (val: string | number | string[] | number[], data: ITreeOption) =>
-    isString(val) || isNumber(val) || isArray(val) || isObject(data),
+  'update:modelValue': (val: IPanelModelValue) =>
+    isString(val) || isNumber(val) || isArray(val) || isObject(val),
+  change: (val: IPanelModelValue) =>
+    isString(val) || isNumber(val) || isArray(val) || isObject(val),
   'selected-options-change': (val: ITreeOption[]) => isArray(val),
 }

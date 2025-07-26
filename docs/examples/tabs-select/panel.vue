@@ -3,7 +3,7 @@
   <el-tabs-select-panel
     v-model="value"
     v-model:tab="tab"
-    multiple
+    :multiple="false"
     :tabs="tabs"
     prefix-label=""
     style="max-width: 380px"
@@ -15,7 +15,8 @@
 import { ref } from 'vue'
 const tab = ref('4')
 
-const value = ref(['Output1', 'time'])
+// const value = ref(['Output1', 'time'])
+const value = ref('Output1')
 
 const tabs = ref([
   {

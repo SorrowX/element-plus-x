@@ -5,6 +5,7 @@
     v-model="bindValue"
     :class="ns.b()"
     :multiple="multiple"
+    :value-key="valueKey"
     :popper-class="ns.m('popper')"
   >
     <template #header>
@@ -20,8 +21,9 @@
         :panel-style="panelStyle"
         :max-height="maxHeight"
         :show-search="showSearch"
-        @selected-options-change="handleSelectedChange"
+        :value-key="valueKey"
         @change="handleChange"
+        @selected-options-change="handleSelectedChange"
       >
         <template #option="scoped">
           <slot v-bind="scoped" name="option" />
@@ -46,7 +48,7 @@ import { computed, ref } from 'vue'
 import { ElOption, ElSelect, useNamespace } from 'element-plus'
 import { tabsSelectEmits, tabsSelectProps } from './tabs-select'
 import Panel from './panel.vue'
-import type { ITreeOption } from './panel'
+import type { IPanelModelValue, ITreeOption } from './panel'
 
 defineOptions({
   name: 'ElTabsSelect',
@@ -64,7 +66,7 @@ const bindValue = computed({
   get() {
     return props.modelValue
   },
-  set(value: string | number | string[] | number[]) {
+  set(value: IPanelModelValue) {
     emit('update:modelValue', value)
   },
 })
@@ -75,13 +77,10 @@ const handleSelectedChange = (selectedOptions: ITreeOption[]) => {
   options.value = selectedOptions
 }
 
-const handleChange = (
-  val: string | number | string[] | number[],
-  data: ITreeOption
-) => {
+const handleChange = (val: IPanelModelValue) => {
   if (!props.multiple) {
     selectRef.value.handleClickOutside()
   }
-  emit('change', val, data)
+  emit('change', val)
 }
 </script>

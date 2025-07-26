@@ -1,9 +1,11 @@
 <template>
-  <!-- {{ value }} -->
+  <pre>{{ value }}</pre>
   <el-tabs-select
     v-model="value"
     :tabs="tabs"
     style="width: 320px"
+    value-key="value"
+    :multiple="false"
     @change="handleChange"
   />
 </template>
@@ -11,7 +13,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const value = ref('tag2')
+// const value = ref([
+//   { label: 'Output1', value: 'Output1' },
+//   {
+//     label: '标签1',
+//     value: 'tag1',
+//   },
+// ])
+const value = ref({ label: 'Output1', value: 'Output1' })
 
 const tabs = ref([
   {

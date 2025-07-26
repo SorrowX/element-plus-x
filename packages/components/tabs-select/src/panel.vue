@@ -27,7 +27,7 @@
         <el-collapse-panel
           v-for="(option, index) in currentOptions"
           v-show="showPanel(index)"
-          :key="option.value ?? index"
+          :key="option[realValueKey] ?? index"
           :title="option.label"
           :collapse="false"
         >
@@ -51,9 +51,7 @@
                 <div
                   :class="[
                     ns.e('option'),
-                    arrBindValue.includes(data.value)
-                      ? ns.em('option', 'selected')
-                      : '',
+                    checkSelectedState(data) ? ns.em('option', 'selected') : '',
                   ]"
                 >
                   <span v-if="prefixLabel" :class="ns.e('option-prefix')">
@@ -88,9 +86,7 @@
               <div
                 :class="[
                   ns.e('option'),
-                  arrBindValue.includes(data.value)
-                    ? ns.em('option', 'selected')
-                    : '',
+                  checkSelectedState(data) ? ns.em('option', 'selected') : '',
                 ]"
               >
                 <span v-if="prefixLabel" :class="ns.e('option-prefix')">
@@ -121,7 +117,7 @@ import { Search } from '@element-plus/icons-vue'
 import { ElCollapsePanel } from '@element-plus/components/collapse-panel/index'
 import { panelEmits, panelProps } from './panel'
 import type { TreeInstance } from 'element-plus'
-import type { ITabItem, ITreeOption } from './panel'
+import type { IPanelModelValue, ITabItem, ITreeOption } from './panel'
 
 defineOptions({
   name: 'ElTabsSelectPanel',
@@ -150,10 +146,13 @@ const bindValue = computed({
   get() {
     return props.modelValue
   },
-  set(value: string | number | string[] | number[]) {
+  set(value: IPanelModelValue) {
     emit('update:modelValue', value)
   },
 })
+
+const hasValueKey = computed(() => !!props.valueKey)
+const realValueKey = computed(() => props.valueKey ?? 'value')
 
 const arrBindValue: any = computed(() => {
   return props.multiple
@@ -227,10 +226,22 @@ const allFlattenOptions = computed(() =>
 )
 
 const currentSelectedOptions = computed(() => {
-  return allFlattenOptions.value.filter((item) =>
-    arrBindValue.value.includes(item.value)
+  return allFlattenOptions.value.filter((data: ITreeOption) =>
+    checkSelectedState(data)
   )
 })
+
+const checkSelectedState = (data: ITreeOption) => {
+  const valueKey = realValueKey.value
+  if (hasValueKey.value) {
+    const list = arrBindValue.value
+      .map((item: ITreeOption) => item[valueKey])
+      .filter((_: ITreeOption) => _)
+    return list.includes(data[valueKey])
+  } else {
+    return arrBindValue.value.includes(data[valueKey])
+  }
+}
 
 watch(
   () => currentSelectedOptions.value,
@@ -277,21 +288,41 @@ const hasChildren = (data: ITreeOption[]) => {
 }
 
 const handleNodeClick = (data: ITreeOption) => {
-  if (props.multiple) {
-    const list: any = bindValue.value
-    if (list.includes(data.value)) {
-      const newList = list.filter(
-        (value: string | number) => value !== data.value
+  const valueKey = realValueKey.value
+  if (hasValueKey.value) {
+    if (props.multiple) {
+      const list: IPanelModelValue = bindValue.value ?? []
+
+      const index = list.findIndex(
+        (item: ITreeOption) => item[props.valueKey!] === data[valueKey]
       )
-      bindValue.value = newList
-    } else {
-      list.push(data.value)
+      if (index === -1) {
+        list.push(data)
+      } else {
+        list.splice(index, 1)
+      }
       bindValue.value = list
+    } else {
+      bindValue.value = data
     }
   } else {
-    bindValue.value = data.value
+    if (props.multiple) {
+      const list: any = bindValue.value
+      if (list.includes(data[valueKey])) {
+        const newList = list.filter(
+          (value: string | number) => value !== data[valueKey]
+        )
+        bindValue.value = newList
+      } else {
+        list.push(data[valueKey])
+        bindValue.value = list
+      }
+    } else {
+      bindValue.value = data[valueKey]
+    }
   }
-  emit('change', data.value, data)
+
+  emit('change', hasValueKey.value ? data : data[valueKey])
 }
 
 const handleTabClick = () => {

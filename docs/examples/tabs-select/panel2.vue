@@ -1,17 +1,23 @@
 <template>
-  <!-- {{ value }} -->
-  <el-tabs-select
+  <pre>{{ value }}</pre>
+  <el-tabs-select-panel
     v-model="value"
+    v-model:tab="tab"
+    :multiple="true"
     :tabs="tabs"
-    style="width: 320px"
-    @change="handleChange"
+    prefix-label=""
+    style="max-width: 380px"
+    value-key="id"
+    :tabs-props="{ stretch: true }"
   />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+const tab = ref('4')
 
-const value = ref('tag2')
+const value = ref([{ id: 'tag1' }])
+// const value = ref({ id: 'tag1' })
 
 const tabs = ref([
   {
@@ -24,17 +30,17 @@ const tabs = ref([
         children: [
           {
             label: 'Output1',
-            value: 'Output1',
+            id: 'Output1',
             children: [
               {
                 label: 'Output1-1',
-                value: 'Output1-1',
+                id: 'Output1-1',
               },
             ],
           },
           {
             label: 'Output2',
-            value: 'Output2',
+            id: 'Output2',
           },
         ],
       },
@@ -43,15 +49,15 @@ const tabs = ref([
         children: [
           {
             label: 'model1',
-            value: 'model1',
+            id: 'model1',
             children: [
               {
                 label: 'model1-1',
-                value: 'model1-1',
+                id: 'model1-1',
                 children: [
                   {
                     label: 'model1-1-1',
-                    value: 'model1-1-1',
+                    id: 'model1-1-1',
                   },
                 ],
               },
@@ -59,7 +65,7 @@ const tabs = ref([
           },
           {
             label: 'model2',
-            value: 'model2',
+            id: 'model2',
           },
         ],
       },
@@ -72,11 +78,11 @@ const tabs = ref([
     options: [
       {
         label: '当前北京时间',
-        value: 'time',
+        id: 'time',
       },
       {
         label: 'SOP开始时间',
-        value: 'sop',
+        id: 'sop',
       },
     ],
   },
@@ -87,29 +93,29 @@ const tabs = ref([
     options: [
       {
         label: 'Vip客户',
-        value: 'vip',
+        id: 'vip',
         children: [
           {
             label: '客户1',
-            value: 'vip-customer1',
+            id: 'vip-customer1',
           },
           {
             label: '客户2',
-            value: 'vip-customer2',
+            id: 'vip-customer2',
           },
         ],
       },
       {
         label: '普通客户',
-        value: 'general',
+        id: 'general',
         children: [
           {
             label: '普通-客户1',
-            value: 'general-customer1',
+            id: 'general-customer1',
           },
           {
             label: '普通-客户2',
-            value: 'general-customer2',
+            id: 'general-customer2',
           },
         ],
       },
@@ -123,20 +129,16 @@ const tabs = ref([
   },
 ])
 
-const handleChange = (value) => {
-  console.log(value)
-}
-
 // 模拟异步接口请求，更新数据源
 setTimeout(() => {
   tabs.value[3].options = [
     {
       label: '标签1',
-      value: 'tag1',
+      id: 'tag1',
     },
     {
       label: '标签2',
-      value: 'tag2',
+      id: 'tag2',
     },
   ]
 }, 1000)
