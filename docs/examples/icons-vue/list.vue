@@ -30,12 +30,15 @@ import { computed, ref } from 'vue'
 import { IconsVue } from 'element-plus-x'
 import clipboardCopy from 'clipboard-copy'
 import { ElMessage } from 'element-plus'
+const { createIconComponent } = IconsVue
 
 const query = ref('')
 
 const filterList = computed(() => {
   return Object.values(IconsVue).filter((component) => {
-    return component.name.toLowerCase().includes(query.value.toLowerCase())
+    return createIconComponent === component
+      ? false
+      : component.name?.toLowerCase()?.includes?.(query.value.toLowerCase())
   })
 })
 
