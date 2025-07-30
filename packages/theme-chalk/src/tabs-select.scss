@@ -1,6 +1,7 @@
 @use 'element-plus/theme-chalk/src/common/var.scss' as *;
 @use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
 @use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+@use './common/var.scss' as *;
 
 @include b(tabs-select) {
   &--popper {
@@ -72,6 +73,9 @@
         border-radius: 4px;
         margin-bottom: 4px;
         background-color: transparent !important;
+        &:hover {
+          background-color: getCssVar('tree-node-hover-bg-color') !important;
+        }
       }
       .#{$namespace}-tree-node__content:has(#{$selected}) {
         background-color: getCssVar('tree-node-hover-bg-color') !important;
@@ -102,6 +106,14 @@
 
   &__search {
     margin-bottom: 8px;
+  }
+
+  &__loading {
+    padding: 6px;
+    margin: 0;
+    font-size: 12px;
+    text-align: center;
+    color: getCssVar('text-color', 'placeholder');
   }
 
   &__empty {

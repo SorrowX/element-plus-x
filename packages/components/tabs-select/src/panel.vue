@@ -23,27 +23,70 @@
       />
     </div>
     <el-scrollbar :max-height="maxHeight" :class="ns.e('content')">
-      <template v-if="currentTabInfo.type === 'group'">
-        <el-collapse-panel
-          v-for="(option, index) in currentOptions"
-          v-show="showPanel(index)"
-          :key="option[realValueKey] ?? index"
-          :title="option.label"
-          :collapse="false"
-        >
+      <div v-if="loading && remoteMethod" :class="ns.e('loading')">
+        {{ t('epx.tabsSelect.loading') }}
+      </div>
+      <template v-else>
+        <template v-if="currentTabInfo.type === 'group'">
+          <el-collapse-panel
+            v-for="(option, index) in currentOptions"
+            v-show="showPanel(index)"
+            :key="option[realValueKey] ?? index"
+            :title="option.label"
+            :collapse="false"
+          >
+            <el-tree
+              v-if="option.children"
+              v-bind="treeProps"
+              :ref="(treeInstance) => collectTreeInstance(index, treeInstance)"
+              default-expand-all
+              :data="option.children"
+              :expand-on-click-node="false"
+              :class="
+                !hasChildren(option.children)
+                  ? ns.em('tree', 'has-no-subchild')
+                  : ''
+              "
+              :filter-node-method="filterNode"
+              @node-click="handleNodeClick"
+            >
+              <template #default="{ data, node }">
+                <slot name="option" v-bind="{ data, node }">
+                  <div
+                    :class="[
+                      ns.e('option'),
+                      checkSelectedState(data)
+                        ? ns.em('option', 'selected')
+                        : '',
+                    ]"
+                  >
+                    <span v-if="prefixLabel" :class="ns.e('option-prefix')">
+                      {{ prefixLabel }}
+                    </span>
+                    <span :class="ns.e('option-label')">{{ data.label }}</span>
+                  </div>
+                </slot>
+              </template>
+            </el-tree>
+          </el-collapse-panel>
+          <div v-if="isEmpty" :class="ns.e('empty')">
+            <div :class="ns.e('empty-text')">{{ t('epx.common.noData') }}</div>
+          </div>
+        </template>
+        <template v-if="currentTabInfo.type === 'option'">
           <el-tree
-            v-if="option.children"
             v-bind="treeProps"
-            :ref="(treeInstance) => collectTreeInstance(index, treeInstance)"
+            :ref="(treeInstance) => collectTreeInstance(0, treeInstance)"
             default-expand-all
-            :data="option.children"
+            :data="currentOptions"
             :expand-on-click-node="false"
             :class="
-              !hasChildren(option.children)
+              !hasChildren(currentOptions)
                 ? ns.em('tree', 'has-no-subchild')
                 : ''
             "
             :filter-node-method="filterNode"
+            style="margin-top: 6px"
             @node-click="handleNodeClick"
           >
             <template #default="{ data, node }">
@@ -62,41 +105,7 @@
               </slot>
             </template>
           </el-tree>
-        </el-collapse-panel>
-        <div v-if="isEmpty" :class="ns.e('empty')">
-          <div :class="ns.e('empty-text')">{{ t('epx.common.noData') }}</div>
-        </div>
-      </template>
-      <template v-if="currentTabInfo.type === 'option'">
-        <el-tree
-          v-bind="treeProps"
-          :ref="(treeInstance) => collectTreeInstance(0, treeInstance)"
-          default-expand-all
-          :data="currentOptions"
-          :expand-on-click-node="false"
-          :class="
-            !hasChildren(currentOptions) ? ns.em('tree', 'has-no-subchild') : ''
-          "
-          :filter-node-method="filterNode"
-          style="margin-top: 6px"
-          @node-click="handleNodeClick"
-        >
-          <template #default="{ data, node }">
-            <slot name="option" v-bind="{ data, node }">
-              <div
-                :class="[
-                  ns.e('option'),
-                  checkSelectedState(data) ? ns.em('option', 'selected') : '',
-                ]"
-              >
-                <span v-if="prefixLabel" :class="ns.e('option-prefix')">
-                  {{ prefixLabel }}
-                </span>
-                <span :class="ns.e('option-label')">{{ data.label }}</span>
-              </div>
-            </slot>
-          </template>
-        </el-tree>
+        </template>
       </template>
     </el-scrollbar>
   </div>
@@ -113,6 +122,7 @@ import {
   useLocale,
   useNamespace,
 } from 'element-plus'
+import { isFunction } from '@element-plus/utils'
 import { Search } from '@element-plus/icons-vue'
 import { ElCollapsePanel } from '@element-plus/components/collapse-panel/index'
 import { panelEmits, panelProps } from './panel'
@@ -251,14 +261,20 @@ watch(
   { immediate: true }
 )
 
-watch(
-  () => searchKey.value,
-  (val) => {
-    const value = val.trim()
+const handleSearch = () => {
+  const value = searchKey.value.trim()
+  if (props.remoteMethod && isFunction(props.remoteMethod)) {
+    props.remoteMethod(value, currentTab.value as string | number)
+  } else {
     Object.values(treeRefs.value).forEach((tree) => {
       tree.filter(value)
     })
   }
+}
+
+watch(
+  () => searchKey.value,
+  () => handleSearch()
 )
 
 const filterNode = (value: string, data: any) => {

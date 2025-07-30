@@ -77,6 +77,7 @@ export default {
     },
     tabsSelect: {
       searchPlaceholder: 'Search by keyword',
+      loading: 'Loading...',
     },
   },
 }

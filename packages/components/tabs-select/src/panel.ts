@@ -79,6 +79,15 @@ export const panelProps = buildProps({
   valueKey: {
     type: definePropType<string>(String),
   },
+  loading: {
+    type: definePropType<boolean>(Boolean),
+    default: false,
+  },
+  remoteMethod: {
+    type: definePropType<
+      (query: string, currentTabId: string | number) => void
+    >(Function),
+  },
 } as const)
 
 export const panelEmits = {
