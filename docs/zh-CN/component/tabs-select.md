@@ -48,6 +48,16 @@ tabs-select/slot
 
 :::
 
+## 远程搜索
+
+使用`loading`来控制加载状态,使用`remoteMethod`来加载远程数据
+
+:::demo 注意这个远程搜索和`ElSelect`交互不一致，但是使用姿势类似
+
+tabs-select/select-loading
+
+:::
+
 ## 面板
 
 `tabs-select`组件弹窗内容，已被剥离，使用`tabs-select-panel`即可
@@ -55,6 +65,16 @@ tabs-select/slot
 :::demo 使用姿势和`tabs-select`一致
 
 tabs-select/panel
+
+:::
+
+## 面板-远程搜索
+
+和`tabs-select`组件使用一致
+
+:::demo
+
+tabs-select/panel-loading
 
 :::
 
@@ -82,20 +102,20 @@ tabs-select/editor
 
 TabsSelect 其他相关的 API 属性，请参考 [ElSelect](https://element-plus.org/zh-CN/component/select.html) 即可
 
-| 属性名      | 说明                                              | 类型                                                                       | 默认值 |
-| ----------- | ------------------------------------------------- | -------------------------------------------------------------------------- | ------ |
-| modelValue  | 双向绑定值                                        | ^[String\|Number\|Array\|Object]`string \| number \| string[] \| number[]` | -      |
-| tabs        | 分页配置                                          | ^[Array]`Array<ITabItem>`                                                  | -      |
-| tab         | tab 绑定的值(只适用于 tabs-select-panel 组件)     | ^[String\|Number]`string \| number`                                        | -      |
-| prefixLabel | label 前缀                                        | ^[String]`string`                                                          | -      |
-| multiple    | 是否多选                                          | ^[Boolean]`boolean`                                                        | -      |
-| tabsProps   | el-tabs 组件属性                                  | ^[Object]                                                                  | -      |
-| treeProps   | el-tree 组件属性                                  | ^[Boolean]                                                                 | -      |
-| border      | 是否含有边框(只适用于 tabs-select-panel 组件)     | ^[Boolean]                                                                 | -      |
-| maxHeight   | 列表内容的高度                                    | ^[String]                                                                  | 260px  |
-| panelStyle  | panelStyle 面板的样式                             | ^[Object]`CSSProperties`                                                   | -      |
-| showSearch  | 是否显示搜索框                                    | ^[Boolean]                                                                 | -      |
-| valueKey    | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | ^[Boolean]                                                                 | -      |
+| 属性名      | 说明                                              | 类型                                                                       | 默认值  |
+| ----------- | ------------------------------------------------- | -------------------------------------------------------------------------- | ------- |
+| modelValue  | 双向绑定值                                        | ^[String\|Number\|Array\|Object]`string \| number \| string[] \| number[]` | -       |
+| tabs        | 分页配置                                          | ^[Array]`Array<ITabItem>`                                                  | -       |
+| tab         | tab 绑定的值(只适用于 tabs-select-panel 组件)     | ^[String\|Number]`string \| number`                                        | -       |
+| prefixLabel | label 前缀                                        | ^[String]`string`                                                          | `{x}`   |
+| multiple    | 是否多选                                          | ^[Boolean]`boolean`                                                        | -       |
+| tabsProps   | el-tabs 组件属性                                  | ^[Object]                                                                  | -       |
+| treeProps   | el-tree 组件属性                                  | ^[Boolean]                                                                 | -       |
+| border      | 是否含有边框(只适用于 tabs-select-panel 组件)     | ^[Boolean]                                                                 | -       |
+| maxHeight   | 列表内容的高度                                    | ^[String]                                                                  | `260px` |
+| panelStyle  | panelStyle 面板的样式                             | ^[Object]`CSSProperties`                                                   | -       |
+| showSearch  | 是否显示搜索框                                    | ^[Boolean]                                                                 | -       |
+| valueKey    | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | ^[Boolean]                                                                 | -       |
 
 ### Event
 
