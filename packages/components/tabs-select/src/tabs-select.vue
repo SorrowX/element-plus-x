@@ -22,6 +22,8 @@
         :max-height="maxHeight"
         :show-search="showSearch"
         :value-key="valueKey"
+        :loading="loading"
+        :remote-method="remoteMethod"
         @change="handleChange"
         @selected-options-change="handleSelectedChange"
       >
