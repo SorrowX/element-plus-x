@@ -30,15 +30,18 @@
         </template>
       </Panel>
     </template>
-    <template #default>
-      <div style="display: none">
-        <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </div>
+
+    <div style="display: none">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      />
+    </div>
+
+    <template v-for="(_, name) in $slots" #[name]="slotProps">
+      <slot :name="name" v-bind="slotProps" />
     </template>
   </el-select>
 </template>
