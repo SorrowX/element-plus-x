@@ -2,7 +2,6 @@
   <el-line-tree
     style="max-width: 600px"
     :data="data"
-    :expand-on-click-node="false"
     @node-click="handleNodeClick"
   />
 </template>

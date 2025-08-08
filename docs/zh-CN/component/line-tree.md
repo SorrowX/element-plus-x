@@ -58,13 +58,14 @@ line-tree/load
 
 其他相关的 API 属性，请参考 [ElTree](https://element-plus.org/zh-CN/component/tree.html) 即可，剩下是 `LineTree` 组件独有的 API 属性
 
-| 属性名            | 说明                                                                     | 类型       | 默认值 |
-| ----------------- | ------------------------------------------------------------------------ | ---------- | ------ |
-| line-radius       | 线的弧度                                                                 | ^[String]  | 0px    |
-| line-color        | 线的颜色                                                                 | ^[String]  | -      |
-| collapse-width    | 当自定义 collapse 内容时，需要设置 collapse 的宽度值，为了调整连线的位置 | ^[String]  | 15px   |
-| show-content-line | 自定义 content 后，子内容的高度可能变化，添加一条线会更好                | ^[Boolean] | false  |
-| icon-props        | 自定义图标的属性                                                         | ^[Object]  | -      |
+| 属性名               | 说明                                                                                          | 类型       | 默认值 |
+| -------------------- | --------------------------------------------------------------------------------------------- | ---------- | ------ |
+| line-radius          | 线的弧度                                                                                      | ^[String]  | 0px    |
+| line-color           | 线的颜色                                                                                      | ^[String]  | -      |
+| collapse-width       | 当自定义 collapse 内容时，需要设置 collapse 的宽度值，为了调整连线的位置                      | ^[String]  | 15px   |
+| show-content-line    | 自定义 content 后，子内容的高度可能变化，添加一条线会更好                                     | ^[Boolean] | false  |
+| icon-props           | 自定义图标的属性                                                                              | ^[Object]  | -      |
+| expand-on-click-icon | 是否在点击节点前的 icon 时展开或者收缩节点， 默认值为 true,可以搭配`expand-on-click-node`使用 | ^[Boolean] | true   |
 
 ### Slots
 

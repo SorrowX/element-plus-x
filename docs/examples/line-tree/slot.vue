@@ -6,6 +6,7 @@
     default-expand-all
     show-content-line
     :expand-on-click-node="false"
+    :expand-on-click-icon="false"
     style="max-width: 600px"
   >
     <template #collapse="{ data }">

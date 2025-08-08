@@ -22,7 +22,7 @@ export const lineTreeProps = buildProps({
     type: definePropType<boolean>(Boolean),
     default: false,
   },
-  expandOnClickNode: {
+  expandOnClickIcon: {
     type: definePropType<boolean>(Boolean),
     default: true,
   },

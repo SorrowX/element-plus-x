@@ -38,7 +38,7 @@ import { ElCase } from 'element-plus-x'
 // import Test from '../../docs/examples/resizable/window.vue'
 // import Test from '../../docs/examples/tabs-select/select-loading.vue'
 // import Test from '../../docs/examples/tabs-select/panel.vue'
-import Test from '../../docs/examples/line-tree/basic.vue'
+import Test from '../../docs/examples/line-tree/slot.vue'
 // import Test from '../../docs/examples/array-items/render.vue'
 
 import { computed, ref } from 'vue'

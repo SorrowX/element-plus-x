@@ -1,10 +1,5 @@
 <template>
-  <el-tree
-    :class="ns.b()"
-    :style="treeStyle"
-    v-bind="$attrs"
-    :expand-on-click-node="expandOnClickNode"
-  >
+  <el-tree :class="ns.b()" :style="treeStyle" v-bind="$attrs">
     <template #default="{ node, data }">
       <div
         :class="nsNode.e('collapse')"
@@ -71,7 +66,7 @@ const treeStyle = computed(() => {
 })
 
 const handleExpandIconClick = (node: any) => {
-  if (node.isLeaf) return
+  if (node.isLeaf || !props.expandOnClickIcon) return
   node.expanded ? node.collapse() : node.expand()
 }
 </script>
