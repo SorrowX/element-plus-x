@@ -2,11 +2,13 @@
 
 每个版本更新的内容会在此记录。
 
-## V1.1.11 (更新时间: 2025-07-26 11:32)-未发布[可先使用对应的 beta 版本]
+## V1.1.11 (更新时间: 2025-07-26 11:32)-未发布[可先使用对应的 beta 版本 1.1.11-beta4]
 
 1. TabsSelect 组件 新增 valueKey 功能(支持绑定对象及对象数组)
 2. TabsSelect 组件 新增 远程搜索功能
 3. TabsSelect 组件 支持 ElSelect 组件的其他插槽
+4. LineTree 组件修复 expand-on-click-node 的问题
+5. TableDialog 去掉 ElDialog 多余的 http-request 属性
 
 ## V1.1.10 (更新时间: 2025-07-25 15:37)
 

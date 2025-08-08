@@ -14,15 +14,15 @@ lang: zh-CN
 ::: code-group
 
 ```shell [npm]
-$ npm install element-plus-x --save
+$ npm install element-plus element-plus-x --save
 ```
 
 ```shell [yarn]
-$ yarn add element-plus-x
+$ yarn add element-plus element-plus-x
 ```
 
 ```shell [pnpm]
-$ pnpm install element-plus-x
+$ pnpm install element-plus element-plus-x
 ```
 
 :::
