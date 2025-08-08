@@ -71,7 +71,7 @@ const treeStyle = computed(() => {
 })
 
 const handleExpandIconClick = (node: any) => {
-  if (node.isLeaf || !props.expandOnClickNode) return
+  if (node.isLeaf) return
   node.expanded ? node.collapse() : node.expand()
 }
 </script>
