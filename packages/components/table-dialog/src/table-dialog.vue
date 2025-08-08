@@ -9,7 +9,7 @@
       :width="width"
       append-to-body
       :modal-class="ns.e('class')"
-      v-bind="$attrs"
+      v-bind="passDialogProps"
     >
       <div>
         <slot name="top" />
@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, nextTick, ref, useAttrs, watch } from 'vue'
 import {
   DynamicSizeList,
   ElButton,
@@ -120,6 +120,13 @@ const selectList: any = ref([])
 const tableRef = ref()
 const tableWrapperRef = ref()
 const loading = ref(false)
+
+const passDialogProps = computed(() => {
+  const attrs: Record<string, any> = { ...useAttrs() }
+  delete attrs['http-request']
+  delete attrs['httpRequest']
+  return attrs
+})
 
 const selectedFieldTitle = computed(
   () => props.selectedFieldTitle || t('epx.tableDialog.selectedField')
