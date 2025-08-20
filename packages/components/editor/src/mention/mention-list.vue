@@ -1,5 +1,5 @@
 <template>
-  <div ref="dropdownRef" :class="ns.b()">
+  <div ref="dropdownRef" v-click-outside="handleClickOutside" :class="ns.b()">
     <div v-if="$slots.header" :class="ns.b('header')">
       <slot name="header" />
     </div>
@@ -11,7 +11,7 @@
       role="listbox"
       aria-orientation="vertical"
     >
-      <slot name="content" v-bind="{ items, command }">
+      <slot name="content" v-bind="{ items, command, hide: hiddenPopup }">
         <li
           v-for="(item, index) in items"
           :id="item.id"
@@ -42,12 +42,18 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ElImage, ElScrollbar, useNamespace } from 'element-plus'
-import { scrollIntoView } from '@element-plus/utils'
+import {
+  ElImage,
+  ElScrollbar,
+  useNamespace,
+  ClickOutside as vClickOutside,
+} from 'element-plus'
+import { findParentByClassName, scrollIntoView } from '@element-plus/utils'
 import type { MentionOption } from '../types'
 import type { PropType } from 'vue'
 
 const ns = useNamespace('editor-mention')
+const nsEditor = useNamespace('editor')
 
 const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
 const optionRefs = ref<HTMLElement[]>()
@@ -62,6 +68,11 @@ const props = defineProps({
   },
 
   command: {
+    type: Function,
+    required: true,
+  },
+
+  hiddenPopup: {
     type: Function,
     required: true,
   },
@@ -122,6 +133,12 @@ function selectItem(index: number) {
 
   if (item) {
     props.command(item)
+  }
+}
+
+const handleClickOutside = (evt: MouseEvent) => {
+  if (!findParentByClassName(evt.target as HTMLElement, nsEditor.b())) {
+    props.hiddenPopup()
   }
 }
 

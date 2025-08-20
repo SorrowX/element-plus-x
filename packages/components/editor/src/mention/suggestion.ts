@@ -21,6 +21,10 @@ const Popup = {
     slots: {
       type: Object,
     },
+    hiddenPopup: {
+      type: Function,
+      required: true,
+    },
   },
   setup(props: any, { attrs, expose }: any) {
     const ns = useNamespace('editor-popup')
@@ -51,13 +55,13 @@ const Popup = {
       return h(
         ElTooltip,
         {
+          showArrow: false,
+          placement: 'bottom-start',
           ...attrs,
           Key: props.visible,
           effect: 'light',
           trigger: 'click',
-          placement: 'bottom-start',
           popperClass: ns.b(),
-          showArrow: false,
           virtualTriggering: true,
           visible: props.visible,
           virtualRef: virtualRef.value,
@@ -66,7 +70,12 @@ const Popup = {
           content: () => {
             return h(
               MentionList,
-              { items: attrs.items, command: attrs.command, ref: listRef },
+              {
+                items: attrs.items,
+                command: attrs.command,
+                ref: listRef,
+                hiddenPopup: props.hiddenPopup,
+              },
               {
                 ...props.slots,
               }
@@ -132,6 +141,7 @@ export const useSuggestion = (opts: SuggestionOptions) => {
               ...props,
               visible: visible.value,
               slots: opts.slots ?? {},
+              hiddenPopup,
             },
             editor: props.editor,
           })

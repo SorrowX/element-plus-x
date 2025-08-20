@@ -1,6 +1,5 @@
 <template>
   <div
-    v-click-outside="handleClickOutside"
     :class="[
       ns.b(),
       border ? ns.m('border') : '',
@@ -27,7 +26,7 @@
 
 <script lang="ts" setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { useNamespace, ClickOutside as vClickOutside } from 'element-plus'
+import { useNamespace } from 'element-plus'
 import { EditorContent, useEditor } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Mention from '@tiptap/extension-mention'
@@ -77,15 +76,11 @@ const textLength = ref(0)
 const maxLength = computed(() => Number(props.maxlength))
 const isWordLimitVisible = computed(() => maxLength.value !== 0)
 
-const { suggestion, hiddenPopup, getVisible } = useSuggestion({
+const { suggestion, getVisible } = useSuggestion({
   char: props.prefix,
   options: props.options,
   slots,
 })
-
-const handleClickOutside = () => {
-  hiddenPopup()
-}
 
 const handleClick = () => {
   focus()
