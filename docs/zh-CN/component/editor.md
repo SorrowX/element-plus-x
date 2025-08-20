@@ -74,6 +74,15 @@ editor/popover
 
 :::
 
+## 唤起案例
+
+可以使用`insertContentAt`方法来替换唤醒词，如果不需要替换请使用抛出的`insertContent`方法即可
+:::demo
+
+editor/popover2
+
+:::
+
 ## 插入
 
 使用 组件实例的`insertHtml`方法来插入`文本` `html` `自定义元素`
@@ -164,16 +173,17 @@ editor/editor
 
 ### 属性
 
-| 属性名             | 说明                                      | 类型            | 默认值 |
-| ------------------ | ----------------------------------------- | --------------- | ------ |
-| v-model            | 绑定的 html                               | string          | -      |
-| maxlength          | 最大输入长度                              | string          | -      |
-| options            | 提及选项列表                              | array\|function | -      |
-| prefix             | 触发字段的前缀。 字符串长度必须且只能为 1 | string          | @      |
-| extensions         | tiptap 扩展包                             | array           | -      |
-| disabled           | 是否禁用                                  | boolean         | false  |
-| disable-enter-emit | 是否禁用回车 enter 事件                   | boolean         | false  |
-| border             | 编辑器是否有边框                          | boolean         | true   |
+| 属性名             | 说明                                                                                  | 类型            | 默认值 |
+| ------------------ | ------------------------------------------------------------------------------------- | --------------- | ------ |
+| v-model            | 绑定的 html                                                                           | string          | -      |
+| maxlength          | 最大输入长度                                                                          | string          | -      |
+| options            | 提及选项列表                                                                          | array\|function | -      |
+| prefix             | 触发字段的前缀。 字符串长度必须且只能为 1                                             | string          | @      |
+| extensions         | tiptap 扩展包                                                                         | array           | -      |
+| disabled           | 是否禁用                                                                              | boolean         | false  |
+| disable-enter-emit | 是否禁用回车 enter 事件                                                               | boolean         | false  |
+| border             | 编辑器是否有边框                                                                      | boolean         | true   |
+| tooltip-props      | 提及弹窗的属性,参考[ElTooltip](https://element-plus.org/zh-CN/component/tooltip.html) | object          | -      |
 
 ### Methods
 
