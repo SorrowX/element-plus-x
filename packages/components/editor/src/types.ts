@@ -20,6 +20,7 @@ export type SuggestionOptions = {
     | MentionOption[]
     | ((options: { query: string }) => Promise<MentionOption[]>)
   slots?: Record<string, any>
+  tooltipProps?: Record<string, any>
 }
 
 export type EnterValues = {

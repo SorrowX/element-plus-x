@@ -79,6 +79,7 @@ const isWordLimitVisible = computed(() => maxLength.value !== 0)
 const { suggestion, getVisible } = useSuggestion({
   char: props.prefix,
   options: props.options,
+  tooltipProps: props.tooltipProps,
   slots,
 })
 

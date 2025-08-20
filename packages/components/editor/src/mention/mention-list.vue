@@ -11,7 +11,16 @@
       role="listbox"
       aria-orientation="vertical"
     >
-      <slot name="content" v-bind="{ items, command, hide: hiddenPopup }">
+      <slot
+        name="content"
+        v-bind="{
+          items,
+          command,
+          hide: hiddenPopup,
+          insertContentAt,
+          insertContent,
+        }"
+      >
         <li
           v-for="(item, index) in items"
           :id="item.id"
@@ -66,15 +75,19 @@ const props = defineProps({
     type: Array as PropType<MentionOption[]>,
     required: true,
   },
-
   command: {
     type: Function,
     required: true,
   },
-
   hiddenPopup: {
     type: Function,
     required: true,
+  },
+  range: {
+    type: Object,
+  },
+  editor: {
+    type: Object,
   },
 })
 
@@ -139,6 +152,18 @@ function selectItem(index: number) {
 const handleClickOutside = (evt: MouseEvent) => {
   if (!findParentByClassName(evt.target as HTMLElement, nsEditor.b())) {
     props.hiddenPopup()
+  }
+}
+
+const insertContentAt = (content: string) => {
+  if (props.editor) {
+    props.editor.commands.insertContentAt(props.range, content)
+  }
+}
+
+const insertContent = (content: string) => {
+  if (props.editor) {
+    props.editor.commands.insertContent(content)
   }
 }
 

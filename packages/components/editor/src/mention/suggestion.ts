@@ -57,11 +57,11 @@ const Popup = {
         {
           showArrow: false,
           placement: 'bottom-start',
-          ...attrs,
-          Key: props.visible,
-          effect: 'light',
-          trigger: 'click',
           popperClass: ns.b(),
+          effect: 'light',
+          ...attrs.tooltipProps,
+          Key: props.visible,
+          trigger: 'click',
           virtualTriggering: true,
           visible: props.visible,
           virtualRef: virtualRef.value,
@@ -74,6 +74,8 @@ const Popup = {
                 items: attrs.items,
                 command: attrs.command,
                 ref: listRef,
+                range: attrs.range,
+                editor: attrs.editor,
                 hiddenPopup: props.hiddenPopup,
               },
               {
@@ -140,6 +142,7 @@ export const useSuggestion = (opts: SuggestionOptions) => {
               visible: visible.value,
               slots: opts.slots ?? {},
               hiddenPopup,
+              tooltipProps: opts.tooltipProps ?? {},
             },
             editor: props.editor,
           })
@@ -160,6 +163,8 @@ export const useSuggestion = (opts: SuggestionOptions) => {
             ...props,
             visible: visible.value,
             slots: opts.slots ?? {},
+            hiddenPopup,
+            tooltipProps: opts.tooltipProps ?? {},
           })
         },
 

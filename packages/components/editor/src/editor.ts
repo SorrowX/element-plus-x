@@ -56,6 +56,9 @@ export const editorProps = buildProps({
     type: Boolean,
     default: false,
   },
+  tooltipProps: {
+    type: Object,
+  },
 } as const)
 export type EditorProps = ExtractPropTypes<typeof editorProps>
 
