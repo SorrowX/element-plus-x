@@ -102,9 +102,7 @@ export const useSuggestion = (opts: SuggestionOptions) => {
 
   const destroy = () => {
     hiddenPopup()
-    setTimeout(() => {
-      component && component.destroy()
-    }, 300)
+    component && component.destroy()
   }
 
   const getVisible = () => visible.value
@@ -131,7 +129,7 @@ export const useSuggestion = (opts: SuggestionOptions) => {
     render: () => {
       return {
         onStart: (props: SuggestionProps) => {
-          if (!props.clientRect || !props.items.length) {
+          if (!props.clientRect) {
             return
           }
 
@@ -151,20 +149,29 @@ export const useSuggestion = (opts: SuggestionOptions) => {
           if (!props.clientRect) {
             return
           }
-          visible.value = props.items.length ? true : false
-          component.updateProps({
+          const hasOptions = !!opts.options.length
+          visible.value = hasOptions
+            ? props.items.length
+              ? true
+              : false
+            : visible.value
+
+          component?.updateProps({
             ...props,
             visible: visible.value,
             slots: opts.slots ?? {},
           })
         },
 
-        onKeyDown(props: SuggestionKeyDownProps) {
-          if (props.event.key === 'Escape') {
-            hiddenPopup()
-            return true
+        onKeyDown(suggestionKeyDownProps: SuggestionKeyDownProps) {
+          const hasOptions = !!opts.options.length
+          if (hasOptions) {
+            if (suggestionKeyDownProps.event.key === 'Escape') {
+              hiddenPopup()
+              return true
+            }
+            return component?.ref?.onKeyDown?.(suggestionKeyDownProps)
           }
-          return component.ref?.onKeyDown?.(props)
         },
 
         onExit() {

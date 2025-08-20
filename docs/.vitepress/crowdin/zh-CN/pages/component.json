@@ -74,6 +74,11 @@
         "text": "TableDialog 表格弹窗"
       },
       {
+        "link": "/tabs-select",
+        "text": "TabsSelect 标签页选择器",
+        "promotion": "1.1.10"
+      },
+      {
         "link": "/submit",
         "text": "Submit 表单提交"
       },
@@ -225,6 +230,11 @@
       {
         "link": "/contextmenu",
         "text": "Contextmenu 右键菜单"
+      },
+      {
+        "link": "/collapse-panel",
+        "text": "CollapsePanel 折叠面板",
+        "promotion": "1.1.10"
       }
     ]
   },
@@ -293,16 +303,6 @@
         "link": "/plain-tabs",
         "text": "PlainTabs 标签页",
         "promotion": "1.1.9"
-      },
-      {
-        "link": "/collapse-panel",
-        "text": "CollapsePanel 折叠面板",
-        "promotion": "1.1.10"
-      },
-      {
-        "link": "/tabs-select",
-        "text": "TabsSelect 标签页选择器",
-        "promotion": "1.1.10"
       }
     ]
   }

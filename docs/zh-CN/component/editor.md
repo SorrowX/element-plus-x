@@ -9,6 +9,8 @@ lang: zh-CN
 
 该组件基于 [Tiptap](https://tiptap.dev/docs/editor/getting-started/overview) 及 [ElTooltip](https://element-plus.org/zh-CN/component/tooltip.html) 封装而来。
 
+自 `v1.1.11`起，完全自定义提及弹窗抛出`hide`方法，可以按需关闭弹窗，这样可以做到很多像`AI对话输入框`等定制功能。
+
 ## 基础用法
 
 使用`v-model`双向绑定`html`值。使用`enter`事件来处理什么(比如发送消息之类的)
@@ -60,6 +62,15 @@ editor/mention
 :::demo 如何你想完全自定义提及列表，建议使用`content`插槽
 
 editor/slot
+
+:::
+
+## 发送框
+
+像 [文心一言](https://yiyan.baidu.com/)， [Copilot](https://github.com/copilot/c/df198152-65cb-4698-ba7e-b352f6c2bfe7) 等等这种的发送框，都很好编写
+:::demo 可以使用抛出的`hide`方法按需关闭
+
+editor/popover
 
 :::
 
