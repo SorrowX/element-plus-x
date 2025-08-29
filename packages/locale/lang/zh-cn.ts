@@ -78,6 +78,7 @@ export default {
     tabsSelect: {
       searchPlaceholder: '请输入关键词以搜索',
       loading: '加载中...',
+      searchEmptyText: '暂无搜索结果',
     },
   },
 }

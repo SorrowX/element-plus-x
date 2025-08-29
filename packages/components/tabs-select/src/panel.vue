@@ -22,7 +22,7 @@
         :placeholder="t('epx.tabsSelect.searchPlaceholder')"
       />
     </div>
-    <el-scrollbar :max-height="maxHeight" :class="ns.e('content')">
+    <el-scrollbar :height="height" :class="ns.e('content')">
       <div v-if="loading && remoteMethod" :class="ns.e('loading')">
         {{ t('epx.tabsSelect.loading') }}
       </div>
@@ -69,8 +69,12 @@
               </template>
             </el-tree>
           </el-collapse-panel>
-          <div v-if="isEmpty" :class="ns.e('empty')">
-            <div :class="ns.e('empty-text')">{{ t('epx.common.noData') }}</div>
+          <div v-if="isEmpty" :class="ns.e('empty')" :style="{ height }">
+            <slot name="empty">
+              <div :class="ns.e('empty-text')">
+                {{ emptyText }}
+              </div>
+            </slot>
           </div>
         </template>
         <template v-if="currentTabInfo.type === 'option'">
@@ -86,7 +90,6 @@
                 : ''
             "
             :filter-node-method="filterNode"
-            style="margin-top: 6px"
             @node-click="handleNodeClick"
           >
             <template #default="{ data, node }">
@@ -103,6 +106,15 @@
                   <span :class="ns.e('option-label')">{{ data.label }}</span>
                 </div>
               </slot>
+            </template>
+            <template #empty>
+              <div :class="ns.e('empty')" :style="{ height }">
+                <slot name="empty">
+                  <div :class="ns.e('empty-text')">
+                    {{ emptyText }}
+                  </div>
+                </slot>
+              </div>
             </template>
           </el-tree>
         </template>
@@ -291,8 +303,18 @@ const showPanel = (index: number) => {
 
 const showTabs = computed(() => props.tabs.length > 1)
 
+const hasSearchKey = computed(() => !!searchKey.value.trim())
+
+const emptyText = computed(() =>
+  hasSearchKey.value
+    ? t('epx.tabsSelect.searchEmptyText')
+    : t('epx.common.noData')
+)
+
 const isEmpty = computed(() => {
   const treeInstances = Object.values(treeRefs.value)
+  const optionsLength = currentOptions.value.length
+  if (optionsLength === 0) return true
   if (treeInstances.length) {
     return treeInstances.every((tree) => tree.isEmpty)
   }
