@@ -10,6 +10,7 @@
 4. LineTree 组件修复 expand-on-click-node 的问题
 5. TableDialog 去掉 ElDialog 多余的 http-request 属性
 6. Editor 组件 提及弹窗插槽抛出 `hide` `insertContentAt` `insertContent` 方法，自定义性更强
+7. TabsSelect 组件 新增 empty 插槽
 
 ## V1.1.10 (更新时间: 2025-07-25 15:37)
 

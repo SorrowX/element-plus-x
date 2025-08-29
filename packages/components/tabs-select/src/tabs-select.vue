@@ -19,7 +19,7 @@
         :tabs-props="tabsProps"
         :tree-props="treeProps"
         :panel-style="panelStyle"
-        :max-height="maxHeight"
+        :height="height"
         :show-search="showSearch"
         :value-key="valueKey"
         :loading="loading"
@@ -29,6 +29,9 @@
       >
         <template #option="scoped">
           <slot v-bind="scoped" name="option" />
+        </template>
+        <template #empty>
+          <slot name="empty" />
         </template>
       </Panel>
     </template>
