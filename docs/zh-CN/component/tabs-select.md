@@ -86,6 +86,14 @@ tabs-select/panel2
 
 :::
 
+## 自定义空内容
+
+:::demo tabs-select 组件同样也支持
+
+tabs-select/empty
+
+:::
+
 ## 基于面板
 
 比如可以把面板内容插入到编辑器中
@@ -112,7 +120,7 @@ TabsSelect 其他相关的 API 属性，请参考 [ElSelect](https://element-plu
 | tabsProps   | el-tabs 组件属性                                  | ^[Object]                                                                  | -       |
 | treeProps   | el-tree 组件属性                                  | ^[Boolean]                                                                 | -       |
 | border      | 是否含有边框(只适用于 tabs-select-panel 组件)     | ^[Boolean]                                                                 | -       |
-| maxHeight   | 列表内容的高度                                    | ^[String]                                                                  | `260px` |
+| height      | 列表内容的高度                                    | ^[String]                                                                  | `260px` |
 | panelStyle  | panelStyle 面板的样式                             | ^[Object]`CSSProperties`                                                   | -       |
 | showSearch  | 是否显示搜索框                                    | ^[Boolean]                                                                 | -       |
 | valueKey    | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | ^[Boolean]                                                                 | -       |
@@ -126,6 +134,7 @@ TabsSelect 其他相关的 API 属性，请参考 [ElSelect](https://element-plu
 
 ### TabsSelect、TabsSelectPanel Slots
 
-| 事件名 | 说明           | 参数           |
-| ------ | -------------- | -------------- |
-| option | 自定义选项内容 | `{node, data}` |
+| 事件名 | 说明             | 参数             |
+| ------ | ---------------- | ---------------- |
+| option | 自定义选项内容   | `{node, data}`   |
+| empty  | 数据为空时的内容 | `{hasSearchKey}` |

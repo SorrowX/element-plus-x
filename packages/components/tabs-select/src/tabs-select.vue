@@ -30,8 +30,8 @@
         <template #option="scoped">
           <slot v-bind="scoped" name="option" />
         </template>
-        <template #empty>
-          <slot name="empty" />
+        <template #empty="scoped">
+          <slot v-bind="scoped" name="empty" />
         </template>
       </Panel>
     </template>

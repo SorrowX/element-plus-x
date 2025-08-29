@@ -70,7 +70,7 @@
             </el-tree>
           </el-collapse-panel>
           <div v-if="isEmpty" :class="ns.e('empty')" :style="{ height }">
-            <slot name="empty">
+            <slot name="empty" v-bind="{ hasSearchKey }">
               <div :class="ns.e('empty-text')">
                 {{ emptyText }}
               </div>
@@ -109,7 +109,7 @@
             </template>
             <template #empty>
               <div :class="ns.e('empty')" :style="{ height }">
-                <slot name="empty">
+                <slot name="empty" v-bind="{ hasSearchKey }">
                   <div :class="ns.e('empty-text')">
                     {{ emptyText }}
                   </div>
