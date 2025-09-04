@@ -8,15 +8,36 @@ $hover-color: getCssVar('color', 'primary');
 
 @include b(editor) {
   position: relative;
-  min-height: 30px;
+  min-height: 32px;
   caret-color: #{$hover-color};
 
+  $wrapper: #{&}-wrapper;
+
   &--border {
-    // border: 1px solid getCssVar('border-color');
+    transition: getCssVar('transition-box-shadow');
+    transform: translate3d(0, 0, 0);
     border-radius: getCssVar('border-radius-base');
     box-shadow: 0 0 0 1px
       var(#{getCssVarName('input-border-color')}, #{getCssVar('border-color')})
       inset;
+    // hover
+    &:hover {
+      box-shadow: 0 0 0 1px
+        var(
+          #{getCssVarName('input-border-color')},
+          #{getCssVar('border-color-hover')}
+        )
+        inset;
+    }
+    // focus
+    &:has(#{$wrapper} > div:focus) {
+      box-shadow: 0 0 0 1px
+        var(
+          #{getCssVarName('input-border-color')},
+          #{getCssVar('color-primary')}
+        )
+        inset;
+    }
   }
 
   &--resize {
@@ -34,7 +55,9 @@ $hover-color: getCssVar('color', 'primary');
     height: 100%;
     font-size: getCssVar('font-size', 'base');
     & > div {
-      padding: 6px;
+      padding: 4px 10px;
+      line-height: 24px;
+      color: getCssVar('text-color-regular');
       &:focus-visible {
         outline: 0;
       }
