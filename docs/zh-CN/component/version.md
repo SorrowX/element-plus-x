@@ -2,7 +2,7 @@
 
 每个版本更新的内容会在此记录。
 
-## V1.1.11 (更新时间: 2025-07-26 11:32)-未发布[可先使用对应的 beta 版本 1.1.11-beta4]
+## V1.1.11 (更新时间: 2025-09-04 10:24)
 
 1. TabsSelect 组件 新增 valueKey 功能(支持绑定对象及对象数组)
 2. TabsSelect 组件 新增 远程搜索功能
@@ -11,6 +11,7 @@
 5. TableDialog 去掉 ElDialog 多余的 http-request 属性
 6. Editor 组件 提及弹窗插槽抛出 `hide` `insertContentAt` `insertContent` 方法，自定义性更强
 7. TabsSelect 组件 新增 empty 插槽
+8. Editor 组件 样式修改(同 ElInput 一致)
 
 ## V1.1.10 (更新时间: 2025-07-25 15:37)
 
