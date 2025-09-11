@@ -161,6 +161,7 @@ const options: Partial<EditorOptions> = {
     }),
     CharacterCount.configure({
       limit: isWordLimitVisible.value ? maxLength.value : null,
+      mode: 'nodeSize',
     }),
     Mention.configure({
       HTMLAttributes: {
