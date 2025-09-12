@@ -31,7 +31,7 @@ import { EditorContent, useEditor } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Mention from '@tiptap/extension-mention'
 import Placeholder from '@tiptap/extension-placeholder'
-import CharacterCount from '@tiptap/extension-character-count'
+// import CharacterCount from '@tiptap/extension-character-count'
 import Underline from '@tiptap/extension-underline'
 import Image from '@tiptap/extension-image'
 import TextAlign from '@tiptap/extension-text-align'
@@ -42,6 +42,7 @@ import Tag from './plugins/tag/index'
 import Video from './plugins/video/index'
 import Component from './plugins/component/index'
 import FontSize from './plugins/font-size/index'
+import CharacterCount from './plugins/character-count/index'
 import { useSuggestion } from './mention/suggestion'
 import { editorEmits, editorProps } from './editor'
 import type { EditorOptions } from '@tiptap/core'
@@ -161,7 +162,7 @@ const options: Partial<EditorOptions> = {
     }),
     CharacterCount.configure({
       limit: isWordLimitVisible.value ? maxLength.value : null,
-      mode: 'nodeSize',
+      textCounter: (text: string) => text.trim().length,
     }),
     Mention.configure({
       HTMLAttributes: {
