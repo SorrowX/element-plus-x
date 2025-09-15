@@ -52,6 +52,15 @@ line-tree/load
 
 :::
 
+## 过滤
+
+这里不能使用`ElTree`组件自带的`filter`方法,由于调用`ElTree`的`filter`方法后，本质其实是对数据添加了`visible`从而控制节点的显示隐藏，目前的样式并不适配，会出现多余的一条竖线。
+:::demo 但是可以使用如下方案
+
+line-tree/filter
+
+:::
+
 ## API
 
 ### 属性
@@ -73,3 +82,9 @@ line-tree/load
 | -------- | -------------- |
 | collapse | 自定义折叠器   |
 | default  | 自定义节点内容 |
+
+### Exposes
+
+| 名称         | 详情            | 类型 |
+| ------------ | --------------- | ---- |
+| treeInstance | ElTree 组件实例 | -    |
