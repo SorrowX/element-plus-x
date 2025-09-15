@@ -1,5 +1,10 @@
 <template>
-  <el-tree :class="ns.b()" :style="treeStyle" v-bind="$attrs">
+  <el-tree
+    v-bind="$attrs"
+    ref="treeInstance"
+    :class="ns.b()"
+    :style="treeStyle"
+  >
     <template #default="{ node, data }">
       <div
         :class="nsNode.e('collapse')"
@@ -40,10 +45,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { ElIcon, ElTree, useNamespace } from 'element-plus'
 import * as IconsVue from '@element-plus/components/icons-vue'
 import { lineTreeEmits, lineTreeProps } from './line-tree'
+import type { TreeInstance } from 'element-plus'
 const { Expand, PutAway } = IconsVue
 
 defineOptions({
@@ -52,6 +58,7 @@ defineOptions({
 })
 const ns = useNamespace('line-tree')
 const nsNode = useNamespace('line-tree-node')
+const treeInstance = ref<TreeInstance>()
 
 const props = defineProps(lineTreeProps)
 defineEmits(lineTreeEmits)
@@ -69,4 +76,6 @@ const handleExpandIconClick = (node: any) => {
   if (node.isLeaf || !props.expandOnClickIcon) return
   node.expanded ? node.collapse() : node.expand()
 }
+
+defineExpose({ treeInstance })
 </script>
