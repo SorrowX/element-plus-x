@@ -1,0 +1,47 @@
+@use 'element-plus/theme-chalk/src/common/var.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/config.scss' as *;
+@use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
+
+@include b(input-otp) {
+  $nput-otp: #{&};
+
+  &--small {
+    .#{$namespace}-input {
+      width: 24px;
+      height: 28px;
+    }
+  }
+
+  &--default {
+    .#{$namespace}-input {
+      width: 30px;
+      height: 34px;
+    }
+  }
+
+  &--large {
+    .#{$namespace}-input {
+      width: 36px;
+      height: 40px;
+    }
+  }
+
+  &--auto {
+    .#{$namespace}-space__item {
+      flex: 1;
+    }
+    .#{$namespace}-space {
+      width: 100%;
+    }
+  }
+
+  .#{$namespace}-input__wrapper {
+    padding: 1px 0px;
+  }
+  .#{$namespace}-input__password {
+    display: none;
+  }
+  .#{$namespace}-input__inner {
+    text-align: center;
+  }
+}

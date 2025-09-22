@@ -52,6 +52,7 @@ import {
   ElTabsSelect,
   ElTabsSelectPanel,
 } from '@element-plus/components/tabs-select'
+import { ElInputOtp } from '@element-plus/components/input-otp'
 
 import type { Plugin } from 'vue'
 
@@ -104,4 +105,5 @@ export default [
   ElCollapsePanel,
   ElTabsSelect,
   ElTabsSelectPanel,
+  ElInputOtp,
 ] as Plugin[]
