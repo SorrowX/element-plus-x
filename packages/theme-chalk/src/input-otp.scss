@@ -39,7 +39,7 @@
     padding: 1px 0px;
   }
   .#{$namespace}-input__password {
-    display: none;
+    display: none !important;
   }
   .#{$namespace}-input__inner {
     text-align: center;

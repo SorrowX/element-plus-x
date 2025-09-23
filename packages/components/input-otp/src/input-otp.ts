@@ -4,12 +4,8 @@ import { UPDATE_MODEL_EVENT } from '@element-plus/constants'
 import type { ExtractPropTypes, PropType } from 'vue'
 
 export const inputOtpProps = buildProps({
-  length: {
-    type: Number,
-    default: 6,
-  },
   modelValue: {
-    type: [Array] as PropType<any[]>,
+    type: [Array] as PropType<string[] | number[]>,
     default: [],
   },
   validator: {
@@ -17,17 +13,9 @@ export const inputOtpProps = buildProps({
       (inputValue: string, index: number, modelValueStr: string) => boolean
     >,
   },
-  readonly: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  showPassword: {
-    type: Boolean,
-    default: false,
+  length: {
+    type: Number,
+    default: 6,
   },
   size: {
     type: String,

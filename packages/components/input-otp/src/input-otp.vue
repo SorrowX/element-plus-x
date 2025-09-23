@@ -3,14 +3,11 @@
     <el-space :size="gap">
       <div v-for="index in length" :key="String(index)" :class="ns.e('item')">
         <el-input
-          v-bind="createEvents(index - 1)"
+          v-bind="{ ...attr, ...createEvents(index - 1) }"
           :ref="(el) => handleInputList(el, index - 1)"
           v-model="model[index - 1]"
           :formatter="handleFormatter"
           :parser="(value: string) => handleParser(value, index - 1)"
-          :readonly="readonly"
-          :disabled="disabled"
-          :show-password="showPassword"
         />
         <slot v-bind="{ index: index - 1, value: model[index - 1] }" />
       </div>
@@ -19,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 import { ElInput, ElSpace, useNamespace } from 'element-plus'
 import { isDef, isFunction } from '@element-plus/utils'
 import { UPDATE_MODEL_EVENT } from '@element-plus/constants'
@@ -27,10 +24,12 @@ import { inputOtpEmits, inputOtpProps } from './input-otp'
 
 defineOptions({
   name: 'ElInputOtp',
+  inheritAttrs: false,
 })
 
 const props = defineProps(inputOtpProps)
 const emit = defineEmits(inputOtpEmits)
+const attr = useAttrs()
 const ns = useNamespace('input-otp')
 
 const model = computed({
@@ -140,4 +139,8 @@ const emitFinish = () => {
 const emitInput = (value: string, index: number) => {
   emit('input', value, index)
 }
+
+defineExpose({
+  inputRefs,
+})
 </script>

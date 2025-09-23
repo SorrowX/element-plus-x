@@ -79,6 +79,11 @@
         "promotion": "1.1.10"
       },
       {
+        "link": "/input-otp",
+        "text": "InputOtp 验证码",
+        "promotion": "New"
+      },
+      {
         "link": "/submit",
         "text": "Submit 表单提交"
       },

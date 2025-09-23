@@ -1,5 +1,4 @@
 <template>
-  <pre>{{ value }}</pre>
   <el-input-otp v-model="value" @input="handleInput" />
 </template>
 
