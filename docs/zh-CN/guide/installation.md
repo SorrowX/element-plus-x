@@ -27,6 +27,25 @@ $ pnpm install element-plus element-plus-x
 
 :::
 
+:::tip
+`element-plus-x` 依赖 `vue-use`中的 [useAxios](https://vueuse.org/integrations/useAxios/)和[useSortable](https://vueuse.org/integrations/useSortable/),根据`vue-use`文档，需要安装 `axios` 和 `sortablejs`
+
+::: code-group
+
+```shell [npm]
+$ npm install axios sortablejs --save
+```
+
+```shell [yarn]
+$ yarn add axios sortablejs
+```
+
+```shell [pnpm]
+$ pnpm install axios sortablejs
+```
+
+:::
+
 如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm) 或使用 [ npmmirror](https://npmmirror.com/)
 
 ```shell
